@@ -103,7 +103,29 @@ double mass_enc(double r, double rscale, double mass)
   
 }
   
-  
+void vel_dis(int N, struct bodies * b, string extension)
+{
+    double vx, vy, vz,v;
+    double x, y, z, r;
+    string s="./test_output/vel_dis_"+extension+".txt";
+    
+    ofstream vels;
+    vels.open(s);
+  for(int i=0; i<N; i++)
+  {
+    vx=b[i].vx;
+    vy=b[i].vy;
+    vz=b[i].vz;
+    v=sqrt(sqr(vx) + sqr(vy) + sqr(vz));
+    x=b[i].x;
+    y=b[i].y;
+    z=b[i].z;
+    r= sqrt( sqr(x) + sqr(y) + sqr(z));
+    vels<<v<<"\t"<<r<<endl;
+    
+  }
+  vels.close();
+}
   
 double kinetic(int N, struct bodies * b)
 {
@@ -118,6 +140,7 @@ double kinetic(int N, struct bodies * b)
     vx=b[i].vx;
     vy=b[i].vy;
     vz=b[i].vz;
+
     ke+= 0.5*b[i].mass*(sqr(vx) + sqr(vy) + sqr(vz));
   }
   return ke;
@@ -159,7 +182,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     }
   }
   
-  return pot;
+  return pot/2.0;
 }
 
 double potential( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
@@ -170,15 +193,15 @@ double potential( struct bodies * b, double massl, double massd, double rscale_l
   double mass_light, mass_dark;
   for(int i=0; i<N; i++)
   {     
-        x=b[i].x;
-        y=b[i].y;
-        z=b[i].z;
-        r= sqrt( sqr(x) + sqr(y) + sqr(z));
-        mass=b[i].mass;
-//      mass_light=massl;
-//      mass_dark=massd;
-        mass_light=mass_enc(r, rscale_l, massl);
-        mass_dark=mass_enc(r, rscale_d, massd);
+    x=b[i].x;
+    y=b[i].y;
+    z=b[i].z;
+    r= sqrt( sqr(x) + sqr(y) + sqr(z));
+    mass=b[i].mass;
+        mass_light=massl;
+        mass_dark=massd;
+//     mass_light=mass_enc(r, rscale_l, massl);
+//     mass_dark=mass_enc(r, rscale_d, massd);
     pot+=-1.0*mass*(mass_light/sqrt(sqr(r) + sqr(rscale_l)) +  mass_dark/sqrt(sqr(r) + sqr(rscale_d)) );
   }
   return pot;
@@ -245,6 +268,9 @@ int main (int argc, char * const argv[])
 //   printf("ke \t pot \t ratio \t time\n");
   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
   fclose(file);
+  
+  vel_dis(N,b, extension);
+  
 
 //   FILE * file2;
 //   file2=fopen("masses.txt", "a");
