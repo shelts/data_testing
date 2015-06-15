@@ -51,7 +51,7 @@ int get_size(int type, string extension)
 
 
 void get_data(int Nd,int Nl,struct bodies * b, string extension,
-               double mass_per_dark_particle, double mass_per_light_particle, int type_dark, int type_light)
+	       double mass_per_dark_particle, double mass_per_light_particle, int type_dark, int type_light)
 {
   
     string s;
@@ -63,16 +63,16 @@ void get_data(int Nd,int Nl,struct bodies * b, string extension,
     data.open (s);
     while(data>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
       {
-          b[i].x=datax;
-          b[i].y=datay;
-          b[i].z=dataz;
-          b[i].vx=datavx;
-          b[i].vy=datavy;
-          b[i].vz=datavz;
-          b[i].mass=mass_per_dark_particle;
-          b[i].type=type_dark;
-          i++;
-        }
+	  b[i].x=datax;
+	  b[i].y=datay;
+	  b[i].z=dataz;
+	  b[i].vx=datavx;
+	  b[i].vy=datavy;
+	  b[i].vz=datavz;
+	  b[i].mass=mass_per_dark_particle;
+	  b[i].type=type_dark;
+	  i++;
+	}
     data.close();
 
     s= string("raw_data/light_matter_"+extension+".dat");
@@ -80,16 +80,16 @@ void get_data(int Nd,int Nl,struct bodies * b, string extension,
     data2.open (s);
     while(data2>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
       {
-          b[i].x=datax;
-          b[i].y=datay;
-          b[i].z=dataz;
-          b[i].vx=datavx;
-          b[i].vy=datavy;
-          b[i].vz=datavz;
-          b[i].mass=mass_per_light_particle;
-          b[i].type=type_light;
-          i++;
-        }
+	  b[i].x=datax;
+	  b[i].y=datay;
+	  b[i].z=dataz;
+	  b[i].vx=datavx;
+	  b[i].vy=datavy;
+	  b[i].vz=datavz;
+	  b[i].mass=mass_per_light_particle;
+	  b[i].type=type_light;
+	  i++;
+	}
     data2.close();
   
   }
@@ -163,21 +163,21 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
       if(i==j){continue;}
       else
       {
-        x1=b[i].x;
-        x2=b[j].x;
-        
-        y1=b[i].y;
-        y2=b[j].y;
-        
-        z1=b[i].z;
-        z2=b[j].z;
-        
-        mass1=b[i].mass;
-        mass2=b[j].mass;
-        
-        rad_diff= sqrt( sqrdel(x1,x2) + sqrdel(y1, y2) + sqrdel(z1, z2) );
-        pot+=-mass1* mass2* 1.0/(rad_diff);
-//      printf("pot= %f \n", pot);
+	x1=b[i].x;
+	x2=b[j].x;
+	
+	y1=b[i].y;
+	y2=b[j].y;
+	
+	z1=b[i].z;
+	z2=b[j].z;
+	
+	mass1=b[i].mass;
+	mass2=b[j].mass;
+	
+	rad_diff= sqrt( sqrdel(x1,x2) + sqrdel(y1, y2) + sqrdel(z1, z2) );
+	pot+=-mass1* mass2* 1.0/(rad_diff);
+// 	printf("pot= %f \n", pot);
       }
     }
   }
@@ -185,7 +185,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
   return pot/2.0;
 }
 
-double potential( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
+double potential_massenc( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
 {
   
   double pot=0.0;
@@ -198,8 +198,30 @@ double potential( struct bodies * b, double massl, double massd, double rscale_l
     z=b[i].z;
     r= sqrt( sqr(x) + sqr(y) + sqr(z));
     mass=b[i].mass;
-        mass_light=massl;
-        mass_dark=massd;
+//     mass_light=massl;
+//     mass_dark=massd;
+    mass_light=mass_enc(r, rscale_l, massl);
+    mass_dark=mass_enc(r, rscale_d, massd);
+    pot+=-1.0*mass*((mass_light+ mass_dark)/r );
+  }
+  return pot;
+}
+
+double potential_func( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
+{
+  
+  double pot=0.0;
+  double x, y, z, r, mass;
+  double mass_light, mass_dark;
+  for(int i=0; i<N; i++)
+  {	
+    x=b[i].x;
+    y=b[i].y;
+    z=b[i].z;
+    r= sqrt( sqr(x) + sqr(y) + sqr(z));
+    mass=b[i].mass;
+    mass_light=massl;
+    mass_dark=massd;
 //     mass_light=mass_enc(r, rscale_l, massl);
 //     mass_dark=mass_enc(r, rscale_d, massd);
     pot+=-1.0*mass*(mass_light/sqrt(sqr(r) + sqr(rscale_l)) +  mass_dark/sqrt(sqr(r) + sqr(rscale_d)) );
@@ -253,20 +275,23 @@ int main (int argc, char * const argv[])
   
 //   cout<<Nl<<"  "<< Nd<<endl;
   double ke;
-  double pot, pot2;
+  double pot, pot2, pot3;
 
   get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle, d, l);
   
   ke=kinetic(N,b);
-  pot=potential(b, massl, massd, rscale_l,rscale_d, N);
+  pot=potential_func(b, massl, massd, rscale_l,rscale_d, N);
   pot2=potential_energy(Nl, Nd, b, extension);
+  pot3=potential_massenc(b, massl, massd, rscale_l,rscale_d, N);
   
   double ratio= fabs(2.0*ke/pot);
   double ratio2= fabs(2.0*ke/pot2);
+  double ratio3= fabs(2.0*ke/pot3);
   FILE * file;
   file=fopen("./test_output/virial_output.txt", "a");
 //   printf("ke \t pot \t ratio \t time\n");
-  fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
+//   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
+  fprintf(file, "%f \t %f \t %f\t %f \n", ratio,ratio2, ratio3, atof(argv[1]));
   fclose(file);
   
   vel_dis(N,b, extension);
