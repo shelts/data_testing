@@ -11,6 +11,18 @@
 
 using namespace std;
 
+#define fifth(x) ((x) * (x) * (x) * (x) * (x))
+#define cube(x) ((x) * (x) * (x))
+#define sqr(x)  ((x) * (x))
+#define inv(x)  ((double) 1.0 / (x))
+
+#define fivehalves(x) ( sqrt(fifth(x) ) )
+#define threehalves(x) ( sqrt(cube(x)  ) )
+
+#define minusfivehalves(x) (inv(fivehalves(x)))
+#define minusthreehalves(x) (inv(threehalves(x)) )
+#define minushalf(x) ( inv(sqrt(x)) )
+
 double potential( double r, double mass, double rscale)
 {
   double sqrsq=rscale*rscale;
@@ -20,14 +32,18 @@ double potential( double r, double mass, double rscale)
   return (-1.0*potential_result);
 }
 
-double density(double rscale, double mass, double r)
+double density(double r, double rscale_l, double mass_l, double rscale_d, double mass_d )
 {
   double pi=4.0*atan(1.0);
-  double rscalecube = (rscale)*(rscale)*(rscale); 
-  double sqr=r*r;
-  double sqrrcube=rscalecube*rscalecube;
-  double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
+  double rscale_l_cube = cube(rscale_l); 
+  double rscale_d_cube = cube(rscale_d); 
   
+//   double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
+  double density_light_comp=(mass_l/rscale_l_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_l) ) );
+  double density_dark_comp= (mass_d/rscale_d_cube)  * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_d) ) );
+  double coeff=(3.0/(4.0*(pi)));
+  
+  double density_result= coeff*( density_light_comp + density_dark_comp);
   return density_result;
 }
 
@@ -87,15 +103,6 @@ void get_data(int N, double * x,double * y, double * z, double * vx,double * vy,
   data.close();
 }
 
-double fun(double r, double mass, double rscale)
-{
-  double function_val=r*r*density(rscale, mass, r);
-  return function_val;
-}
-
-
-
-
 /*this is a binning routine, makes a histogram*/
 void binner(int binN,double binwidth, double * x,int N, int type, string extension)
 {
@@ -123,18 +130,18 @@ void binner(int binN,double binwidth, double * x,int N, int type, string extensi
       range=0;/*resets the range so that the bins can be tested again against the number*/
       for(int i=0;i<binN;i++)/*for each bin, the number is tested*/
       {
-      /*these two if statements justs for end points. if the range of the bin
-      includes the upper interval, 1, then the second one runs. if not the first
-      one runs. the only difference is the first is only less than range+binwidth
-      and the second is less than or equal to range+binwidth. */
+            /*these two if statements justs for end points. if the range of the bin
+            includes the upper interval, 1, then the second one runs. if not the first
+            one runs. the only difference is the first is only less than range+binwidth
+            and the second is less than or equal to range+binwidth. */
 	  if((range+binwidth)< upper)
 	  {
 	      /*this if statement tests to see if the random number is in that
 	      bin range.*/
 	      if (x[j]>=range && x[j]< (range+binwidth))
-	      {	
-		bins[i]=bins[i]+1;
-		break;
+	      {
+                bins[i]=bins[i]+1;
+                break;
 	      }
 	      range=range+binwidth;/*this statement changes the range of testing
 	      so that a new new bin can be checked against the number*/
@@ -152,6 +159,7 @@ void binner(int binN,double binwidth, double * x,int N, int type, string extensi
       }
   }
 
+  double total=0;
   double binrange=0;
   double normed;
   for(int i=0; i!=binN;i++)
@@ -161,9 +169,30 @@ void binner(int binN,double binwidth, double * x,int N, int type, string extensi
       bin<<normed<<"\t"<<binrange<<endl;
 // 	bin<<bins[i]<<"\t"<<binrange<<endl;
   }
-
   bin.close();
 }
+
+void single_density_theory(double mass_l, double rscale_l, double mass_d, double rscale_d, double bin_width)
+{
+    double w=0.0;
+    string s;
+//     if(type==0){s= string("theory/dark_matter_theory.dat");}
+//     else if(type==1){s= string("theory/light_matter_theory.dat");}
+    s= string("theory/theory.dat");
+    double de, de2;
+    FILE * rho;
+    rho= fopen("./theory/theory.dat", "w");
+    while(1)
+    {
+        de=w*w*density(w, rscale_l, mass_l, rscale_d, mass_d)*bin_width;
+        de2=w*w*density(w,rscale_l, mass_l, rscale_d, mass_d)*bin_width;
+        w=w+0.01;
+        fprintf(rho, "%f \t %f \t %f\n", w, de, de2);
+    //             mw_printf("\r printing density functions: %f %", w/(5*(radiusScale1+radiusScale2))*100);
+        if(w>5*(rscale_l+rscale_d)){break;}
+    }
+}
+
 
 /*This uses the data and plots the radial distribution*/
 void radial_distribution(int type, string extension, int N, double * x, double * y, double * z, double * r, int number_of_bins, double bin_width, double rscale, double mass)
@@ -218,8 +247,6 @@ void vel_dis(int type, string extension, int N, double * vx,double * vy, double 
 }
 
 
-
-
 int main (int argc, char * const argv[])
 {
   /*taking in command line data. should be the same parameters used to calculate the simulation*/
@@ -238,8 +265,8 @@ int main (int argc, char * const argv[])
 //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, massl, massd);
   
   /*paramters for binning routine*/
-  int number_of_bins=100;
-  double bin_width=1;
+  int number_of_bins=1000;
+  double bin_width=.10;
   
   /*these are markers for the type of data being sent into functions*/
   int d=0;//dark matter
@@ -264,4 +291,7 @@ int main (int argc, char * const argv[])
   /*getting the radius value and binning*/
   radial_distribution(d, extension, Nd, dx, dy, dz, rd, number_of_bins, bin_width, rscale_d, massd);
   radial_distribution(l, extension, Nl, lx, ly, lz, rl, number_of_bins, bin_width, rscale_l, massl);
+  
+  single_density_theory( massl,  rscale_l,  massd,  rscale_d,  bin_width);
+ 
 }

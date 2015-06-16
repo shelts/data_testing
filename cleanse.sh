@@ -10,6 +10,7 @@ rm -r plots
 mkdir plots
 cd plots
 mkdir energy
+mkdir vel_dist
 
 cd ~/Desktop/research/data_testing
 
@@ -21,3 +22,6 @@ mkdir sim_outputs
 
 rm -r test_output
 mkdir test_output
+
+rm -r theory
+mkdir theory

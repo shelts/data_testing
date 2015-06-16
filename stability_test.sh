@@ -27,6 +27,8 @@
         
         
         gnuplot stability_plots.gnuplot
+        gnuplot theory_and_actual_stability_plots.gnuplot 
+        
         
         
 # 	xdg-open run1/plots/radii_distribution.jpeg

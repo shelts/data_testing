@@ -185,28 +185,6 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
   return pot/2.0;
 }
 
-double potential_massenc( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
-{
-  
-  double pot=0.0;
-  double x, y, z, r, mass;
-  double mass_light, mass_dark;
-  for(int i=0; i<N; i++)
-  {     
-    x=b[i].x;
-    y=b[i].y;
-    z=b[i].z;
-    r= sqrt( sqr(x) + sqr(y) + sqr(z));
-    mass=b[i].mass;
-//     mass_light=massl;
-//     mass_dark=massd;
-    mass_light=mass_enc(r, rscale_l, massl);
-    mass_dark=mass_enc(r, rscale_d, massd);
-    pot+=-1.0*mass*((mass_light+ mass_dark)/r );
-  }
-  return pot;
-}
-
 double potential_func( struct bodies * b, double massl, double massd, double rscale_l, double rscale_d, int N)
 {
   
@@ -275,23 +253,23 @@ int main (int argc, char * const argv[])
   
 //   cout<<Nl<<"  "<< Nd<<endl;
   double ke;
-  double pot, pot2, pot3;
+  double pot_func, pot_pp;
 
   get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle, d, l);
   
   ke=kinetic(N,b);
-  pot=potential_func(b, massl, massd, rscale_l,rscale_d, N);
-  pot2=potential_energy(Nl, Nd, b, extension);
-  pot3=potential_massenc(b, massl, massd, rscale_l,rscale_d, N);
+  pot_func=potential_func(b, massl, massd, rscale_l,rscale_d, N);
+  pot_pp=potential_energy(Nl, Nd, b, extension);
   
-  double ratio= fabs(2.0*ke/pot);
-  double ratio2= fabs(2.0*ke/pot2);
-  double ratio3= fabs(2.0*ke/pot3);
+  double ratio_func= fabs(2.0*ke/pot_func);
+  double ratio_pp= fabs(2.0*ke/pot_pp);
+  double rat= pot_pp/pot_func;
   FILE * file;
   file=fopen("./test_output/virial_output.txt", "a");
 //   printf("ke \t pot \t ratio \t time\n");
 //   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
-  fprintf(file, "%f \t %f \t %f\t %f \n", ratio,ratio2, ratio3, atof(argv[1]));
+  
+  fprintf(file, "%f %f \t %f %f\t ratio: %f \t %f \n", ratio_func,pot_func, ratio_pp,pot_pp, rat,atof(argv[1]));
   fclose(file);
   
   vel_dis(N,b, extension);
