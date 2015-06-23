@@ -11,6 +11,8 @@ mkdir plots
 cd plots
 mkdir energy
 mkdir vel_dist
+mkdir theta
+mkdir phi
 
 cd ~/Desktop/research/data_testing
 

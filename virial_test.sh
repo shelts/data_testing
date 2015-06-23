@@ -8,13 +8,24 @@
 	  g++ -std=c++11 virial_test.cpp -o virial_test
 # 	  rm virial_output.txt
 	   ./virial_test 0 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test p25 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test p5 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test p75 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test 1 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test 2 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test 3 1  0.5 0.2 30.0 0.2 1
-	   ./virial_test 4 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test p25 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test p5 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test p75 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test 1 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test 2 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test 3 1  0.5 0.2 30.0 0.2 1
+# 	   ./virial_test 4 1  0.5 0.2 30.0 0.2 1
+	   
+	   
+# 	   
+#            ./virial_test 0 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test p25 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test p5 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test p75 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test 1 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test 2 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test 3 1  0.5 0.2 30.0 0.2 0
+#            ./virial_test 4 1  0.5 0.2 30.0 0.2 0
 	  
 # 	  gnuplot virial.gnuplot
 	  

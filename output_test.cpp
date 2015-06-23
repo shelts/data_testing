@@ -32,19 +32,25 @@ double potential( double r, double mass, double rscale)
   return (-1.0*potential_result);
 }
 
-double density(double r, double rscale_l, double mass_l, double rscale_d, double mass_d )
+double density(double r, double * args)
 {
-  double pi=4.0*atan(1.0);
-  double rscale_l_cube = cube(rscale_l); 
-  double rscale_d_cube = cube(rscale_d); 
-  
-//   double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
-  double density_light_comp=(mass_l/rscale_l_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_l) ) );
-  double density_dark_comp= (mass_d/rscale_d_cube)  * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_d) ) );
-  double coeff=(3.0/(4.0*(pi)));
-  
-  double density_result= coeff*( density_light_comp + density_dark_comp);
-  return density_result;
+    
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    
+    double pi=4.0*atan(1.0);
+    double rscale_l_cube = cube(rscale_l); 
+    double rscale_d_cube = cube(rscale_d); 
+
+    //   double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
+    double density_light_comp=(mass_l/rscale_l_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_l) ) );
+    double density_dark_comp= (mass_d/rscale_d_cube)  * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_d) ) );
+    double coeff=(3.0/(4.0*(pi)));
+
+    double density_result= coeff*( density_light_comp + density_dark_comp);
+    return density_result;
 }
 
 double mass_enc(double r, double rscale, double mass)
@@ -60,7 +66,7 @@ double mass_enc(double r, double rscale, double mass)
 int get_size(int type, string extension)
 {
   string s;
-    if(type==1){s= string("./raw_data/light_matter_"+extension+".dat");}
+    if(type==0){s= string("./raw_data/light_matter_"+extension+".dat");}
   else {s= string("./raw_data/dark_matter_"+extension+".dat");}
    int N=0;
   double datax;
@@ -81,8 +87,8 @@ int get_size(int type, string extension)
 void get_data(int N, double * x,double * y, double * z, double * vx,double * vy, double * vz, int type, string extension)
 {
     string s;
-  if(type==1){s= string("raw_data/light_matter_"+extension+".dat");}
-  else {s= string("raw_data/dark_matter_"+extension+".dat");}
+  if(type==0){s= string("raw_data/light_matter_"+extension+".dat");}
+  else if(type==1){s= string("raw_data/dark_matter_"+extension+".dat");}
   double datax,datay,dataz,datavx,datavy,datavz;
   int l=0;
   
@@ -112,10 +118,17 @@ void binner(int binN,double binwidth, double * x,int N, int type, string extensi
   double range=0;
   double upper=binN*binwidth;
   string s;
-  if(type==0){s= string("binned_data/dark_matter_bins_"+extension+".dat");}
-  else if(type==1){s= string("binned_data/light_matter_bins_"+extension+".dat");}
+  if(type==1){s= string("binned_data/dark_matter_bins_"+extension+".dat");}
+  else if(type==0){s= string("binned_data/light_matter_bins_"+extension+".dat");}
   else if(type==2){s= string("binned_data/dark_matter_vel_bins_"+extension+".dat");}
   else if(type==3){s= string("binned_data/light_matter_vel_bins_"+extension+".dat");}
+  else if(type==4){s=string("binned_data/theta_light_"+extension+".dat");}
+  else if(type==5){s=string("binned_data/theta_dark_"+extension+".dat");}
+  else if(type==6){s=string("binned_data/theta_both_"+extension+".dat");}
+  
+  else if(type==7){s=string("binned_data/phi_light_"+extension+".dat");}
+  else if(type==8){s=string("binned_data/phi_dark_"+extension+".dat");}
+  else if(type==9){s=string("binned_data/phi_both_"+extension+".dat");}
   
 /*binning*/
 
@@ -165,32 +178,71 @@ void binner(int binN,double binwidth, double * x,int N, int type, string extensi
   for(int i=0; i!=binN;i++)
   {
       binrange=binrange+binwidth;
-      normed=(bins[i])/double(N);
-      bin<<normed<<"\t"<<binrange<<endl;
-// 	bin<<bins[i]<<"\t"<<binrange<<endl;
+//       normed=(bins[i])/double(N);
+//       bin<<normed<<"\t"<<binrange<<endl;
+	bin<<bins[i]<<"\t"<<binrange<<endl;
   }
   bin.close();
 }
 
-void single_density_theory(double mass_l, double rscale_l, double mass_d, double rscale_d, double bin_width)
+void single_density_theory(double mass_l, double rscale_l, double mass_d, double rscale_d, double bin_width, double masspd, double masspl)
 {
-    double w=0.0;
-    string s;
-//     if(type==0){s= string("theory/dark_matter_theory.dat");}
-//     else if(type==1){s= string("theory/light_matter_theory.dat");}
-    s= string("theory/theory.dat");
-    double de, de2;
+    double w = 0.0;
+    double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
+    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
+    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
+    double pi= 4.0 * atan(1.0);
+    
+    double de, de2, de3;
     FILE * rho;
     rho= fopen("./theory/theory.dat", "w");
     while(1)
     {
-        de=w*w*density(w, rscale_l, mass_l, rscale_d, mass_d)*bin_width;
-        de2=w*w*density(w,rscale_l, mass_l, rscale_d, mass_d)*bin_width;
+        de2 = 4.0 * pi * w * w * density(w, light) * bin_width/ masspl;
+        de3 = 4.0 * pi * w * w * density(w, dark) * bin_width / masspd;
+        de = de2 + de3;
         w=w+0.01;
-        fprintf(rho, "%f \t %f \t %f\n", w, de, de2);
-    //             mw_printf("\r printing density functions: %f %", w/(5*(radiusScale1+radiusScale2))*100);
+        fprintf(rho, "%f \t %f \t %f\t%f\n", w, de, de2, de3);
+            
         if(w>5*(rscale_l+rscale_d)){break;}
     }
+}
+
+void angle_theory( double bin_width, double masspd, double masspl)
+{
+    double pi= 4.0 * atan(1.0);
+    double theta_l, theta_d, theta;
+    double phi_l, phi_d, phi;
+    FILE * th;
+    double w = 0.0;
+    th= fopen("./theory/theory_theta.dat", "w");
+    while(1)
+    {
+        theta_l = 2.0 * pi * sin(w) * bin_width /  masspl;
+        theta_d = 2.0 * pi * sin(w) * bin_width / masspd;
+        theta = theta_l + theta_d;
+        w=w+0.01;
+        fprintf(th, "%f \t %f \t %f\t%f\n", w, theta, theta_l, theta_d);
+            
+        if(w>(5.0)){break;}
+    }
+    
+    FILE * ph;
+    w = 0.0;
+    ph= fopen("./theory/theory_phi.dat", "w");
+    while(1)
+    {
+        phi_l = 2.0 * pi * sin(w) * bin_width /  masspl;
+        phi_d = 2.0 * pi * sin(w) * bin_width / masspd;
+        phi = theta_l + theta_d;
+        w=w+0.01;
+        fprintf(ph, "%f \t %f \t %f\t%f\n", w, phi, phi_l, phi_d);
+            
+        if(w>(5.0)){break;}
+    }
+    
+    fclose(th);
+    fclose(ph);
 }
 
 
@@ -198,11 +250,11 @@ void single_density_theory(double mass_l, double rscale_l, double mass_d, double
 void radial_distribution(int type, string extension, int N, double * x, double * y, double * z, double * r, int number_of_bins, double bin_width, double rscale, double mass)
 {
   string s;
-  if(type==0){s= string("actual/dark_matter_density_"+extension+".dat");}
-  else if(type==1){s= string("actual/light_matter_density_"+extension+".dat");}
+  if(type==1){s= string("actual/dark_matter_density_"+extension+".dat");}
+  else if(type==0){s= string("actual/light_matter_density_"+extension+".dat");}
 //   else if(type==2){s= string("actual/dark_matter_vel_density.dat");}
 //   else if(type==3){s= string("actual/light_matter_vel_density.dat");}
-  
+
   for(int i=0;i<N;i++)
   {r[i]= sqrt( x[i]*x[i] +y[i]*y[i] + z[i]*z[i] );}
   
@@ -219,6 +271,59 @@ void radial_distribution(int type, string extension, int N, double * x, double *
   }
 //   dens.close();
    binner(number_of_bins, bin_width, r, N, type, extension);
+}
+
+void angles(string extension, int Nl, int Nd, double * xl, double * yl, double * zl, double * xd, double * yd, double * zd, int number_of_bins, double bin_width )
+{
+    double rl[Nl];
+    double rd[Nd]; 
+    int N = Nl + Nd;
+    double r[N];
+    int type;
+    double theta_l[Nl];
+    double theta_d[Nd];
+    double theta[N];
+    double phi[N];
+    double phi_l[Nl];
+    double phi_d[Nd];
+    
+    int j = 0;
+    for(int i = 0; i < Nl; i++)
+    {
+        rl[i] = sqrt( sqr(xl[i]) + sqr(yl[i]) + sqr(zl[i]) );
+        theta_l[i] = acos( zl[i] / rl[i] );
+        phi_l[i] = atan( yl[i] / xl[i] );
+        
+        theta[j] = theta_l[i];
+        phi[j] = phi_l[i];
+        j++;
+    }
+    
+    for(int i = 0; i < Nl; i++)
+    {
+        rd[i] = sqrt( sqr(xd[i]) + sqr(yd[i]) + sqr(zd[i]) );
+        theta_d[i] = acos( zd[i] / rd[i]);
+        phi_d[i] = atan( yd[i] / xd[i] );
+        
+        theta[j] = theta_d[i];
+        phi[j] = phi_d[i];
+        j++;
+    }
+    
+    type = 4;
+    binner(number_of_bins, bin_width, theta_l, Nl, type, extension);
+    type = 5;
+    binner(number_of_bins, bin_width, theta_d, Nd, type, extension);
+    type = 6;
+    binner(number_of_bins, bin_width, theta, N, type, extension);
+    
+    type = 7;
+    binner(number_of_bins, bin_width, phi_l, Nl, type, extension);
+    type = 8;
+    binner(number_of_bins, bin_width, phi_d, Nd, type, extension);
+    type = 9;
+    binner(number_of_bins, bin_width, phi, N, type, extension);
+    
 }
 
 
@@ -256,12 +361,16 @@ int main (int argc, char * const argv[])
    double light_r_ratio = atof(argv[4]);
    double dwarfmass = atof(argv[5]);
    double light_mass_ratio = atof(argv[6]);
-    
+
    string extension= simtime+"gy";
    /*changes the parameters to usable info*/
    double massl= dwarfmass * light_mass_ratio;
    double massd= dwarfmass - (dwarfmass * light_mass_ratio);
+   double mass_per_particle_dark = massd/ (0.5* 20000);
+   double mass_per_particle_light = massl/ (0.5* 20000);
    double rscale_d= rscale_l/light_r_ratio;
+   
+  
 //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, massl, massd);
   
   /*paramters for binning routine*/
@@ -269,12 +378,12 @@ int main (int argc, char * const argv[])
   double bin_width=.10;
   
   /*these are markers for the type of data being sent into functions*/
-  int d=0;//dark matter
-  int l=1;//light matter
+  int d=1;//dark matter
+  int l=0;//light matter
   int vd=2;//vel
   int vl=3;//vel
-  int Nd= get_size(0, extension);//getting the size of the dark matter data
-  int Nl= get_size(1, extension);//getting the size of the light matter data
+  int Nd= get_size(d, extension);//getting the size of the dark matter data
+  int Nl= get_size(l, extension);//getting the size of the light matter data
   
   double rd[Nd], rl[Nl];//, r[Nd+Nl];  
   
@@ -292,6 +401,7 @@ int main (int argc, char * const argv[])
   radial_distribution(d, extension, Nd, dx, dy, dz, rd, number_of_bins, bin_width, rscale_d, massd);
   radial_distribution(l, extension, Nl, lx, ly, lz, rl, number_of_bins, bin_width, rscale_l, massl);
   
-  single_density_theory( massl,  rscale_l,  massd,  rscale_d,  bin_width);
- 
+  single_density_theory( massl,  rscale_l,  massd,  rscale_d,  bin_width, mass_per_particle_dark,mass_per_particle_light );
+  angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
+  angle_theory(bin_width, mass_per_particle_dark, mass_per_particle_light);
 }
