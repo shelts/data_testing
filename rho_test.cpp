@@ -16,6 +16,14 @@ using namespace std;
 #define fifth(x) (x*x*x*x*x)
 #define fivehalf(x) (sqrt( fifth(x)))
 #define negone(x) (1.0/x )
+
+/*
+ * THIS HAS NOT BEEN UPDATED AND SHOULD NOT BE USED UNLESS IT IS
+ */
+
+
+
+
 /*
  * This code calculates the viral ratio for the entire system as a whole
  */

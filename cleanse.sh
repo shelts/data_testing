@@ -13,6 +13,8 @@ mkdir energy
 mkdir vel_dist
 mkdir theta
 mkdir phi
+mkdir rad
+mkdir pot
 
 cd ~/Desktop/research/data_testing
 

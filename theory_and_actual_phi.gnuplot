@@ -2,8 +2,8 @@ reset
 set terminal jpeg
 set key on
 set ylabel 'counts'
-set xlabel 'radius (Mpc)'
-set xrange[0:4]
+set xlabel 'phi (rad)'
+set xrange[-5:5]
 # set yrange[0:1000]
 
 

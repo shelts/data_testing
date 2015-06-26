@@ -3,7 +3,7 @@
         python outputparser.py ./sim_outputs/output_0gy.out  0gy
         g++ -std=c++11 output_test.cpp -o output_test
         ./output_test 0 1 0.5 0.2 30 .2
-        2>>~/Desktop/research/data_testing/piped_output.txt
+#         2>>./piped_output.txt
 #         python outputparser.py ./sim_outputs/output_p25gy.out  p25gy
 #         ./output_test p25 1 0.5 0.2 30 0.2  
 #         
@@ -30,5 +30,6 @@
         gnuplot theory_and_actual_stability_plots.gnuplot 
         gnuplot theory_and_actual_theta.gnuplot
         gnuplot theory_and_actual_phi.gnuplot
-        
+        gnuplot theory_and_actual_pot_int.gnuplot
+        gnuplot theory_and_actual_pot_calc.gnuplot
 # 	xdg-open run1/plots/radii_distribution.jpeg
