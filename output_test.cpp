@@ -8,23 +8,34 @@
 #include <typeinfo>
 #include <vector>
 #include <string>
-
+#include <ctime>
 using namespace std;
 
 #define inv(x)  ((double) 1.0 / (x))
+#define seventh(x) ((x) * (x) * (x) * (x) * (x) * (x) * (x))
 #define sixth(x) ((x) * (x) * (x) * (x) * (x) * (x))
 #define fourth(x) ((x) * (x) * (x) * (x))
 #define fifth(x) ((x) * (x) * (x) * (x) * (x))
 #define cube(x) ((x) * (x) * (x))
 #define sqr(x)  ((x) * (x))
 
+#define seventhhalfs(x) ( sqrt(seventh(x) ) )
+#define fivehalves(x)   ( sqrt(fifth(x) ) )
+#define threehalves(x)  ( sqrt(cube(x)  ) )
 
-#define fivehalves(x) ( sqrt(fifth(x) ) )
-#define threehalves(x) ( sqrt(cube(x)  ) )
 
 #define minusfivehalves(x) (inv(fivehalves(x)))
 #define minusthreehalves(x) (inv(threehalves(x)) )
 #define minushalf(x) ( inv(sqrt(x)) )
+
+double randDouble(double low, double high)
+{
+    double temp;
+/* calculate the random number & return it */
+    temp = ((double) rand() / (static_cast<double>(RAND_MAX) + 1.0))* (high - low) + low;
+    return temp;
+}
+
 
 
 /*This gets the number of positional data from the raw data files*/
@@ -91,9 +102,9 @@ double density(double r, double * args)
     //   double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
     double density_light_comp = (mass_l/rscale_l_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_l) ) );
     double density_dark_comp  = (mass_d/rscale_d_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_d) ) );
-    double coeff = (3.0/(4.0*(pi)));
+    double coeff = 3.0 / (4.0 * pi);
 
-    double density_result = coeff*( density_light_comp + density_dark_comp);
+    double density_result = coeff * ( density_light_comp + density_dark_comp);
     return density_result;
 }
 
@@ -121,7 +132,6 @@ double potential( double r, double * args)
     double mass_d   = args[3];
     double pot_light_comp = mass_l/sqrt( sqr(r) + sqr(rscale_l) );
     double pot_dark_comp  = mass_d/sqrt( sqr(r) + sqr(rscale_d) );
-    
     double potential_result = -1.0 * (pot_light_comp + pot_dark_comp);
 
     return (potential_result);
@@ -135,14 +145,13 @@ double potential_total_int(double r, double * args)
     double mass_l   = args[2];
     double mass_d   = args[3];
     
-    double pi= 4.0 * atan(1.0);
+    double pi  = 4.0 * atan(1.0);
     double pot = potential(r, args);
     double den = density(r, args);
     double func = sqr(r) * pot * den;
     
 //     printf("func = %f pot = %f den = %f \n", func, pot, den);
     return func;
-    
 }
 
 
@@ -169,6 +178,19 @@ double test(double x, double * args)
 {
  double func = exp(x) * sin(x) * x;
  return func;
+}
+
+
+double distribution(double mass, double r_scale, double v, double r, double * args)
+{
+    
+    double pi  = 4.0 * atan(1.0);
+    double coeff = 24.0 * sqrt(2.0) * inv( 7.0 * cube(pi) );
+    double energy = -potential(r, args) - 0.5 * sqr(v) ;
+    double f = v * v * coeff * inv( fourth(mass) ) * sqr(r_scale) * seventhhalfs(fabs(energy));
+    
+    return f;
+    
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // service functions
@@ -267,6 +289,9 @@ void binner(int binN,double binwidth, double * x, int N, int type, string extens
     else if(type == 10){s = string("binned_data/pot_dark_"+extension+".dat");}
     else if(type == 11){s = string("binned_data/pot_light_"+extension+".dat");}
 
+    else if(type == 12){s = string("binned_data/dark_matter_theory_vel_bins.dat");}
+    else if(type == 13){s = string("binned_data/light_matter_theory_vel_bins.dat");}
+    
     /*binning*/
 
     /*initializing bins*/
@@ -436,21 +461,25 @@ void potential_theory(double bin_width, double * args)
     double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
     double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
     double pot_all, pot_l, pot_d;
-    double pi= 4.0 * atan(1.0);
+    double pi = 4.0 * atan(1.0);
     double w = 0.0;
-    
+    double pot_pp_l;
+    double pot_pp_d;
     //done via integral:
     FILE * pot;
     pot= fopen("./theory/theory_pot_int.dat", "w");
     while(1)
     {
-        pot_l    = 4.0 * pi * gauss_quad(potential_total_int, light, 0.0, w) * bin_width;
-        pot_d    = 4.0 * pi * gauss_quad(potential_total_int, dark, 0.0, w)  * bin_width;
-        pot_all  = 4.0 * pi * gauss_quad(potential_total_int, args, 0.0, w)  * bin_width ;
+        pot_pp_l = (  potential(w, light) );
+        pot_pp_d = (  potential(w, dark)  );
+        pot_l    = 4.0 * pi * bin_width * inv(pot_pp_l * masspl ) * potential_total_int(w, light); //gauss_quad(potential_total_int, light, 0.0, w);
+        pot_d    = 4.0 * pi * bin_width * inv(pot_pp_d * masspd ) * potential_total_int(w, dark); //gauss_quad(potential_total_int, dark, 0.0, w);
+        
+        
         w += 0.01;
-        fprintf(pot, "%f \t %f \t %f\t%f\n", w, pot_all, pot_l, pot_d);
+        fprintf(pot, "%f\t%f\t%f\t%f\n", pot_pp_l, pot_pp_d , pot_l, pot_d);
             
-        if( w > 5 * (rscale_l + rscale_d)){break;}
+        if( fabs(w) > 5 * (rscale_l + rscale_d)){break;}
     }
     fclose(pot);
     
@@ -460,15 +489,113 @@ void potential_theory(double bin_width, double * args)
     w = 0.0;
     while(1)
     {
-        pot_l = potential_total_calc(w, light);
-        pot_d = potential_total_calc(w, dark) ;
-        pot_all = pot_l + pot_d;
+        
+        pot_pp_l = potential(w, light);
+        pot_pp_d = potential(w, dark);
+        
+        pot_l = potential_total_calc(w, light) ;
+        pot_d = potential_total_calc(w, dark)  ;
+        pot_all = pot_l + pot_d;//not correct
         w += 0.01;
-        fprintf(pot2, "%f \t %f \t %f\t%f\n", w, pot_all, pot_l, pot_d);
+        fprintf(pot2, "%f \t %f \t %f\t%f\n", pot_pp_l, pot_pp_d, pot_l, pot_d);
             
         if( w > 5 * (rscale_l + rscale_d)){break;}
     }
     fclose(pot2);
+    
+    
+}
+
+void vel_theory(double bin_width, double * args)
+{
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    double masspl   = args[4]; 
+    double masspd   = args[5];
+    
+    double w = 0.0;
+    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
+    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
+    double pi = 4.0 * atan(1.0);
+    double r_d = 0.5 * rscale_d;
+    double r_l = 0.5 * rscale_l;
+    double vel_l, vel_d, vel_b;
+    FILE * vel;
+    vel= fopen("./theory/theory_vel.dat", "w");
+    while(1)
+    {
+        vel_l = distribution(mass_l, rscale_l, w, r_l, light) * inv(masspl);
+        vel_d = distribution(mass_d, rscale_d, w, r_d, dark) * inv(masspd);
+//         vel_b = sqrt( fabs( 2.0 * potential(w, args) )) * bin_width;
+        w += 0.01;
+        fprintf(vel, "%f \t %f \t %f\t%f\n", w, vel_l, vel_d, vel_b);
+            
+        if( w > 5 * (rscale_l + rscale_d)){break;}
+    }
+    fclose(vel);
+}
+
+
+void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
+{
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    double masspl   = args[4]; 
+    double masspd   = args[5];
+    
+    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
+    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
+    
+    double v_l[Nl];
+    double v_d[Nd];
+    double v, u, f, r;
+    double v_esc;
+    double fmax;
+    for(int i = 0; i < Nl; i++)
+    {
+        r = r_l[i];
+        v_esc = sqrt( 2.0 * fabs( potential(r, light) ));
+        fmax = distribution(mass_l, rscale_l, v_esc, r, light);
+        while(1)
+        {
+            v = randDouble(0.0, v_esc);
+            u = randDouble(0.0,1.0);
+            f = distribution(mass_l, rscale_l, v, r, light);
+            if(f/fmax > u)
+            {
+                v_l[i] = v;
+                break;
+            }
+        }
+    }
+    
+    for(int i = 0; i < Nd; i++)
+    {
+        r = r_d[i];
+        v_esc = sqrt( 2.0 * fabs( potential(r, dark) ));
+        fmax = distribution(mass_d, rscale_d, v_esc, r, dark);
+        while(1)
+        {
+            v = randDouble(0.0, v_esc);
+            u = randDouble(0.0,1.0);
+            f = distribution(mass_d, rscale_d, v, r, dark);
+            if(f/fmax > u)
+            {
+                v_d[i] = v;
+                break;
+            }
+        }
+    }
+    
+    int type;
+    type = 12;
+    binner(number_of_bins, bin_width, v_d, Nd, type, extension);
+    type = 13;
+    binner(number_of_bins, bin_width, v_l, Nl, type, extension);
     
     
 }
@@ -548,21 +675,35 @@ void angles(string extension, int Nl, int Nd, double * xl, double * yl, double *
 }
 
 
-void vel_dis(int type, string extension, int N, double * v, double * r,double number_of_bins, double bin_width, double rscale, double mass)
+void vel_dis(string extension, double Nl, double Nd, double * vel_l, double * vel_d, double * rl, double * rd, int number_of_bins, double bin_width)
 {
 
-  string s;
-  if(type == 3){s = string("actual/light_matter_velocity_dist_"+extension+".dat");}
-  else if(type == 2){s = string("actual/dark_matter_velocity_dist_"+extension+".dat");}
-  
-  ofstream vel;
-  vel.open(s);
-  for(int i = 0; i < N; i++)
-  {
-    vel<<r[i]<<"\t"<<v[i]<<endl;
-  }
-  vel.close();
-  binner(number_of_bins, bin_width, v, N, type, extension);
+    int type;
+    string s;
+    s = string("actual/light_matter_velocity_dist_"+extension+".dat");
+    ofstream vel;
+    vel.open(s);
+    for(int i = 0; i < Nl; i++)
+    {
+        vel<<rl[i]<<"\t"<<vel_l[i]<<endl;
+    }
+    vel.close();
+    
+    s = string("actual/dark_matter_velocity_dist_"+extension+".dat");
+    ofstream vel2;
+    vel2.open(s);
+    for(int i = 0; i < Nd; i++)
+    {
+        vel2<<rd[i]<<"\t"<<vel_d[i]<<endl;
+    }
+    vel2.close();
+
+    
+    
+    type = 2;
+    binner(number_of_bins, bin_width, vel_d, Nd, type, extension);
+    type = 3;
+    binner(number_of_bins, bin_width, vel_l, Nl, type, extension);
   
 }
 
@@ -600,6 +741,8 @@ void potential_distribution(double bin_width, double number_of_bins, string exte
         pol<<r <<"\t"<<pot_l[i]<<endl;
     }
     
+    pol.close();
+    pod.close();
     
     type = 10;
     binner(number_of_bins, bin_width, pot_d, Nd, type, extension);
@@ -611,6 +754,7 @@ void potential_distribution(double bin_width, double number_of_bins, string exte
 // main function calls
 int main (int argc, char * const argv[])
 {
+    srand(time(NULL));
     /*taking in command line data. should be the same parameters used to calculate the simulation*/
     string simtime          = argv[1];
     double backtime         = atof(argv[2]);
@@ -674,25 +818,30 @@ int main (int argc, char * const argv[])
     printf(".");
     radial_distribution(l, extension, Nl, rl, number_of_bins, bin_width, rscale_l, massl);
     printf(".");
-    angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
-    printf(".");
-    potential_distribution(bin_width, number_of_bins, extension, args, rl, Nl, rd, Nd);
-
-
-    /*theory*/
-    printf(".");
     single_density_theory(bin_width, args);
+    printf(".");
+    angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
     printf(".");
     angle_theory(bin_width, args);
     printf(".");
+    vel_dis(extension, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
+    printf(".");
+    vel_theory(bin_width, args);
+    
+    printf(".");
+//     bin_width= 0.0001;
+    potential_distribution(bin_width, number_of_bins, extension, args, rl, Nl, rd, Nd);
+    printf(".");
+    
     potential_theory(bin_width, args);
+    vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
+    /*theory*/
+    
+    
+    
 
-    double tester = gauss_quad(test, args, 0.0, 5.0);
+//     double tester = gauss_quad(test, args, 0.0, 5.0);
     //   printf(" int = %f \n", tester);
 
     printf("done.\n");
-
 }
-
-
-//test

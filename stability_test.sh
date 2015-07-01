@@ -27,9 +27,12 @@
 #         
 #         
 #         gnuplot stability_plots.gnuplot
-        gnuplot theory_and_actual_stability_plots.gnuplot 
-        gnuplot theory_and_actual_theta.gnuplot
-        gnuplot theory_and_actual_phi.gnuplot
-        gnuplot theory_and_actual_pot_int.gnuplot
-        gnuplot theory_and_actual_pot_calc.gnuplot
+        gnuplot stability_plots.gnuplot 
+        gnuplot theta.gnuplot
+        gnuplot phi.gnuplot
+        gnuplot pot_int.gnuplot
+        gnuplot pot_calc.gnuplot
+        gnuplot vel.gnuplot
+        gnuplot v_vs_r.gnuplot
+        gnuplot vel_theory_binned.gnuplot
 # 	xdg-open run1/plots/radii_distribution.jpeg

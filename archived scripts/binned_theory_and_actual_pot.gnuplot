@@ -2,7 +2,7 @@ reset
 set terminal jpeg
 set key on
 set ylabel 'counts'
-set xlabel 'radius (Mpc)'
+set xlabel 'Potential'
 # set xrange[0:10]
 # set yrange[0:1000]
 

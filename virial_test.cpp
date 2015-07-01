@@ -263,7 +263,7 @@ int main (int argc, char * const argv[])
 //   printf("ke \t pot \t ratio \t time\n");
 //   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
   
-  fprintf(file, "%f\t %f\t ratio: %f \t %f \n", ratio_func, ratio_pp, rat, atof(argv[1]));
+  fprintf(file, "%f  %f\t %f  %f \t ratio: %f \t %f \n", ratio_func, pot_func, ratio_pp, pot_pp, rat, atof(argv[1]));
   fclose(file);
   
   vel_dis(N, b, extension);
