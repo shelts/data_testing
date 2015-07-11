@@ -1,31 +1,32 @@
 #!/bin/bash
 
 rm -r actual
-mkdir actual
-
+rm -r raw_data
 rm -r binned_data
+rm -r plots
+rm -r sim_outputs
+rm -r test_output
+rm -r theory
+
+
+mkdir actual
 mkdir binned_data
 
-rm -r plots
+mkdir raw_data
+mkdir sim_outputs
+mkdir test_output
+mkdir theory
+
 mkdir plots
 cd plots
 mkdir energy
-mkdir vel_dist
 mkdir theta
 mkdir phi
 mkdir rad
 mkdir pot
 
-cd ~/Desktop/research/data_testing
+mkdir vel_dist
+mkdir ./vel_dist/binned_vs_tbins
+mkdir ./vel_dist/binned_vs_theory
+mkdir ./vel_dist/vel_vs_r
 
-rm -r raw_data
-mkdir raw_data
-
-rm -r sim_outputs
-mkdir sim_outputs
-
-rm -r test_output
-mkdir test_output
-
-rm -r theory
-mkdir theory

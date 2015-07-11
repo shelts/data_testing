@@ -3,8 +3,8 @@ set terminal jpeg
 set key on
 set ylabel 'counts'
 set xlabel 'potential'
-set xrange[-15:0]
-set yrange[0:250]
+set xrange[-20:0]
+# set yrange[0:1000]
 
 
 
