@@ -487,17 +487,16 @@ void potential_theory(double bin_width, double * args)
     pot_l = 4.0 * pi  * gauss_quad(potential_total_int, light, args, 0.0, r_inf);
     pot_d = 4.0 * pi  * gauss_quad(potential_total_int, dark, args, 0.0, r_inf);
     double sum = pot_l + pot_d;
-    printf("\npot_l = %f \t pot_d = %f \t sum = %f\n", pot_l, pot_d, sum);
+//     printf("\npot_l = %f \t pot_d = %f \t sum = %f\n", pot_l, pot_d, sum);
     
     
     //single density against single potentials
     pot_l = 4.0 * pi  * gauss_quad(potential_total_int, light, light, 0.0, r_inf);
     pot_d = 4.0 * pi  * gauss_quad(potential_total_int, dark, dark, 0.0, r_inf);
     sum = pot_l + pot_d;
-    printf("\npot_l = %f \t pot_d = %f \t sum = %f\n", pot_l, pot_d, sum);
+//     printf("\npot_l = %f \t pot_d = %f \t sum = %f\n", pot_l, pot_d, sum);
     
 }
-
 
 
 void vel_theory(double bin_width, double * args, int Nl, int Nd)
@@ -708,6 +707,7 @@ void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, do
     int N = Nl + Nd;
     double v[N];
     string s;
+    int type = 0;
     double theta_l[Nl];
     double theta_d[Nd];
     double theta[N];
@@ -739,18 +739,19 @@ void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, do
     }
     
     s = string("binned_data/theta_vel_light_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta_l, Nl, type, extension);
+    binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);
     s = string("binned_data/theta_vel_dark_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta_d, Nd, type, extension);
+    binner(number_of_bins, bin_width, theta_d, Nd, s, extension, type);
     s = string("binned_data/theta_vel_both_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta, N, type, extension);
+    binner(number_of_bins, bin_width, theta, N, s, extension, type);
     
+    type = 1;
     s = string("binned_data/phi_vel_light_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi_l, Nl, type, extension);
+    binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);
     s = string("binned_data/phi_vel_dark_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi_d, Nd, type, extension);
+    binner(number_of_bins, bin_width, phi_d, Nd, s, extension, type);
     s = string("binned_data/phi_vel_both_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi, N, type, extension);
+    binner(number_of_bins, bin_width, phi, N, s, extension, type);
     
 }
 
@@ -850,7 +851,7 @@ int main (int argc, char * const argv[])
     /*taking in command line data. should be the same parameters used to calculate the simulation*/
     string simtime          = argv[1];
     double backtime         = atof(argv[2]);
-    double rscale_l         = atof(argv[3]);
+    double rscale_d         = atof(argv[3]);
     double light_r_ratio    = atof(argv[4]);
     double dwarfmass        = atof(argv[5]);
     double light_mass_ratio = atof(argv[6]);
@@ -860,14 +861,14 @@ int main (int argc, char * const argv[])
 
     string extension = simtime + "gy";
     /*changes the parameters to usable info*/
-    double massl = dwarfmass * light_mass_ratio;
-    double massd = massl;//dwarfmass - (dwarfmass * light_mass_ratio);
-    double rscale_d = rscale_l;// / light_r_ratio;
+    double massl = dwarfmass - (dwarfmass * light_mass_ratio);
+    double massd = dwarfmass * light_mass_ratio;
+    double rscale_l = rscale_d / light_r_ratio;
     
     double mass_per_particle_dark = massd/ (0.5 * Nbody);
     double mass_per_particle_light = massl/ (0.5 * Nbody);
     
-    printf("Nl = %f  Nd = %f  %f\n", massl, massd, rscale_d);
+//     printf("Nl = %f  Nd = %f  %f\n", massl, massd, rscale_d);
     double args[6]  = {rscale_l, rscale_d, massl, massd, mass_per_particle_light, mass_per_particle_dark};
 
     //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, massl, massd);
@@ -896,8 +897,8 @@ int main (int argc, char * const argv[])
     
     double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
     double tst2 = gauss_quad(test, args, args,  5.0, 0.0);
+//     printf("test = %f  %f\n", tst1, tst2);
     
-    printf("test = %f  %f\n", tst1, tst2);
     printf("running tests");
     /*getting the positional and velocity data*/
     get_data(Nd, dx, dy, dz, dvx, dvy, dvz, d, extension);  
@@ -913,15 +914,15 @@ int main (int argc, char * const argv[])
     /*actual data*/
     printf(".");
     radial_distribution(extension, Nd, Nl, rd, rl, number_of_bins, bin_width, args);
-//     printf(".");
-//     radial_distribution(l, extension, Nl, rl, number_of_bins, bin_width, rscale_l, massl);
     printf(".");
     single_density_theory(bin_width, args);
-    printf(".");
     
+    printf(".");
     angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
     printf(".");
     angle_theory(bin_width, args);
+    printf(".");
+    vel_angles(extension, Nl, Nd, lvx, lvy, lvz, dvx, dvy, dvz, number_of_bins, bin_width );
     
     printf(".");
     vel_dis(extension, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
@@ -929,6 +930,7 @@ int main (int argc, char * const argv[])
     vel_theory(bin_width, args, Nl, Nd);
     printf(".");
     vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
+    
     
     
     printf(".");

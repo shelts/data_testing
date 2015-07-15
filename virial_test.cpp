@@ -214,7 +214,7 @@ int main (int argc, char * const argv[])
   /*taking in command line data. should be the same parameters used to calculate the simulation*/
     string simtime = argv[1];
     double backtime  = atof(argv[2]);
-    double rscale_l  = atof(argv[3]);
+    double rscale_d  = atof(argv[3]);
     double light_r_ratio = atof(argv[4]);
     double dwarfmass = atof(argv[5]);
     double light_mass_ratio = atof(argv[6]);
@@ -222,9 +222,9 @@ int main (int argc, char * const argv[])
 
     string extension = simtime+"gy";
     /*changes the parameters to usable info*/
-    double massl = dwarfmass * light_mass_ratio;
-    double massd = massl; //dwarfmass - (dwarfmass * light_mass_ratio);
-    double rscale_d = rscale_l; // / light_r_ratio;
+    double massl = dwarfmass - (dwarfmass * light_mass_ratio);
+    double massd = dwarfmass * light_mass_ratio;  
+    double rscale_l = rscale_d / light_r_ratio;
     
     double args[4]  = {rscale_l, rscale_d, massl, massd};
     /*these are markers for the type of data being sent into functions*/

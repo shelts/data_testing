@@ -22,6 +22,8 @@ cd plots
 mkdir energy
 mkdir theta
 mkdir phi
+mkdir vel_theta
+mkdir vel_phi
 mkdir rad
 mkdir pot
 

@@ -27,13 +27,15 @@
         ./output_test 4 1 0.5 0.2 30.0 0.2  
         
         
-#         gnuplot stability_plots.gnuplot
-        gnuplot stability_plots.gnuplot 
-        gnuplot theta.gnuplot
-        gnuplot phi.gnuplot
-        gnuplot pot_int.gnuplot
-#         gnuplot pot_calc.gnuplot
-        gnuplot vel.gnuplot
-        gnuplot v_vs_r.gnuplot
-        gnuplot vel_theory_binned.gnuplot
+#         gnuplot gnuplot_scripts/stability_plots.gnuplot
+        gnuplot gnuplot_scripts/stability_plots.gnuplot gnuplot_scripts/
+        gnuplot gnuplot_scripts/theta.gnuplot
+        gnuplot gnuplot_scripts/phi.gnuplot
+#         gnuplot gnuplot_scripts/pot_int.gnuplot
+#         gnuplot gnuplot_scripts/pot_calc.gnuplot
+        gnuplot gnuplot_scripts/vel.gnuplot
+        gnuplot gnuplot_scripts/v_vs_r.gnuplot
+        gnuplot gnuplot_scripts/vel_theory_binned.gnuplot
+        gnuplot gnuplot_scripts/vel_phi.gnuplot
+        gnuplot gnuplot_scripts/vel_theta.gnuplot
 # 	xdg-open run1/plots/radii_distribution.jpeg

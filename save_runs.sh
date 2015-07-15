@@ -1,15 +1,15 @@
 #!/bin/bash
 
-mkdir saved_1
+mkdir with_light_parameters
 
 
 
-mv actual saved_1
-mv binned_data saved_1
-mv plots saved_1
-mv raw_data saved_1
-mv sim_outputs saved_1
-mv test_output saved_1
-mv theory saved_1
+mv actual with_light_parameters
+mv binned_data with_light_parameters
+mv plots with_light_parameters
+mv raw_data with_light_parameters
+mv sim_outputs with_light_parameters
+mv test_output with_light_parameters
+mv theory with_light_parameters
 
 bash cleanse.sh
