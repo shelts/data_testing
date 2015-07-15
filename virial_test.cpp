@@ -223,8 +223,9 @@ int main (int argc, char * const argv[])
     string extension = simtime+"gy";
     /*changes the parameters to usable info*/
     double massl = dwarfmass * light_mass_ratio;
-    double massd = dwarfmass - (dwarfmass * light_mass_ratio);
-    double rscale_d = rscale_l/light_r_ratio;
+    double massd = massl; //dwarfmass - (dwarfmass * light_mass_ratio);
+    double rscale_d = rscale_l; // / light_r_ratio;
+    
     double args[4]  = {rscale_l, rscale_d, massl, massd};
     /*these are markers for the type of data being sent into functions*/
     int d = 1;//dark matter
