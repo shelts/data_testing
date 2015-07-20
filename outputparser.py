@@ -83,7 +83,7 @@ def __main__(arg):
     
     print len(light_x), len(dark_x);
     
-    filename=args[2];
+    filename = args[2];
     
     np.savetxt('./raw_data/light_matter_'+filename+'.dat', zip(light_x,light_y, light_z,light_vx, light_vy, light_vz), delimiter='\t')
     

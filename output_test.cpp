@@ -139,6 +139,7 @@ double potential( double r, double * args)
 
 double potential_total_int(double r, double * comp_args, double * args)
 {
+    /*total potential energy, calculated by integrating this function*/
     double pi  = 4.0 * atan(1.0);
     double pot = potential(r, args);
     double den = density(r, comp_args);
@@ -151,6 +152,7 @@ double potential_total_int(double r, double * comp_args, double * args)
 
 double potential_total_calc(double r, double * args)
 {
+    /*from a analytical calc. Does not work for combined compoenents*/
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
@@ -172,6 +174,28 @@ double test(double x, double * args, double * args2)
 {
  double func = exp(x) + sin(x) + x;
  return func;
+}
+
+double get_x()
+{
+    double x = 0.0;
+    double y = 0.1;
+    double u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
+    while(y > u)
+    {
+        
+        x = randDouble(0.0, 1.0);
+        y = randDouble(0.0, 0.1);
+        u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
+    }
+    
+    return x;
+}
+
+double nemo_vel(double r)
+{
+    double v = get_x() * sqrt(2.0) * inv(fourth( (1.0 + sqr(r)) ));
+    return v;
 }
 
 
@@ -482,6 +506,9 @@ void potential_theory(double bin_width, double * args)
     }
     fclose(pot2);
     
+    
+    /*  CALCULATION OF TOTAL POTENTIAL ENERGY   */
+    
     //single density against both potentials
     double r_inf = 50.0 * (rscale_l + rscale_d);
     pot_l = 4.0 * pi  * gauss_quad(potential_total_int, light, args, 0.0, r_inf);
@@ -557,6 +584,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     double v, u, f, r;
     double v_esc, v_mx;
     double fmax;
+    
     for(int i = 0; i < Nl; i++)
     {
         r = r_l[i];
@@ -596,6 +624,8 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
         }
     }
     
+    
+    
     string s;
     int type = 0;
     s = string("binned_data/dark_matter_theory_vel_bins.dat");
@@ -605,6 +635,48 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     
     
 }
+
+void nemo_vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
+{
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    double masspl   = args[4]; 
+    double masspd   = args[5];
+    
+    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
+    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
+    
+    double v_l[Nl];
+    double v_d[Nd];
+    double v, u, f, r;
+    double v_esc, v_mx;
+    double fmax;
+    
+    for(int i = 0; i < Nl; i++)
+    {
+        r = r_l[i];
+        v = nemo_vel(r);
+    }
+    
+    for(int i = 0; i < Nd; i++)
+    {
+        r = r_d[i];
+        v = nemo_vel(r);
+    }
+    
+    string s;
+    int type = 0;
+    s = string("binned_data/dark_matter_theory_nemo_vel_bins.dat");
+    binner(number_of_bins, bin_width, v_d, Nd, s, extension, type);
+    s = string("binned_data/light_matter_theory_nemo_vel_bins.dat");
+    binner(number_of_bins, bin_width, v_l, Nl, s, extension, type);
+    
+    
+}
+
+
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // actual data checking function
@@ -624,9 +696,11 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     s= string("actual/dark_matter_density_"+extension+".dat");
     ofstream dens;
     dens.open(s);
+    double r[Nd + Nl];
     for(int i=0;i<Nd;i++)
     {
         dens<<rd[i]<<endl;
+        r[i] = rd[i];
     }
     dens.close();
     
@@ -634,14 +708,19 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     dens.open(s);
     for(int i=0;i<Nl;i++)
     {
+        r[i+Nd] = rl[i];
         dens<<rl[i]<<endl;
     }
     dens.close();
     
     
-    s = string("binned_data/dark_matter_bins_"+extension+".dat");
+    s = string("binned_data/both_matter_bins_" + extension + ".dat");
+    binner(number_of_bins, bin_width, r, Nd + Nl, s, extension, type);
+    
+    s = string("binned_data/dark_matter_bins_" + extension + ".dat");
     binner(number_of_bins, bin_width, rd, Nd, s, extension, type);
-    s = string("binned_data/light_matter_bins_"+extension+".dat");
+    
+    s = string("binned_data/light_matter_bins_" + extension + ".dat");
     binner(number_of_bins, bin_width, rl, Nl, s, extension, type);
 }
 
@@ -730,7 +809,7 @@ void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, do
     for(int i = 0; i < Nd; i++)
     {
         vd[i] = sqrt( sqr(vxd[i]) + sqr(vyd[i]) + sqr(vzd[i]) );
-        theta_d[i] = acos( vd[i] / vd[i]);
+        theta_d[i] = acos( vzd[i] / vd[i]);
         phi_d[i] = atan2( vyd[i] , vxd[i] );
         
         theta[j] = theta_d[i];
@@ -848,40 +927,31 @@ void potential_distribution(double bin_width, double number_of_bins, string exte
 int main (int argc, char * const argv[])
 {
     srand(time(NULL));
-    /*taking in command line data. should be the same parameters used to calculate the simulation*/
-    string simtime          = argv[1];
-    double backtime         = atof(argv[2]);
-    double rscale_d         = atof(argv[3]);
-    double light_r_ratio    = atof(argv[4]);
-    double dwarfmass        = atof(argv[5]);
-    double light_mass_ratio = atof(argv[6]);
-
-    double Nbody = 20000; 
-
+    string simtime      = argv[1];
+    double rscale_l     = atof(argv[2]);
+    double rscale_d     = atof(argv[3]);
+    double mass_l       = atof(argv[4]);
+    double mass_d       = atof(argv[5]);
+    double Nbody        = atof(argv[6]); 
 
     string extension = simtime + "gy";
-    /*changes the parameters to usable info*/
-    double massl = dwarfmass - (dwarfmass * light_mass_ratio);
-    double massd = dwarfmass * light_mass_ratio;
-    double rscale_l = rscale_d / light_r_ratio;
     
-    double mass_per_particle_dark = massd/ (0.5 * Nbody);
-    double mass_per_particle_light = massl/ (0.5 * Nbody);
+    double mass_per_particle_dark  = mass_d  / (0.5 * Nbody);
+    double mass_per_particle_light = mass_l / (0.5 * Nbody);
     
-//     printf("Nl = %f  Nd = %f  %f\n", massl, massd, rscale_d);
-    double args[6]  = {rscale_l, rscale_d, massl, massd, mass_per_particle_light, mass_per_particle_dark};
+//     printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
+    double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, mass_per_particle_light, mass_per_particle_dark};
 
-    //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, massl, massd);
+    //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, mass_l, mass_d);
 
     /*paramters for binning routine*/
     int number_of_bins = 1000;
     double bin_width = .10;
 
     /*these are markers for the type of data being sent into functions*/
-    int d = 1;//dark matter
+    int d = 1;//dark matter     
     int l = 0;//light matter
-    int vd = 2;//vel
-    int vl = 3;//vel
+    
     int Nd = get_size(d, extension);//getting the size of the dark matter data
     int Nl = get_size(l, extension);//getting the size of the light matter data
 
@@ -889,14 +959,14 @@ int main (int argc, char * const argv[])
     double vel_d[Nd], vel_l[Nl];
 
 
-    printf("Nl = %i  Nd = %i\n", Nl, Nd);
-    double dx[Nd], dy[Nd],dz[Nd],dvx[Nd], dvy[Nd],dvz[Nd];//vectors to store dark positions
-    double lx[Nl], ly[Nl],lz[Nl],lvx[Nl], lvy[Nl],lvz[Nl];//vectors to store light positions
+//     printf("Nl = %i  Nd = %i\n", Nl, Nd);
+    double dx[Nd], dy[Nd], dz[Nd], dvx[Nd], dvy[Nd], dvz[Nd];//vectors to store dark positions
+    double lx[Nl], ly[Nl], lz[Nl], lvx[Nl], lvy[Nl], lvz[Nl];//vectors to store light positions
     double dv[Nd];//this is a vector to store the velocity distribution
     double lv[Nl];//this is a vector to store the velocity distribution
     
-    double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
-    double tst2 = gauss_quad(test, args, args,  5.0, 0.0);
+//     double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
+//     double tst2 = gauss_quad(test, args, args,  5.0, 0.0);
 //     printf("test = %f  %f\n", tst1, tst2);
     
     printf("running tests");
@@ -911,38 +981,40 @@ int main (int argc, char * const argv[])
     get_radii(Nl, lvx, lvy, lvz, vel_l);
 
     
-    /*actual data*/
-    printf(".");
+    /*radii*/
+    printf(".");//actual 
     radial_distribution(extension, Nd, Nl, rd, rl, number_of_bins, bin_width, args);
-    printf(".");
+    
+    printf(".");//theory
     single_density_theory(bin_width, args);
     
-    printf(".");
+    /*angles*/
+    printf(".");//actual for radii
     angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
-    printf(".");
-    angle_theory(bin_width, args);
-    printf(".");
+    
+    printf(".");//actual for vel
     vel_angles(extension, Nl, Nd, lvx, lvy, lvz, dvx, dvy, dvz, number_of_bins, bin_width );
     
-    printf(".");
+    printf(".");//theory
+    angle_theory(bin_width, args);
+    
+    
+    /*velocity*/
+    printf(".");//actual
     vel_dis(extension, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
-    printf(".");
+    
+    printf(".");//theory -- vel curves
     vel_theory(bin_width, args, Nl, Nd);
-    printf(".");
+    
+    printf(".");//theory -- from distribution func
     vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
+    nemo_vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
     
-    
-    
+    /*no longer neccessary. Used to calculate the total potential energy, actual and theory*/
     printf(".");
     potential_distribution(bin_width, number_of_bins, extension, args, rl, Nl, rd, Nd);
     printf(".");
     potential_theory(bin_width, args);
     
-    /*theory*/
-    
-    
-    
-
-
     printf("done.\n");
 }

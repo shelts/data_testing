@@ -53,7 +53,7 @@ int get_size(int type, string extension)
 
 
 void get_data(int Nd,int Nl,struct bodies * b, string extension,
-              double masspd, double masspl, int type_dark, int type_light)
+              double masspd, double masspl)
 {
   
     string s;
@@ -63,6 +63,8 @@ void get_data(int Nd,int Nl,struct bodies * b, string extension,
     s = string("raw_data/dark_matter_"+extension+".dat");
     ifstream data;
     data.open (s);
+    int type_dark = 1;
+    int type_light = 0;
     while(data>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
     {
         b[i].x    = datax;
@@ -212,24 +214,17 @@ double potential_func( struct bodies * b, double * args, int N)
 int main (int argc, char * const argv[])
 {
   /*taking in command line data. should be the same parameters used to calculate the simulation*/
-    string simtime = argv[1];
-    double backtime  = atof(argv[2]);
-    double rscale_d  = atof(argv[3]);
-    double light_r_ratio = atof(argv[4]);
-    double dwarfmass = atof(argv[5]);
-    double light_mass_ratio = atof(argv[6]);
-    double diff_masses=atof(argv[7]);
+    string simtime      = argv[1];
+    double rscale_l     = atof(argv[2]);
+    double rscale_d     = atof(argv[3]);
+    double mass_l       = atof(argv[4]);
+    double mass_d       = atof(argv[5]);
+    double Nbody        = atof(argv[6]); 
 
-    string extension = simtime+"gy";
-    /*changes the parameters to usable info*/
-    double massl = dwarfmass - (dwarfmass * light_mass_ratio);
-    double massd = dwarfmass * light_mass_ratio;  
-    double rscale_l = rscale_d / light_r_ratio;
+    string extension = simtime + "gy";
     
-    double args[4]  = {rscale_l, rscale_d, massl, massd};
+    double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
     /*these are markers for the type of data being sent into functions*/
-    int d = 1;//dark matter
-    int l = 0;//light matter
 
     int Nl = get_size(0, extension);//getting the size of the dark matter data
     int Nd = get_size(1, extension);//getting the size of the light matter data
@@ -239,29 +234,25 @@ int main (int argc, char * const argv[])
     double mass_per_light_particle;
     double mass_per_dark_particle;
 
-    if(diff_masses == 1)
-    {
-        mass_per_light_particle = massl / (Nl);
-        mass_per_dark_particle = massd / (Nd);
-        cout<<mass_per_dark_particle<<"\t"<<mass_per_light_particle<<endl;
-    }
-    else if(diff_masses == 0)
-    {
-        cout<<"hello"<<endl;
-        mass_per_light_particle = (massl + massd) / (N);
-        mass_per_dark_particle = (massl + massd) / (N);
-        cout<<mass_per_dark_particle<<"\t"<<mass_per_light_particle<<endl;
-    }
+    mass_per_light_particle = mass_l / Nl;
+    mass_per_dark_particle  = mass_d / Nd;
+//      printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
+//      printf("%i %i\n", Nl, Nd);
+    printf("%f \t %f\n", mass_per_dark_particle, mass_per_light_particle);
 
     //   cout<<Nl<<"  "<< Nd<<endl;
     double ke;
     double pot_func, pot_pp;
 
-    get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle, d, l);
-
+    get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle);
+    
+    printf("calculating virial ratio");
     ke = kinetic(N,b);
+    printf("..");
     pot_func = potential_func(b, args, N);
+    printf("..");
     pot_pp = potential_energy(Nl, Nd, b, extension);
+    printf("done.\n");
 
     double ratio_func = fabs( 2.0 * ke / pot_func);
     double ratio_pp = fabs( 2.0 * ke / pot_pp);
