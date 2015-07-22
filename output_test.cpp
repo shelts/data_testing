@@ -194,7 +194,8 @@ double get_x()
 
 double nemo_vel(double r)
 {
-    double v = get_x() * sqrt(2.0) * inv(fourth( (1.0 + sqr(r)) ));
+    double x = get_x();
+    double v = x * sqrt(2.0) * inv(fourth( (1.0 + sqr(r)) ));
     return v;
 }
 
