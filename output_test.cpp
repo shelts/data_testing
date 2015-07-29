@@ -398,8 +398,8 @@ void single_density_theory(double bin_width, double * args)
     rho= fopen("./theory/theory_den.dat", "w");
     while(1)
     {
-        de2 = 4.0 * pi * w * w * density(w, light) * bin_width/ masspl;
-        de3 = 4.0 * pi * w * w * density(w, dark) * bin_width / masspd;
+        de2 = 4.0 * pi * w * w * density(w, light) * bin_width / masspl;
+        de3 = 4.0 * pi * w * w * density(w, dark)  * bin_width / masspd;
         de = de2 + de3;
         w += 0.01;
         fprintf(rho, "%f \t %f \t %f\t%f\n", w, de, de2, de3);
@@ -928,17 +928,15 @@ void potential_distribution(double bin_width, double number_of_bins, string exte
 int main (int argc, char * const argv[])
 {
     srand(time(NULL));
-    string simtime      = argv[1];
-    double rscale_l     = atof(argv[2]);
-    double rscale_d     = atof(argv[3]);
-    double mass_l       = atof(argv[4]);
-    double mass_d       = atof(argv[5]);
-    double Nbody        = atof(argv[6]); 
-
+    string simtime                 = argv[1];
+    double rscale_l                = atof(argv[2]);
+    double rscale_d                = atof(argv[3]);
+    double mass_l                  = atof(argv[4]);
+    double mass_d                  = atof(argv[5]);
+    double mass_per_particle_light = atof(argv[6]); 
+    double mass_per_particle_dark  = atof(argv[7]); 
     string extension = simtime + "gy";
     
-    double mass_per_particle_dark  = mass_d  / (0.5 * Nbody);
-    double mass_per_particle_light = mass_l / (0.5 * Nbody);
     
 //     printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
     double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, mass_per_particle_light, mass_per_particle_dark};
@@ -955,7 +953,7 @@ int main (int argc, char * const argv[])
     
     int Nd = get_size(d, extension);//getting the size of the dark matter data
     int Nl = get_size(l, extension);//getting the size of the light matter data
-
+    printf("%i %i\n", Nd, Nl);
     double rd[Nd], rl[Nl];//, r[Nd+Nl];  
     double vel_d[Nd], vel_l[Nl];
 

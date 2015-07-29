@@ -4,7 +4,7 @@ set key on
 set ylabel 'counts'
 set xlabel 'vel (km/s)'
 set xrange[0:10]
-set yrange[0:600]
+set yrange[0:1200]
 set style fill transparent solid 0.5 
 # noborder
 

@@ -214,12 +214,13 @@ double potential_func( struct bodies * b, double * args, int N)
 int main (int argc, char * const argv[])
 {
   /*taking in command line data. should be the same parameters used to calculate the simulation*/
-    string simtime      = argv[1];
-    double rscale_l     = atof(argv[2]);
-    double rscale_d     = atof(argv[3]);
-    double mass_l       = atof(argv[4]);
-    double mass_d       = atof(argv[5]);
-    double Nbody        = atof(argv[6]); 
+    string simtime                 = argv[1];
+    double rscale_l                = atof(argv[2]);
+    double rscale_d                = atof(argv[3]);
+    double mass_l                  = atof(argv[4]);
+    double mass_d                  = atof(argv[5]);
+    double mass_per_light_particle = atof(argv[6]); 
+    double mass_per_dark_particle  = atof(argv[7]); 
 
     string extension = simtime + "gy";
     
@@ -231,11 +232,7 @@ int main (int argc, char * const argv[])
 
     int N = Nd + Nl;
     bodies b[N];
-    double mass_per_light_particle;
-    double mass_per_dark_particle;
 
-    mass_per_light_particle = mass_l / Nl;
-    mass_per_dark_particle  = mass_d / Nd;
 //      printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
 //      printf("%i %i\n", Nl, Nd);
     printf("%f \t %f\n", mass_per_dark_particle, mass_per_light_particle);

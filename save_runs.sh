@@ -1,15 +1,15 @@
 #!/bin/bash
 
-mkdir dark_parameters
+mkdir both
 
 
 
-mv actual dark_parameters
-mv binned_data dark_parameters
-mv plots dark_parameters
-mv raw_data dark_parameters
-mv sim_outputs dark_parameters
-mv test_output dark_parameters
-mv theory dark_parameters
+mv actual both
+mv binned_data both
+mv plots both
+mv raw_data both
+mv sim_outputs both
+mv test_output both
+mv theory both
 
-bash cleanse.sh
+# bash cleanse.sh
