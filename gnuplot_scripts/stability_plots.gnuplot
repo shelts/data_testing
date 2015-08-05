@@ -4,7 +4,7 @@ set key on
 set ylabel 'counts'
 set xlabel 'radius (Mpc)'
 set xrange[0:15]
-set yrange[0:1600]
+set yrange[0:500]
 
 
 

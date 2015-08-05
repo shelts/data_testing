@@ -195,7 +195,7 @@ double get_x()
 double nemo_vel(double r)
 {
     double x = get_x();
-    double v = x * sqrt(2.0) * inv(fourth( (1.0 + sqr(r)) ));
+    double v = x * sqrt(2.0) * pow( (1.0 + sqr(r)) , -.25);
     return v;
 }
 
@@ -600,6 +600,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
 //             printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
             if(fabs(f/fmax) > u)
             {
+                v *= 0.977813107;
                 v_l[i] = v;
                 break;
             }
@@ -619,6 +620,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
             f = distribution(mass_d, rscale_d, v, r, dark);
             if(fabs(f/fmax) > u)
             {
+                v *= 0.977813107;
                 v_d[i] = v;
                 break;
             }
@@ -659,12 +661,15 @@ void nemo_vel_distribution_theory(double bin_width, int number_of_bins, string e
     {
         r = r_l[i];
         v = nemo_vel(r);
+        v *= 0.977813107;
+        
     }
     
     for(int i = 0; i < Nd; i++)
     {
         r = r_d[i];
         v = nemo_vel(r);
+        v *= 0.977813107;
     }
     
     string s;
