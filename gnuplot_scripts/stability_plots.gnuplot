@@ -2,9 +2,9 @@ reset
 set terminal jpeg
 set key on
 set ylabel 'counts'
-set xlabel 'radius (Mpc)'
-set xrange[0:15]
-set yrange[0:500]
+set xlabel 'radius (Kpc)'
+set xrange[0:10]
+set yrange[0:1500]
 
 
 

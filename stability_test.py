@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import os
-#from subprocess import call
+from subprocess import call
 
 args = [1, 0.5, 0.2, 30, 0.2]
 sim_time      = [ "0", "p25", "p5", "p75", "1", "2", "3", "4"]
@@ -17,30 +17,18 @@ print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 #######################################################################
 #Proper paramaters:
 r_l = ( r0 )
-r_d = ( r0 / light_r_ratio )
-m_l = 0.0#( mass * mass_ratio )
-m_d = ( mass * (1.0 - mass_ratio) )
+m_l = 0.0  #( mass * mass_ratio )
 
+r_d = 1.0  #( r0 / light_r_ratio )
+m_d = 24.0 #( mass * (1.0 - mass_ratio) )
+#r_d = pow((m_d * 222288.24 / 1.0e9), 1.0/3.0);
+#print r_d
 
-
-##switched paramaters:
-#r_l = ( r0 / light_r_ratio )
-#r_d = ( r0 )
-#m_l = ( mass * (1.0 - mass_ratio) )
-#m_d = ( mass * mass_ratio )
-
-
-##same paramaters as light
-#r_l = ( r0 )
-#r_d = ( r0 )
-#m_l = ( mass * mass_ratio )
-#m_d = ( mass * mass_ratio )
-
-##same paramaters as dark
-#r_l = ( r0 / light_r_ratio )
+#NEMO
+#m_l = 24.0
+#m_d = 0.0
+#r_l = 1.0
 #r_d = ( r0 / light_r_ratio )
-#m_l = ( mass * (1.0 - mass_ratio) )
-#m_d = ( mass * (1.0 - mass_ratio) )
 
 Nb       = 20000
 masspl   = m_l / ( Nb);

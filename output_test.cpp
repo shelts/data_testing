@@ -181,12 +181,10 @@ double get_x()
     double x = 0.0;
     double y = 0.1;
     double u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
-    while(y > u)
+    while(y > sqr(x) * pow( (1.0 - sqr(x)), 3.5) )
     {
-        
         x = randDouble(0.0, 1.0);
         y = randDouble(0.0, 0.1);
-        u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
     }
     
     return x;
@@ -195,7 +193,7 @@ double get_x()
 double nemo_vel(double r)
 {
     double x = get_x();
-    double v = x * sqrt(2.0) * pow( (1.0 + sqr(r)) , -.25);
+    double v = x * sqrt(2.0) * pow( (1.0 + sqr(r)) , -0.25);
     return v;
 }
 
@@ -660,16 +658,16 @@ void nemo_vel_distribution_theory(double bin_width, int number_of_bins, string e
     for(int i = 0; i < Nl; i++)
     {
         r = r_l[i];
-        v = nemo_vel(r);
-        v *= 0.977813107;
+        v_l[i] = nemo_vel(r);
+        v_l[i] *= 0.977813107;
         
     }
     
     for(int i = 0; i < Nd; i++)
     {
         r = r_d[i];
-        v = nemo_vel(r);
-        v *= 0.977813107;
+        v_d[i] = nemo_vel(r);
+        v_d[i] *= 0.977813107;
     }
     
     string s;
