@@ -16,23 +16,27 @@ print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 
 #######################################################################
 #Proper paramaters:
-r_l = ( r0 )
-m_l = 0.0  #( mass * mass_ratio )
+#r_l = ( r0 )
+#m_l = ( mass * mass_ratio )
 
-r_d = 1.0  #( r0 / light_r_ratio )
-m_d = 24.0 #( mass * (1.0 - mass_ratio) )
-#r_d = pow((m_d * 222288.24 / 1.0e9), 1.0/3.0);
-#print r_d
+#r_d = ( r0 / light_r_ratio )
+#m_d = ( mass * (1.0 - mass_ratio) )
 
 #NEMO
-#m_l = 24.0
-#m_d = 0.0
-#r_l = 1.0
-#r_d = ( r0 / light_r_ratio )
+m_l = 24.0
+m_d = 0.0
+r_l = 1.0
+r_d = ( r0 / light_r_ratio )
 
 Nb       = 20000
-masspl   = m_l / ( Nb);
-masspd   = m_d / (Nb);
+
+#for one component
+masspl  = m_l / ( Nb);
+masspd  = m_d / ( Nb);
+
+#for two component
+#masspl   = m_l / ( 0.5 * Nb);
+#masspd   = m_d / (0.5 * Nb);
 
 
 nbody    = str( Nb )

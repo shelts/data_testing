@@ -60,7 +60,7 @@ set output "~/Desktop/research/data_testing/plots/rad/radii_distribution_dark_0p
 set title 'Histogram of Dark Matter Distribution After .5Gy'
 plot dark."p5gy.dat" using 2:1  with boxes title 'actual', theory_den   using 1:2 with lines title 'both', theory_den   using 1:3 with lines title 'light',  theory_den   using 1:4 with lines title 'dark' 
 
-set output "~/Desktop/research/data_testing/plots/rad/radii_distribution_both_0p5gy.jpeg"
+set output "~/Desktop/research/data_testing/plots/rad/radii_distribution_both_0p50gy.jpeg"
 set title 'Histogram of Combined Matter Distribution After .5Gy'
 plot both."p5gy.dat" using 2:1  with boxes title 'actual', theory_den   using 1:2 with lines title 'both', theory_den   using 1:3 with lines title 'light',  theory_den   using 1:4 with lines title 'dark' 
 
