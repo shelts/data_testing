@@ -4,6 +4,7 @@ from subprocess import call
 
 args = [1, 0.5, 0.2, 30, 0.2]
 sim_time      = [ "0", "p25", "p5", "p75", "1", "2", "3", "4"]
+#sim_time      = [ "0", "4"]
 N             = 8
 M             = 0
 back_time     = (args[0])
@@ -23,12 +24,12 @@ print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 #m_d = ( mass * (1.0 - mass_ratio) )
 
 #NEMO
-m_l = 24.0
-m_d = 0.0
-r_l = 1.0
-r_d = ( r0 / light_r_ratio )
+m_d = 24.0
+m_l = 0.0
+r_d = 1.0
+r_l = ( r0 / light_r_ratio )
 
-Nb       = 20000
+Nb      = 20000
 
 #for one component
 masspl  = m_l / ( Nb);
@@ -48,7 +49,7 @@ mass_per_particle_light = str( masspl )
 mass_per_particle_dark  = str( masspd )
 
 #######################################################################
-
+folder_name = "two_comp_longer_samplng_radii"
 
 print "parsing data"
 for i in range(M, N):
@@ -58,6 +59,16 @@ print "performing tests"
 os.system("g++ -std=c++11 output_test.cpp -o output_test")
 for i in range(M, N):
     os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+    
+
+#os.system("g++ -std=c++11 create_hist.cpp -o create_hist")
+#for i in range(M, N):
+    #os.system("./create_hist " + sim_time[i] + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+
+#os.system("g++ -std=c++11 chi_sqr.cpp -o chi_sqr")
+#a = "binned_data/light_matter_bins_" + sim_time[0] + "gy.dat"
+#b = "binned_data/light_matter_bins_" + sim_time[1] + "gy.dat"
+#os.system("./chi_sqr " + a + " " + b)    
 
 os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
 for i in range(M, N):
@@ -84,5 +95,7 @@ os.system("gnuplot gnuplot_scripts/vel_phi.gnuplot")
 os.system("gnuplot gnuplot_scripts/vel_theta.gnuplot")
 #xdg-open run1/plots/radii_distribution.jpeg
 
+os.system("./save_runs.py " + folder_name)
+os.system("./cleanse.sh")
 
 

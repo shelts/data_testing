@@ -36,21 +36,40 @@ void get_data(int N, double * bins, double * counts, string s)
     /*reading in data*/
     while(data>>datax>>datay)
     {
-        bins[l]    = datax;
-        counts[l]  = datay;
+        counts[l]  = datax;
+        bins[l]    = datay;
+        
         l++;
     }
     data.close();
 }
 
 
-void write_hist(int N, double * bins, double * counts, double * args, string s)
+void write_hist(int N, double * bins, double * counts, string s, double massp)
 {
  
     int line = 0;
-    
-    
-    
+    int i = 0;
+    const char * c = s.c_str();
+    FILE * hist;
+    hist = fopen(c, "w");
+    while(1)
+    {
+        if(line == 0)
+        {
+            fprintf(hist, "n = 20000 \nmassPerParticle = %f \ntotalSimulated = 20000 \nlambdaBins = %i \nbetaBins = 1\n", massp, N);
+        }
+        
+        if(line > 0)
+        {
+            fprintf(hist, "1 %12.10f %12.10f %12.10f %12.10f \n\n", bins[i], -100.0, counts[i], 0.0);
+        }
+        
+        line++;
+        i++;
+        
+        if(line >= N){break;}
+    }
     
 }
 
@@ -58,20 +77,13 @@ void write_hist(int N, double * bins, double * counts, double * args, string s)
 int main (int argc, char * const argv[])
 {
     string simtime                 = argv[1];
-    double rscale_l                = atof(argv[2]);
-    double rscale_d                = atof(argv[3]);
-    double mass_l                  = atof(argv[4]);
-    double mass_d                  = atof(argv[5]);
-    double mass_per_particle_light = atof(argv[6]); 
-    double mass_per_particle_dark  = atof(argv[7]); 
+    double mass_per_particle_light = atof(argv[2]); 
+    double mass_per_particle_dark  = atof(argv[3]); 
     string extension = simtime + "gy";
     string l, d, b;
     int Nl, Nd, Nb;
     
-    double args[] = {nbody, simtime
-    
-    
-    b = string("binned_data/both_matter_bins_" + extension + ".dat");
+    b = string("binned_data/both_matter_bins_" + extension + ".h");
     Nb = get_size(b);
     
     d = string("binned_data/dark_matter_bins_" + extension + ".dat");
@@ -80,7 +92,7 @@ int main (int argc, char * const argv[])
     l = string("binned_data/light_matter_bins_" + extension + ".dat");
     Nl = get_size(l);//getting the size of the light matter data
     
-    printf("%i %i %i\n", Nd, Nl, Nb);
+    printf("%i %i\n", Nd, Nl);
     
     double binsl[Nl];
     double binsd[Nd];
@@ -94,6 +106,10 @@ int main (int argc, char * const argv[])
     get_data(Nd, binsd, countsd, d); 
     get_data(Nb, binsb, countsb, b); 
      
-
+    d = string("hist_data/dark_matter_bins_" + extension + ".hist");
+    write_hist(Nd, binsd, countsd, d, mass_per_particle_dark);
+    
+    l = string("hist_data/light_matter_bins_" + extension + ".hist");
+    write_hist(Nl, binsl, countsl, l, mass_per_particle_light);
 
 }

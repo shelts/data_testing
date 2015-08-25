@@ -701,7 +701,7 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     ofstream dens;
     dens.open(s);
     double r[Nd + Nl];
-    for(int i=0;i<Nd;i++)
+    for(int i = 0; i < Nd; i++)
     {
         dens<<rd[i]<<endl;
         r[i] = rd[i];

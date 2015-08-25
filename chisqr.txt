@@ -1,0 +1,12 @@
+for nemo stable paras: 293.036213 
+ nemo usual paras:557.128229 
+
+
+for all light stable: 196.708818
+
+for nemo time step all light stable: 245.353452
+
+for 10x smaller normal timestep all light stable: 230.715257
+100x: 236.555393
+
+
