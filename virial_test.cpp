@@ -235,7 +235,7 @@ int main (int argc, char * const argv[])
 
 //      printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
 //      printf("%i %i\n", Nl, Nd);
-    printf("%f \t %f\n", mass_per_dark_particle, mass_per_light_particle);
+    printf("masspl: %f \t masspd: %f\n", mass_per_light_particle, mass_per_dark_particle);
 
     //   cout<<Nl<<"  "<< Nd<<endl;
     double ke;

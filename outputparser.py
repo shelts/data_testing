@@ -81,7 +81,7 @@ def __main__(arg):
     dark_vy = np.array(dark_vy);
     dark_vz = np.array(dark_vz);
     
-    print len(light_x), len(dark_x);
+    print "light: ", len(light_x), "dark: ", len(dark_x);
     
     filename = args[2];
     

@@ -956,7 +956,7 @@ int main (int argc, char * const argv[])
     
     int Nd = get_size(d, extension);//getting the size of the dark matter data
     int Nl = get_size(l, extension);//getting the size of the light matter data
-    printf("%i %i\n", Nd, Nl);
+    printf("light: %i dark: %i\n", Nl, Nd);
     double rd[Nd], rl[Nl];//, r[Nd+Nl];  
     double vel_d[Nd], vel_l[Nl];
 
