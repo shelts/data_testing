@@ -50,7 +50,7 @@ mass_per_particle_dark  = str( masspd )
 
 #######################################################################
 #name of folder to which your results will be saved
-folder_name = "both_50x_1r_30m_normaltimestep"
+folder_name = "both_normal_parameters"
 
 print "parsing data"
 for i in range(M, N):
