@@ -17,27 +17,26 @@ print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 
 #######################################################################
 #Proper paramaters:
-r_l = ( r0 )
-m_l = ( mass * mass_ratio )
+#r_l = ( r0 )
+#m_l = ( mass * mass_ratio )
 
-r_d = ( r0 / light_r_ratio )
-m_d = ( mass * (1.0 - mass_ratio) )
-
-#NEMO
-#m_l = 30.0
-#m_d = 0.0
-#r_l = 1.0
 #r_d = ( r0 / light_r_ratio )
+#m_d = ( mass * (1.0 - mass_ratio) )
 
-Nb      = 20000
+m_l = 30.0
+m_d = 0.0 #( mass * (1.0 - mass_ratio) )
+r_l = 1.0
+r_d = ( r0 / light_r_ratio )
+
+Nb  = 20000
 
 #for one component
-#masspl  = m_l / ( Nb);
-#masspd  = m_d / ( Nb);
+masspl  = m_l / ( Nb);
+masspd  = m_d / ( Nb);
 
 #for two component
-masspl   = m_l / (0.5 * Nb);
-masspd   = m_d / (0.5 * Nb);
+#masspl   = m_l / (0.5 * Nb);
+#masspd   = m_d / (0.5 * Nb);
 
 
 nbody    = str( Nb )
@@ -50,7 +49,7 @@ mass_per_particle_dark  = str( masspd )
 
 #######################################################################
 #name of folder to which your results will be saved
-folder_name = "both_normal_parameters"
+folder_name = "single_plum_mia_parameters"
 
 print "parsing data"
 for i in range(M, N):
@@ -94,9 +93,9 @@ os.system("gnuplot gnuplot_scripts/vel_theory_binned.gnuplot")
 ##vel angles
 os.system("gnuplot gnuplot_scripts/vel_phi.gnuplot")
 os.system("gnuplot gnuplot_scripts/vel_theta.gnuplot")
-#xdg-open run1/plots/radii_distribution.jpeg
+###xdg-open run1/plots/radii_distribution.jpeg
 
-os.system("./save_runs.py " + folder_name)
+#os.system("./save_runs.py " + folder_name)
 #os.system("./cleanse.sh")
 
 

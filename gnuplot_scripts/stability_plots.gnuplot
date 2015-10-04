@@ -3,7 +3,7 @@ set terminal jpeg
 set key on
 set ylabel 'counts'
 set xlabel 'radius (Kpc)'
-set xrange[0:10]
+set xrange[0:20]
 set yrange[0:1500]
 
 

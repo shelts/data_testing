@@ -18,6 +18,7 @@ using namespace std;
 #define fifth(x) ((x) * (x) * (x) * (x) * (x))
 #define cube(x) ((x) * (x) * (x))
 #define sqr(x)  ((x) * (x))
+#define sqrdif(x, y) (sqr( (x) - (y) ))
 
 #define seventhhalfs(x) ( sqrt(seventh(x) ) )
 #define fivehalves(x)   ( sqrt(fifth(x) ) )
@@ -212,6 +213,33 @@ double distribution(double mass, double r_scale, double v, double r, double * ar
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // service functions
 
+void com(double * cm, double * xd, double * yd, double * zd,  int Nd, double * xl, double * yl, double * zl, int Nl, double masspd, double masspl, double mass)
+{
+    double cm_x = 0.0;
+    double cm_y = 0.0;
+    double cm_z = 0.0;
+    
+    for(int i = 0; i < Nd; i++)
+    {
+        cm_x += masspd * xd[i];
+        cm_y += masspd * yd[i];
+        cm_z += masspd * zd[i];
+        
+    }
+    
+    for(int i = 0; i < Nl; i++)
+    {
+        cm_x += masspl * xl[i];
+        cm_y += masspl * yl[i];
+        cm_z += masspl * zl[i];
+    }
+    
+    cm[0] = cm_x * inv(mass);
+    cm[1] = cm_y * inv(mass);
+    cm[2] = cm_z * inv(mass);
+    
+}
+
 static double gauss_quad(double (*rootFunc)(double, double *, double *), double * comp_args, double * args, double lower, double upper )
 {
     double Ng,hg,lowerg, upperg;
@@ -365,12 +393,12 @@ void binner(int binN,double binwidth, double * x, int N, string s, string extens
     bin.close();
 }
 
-void get_radii(int N, double * x, double * y, double * z, double * r)
+void get_radii(int N, double * x, double * y, double * z, double * r, double * cm)
 {
     
     for(int i=0;i<N;i++)
     {
-        r[i]= sqrt( x[i]*x[i] +y[i]*y[i] + z[i]*z[i] );
+        r[i]= sqrt( sqrdif(cm[0], x[i]) + sqrdif(cm[1], y[i]) + sqrdif(cm[2], z[i]) );
     }
     
 }
@@ -701,6 +729,7 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     ofstream dens;
     dens.open(s);
     double r[Nd + Nl];
+    
     for(int i = 0; i < Nd; i++)
     {
         dens<<rd[i]<<endl;
@@ -940,7 +969,6 @@ int main (int argc, char * const argv[])
     double mass_per_particle_dark  = atof(argv[7]); 
     string extension = simtime + "gy";
     
-    
 //     printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
     double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, mass_per_particle_light, mass_per_particle_dark};
 
@@ -967,6 +995,9 @@ int main (int argc, char * const argv[])
     double dv[Nd];//this is a vector to store the velocity distribution
     double lv[Nl];//this is a vector to store the velocity distribution
     
+    double cm[3] = {0.0, 0.0, 0.0};
+    double mass;
+    
 //     double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
 //     double tst2 = gauss_quad(test, args, args,  5.0, 0.0);
 //     printf("test = %f  %f\n", tst1, tst2);
@@ -975,12 +1006,18 @@ int main (int argc, char * const argv[])
     /*getting the positional and velocity data*/
     get_data(Nd, dx, dy, dz, dvx, dvy, dvz, d, extension);  
     get_data(Nl, lx, ly, lz, lvx, lvy, lvz, l, extension);
+    
+    
+    /*get center of mass*/
+    mass = mass_l + mass_d;
+    com(cm, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
+    
 
     /*getting the radii and vel vectors*/
-    get_radii(Nd, dx, dy, dz, rd);
-    get_radii(Nl, lx, ly, lz, rl);
-    get_radii(Nd, dvx, dvy, dvz, vel_d);
-    get_radii(Nl, lvx, lvy, lvz, vel_l);
+    get_radii(Nd, dx, dy, dz, rd, cm);
+    get_radii(Nl, lx, ly, lz, rl, cm);
+    get_radii(Nd, dvx, dvy, dvz, vel_d, cm);
+    get_radii(Nl, lvx, lvy, lvz, vel_l, cm);
 
     
     /*radii*/
