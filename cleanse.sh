@@ -29,6 +29,6 @@ mkdir pot
 
 mkdir vel_dist
 mkdir ./vel_dist/binned_vs_tbins
-mkdir ./vel_dist/binned_vs_theory
+mkdir ./vel_dist/binned
 mkdir ./vel_dist/vel_vs_r
 

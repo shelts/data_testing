@@ -1,11 +1,15 @@
 #!/bin/bash      
 
-    gnuplot gnuplot_scripts/stability_plots.gnuplot 
-    gnuplot gnuplot_scripts/theta.gnuplot
-    gnuplot gnuplot_scripts/phi.gnuplot
-    gnuplot gnuplot_scripts/vel.gnuplot
-    gnuplot gnuplot_scripts/v_vs_r.gnuplot
-    gnuplot gnuplot_scripts/vel_theory_binned.gnuplot
-    gnuplot gnuplot_scripts/vel_phi.gnuplot
-    gnuplot gnuplot_scripts/vel_theta.gnuplot
-#       xdg-open run1/plots/radii_distribution.jpeg
+
+
+    cd gnuplot_scripts/
+    ./stability_plots.py
+#     cd ..
+    gnuplot stability_rad.gnuplot
+    gnuplot stability_phi.gnuplot
+    gnuplot stability_theta.gnuplot
+    gnuplot vel_binned.gnuplot
+    gnuplot v_vs_r.gnuplot
+    gnuplot vel_stability.gnuplot
+    gnuplot vel_stability_phi.gnuplot
+    gnuplot vel_stability_theta.gnuplot

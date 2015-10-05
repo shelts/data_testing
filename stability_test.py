@@ -3,7 +3,7 @@ import os
 from subprocess import call
 
 args = [1, 0.5, 0.2, 30, 0.2]
-sim_time      = [ "0", "p25", "p5", "p75", "1", "2", "3", "4"]
+sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "4"]
 N             = 8
 M             = 0
