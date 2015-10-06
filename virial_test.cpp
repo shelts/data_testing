@@ -11,6 +11,7 @@
 
 using namespace std;
 
+#define inv(x)  ((double) 1.0 / (x))
 #define sqr(x) ( x * x )
 #define sqrdel(x1, x2) sqr( (x1 - x2 ))
 
@@ -52,13 +53,12 @@ int get_size(int type, string extension)
 }
 
 
-void get_data(int Nd,int Nl,struct bodies * b, string extension,
-              double masspd, double masspl)
+void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd, double masspl)
 {
   
     string s;
     double datax,datay,dataz,datavx,datavy,datavz;
-    int i =0;
+    int i = 0;
     int N = Nd + Nl;
     s = string("raw_data/dark_matter_"+extension+".dat");
     ifstream data;
@@ -96,7 +96,45 @@ void get_data(int Nd,int Nl,struct bodies * b, string extension,
     }
     data2.close();
   
-  }
+}
+  
+  
+void com(struct bodies * b, int N, double * cm, double mass)
+{
+    double cm_x = 0.0;
+    double cm_y = 0.0;
+    double cm_z = 0.0;
+    
+    for(int i = 0; i < N; i++)
+    {
+        cm_x += b[i].mass * b[i].x;
+        cm_y += b[i].mass * b[i].y;
+        cm_z += b[i].mass * b[i].z;
+    }
+    
+    cm[0] = cm_x * inv(mass);
+    cm[1] = cm_y * inv(mass);
+    cm[2] = cm_z * inv(mass);
+}
+  
+  
+void comv(struct bodies* b, int N, double * cmv, double mass)
+{
+    double cm_vx = 0.0;
+    double cm_vy = 0.0;
+    double cm_vz = 0.0;
+    
+    for(int i = 0; i < N; i++)
+    {
+        cm_vx += b[i].mass * b[i].vx;
+        cm_vy += b[i].mass * b[i].vy;
+        cm_vz += b[i].mass * b[i].vz;
+    }
+    
+    cmv[0] = cm_vx * inv(mass);
+    cmv[1] = cm_vy * inv(mass);
+    cmv[2] = cm_vz * inv(mass);
+}
   
 double mass_enc(double r, double rscale, double mass)
 {
@@ -131,7 +169,7 @@ void vel_dis(int N, struct bodies * b, string extension)
     vels.close();
 }
   
-double kinetic(int N, struct bodies * b)
+double kinetic(int N, struct bodies * b, double * cmv)
 {
     string s;
     //   if(type==1){s= string("energy/kinetic_e_light_"+extension+".dat");}
@@ -145,7 +183,7 @@ double kinetic(int N, struct bodies * b)
         vy = b[i].vy;
         vz = b[i].vz;
 
-        ke += 0.5 * b[i].mass * ( sqr(vx) + sqr(vy) + sqr(vz) );
+        ke += 0.5 * b[i].mass * ( sqrdel(cmv[0], vx) + sqrdel(cmv[1], vy) + sqrdel(cmv[2], vz) );
     }
     return ke;
 }
@@ -186,7 +224,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     return pot;
 }
 
-double potential_func( struct bodies * b, double * args, int N)
+double potential_func( struct bodies * b, double * args, int N, double * cm)
 {
     double rscale_l = args[0];
     double rscale_d = args[1];
@@ -201,7 +239,7 @@ double potential_func( struct bodies * b, double * args, int N)
         x = b[i].x;
         y = b[i].y;
         z = b[i].z;
-        r = sqrt( sqr(x) + sqr(y) + sqr(z));
+        r = sqrt( sqrdel(cm[0], x) + sqrdel(cm[1], y) + sqrdel(cm[2], z));
         mass = b[i].mass;
         mass_light = mass_l;
         mass_dark = mass_d;
@@ -213,7 +251,6 @@ double potential_func( struct bodies * b, double * args, int N)
 
 int main (int argc, char * const argv[])
 {
-  /*taking in command line data. should be the same parameters used to calculate the simulation*/
     string simtime                 = argv[1];
     double rscale_l                = atof(argv[2]);
     double rscale_d                = atof(argv[3]);
@@ -225,29 +262,32 @@ int main (int argc, char * const argv[])
     string extension = simtime + "gy";
     
     double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
-    /*these are markers for the type of data being sent into functions*/
-
     int Nl = get_size(0, extension);//getting the size of the dark matter data
     int Nd = get_size(1, extension);//getting the size of the light matter data
 
     int N = Nd + Nl;
     bodies b[N];
-
-//      printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
-//      printf("%i %i\n", Nl, Nd);
+    double cm[3] = {0.0, 0.0, 0.0};
+    double cmv[3] = {0.0, 0.0, 0.0};
+    
+    double mass = mass_l + mass_d;
     printf("masspl: %f \t masspd: %f\n", mass_per_light_particle, mass_per_dark_particle);
 
-    //   cout<<Nl<<"  "<< Nd<<endl;
     double ke;
     double pot_func, pot_pp;
 
     get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle);
+    com(b, N, cm, mass);
+    comv(b, N, cmv, mass);
     
     printf("calculating virial ratio");
-    ke = kinetic(N,b);
+    /*calculates kinetic energy relative to centor of mass*/
+    ke = kinetic(N, b, cmv);
     printf("..");
-    pot_func = potential_func(b, args, N);
+    /*calculates potential energy relative to centor of mass*/
+    pot_func = potential_func(b, args, N, cm);
     printf("..");
+    /*particle particle potential energy*/
     pot_pp = potential_energy(Nl, Nd, b, extension);
     printf("done.\n");
 
@@ -258,11 +298,10 @@ int main (int argc, char * const argv[])
     file = fopen("./test_output/virial_output.txt", "a");
     //   printf("ke \t pot \t ratio \t time\n");
     //   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
-
-    fprintf(file, "%f  %f\t %f  %f \t ratio: %f \t %f \n", ratio_func, pot_func, ratio_pp, pot_pp, rat, atof(argv[1]));
+    fprintf(file, "%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
     fclose(file);
 
-    vel_dis(N, b, extension);
+//     vel_dis(N, b, extension);
 
   
 }

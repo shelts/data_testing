@@ -240,6 +240,33 @@ void com(double * cm, double * xd, double * yd, double * zd,  int Nd, double * x
     
 }
 
+void comv(double * cmv, double * vxd, double * vyd, double * vzd,  int Nd, double * vxl, double * vyl, double * vzl, int Nl, double masspd, double masspl, double mass)
+{
+    double cm_vx = 0.0;
+    double cm_vy = 0.0;
+    double cm_vz = 0.0;
+    
+    for(int i = 0; i < Nd; i++)
+    {
+        cm_vx += masspd * vxd[i];
+        cm_vy += masspd * vyd[i];
+        cm_vz += masspd * vzd[i];
+        
+    }
+    
+    for(int i = 0; i < Nl; i++)
+    {
+        cm_vx += masspl * vxl[i];
+        cm_vy += masspl * vyl[i];
+        cm_vz += masspl * vzl[i];
+    }
+    
+    cmv[0] = cm_vx * inv(mass);
+    cmv[1] = cm_vy * inv(mass);
+    cmv[2] = cm_vz * inv(mass);
+    
+}
+
 static double gauss_quad(double (*rootFunc)(double, double *, double *), double * comp_args, double * args, double lower, double upper )
 {
     double Ng,hg,lowerg, upperg;
@@ -757,10 +784,8 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     binner(number_of_bins, bin_width, rl, Nl, s, extension, type);
 }
 
-void angles(string extension, int Nl, int Nd, double * xl, double * yl, double * zl, double * xd, double * yd, double * zd, int number_of_bins, double bin_width )
+void angles(string extension, int Nl, int Nd, double * rl, double * rd, double * xl, double * yl, double * zl, double * xd, double * yd, double * zd, int number_of_bins, double bin_width, double * cm)
 {
-    double rl[Nl];
-    double rd[Nd]; 
     int N = Nl + Nd;
     double r[N];
     double theta_l[Nl];
@@ -774,9 +799,8 @@ void angles(string extension, int Nl, int Nd, double * xl, double * yl, double *
     int j = 0;
     for(int i = 0; i < Nl; i++)
     {
-        rl[i] = sqrt( sqr(xl[i]) + sqr(yl[i]) + sqr(zl[i]) );
-        theta_l[i] = acos( zl[i] / rl[i] );
-        phi_l[i] = atan2( yl[i] , xl[i] );
+        theta_l[i] = acos( (cm[2] - zl[i]) / rl[i] );
+        phi_l[i] = atan2( (cm[1] - yl[i]) , (cm[0] - xl[i]) );
         
         theta[j] = theta_l[i];
         phi[j] = phi_l[i];
@@ -785,9 +809,8 @@ void angles(string extension, int Nl, int Nd, double * xl, double * yl, double *
     
     for(int i = 0; i < Nd; i++)
     {
-        rd[i] = sqrt( sqr(xd[i]) + sqr(yd[i]) + sqr(zd[i]) );
-        theta_d[i] = acos( zd[i] / rd[i]);
-        phi_d[i] = atan2( yd[i] , xd[i] );
+        theta_d[i] = acos( (cm[2] - zd[i]) / rd[i] );
+        phi_d[i] = atan2( (cm[1] - yd[i]) , (cm[0] - xd[i]) );
         
         theta[j] = theta_d[i];
         phi[j] = phi_d[i];
@@ -795,27 +818,25 @@ void angles(string extension, int Nl, int Nd, double * xl, double * yl, double *
     }
     
     int type = 0;
-    s = string("binned_data/theta_light_"+extension+".dat");
+    s = string("binned_data/theta_light_" + extension + ".dat");
     binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);
-    s = string("binned_data/theta_dark_"+extension+".dat");
+    s = string("binned_data/theta_dark_" + extension + ".dat");
     binner(number_of_bins, bin_width, theta_d, Nd, s, extension, type);
-    s = string("binned_data/theta_both_"+extension+".dat");
+    s = string("binned_data/theta_both_" + extension + ".dat");
     binner(number_of_bins, bin_width, theta, N, s, extension, type);
     
     type = 1;
-    s = string("binned_data/phi_light_"+extension+".dat");
+    s = string("binned_data/phi_light_" + extension + ".dat");
     binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);
-    s = string("binned_data/phi_dark_"+extension+".dat");
+    s = string("binned_data/phi_dark_" + extension + ".dat");
     binner(number_of_bins, bin_width, phi_d, Nd, s, extension, type);
-    s = string("binned_data/phi_both_"+extension+".dat");
+    s = string("binned_data/phi_both_" + extension + ".dat");
     binner(number_of_bins, bin_width, phi, N, s, extension, type);
     
 }
 
-void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, double * vzl, double * vxd, double * vyd, double * vzd, int number_of_bins, double bin_width )
+void vel_angles(string extension, int Nl, int Nd, double * vl, double * vd, double * vxl, double * vyl, double * vzl, double * vxd, double * vyd, double * vzd, int number_of_bins, double bin_width, double * cmv )
 {
-    double vl[Nl];
-    double vd[Nd]; 
     int N = Nl + Nd;
     double v[N];
     string s;
@@ -830,9 +851,8 @@ void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, do
     int j = 0;
     for(int i = 0; i < Nl; i++)
     {
-        vl[i] = sqrt( sqr(vxl[i]) + sqr(vyl[i]) + sqr(vzl[i]) );
-        theta_l[i] = acos( vzl[i] / vl[i] );
-        phi_l[i] = atan2( vyl[i] , vxl[i] );
+        theta_l[i] = acos( (cmv[2] - vzl[i]) / vl[i] );
+        phi_l[i] = atan2( (cmv[1] - vyl[i]) , (cmv[0] - vxl[i]) );
         
         theta[j] = theta_l[i];
         phi[j] = phi_l[i];
@@ -841,9 +861,8 @@ void vel_angles(string extension, int Nl, int Nd, double * vxl, double * vyl, do
     
     for(int i = 0; i < Nd; i++)
     {
-        vd[i] = sqrt( sqr(vxd[i]) + sqr(vyd[i]) + sqr(vzd[i]) );
-        theta_d[i] = acos( vzd[i] / vd[i]);
-        phi_d[i] = atan2( vyd[i] , vxd[i] );
+        theta_d[i] = acos( (cmv[2] - vzd[i]) / vd[i] );
+        phi_d[i] = atan2( (cmv[1] - vyd[i]) , (cmv[0] - vxd[i]) );
         
         theta[j] = theta_d[i];
         phi[j] = phi_d[i];
@@ -996,6 +1015,7 @@ int main (int argc, char * const argv[])
     double lv[Nl];//this is a vector to store the velocity distribution
     
     double cm[3] = {0.0, 0.0, 0.0};
+    double cmv[3] = {0.0, 0.0, 0.0};
     double mass;
     
 //     double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
@@ -1011,13 +1031,13 @@ int main (int argc, char * const argv[])
     /*get center of mass*/
     mass = mass_l + mass_d;
     com(cm, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
-    
+    comv(cmv, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
 
     /*getting the radii and vel vectors*/
     get_radii(Nd, dx, dy, dz, rd, cm);
     get_radii(Nl, lx, ly, lz, rl, cm);
-    get_radii(Nd, dvx, dvy, dvz, vel_d, cm);
-    get_radii(Nl, lvx, lvy, lvz, vel_l, cm);
+    get_radii(Nd, dvx, dvy, dvz, vel_d, cmv);
+    get_radii(Nl, lvx, lvy, lvz, vel_l, cmv);
 
     
     /*radii*/
@@ -1029,10 +1049,10 @@ int main (int argc, char * const argv[])
     
     /*angles*/
     printf(".");//actual for radii
-    angles(extension, Nl, Nd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width );
+    angles(extension, Nl, Nd, rl, rd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width, cm);
     
     printf(".");//actual for vel
-    vel_angles(extension, Nl, Nd, lvx, lvy, lvz, dvx, dvy, dvz, number_of_bins, bin_width );
+    vel_angles(extension, Nl, Nd, vel_l, vel_d, lvx, lvy, lvz, dvx, dvy, dvz, number_of_bins, bin_width, cmv);
     
     printf(".");//theory
     angle_theory(bin_width, args);

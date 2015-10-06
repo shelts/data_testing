@@ -77,7 +77,7 @@ f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'phi (rad)'\n")
 f.write("set xrange[-5:5]\n")
-#f.write("set yrange[0:1000]\n\n\n")
+f.write("set yrange[0:1200]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -118,7 +118,7 @@ f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'theta (rad)'\n")
 f.write("set xrange[0:4]\n")
-#f.write("set yrange[0:1000]\n\n\n")
+f.write("set yrange[0:1200]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -198,7 +198,7 @@ f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'phi (rad)'\n")
 f.write("set xrange[-5:5]\n")
-#f.write("set yrange[0:1000]\n\n\n")
+f.write("set yrange[0:1200]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -241,7 +241,7 @@ f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'theta (rad)'\n")
 f.write("set xrange[0:4]\n")
-#f.write("set yrange[0:1000]\n\n\n")
+f.write("set yrange[0:1200]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
