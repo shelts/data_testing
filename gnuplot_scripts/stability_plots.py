@@ -6,9 +6,9 @@ sim_time = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 titles   = [ "0", ".25" , ".5" , ".75" , "1", "2", "3", "4"]
 N        = 8
 M        = 0
-plot_dark = False
+plot_dark = True
 plot_light = True
-plot_both = False
+plot_both = True
 
 if(plot_light == True):
     print("plotting light")
@@ -34,8 +34,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (Kpc)'\n")
-f.write("set xrange[0:20]\n")
-f.write("set yrange[0:1500]\n\n\n")
+f.write("set xrange[0:5]\n")
+f.write("set yrange[0:3000]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -290,13 +290,15 @@ for i in range(M, N):
         p = light + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/vel_vs_r/vel_vs_r_light_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Light Velocity as a function of Radius After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 1:2  with dots title 'actual', '" + theory + "' using 1:2 with lines title 'both', '" + theory + "' using 1:3 with lines title 'light', '" + theory + "' using 1:4 with lines title 'dark' \n\n") 
+        #f.write("plot '" + p + "' using 1:2  with dots title 'actual', '" + theory + "' using 1:2 with lines title 'both', '" + theory + "' using 1:3 with lines title 'light', '" + theory + "' using 1:4 with lines title 'dark' \n\n")
+        f.write("plot '" + p + "' using 1:2  with dots title 'actual' \n\n", )
 
     if(plot_dark == True):
         p = dark + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/vel_vs_r/vel_vs_r_dark_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Dark Velocity as a function of Radius After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 1:2  with dots title 'actual', '" + theory + "' using 1:2 with lines title 'both', '" + theory + "' using 1:3 with lines title 'light', '" + theory + "' using 1:4 with lines title 'dark' \n\n") 
+        #f.write("plot '" + p + "' using 1:2  with dots title 'actual', '" + theory + "' using 1:2 with lines title 'both', '" + theory + "' using 1:3 with lines title 'light', '" + theory + "' using 1:4 with lines title 'dark' \n\n")
+        f.write("plot '" + p + "' using 1:2  with dots title 'actual'\n\n", )
 
 
     f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
@@ -311,6 +313,8 @@ f.close()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 ##VELOCITY DISTRIBUTION
+##This is the one without theory
+theory   = "~/Desktop/research/data_testing/theory/theory_vel.dat"
 light = "~/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
 dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
 
@@ -330,13 +334,14 @@ for i in range(M, N):
         p = light + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_light_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Histogram of Light Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual'\n\n") 
+        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'light dist'  lw 2   \n\n", )
 
     if(plot_dark == True):
         p = dark + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_dark_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Histogram of Dark Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual'\n\n") 
+        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'dark dist'  lw 2   \n\n") 
+        
 
 
     f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
