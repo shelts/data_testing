@@ -2,7 +2,7 @@
 import os
 from subprocess import call
 
-args = [1, 0.2, 0.2, 11, 0.2]
+args = [1, 0.5, 0.2, 30, 0.2]
 sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "4"]
 N             = 8
@@ -51,9 +51,9 @@ mass_per_particle_dark  = str( masspd )
 ###name of folder to which your results will be saved
 folder_name = "orphan_parameters_2comp"
 
-#print "parsing data"
-#for i in range(M, N):
-    #os.system("python outputparser.py ./sim_outputs/output_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
+print "parsing data"
+for i in range(M, N):
+    os.system("python outputparser.py ./sim_outputs/output_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
     
 print "performing tests"
 os.system("g++ -std=c++11 output_test.cpp -o output_test")
@@ -61,9 +61,9 @@ for i in range(M, N):
     os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
     
 
-#os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
-#for i in range(M, N):
-    #os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
+for i in range(M, N):
+    os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
 
 
 print "making plots"
