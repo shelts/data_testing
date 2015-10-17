@@ -315,8 +315,8 @@ f.close()
 ##VELOCITY DISTRIBUTION
 ##This is the one without theory
 theory   = "~/Desktop/research/data_testing/theory/theory_vel.dat"
-light = "~/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
-dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
+light = "~/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_"
+dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_norm_vel_bins_"
 
 f = open('vel_binned.gnuplot', 'w')
 f.write("reset\n")
@@ -324,8 +324,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'vel (km/s)'\n")
-f.write("set xrange[0:10]\n")
-f.write("set yrange[0:1500]\n")
+f.write("set xrange[0:1]\n")
+#f.write("set yrange[0:5000]\n")
 f.write("set style fill transparent solid 0.2\n\n\n")
 
 

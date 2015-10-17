@@ -138,7 +138,6 @@ double potential( double r, double * args)
     return (potential_result);
 }
 
-
 double test(double x, double * args, double * args2)
 {
  double func = exp(x) + sin(x) + x;
@@ -166,7 +165,6 @@ double nemo_vel(double r)
     return v;
 }
 
-
 double distribution(double mass, double r_scale, double v, double r, double * args)
 {
     
@@ -181,6 +179,13 @@ double distribution(double mass, double r_scale, double v, double r, double * ar
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // service functions
+
+double esc_vel(double r, double * args)
+{
+    double escv = sqrt( fabs(2.0 * potential( r, args) ) );
+    return escv;
+}
+
 
 void com(double * cm, double * xd, double * yd, double * zd,  int Nd, double * xl, double * yl, double * zl, int Nl, double masspd, double masspl, double mass)
 {
@@ -307,7 +312,7 @@ static double gauss_quad(double (*rootFunc)(double, double *, double *), double 
 }
 
 /*this is a binning routine, makes a histogram*/
-void binner(int binN,double binwidth, double * x, int N, string s, string extension, int type)
+void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
 {
     // binN=number of bins
     //binwidthsize of bins
@@ -439,7 +444,7 @@ void angle_theory( double bin_width, double * args)
     double masspl   = args[4]; 
     double masspd   = args[5];
     
-    double pi= 4.0 * atan(1.0);
+    double pi = 4.0 * atan(1.0);
     double theta_l, theta_d, theta;
     double phi_l, phi_d, phi;
     FILE * th;
@@ -484,28 +489,18 @@ void vel_theory(double bin_width, double * args)
     
     double q = 0.0;
     double g;
-    double v = 0.0;
-    double rb = 1.0 * (rscale_l + rscale_d);
-    double r = 0.0;
-    double counts = 0.0;
-    double energy;
-//     double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
-//     double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
-//     double v_esc = sqrt( 2.0 * fabs( potential(r, args)));
+    double pi = 4.0 * atan(1.0);
+    double n;
     
     FILE * vel;
     vel= fopen("./theory/theory_vel.dat", "w");
     while(1)
     {
-//         q = v / v_esc;
-//         g = sqr(q) * seventhhalfs(1.0 - sqr(q))/ masspl;
-        v = sqrt(2.0) * minusquarter(1.0 + sqr(r));
-        energy = -potential(r, args) - 0.5 * sqr(v);
-        counts = -potential(r, args) * 20000.0 / (energy);
-        r += 0.01;
-        fprintf(vel, "%f \t %f\n", v, counts);
+        g = sqr(q) * seventhhalfs(1.0 - sqr(q)) * 20000.0 * 0.01 * 4.0 * pi;
+        q += 0.001;
+        fprintf(vel, "%f \t %f\n", q, g);
             
-        if( r > rb){break;}
+        if( q > 1.0){break;}
     }
     fclose(vel);
 }
@@ -772,12 +767,13 @@ void vel_angles(string extension, int Nl, int Nd, double * vl, double * vd, doub
 }
 
 
-void vel_dis(string extension, double Nl, double Nd, double * vel_l, double * vel_d, double * rl, double * rd, int number_of_bins, double bin_width)
+void vel_dis(string extension, double * args, int Nl, int Nd, double * vel_l, double * vel_d, double * rl, double * rd, int number_of_bins, double bin_width)
 {
 
     int type = 0;
     string s;
-    s = string("actual/light_matter_velocity_dist_"+extension+".dat");
+    double vsc;
+    s = string("actual/light_matter_velocity_dist_" + extension + ".dat");
     ofstream vel;
     vel.open(s);
     for(int i = 0; i < Nl; i++)
@@ -786,7 +782,7 @@ void vel_dis(string extension, double Nl, double Nd, double * vel_l, double * ve
     }
     vel.close();
     
-    s = string("actual/dark_matter_velocity_dist_"+extension+".dat");
+    s = string("actual/dark_matter_velocity_dist_" + extension + ".dat");
     ofstream vel2;
     vel2.open(s);
     for(int i = 0; i < Nd; i++)
@@ -795,14 +791,35 @@ void vel_dis(string extension, double Nl, double Nd, double * vel_l, double * ve
     }
     vel2.close();
 
+    double vd[Nd];
+    double vl[Nl];
     
+    for(int i = 0; i < Nl; i++)
+    {
+        vsc = esc_vel(rl[i], args);
+        vl[i] = vel_l[i] / (vsc);
+    }
     
-    s = string("binned_data/dark_matter_vel_bins_"+extension+".dat");
+     for(int i = 0; i < Nd; i++)
+    {
+        vsc = esc_vel(rd[i], args);
+        vd[i] = vel_d[i] / (vsc);
+    }
+    
+    s = string("binned_data/dark_matter_vel_bins_" + extension + ".dat");
     binner(number_of_bins, bin_width, vel_d, Nd, s, extension, type);
-    s = string("binned_data/light_matter_vel_bins_"+extension+".dat");
+    s = string("binned_data/light_matter_vel_bins_" + extension + ".dat");
     binner(number_of_bins, bin_width, vel_l, Nl, s, extension, type);
+    
+    bin_width = 0.01;
+    s = string("binned_data/dark_matter_norm_vel_bins_" + extension + ".dat");
+    binner(number_of_bins, bin_width, vd, Nd, s, extension, type);
+    s = string("binned_data/light_matter_norm_vel_bins_" + extension + ".dat");
+    binner(number_of_bins, bin_width, vl, Nl, s, extension, type);
   
 }
+
+
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // main function calls
@@ -890,9 +907,10 @@ int main (int argc, char * const argv[])
     
     /*velocity*/
     printf(".");//actual
-    vel_dis(extension, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
+    vel_dis(extension, args, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
     
     printf(".");//theory -- vel curves
+    
     vel_theory(bin_width, args);
     
     printf(".");//theory -- from distribution func
