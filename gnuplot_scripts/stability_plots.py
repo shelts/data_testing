@@ -9,13 +9,13 @@ M        = 0
 plot_dark = True
 plot_light = True
 plot_both = True
-
+plot_theory = True
 if(plot_light == True):
-    print("plotting light")
+    #print("plotting light")
 if(plot_dark == True):
-    print("plotting dark")
+    #print("plotting dark")
 if(plot_both == True):
-    print("plotting both")
+    #print("plotting both")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -353,3 +353,88 @@ f.close()
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+pot  = "~/Desktop/research/data_testing/theory/pots.dat"
+f = open('pots.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg\n")
+f.write("set key on\n")
+f.write("set ylabel 'pot'\n")
+f.write("set xlabel 'radius (Kpc)'\n")
+#f.write("set xrange[0:10]\n")
+f.write("set yrange[-50000:0]\n\n\n")
+
+if(plot_theory == True):
+    f.write("set output \"~/Desktop/research/data_testing/plots/pots.jpeg\" \n")
+    f.write("set title 'Pot vs r' \n")
+    f.write("plot '" + pot + "' u 1:2  w l title 'plum', '' u 1:3 w l title 'mn', '' u 1:4 w l title 'sphere', '' u 1:5 w l title 'log' \n\n", )
+
+f.close()
+
+den  = "~/Desktop/research/data_testing/theory/den.dat"
+
+f = open('den.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg\n")
+f.write("set key on\n")
+f.write("set ylabel 'den'\n")
+f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xrange[0:100]\n")
+f.write("set yrange[0:10]\n\n\n")
+if(plot_theory == True):
+    f.write("set output \"~/Desktop/research/data_testing/plots/den.jpeg\" \n")
+    f.write("set title 'den vs r' \n")
+    f.write("plot '" + den + "' u 1:2  w l title 'plum', '' u 1:3 w l title 'mn', '' u 1:4 w l title 'sphere', '' u 1:5 w l title 'log' \n\n", )
+
+
+
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+
+f.close()
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+rot  = "~/Desktop/research/data_testing/theory/rotation.dat"
+
+f = open('rotation.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg\n")
+f.write("set key on\n")
+f.write("set ylabel 'vel'\n")
+f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xrange[0:500]\n")
+f.write("set yrange[0:400]\n\n\n")
+if(plot_theory == True):
+    f.write("set output \"~/Desktop/research/data_testing/plots/rotation.jpeg\" \n")
+    f.write("set title 'v vs r' \n")
+    f.write("plot '" + rot + "' u 1:2  w l title 'mn', '' u 1:3 w l title 'sph', '' u 1:4 w l title 'log', '' u 1:5 w l title 'sum' \n\n", )
+
+
+
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+
+f.close()
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+force  = "~/Desktop/research/data_testing/theory/force.dat"
+
+f = open('force.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg\n")
+f.write("set key on\n")
+f.write("set ylabel 'force'\n")
+f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xrange[0:500]\n")
+f.write("set yrange[-1000:0]\n\n\n")
+if(plot_theory == True):
+    f.write("set output \"~/Desktop/research/data_testing/plots/force.jpeg\" \n")
+    f.write("set title 'force vs r' \n")
+    f.write("plot '" + force + "' u 1:2  w l title 'force' \n\n", )
+
+
+
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+
+f.close()

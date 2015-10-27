@@ -421,7 +421,7 @@ void single_density_theory(double bin_width, double * args)
     
     double de, de2, de3;
     FILE * rho;
-    rho= fopen("./theory/theory_den.dat", "w");
+    rho = fopen("./theory/theory_den.dat", "w");
     while(1)
     {
         de2 = 4.0 * pi * w * w * density(w, light) * bin_width / masspl;

@@ -13,6 +13,10 @@
     gnuplot vel_stability.gnuplot
     gnuplot vel_stability_phi.gnuplot
     gnuplot vel_stability_theta.gnuplot
+    gnuplot pots.gnuplot
+    gnuplot den.gnuplot
+    gnuplot rotation.gnuplot
+    gnuplot force.gnuplot
     
     rm stability_rad.gnuplot
     rm stability_phi.gnuplot
@@ -22,3 +26,7 @@
     rm vel_stability.gnuplot
     rm vel_stability_phi.gnuplot
     rm vel_stability_theta.gnuplot
+    rm pots.gnuplot
+    rm den.gnuplot
+    rm rotation.gnuplot
+    rm force.gnuplot

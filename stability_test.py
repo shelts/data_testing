@@ -56,10 +56,13 @@ folder_name = "orphan_parameters_2comp"
     #os.system("python outputparser.py ./sim_outputs/output_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
     
 print "performing tests"
-os.system("g++ -std=c++11 output_test.cpp -o output_test")
-for i in range(M, N):
-    os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+#os.system("g++ -std=c++11 output_test.cpp -o output_test")
+#for i in range(M, N):
+    #os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
     
+os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
+os.system("./tidal_radius " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
+
 
 #os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
 #for i in range(M, N):
