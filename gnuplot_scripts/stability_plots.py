@@ -11,11 +11,11 @@ plot_light = True
 plot_both = True
 plot_theory = True
 if(plot_light == True):
-    #print("plotting light")
+    print("plotting light")
 if(plot_dark == True):
-    #print("plotting dark")
+    print("plotting dark")
 if(plot_both == True):
-    #print("plotting both")
+    print("plotting both")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -425,8 +425,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'force'\n")
 f.write("set xlabel 'radius (Kpc)'\n")
-f.write("set xrange[0:500]\n")
-f.write("set yrange[-1000:0]\n\n\n")
+f.write("set xrange[0:1000]\n")
+f.write("set yrange[-500:1]\n\n\n")
 if(plot_theory == True):
     f.write("set output \"~/Desktop/research/data_testing/plots/force.jpeg\" \n")
     f.write("set title 'force vs r' \n")

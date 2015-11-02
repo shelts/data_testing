@@ -2,7 +2,7 @@
 import os
 from subprocess import call
 
-args = [1, 0.5, 0.2, 30, 0.2]
+args = [1, 0.2, 0.2, 11, 0.2]
 sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "4"]
 N             = 8
@@ -17,26 +17,25 @@ print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 
 #######################################################################
 #Proper paramaters:
-#r_l = ( r0 )
-#m_l = ( mass * mass_ratio )
+r_d = ( r0 / light_r_ratio )
+r_l = ( r0 )
+m_d = ( mass * (1.0 - mass_ratio) )
+m_l = ( mass * mass_ratio )
 
 #r_d = ( r0 / light_r_ratio )
-#m_d = ( mass * (1.0 - mass_ratio) )
-
-m_l = 30.0
-m_d = 0.0 #( mass * (1.0 - mass_ratio) )
-r_l = 1.0
-r_d = ( r0 / light_r_ratio )
+#r_l = 1.0
+#m_d = 0.0 #( mass * (1.0 - mass_ratio) )
+#m_l = 30
 
 Nb  = 20000
 
 #for one component
-masspl  = m_l / ( Nb);
-masspd  = m_d / ( Nb);
+#masspd  = m_d / ( Nb);
+#masspl  = m_l / ( Nb);
 
 #for two component
-#masspl   = m_l / (0.5 * Nb);
-#masspd   = m_d / (0.5 * Nb);
+masspl   = m_l / (0.5 * Nb);
+masspd   = m_d / (0.5 * Nb);
 
 
 nbody    = str( Nb )
@@ -55,7 +54,7 @@ folder_name = "orphan_parameters_2comp"
 #for i in range(M, N):
     #os.system("python outputparser.py ./sim_outputs/output_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
     
-print "performing tests"
+#print "performing tests"
 #os.system("g++ -std=c++11 output_test.cpp -o output_test")
 #for i in range(M, N):
     #os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)

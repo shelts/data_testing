@@ -133,7 +133,6 @@ double plummer_den(double r, double * args)
     double coeff = 3.0 / (4.0 * pi);
 
     double density_result = coeff * ( density_light_comp + density_dark_comp);
-//     printf("den = %f\n", density_dark_comp);
     return density_result;
 }
 
@@ -211,18 +210,20 @@ double gauss_quad(double (*Func)(double (*)(double, double *), double, double *)
 
 double root_finder(double (*rootFunc)(double *, double), double * args, double funcValue, double lower, double upper)
 {
-    int N = 100;
+    int N = 10;
     int numSteps = N;
     double interval;
     double values[numSteps + 1];
     /* Divide the function area up into bins in case there is more than one root */
     /*numSteps+1 because you want to include the upperbound in the interval*/
     
+    
     for(int i = 0; i < numSteps + 1; i++)
     {
         interval = ((upper - lower) * (double)i) / (double)numSteps + lower;
         values[i] = (*rootFunc)(args, interval) - funcValue;
     }
+    
     double midPoint = 0;
     double midVal = 0;
     int nsteps = 0;
@@ -238,27 +239,27 @@ double root_finder(double (*rootFunc)(double *, double), double * args, double f
     for(int i = 0; i < numSteps; i++)
     {
         q = i;
-        printf("searching section %i\r", i);
         if((values[q] > 0 && values[q + 1] < 0) || (values[q] < 0 && values[q + 1] > 0))
         {
-            printf("sign change found...\n");
+//             printf("sign change found...");
             if(values[q] < 0 && values[q + 1] > 0)
             {
-                curLower = ((upper - lower) * (double)q)/(double)numSteps + lower;
-                curUpper = ((upper - lower) * (double)(q + 1))/(double)numSteps + lower;
+                curLower = ((upper - lower) * (double)q) / (double)numSteps + lower;
+                curUpper = ((upper - lower) * (double)(q + 1)) / (double)numSteps + lower;
             }
             else if(values[q] > 0 && values[q + 1] < 0)
             {
-                curLower = ((upper - lower) * (double)(q + 1))/(double)numSteps + lower;
-                curUpper = ((upper - lower) * (double)q)/(double)numSteps + lower;
+                curLower = ((upper - lower) * (double)(q + 1)) / (double)numSteps + lower;
+                curUpper = ((upper - lower) * (double)q) / (double)numSteps + lower;
             }
             else
             {
                 continue;
             }
+            
             midVal = 1;
             nsteps = 0;
-            while(fabs(midVal) > .0001)
+            while(fabs(midVal) > .01)
             {
                 midPoint = (curLower + curUpper) / 2.0;
                 midVal = (*rootFunc)(args, midPoint) - funcValue;
@@ -273,25 +274,29 @@ double root_finder(double (*rootFunc)(double *, double), double * args, double f
                 }
                 ++nsteps;
              
-                if(nsteps > 10000)
+                if(nsteps > 1000)
                 {
                     break;
                 }
-                printf("mid = %f \t nsteps = %i \t midval = %f curL = %f curU = %f\n", midPoint, nsteps, midVal, curLower, curUpper);
+//                 printf("mid = %.20f \t nsteps = %i \t midval = %f curL = %f curU = %f\n", midPoint, nsteps, midVal, curLower, curUpper);
             }
-            if(nsteps < 10000)
-            {
+            
+//             if(nsteps < 10000)
+//             {
+//                 printf("This ran\n");
                 ++rootsFound;
-            }
-            else
-            {
-                return midPoint = 0.0;
-            }
+//             }
+//             else
+//             {
+//                 printf("no this did\n");
+//                 return midPoint = 0.0;
+//             }
             
         }
         
         if(rootsFound != 0)
         {
+            printf("nsteps = %i\n", nsteps);
             break;
         }
     }
@@ -309,10 +314,21 @@ double rsqr_den(double (*func)(double, double *), double r, double * args)
     return val;
 }
 
+/* cylindrical volume element */
+double r_den(double (*func)(double, double *), double r, double * args)
+{
+    double val = (r) * (*func)(r, args);
+    return val;
+}
+
 double calc_cutoff_radius_dwarf(double * args)
 {
     /* this calculates the radius at which 95% of the mass is enclosed */
-    double M_dwarf = 30;
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    double M_dwarf = mass_l + mass_d;
     double mass_dwarf;
     double r = 0.01;
     while(1)
@@ -343,8 +359,8 @@ double mass_enc_galaxy(double * args, double r)
     
     mass_spherical = 4.0 * pi * gauss_quad(rsqr_den, spherical_den, args, 0.0, r);
     mass_log_halo  = 4.0 * pi * gauss_quad(rsqr_den, log_halo_den, args,  0.0, r);
-    mass_mndisk    = 2.0 * pi * gauss_quad(rsqr_den, miyamotoNagai_den, args, 0.0, r);
-        
+    mass_mndisk    =  4.45865888e5; //2.0 * pi * gauss_quad(r_den, miyamotoNagai_den, args, 0.0, r);
+//     printf("%f \t %f \t %f\n", mass_spherical, mass_log_halo, mass_mndisk);
     M_t = mass_spherical + mass_log_halo + mass_mndisk;
     
     return M_t;
@@ -353,22 +369,25 @@ double mass_enc_galaxy(double * args, double r)
 double mass_enc_dwarf(double * args, double r)
 {
     double mass_dwarf = 4.0 * pi * gauss_quad(rsqr_den, plummer_den, args, 0.0, r);   
+//     printf("mass = %f\n", mass_dwarf);
     return mass_dwarf;
 }
 
 /*   Tidal Radius   */
-double tidal_radius_eq(double * args, double x)
+double tidal_radius_eq(double * args, double d)
 {
+    //d = x - r
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
     double mass_d   = args[3];
     double r = args[4];
-    double star = x - r;
+    double x = d + r;
     double galaxy_on_dwarf_center = mass_enc_galaxy(args, x) / sqr(x);
-    double galaxy_on_star = mass_enc_galaxy(args, star) / sqr(star);
+    double galaxy_on_star = mass_enc_galaxy(args, fabs(d)) / sqr(d);
     double dwarf_on_star = mass_enc_dwarf(args, r) / sqr(r);
-    double force = galaxy_on_dwarf_center + galaxy_on_star + dwarf_on_star;
+    double force = galaxy_on_dwarf_center - galaxy_on_star + dwarf_on_star;
+//     printf("mass = %f  r = %f\n", dwarf_on_star * sqr(r), r);
 //     printf("%f\n", force);
     return force;
 }
@@ -444,7 +463,7 @@ void plot_rotation_curves(double * args)
 
 void plot_force(double * args, double r)
 {
-    double x = r + 1.0 ;
+    double x = 1000;
     double force = 0.0;
     FILE * f;
     f = fopen("./theory/force.dat", "w");
@@ -452,9 +471,9 @@ void plot_force(double * args, double r)
     {
         force = tidal_radius_eq(args, x);
         fprintf(f, "%f \t %f\n", x, force);
-        x += 1.0;
+        x -= .1;
         
-        if(x > 1000.0){break;}
+        if(x < 4.0){break;}
     }
     fclose(f);
 }
@@ -500,18 +519,28 @@ int main (int argc, char * const argv[])
 //     printf("test x = %f \t answer = 51.607\n", get_x);
 //     double root_test = root_finder(test_func2, args, 2.0, 0.0, 4.0);
 //     printf("root test x = %f \t answer = 0.9637 , 3.1327\n", root_test);
-    
+//     
     /* get the dwarf cutoff radius */
     double r_d = calc_cutoff_radius_dwarf(args);
     printf("r_dwarf = %f\n", r_d);
-     
+    double eq_args[5] = {rscale_l, rscale_d, mass_l, mass_d, r_d};
+    
 //     plot_density(args);
 //     plot_rotation_curves(args);
-   printf("search for tidal r\n");
-    double eq_args[5] = {rscale_l, rscale_d, mass_l, mass_d, r_d};
 //     plot_force(eq_args, r_d);
-    double tidal_r = root_finder(tidal_radius_eq, eq_args, 0.0, 10, 50.0);
-    printf("done. tidal radius = %f\n", tidal_r);
+   
+    
+    
+    printf("search for tidal r...");
+    double tidal_r = root_finder(tidal_radius_eq, eq_args, 0.0, 1, 500.0);
+    
+    
+    /* assuming point potentials */
+    //the 5.3e6 mass is the mass that the log halo seems to converge to.
+//     double Mg = (4.45865888e5 + 1.52954402e5 + 5.3e6);
+//     double Ms = 30.0;
+//     double tidal_r2 = r_d * pow(( 3.0 * Mg / Ms), 1.0 / 3.0);
+    printf("done. \ntidal radius = %f \n", tidal_r); //reports the center to center distance
     
     
 }
