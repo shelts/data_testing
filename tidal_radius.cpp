@@ -76,7 +76,8 @@ double plummer_pot(double r, double * args)
 
     return (potential_result);
 }
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*    Densities     */
 double spherical_den(double r, double * args)
 {
@@ -135,7 +136,8 @@ double plummer_den(double r, double * args)
     double density_result = coeff * ( density_light_comp + density_dark_comp);
     return density_result;
 }
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*   utility functions    */
 //the guass quad takes a function as a parameter which itself takes a function as a parameter.
 double gauss_quad(double (*Func)(double (*)(double, double *), double, double *), double (*func2)(double, double *), double * args, double lower, double upper )
@@ -306,7 +308,8 @@ double root_finder(double (*rootFunc)(double *, double), double * args, double f
     return midPoint;
 }
 
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*   calculation function  */
 double rsqr_den(double (*func)(double, double *), double r, double * args)
 {
@@ -336,7 +339,7 @@ double calc_cutoff_radius_dwarf(double * args)
         mass_dwarf = 4.0 * pi * gauss_quad(rsqr_den, plummer_den, args, 0.0, r);
         
 //         printf("%f \t %f \t %f\n", r, mass_dwarf, M_dwarf);
-        if(mass_dwarf / M_dwarf > .95)
+        if(mass_dwarf / M_dwarf > .75)
         {
             break;
         }
@@ -357,22 +360,32 @@ double mass_enc_galaxy(double * args, double r)
     double mass_mndisk = 0.0;
     double M_t;
     
-    mass_spherical = 4.0 * pi * gauss_quad(rsqr_den, spherical_den, args, 0.0, r);
+    mass_spherical = 1.52954402e5; //4.0 * pi * gauss_quad(rsqr_den, spherical_den, args, 0.0, r);
     mass_log_halo  = 4.0 * pi * gauss_quad(rsqr_den, log_halo_den, args,  0.0, r);
-    mass_mndisk    =  4.45865888e5; //2.0 * pi * gauss_quad(r_den, miyamotoNagai_den, args, 0.0, r);
+    mass_mndisk    = 4.45865888e5; //2.0 * pi * gauss_quad(r_den, miyamotoNagai_den, args, 0.0, r);
 //     printf("%f \t %f \t %f\n", mass_spherical, mass_log_halo, mass_mndisk);
     M_t = mass_spherical + mass_log_halo + mass_mndisk;
     
     return M_t;
 }
 
+double galaxy_pot(double * args, double r)
+{
+    double mn = miyamotoNagai_pot(r, args);
+    double sph = spherical_pot(r, args);
+    double log = log_halo_pot(r, args);
+    double pot = mn + sph + log;
+    return pot;
+    
+}
 double mass_enc_dwarf(double * args, double r)
 {
     double mass_dwarf = 4.0 * pi * gauss_quad(rsqr_den, plummer_den, args, 0.0, r);   
 //     printf("mass = %f\n", mass_dwarf);
     return mass_dwarf;
 }
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*   Tidal Radius   */
 double tidal_radius_eq(double * args, double d)
 {
@@ -385,13 +398,31 @@ double tidal_radius_eq(double * args, double d)
     double x = d + r;
     double galaxy_on_dwarf_center = mass_enc_galaxy(args, x) / sqr(x);
     double galaxy_on_star = mass_enc_galaxy(args, fabs(d)) / sqr(d);
-    double dwarf_on_star = mass_enc_dwarf(args, r) / sqr(r);
+    double dwarf_on_star = (mass_l + mass_d) / sqr(r);
     double force = galaxy_on_dwarf_center - galaxy_on_star + dwarf_on_star;
 //     printf("mass = %f  r = %f\n", dwarf_on_star * sqr(r), r);
 //     printf("%f\n", force);
     return force;
 }
 
+double tidal_radius_eq_pot(double * args, double d)
+{
+    //d = x - r
+    double rscale_l = args[0];
+    double rscale_d = args[1];
+    double mass_l   = args[2];
+    double mass_d   = args[3];
+    double r = args[4];
+    double x = d + r;
+    double galaxy_on_dwarf_center = -galaxy_pot(args, x);
+    double galaxy_on_star = -galaxy_pot(args, d);
+    double dwarf_on_star = -plummer_pot(r, args);
+    double pot = galaxy_on_dwarf_center - galaxy_on_star + dwarf_on_star;
+    return pot;
+    
+}
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*   Plotting  */
 void plot_density(double * args)
 {
@@ -478,7 +509,8 @@ void plot_force(double * args, double r)
     fclose(f);
 }
 
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*    testing    */
 double test_func(double x, double * args)
 {
@@ -503,7 +535,8 @@ double test_func2(double * args, double x)
     double t = exp(x) * sin(x) * sqr(x); 
     return t;
 }
-
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+//# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 /*   main */
 int main (int argc, char * const argv[])
 {
@@ -522,6 +555,7 @@ int main (int argc, char * const argv[])
 //     
     /* get the dwarf cutoff radius */
     double r_d = calc_cutoff_radius_dwarf(args);
+    printf("rscale_l = %f \t rscale_d = %f\n", rscale_l, rscale_d);
     printf("r_dwarf = %f\n", r_d);
     double eq_args[5] = {rscale_l, rscale_d, mass_l, mass_d, r_d};
     
@@ -530,17 +564,18 @@ int main (int argc, char * const argv[])
 //     plot_force(eq_args, r_d);
    
     
-    
+    double esc = sqrt( fabs(2.0 * (spherical_pot(25.0, args) + log_halo_pot(25.0, args) + miyamotoNagai_pot(25.0, args))));
+    printf("esc = %f\n", esc);
     printf("search for tidal r...");
     double tidal_r = root_finder(tidal_radius_eq, eq_args, 0.0, 1, 500.0);
-    
+    double tidal_r_pot = root_finder(tidal_radius_eq_pot, eq_args, 0.0, 1, 500.0);
     
     /* assuming point potentials */
     //the 5.3e6 mass is the mass that the log halo seems to converge to.
 //     double Mg = (4.45865888e5 + 1.52954402e5 + 5.3e6);
 //     double Ms = 30.0;
 //     double tidal_r2 = r_d * pow(( 3.0 * Mg / Ms), 1.0 / 3.0);
-    printf("done. \ntidal radius = %f \n", tidal_r); //reports the center to center distance
+    printf("done. \ntidal radius = %f \t %f\n", tidal_r, tidal_r_pot); //reports the center to center distance
     
     
 }

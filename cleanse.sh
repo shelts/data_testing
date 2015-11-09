@@ -7,7 +7,7 @@ rm -r plots
 rm -r sim_outputs
 rm -r test_output
 rm -r theory
-
+rm -r histograms
 
 mkdir actual
 mkdir binned_data
@@ -16,6 +16,7 @@ mkdir raw_data
 mkdir sim_outputs
 mkdir test_output
 mkdir theory
+mkdir histograms
 
 mkdir plots
 cd plots

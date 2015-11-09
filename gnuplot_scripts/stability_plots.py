@@ -155,7 +155,7 @@ dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
 f = open('vel_stability.gnuplot', 'w')
 f.write("reset\n")
 f.write("set terminal jpeg\n")
-f.write("set key on\n")
+f.write("set key off\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'vel (km/s)'\n")
 f.write("set xrange[0:10]\n")
@@ -168,13 +168,13 @@ for i in range(M, N):
         p = light + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned_vs_tbins/vel_distribution_light_theory_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Histogram of Light Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_light + "' using 2:1 with lines  title 'light dist'  lw 2   \n\n") 
+        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_light + "' using 2:1 with lines  title 'light theory'  lw 2   \n\n") 
 
     if(plot_dark == True):
         p = dark + sim_time[i] + "gy.dat"
         f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned_vs_tbins/vel_distribution_dark_theory_" + outputs[i] + "gy.jpeg\" \n")
         f.write("set title 'Histogram of Dark Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_dark + "' using 2:1 with lines title 'dark dist' lw 2  \n\n") 
+        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_dark + "' using 2:1 with lines title 'dark theory' lw 2  \n\n") 
 
 
     f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
