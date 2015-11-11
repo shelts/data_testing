@@ -13,8 +13,9 @@ light_r_ratio = str(args[2])
 mass          = str(args[3])
 mass_ratio    = str(args[4])
 
-print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
+#print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 run_nbody = True
+run_nbody = False
 plot_hist = True
 make_data_hist = True
 
@@ -45,8 +46,10 @@ if(make_data_hist == True):
     total = 0.0
     for i in range(0, len(counts)):
         total = total + counts[i]
+    total = total * 5.0 / 222288.24  #each count is fturn off star which reps about a cluster of 5 solar masses
     for i in range(0, len(counts)):
-        g.write("%f \t %f\n" % (lamb, counts[ i] / total ))
+        bodies = counts[i] * 5.0 / 222288.24
+        g.write("%f \t %f\n" % (lamb, bodies / total ))
         lamb = lamb - 3
     g.close()
 
@@ -62,7 +65,7 @@ if(plot_hist == True):
 
     f.write("set output \"~/Desktop/research/data_testing/plots/hist.jpeg\" \n")
     f.write("set title 'Histogram of Light Matter Distribution After 4 Gy' \n")
-    f.write("plot 'histograms/" + histogram + "' using 2:4 with boxes title 'sim', 'histograms/" + data2 + "' using 2:4 with boxes title 'data' \n\n") 
+    f.write("plot 'histograms/" + histogram + "' using 2:4 with boxes title 'sim', 'histograms/" + data + "' using 1:2 with boxes title 'data' \n\n") 
 
 
     f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
