@@ -58,39 +58,49 @@ if(make_data_hist == True):
     g.close()
 
 if(plot_hist == True):
-    f = open('histogram.gnuplot', 'w')
-    f.write("reset\n")
-    f.write("set terminal jpeg\n")
-    f.write("set key on\n")
-    #f.write("set ylabel 'counts'\n")
-    f.write("set xlabel 'lambda'\n")
-    f.write("set xrange[40:-40]\n")
-    f.write("set yrange[0:.15]\n\n\n")
-
-    f.write("set output \"~/Desktop/research/data_testing/plots/hist.jpeg\" \n")
-    f.write("set title 'Histogram of Light Matter Distribution After 4 Gy' \n")
-    f.write("plot 'histograms/" + histogram + "' u 2:4 w boxes t 'sim', 'histograms/" + blank + "' u 1:2 w boxes t 'data', 'histograms/" + blank + "' u 2:4 w boxes t 'data' \n\n") 
-
-    
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-
-    f.close()
-    
     lines = []
     lines = open('histograms/' + histogram).readlines();
-    lines = lines[40:len(lines) - 1]
-    l = []
-    counts = []
+    lines = lines[40:len(lines)]
+    sim_l = []
+    sim_n = []
     for line in lines:
         tokens = line.split();
         if tokens: #tests to make sure tokens is not empty
             lda = float(tokens[1])
             cts = float(tokens[3])
-            l.append(lda)
-            counts.append(cts)
-    plt.plot(l, counts, 'r--', linewidth=2)
-    plt.show()
+            sim_l.append(lda)
+            sim_n.append(cts)
 
-    os.system("gnuplot histogram.gnuplot")
-    #os.system("rm histogram.gnuplot")
+    lines = []
+    lines = open('histograms/' + data2).readlines();
+    lines = lines[5:len(lines)]
+    data_l = []
+    data_n = []
+    for line in lines:
+        tokens = line.split()
+        if tokens:
+            dat_l = float(tokens[1])
+            dat_n = float(tokens[3])
+            data_l.append(dat_l)
+            data_n.append(dat_n)
+    
+    
+    #f, (f1, f2) = plt.subplots(2, sharex = True, sharey = True)
+    plt.subplot(211)
+    plt.bar(sim_l, sim_n, width=1, color='b')
+    plt.legend("sim")
+    plt.title('Histogram of Light Matter Distribution After 4 Gy')
+    plt.xlim((40, -40))
+    plt.ylim((0.0, 0.15))
+    plt.ylabel('counts')
+    
+    plt.subplot(212)
+    plt.bar(data_l, data_n, width=1, color='k')
+    plt.legend("d")
+    plt.xlim((40, -40))
+    plt.ylim((0.0, 0.15))
+    plt.xlabel('l')
+    plt.ylabel('counts')
+    #f.subplots_adjust(hspace=0)
+    plt.savefig('plots/hist', format='png')
+    #plt.show()
