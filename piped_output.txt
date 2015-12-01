@@ -1,0 +1,238 @@
+
+
+
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+
+WARNING: Error during initialization
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+

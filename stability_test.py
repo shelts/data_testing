@@ -25,33 +25,48 @@ def __main__(args):
     #mass_ratio    = (args[4])
 
     print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
-    parse = False
-    output = False
-    tidal = True
-    virial = False
+    
+    number_of_components = 2
+    parse = True
+    #     CHOOSE YOUR TESTS     #
+    output = True
+    tidal = False
+    virial = True
+    
+    #     PLOTS?    #
+    make_plots = True
+    
+    #     SAVE?     #
+    save_run = False
+    folder_name = "orphan_parameters_2comp"
+    cleanse = False #replace the directories
     #######################################################################
-    #Proper paramaters:
-    r_d = ( r0 / light_r_ratio )
-    r_l = ( r0 )
-    m_d = ( mass * (1.0 - mass_ratio) )
-    m_l = ( mass * mass_ratio )
-
-    #r_d = ( r0 / light_r_ratio )
-    #r_l = 1.0
-    #m_d = 0.0 #( mass * (1.0 - mass_ratio) )
-    #m_l = 30.0
-
     Nb  = 20000
-
-    #for one component
-    masspd  = m_d / ( Nb);
-    masspl  = m_l / ( Nb);
-
+    
     #for two component
-    #masspl   = m_l / (0.5 * Nb);
-    #masspd   = m_d / (0.5 * Nb);
+    if(number_of_components == 2):    
+        #Proper paramaters:
+        r_d = ( r0 / light_r_ratio )
+        r_l = ( r0 )
+        m_d = ( mass * (1.0 - mass_ratio) )
+        m_l = ( mass * mass_ratio )
+        
+        masspl   = m_l / (0.5 * Nb);
+        masspd   = m_d / (0.5 * Nb);
+        
+        
+    #for one component
+    if(number_of_components == 1):
+        #one component paramaters:
+        r_d = ( r0 / light_r_ratio )
+        r_l = 1.0
+        m_d = 0.0 #( mass * (1.0 - mass_ratio) )
+        m_l = 30.0
+ 
+        masspd  = m_d / ( Nb);
+        masspl  = m_l / ( Nb);
 
-
+    #we're all full of strings...
     nbody    = str( Nb )
     rscale_l = str( r_l )
     rscale_d = str( r_d )
@@ -61,8 +76,7 @@ def __main__(args):
     mass_per_particle_dark  = str( masspd )
 
     #######################################################################
-    ###name of folder to which your results will be saved
-    folder_name = "orphan_parameters_2comp"
+
 
     if(parse == True):
         print "parsing data"
@@ -84,10 +98,13 @@ def __main__(args):
         os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
         os.system("./tidal_radius " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
 
-    #print "making plots"
-    #os.system("./make_plots.sh 2>>piped_output.txt ")
+    if(make_plots == True):
+        print "making plots"
+        os.system("./make_plots.sh 2>>piped_output.txt ")
 
-    #os.system("./save_runs.py " + folder_name)
-    #os.system("./cleanse.sh")
+    if(save_run == True):
+        os.system("./save_runs.py " + folder_name)
+    if(cleanse == True):
+        os.system("./cleanse.sh")
 
 __main__(args);

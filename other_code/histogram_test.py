@@ -4,16 +4,16 @@ from subprocess import call
 import numpy as np
 import matplotlib.pyplot as plt
 
-args = [0.6, 0.2, 0.2, 11, 0.2]
+args = [4, 1, 0.2, .2, 60, 0.2]
 
 counts = [150, 0, 0, 0, 275, 150, 100, 75, 110, 110, 100, 110, 100, 120, 110, 150, 130, 75, 150, 100, 50, 50, 0, 20, 20]
 
-sim_time      = "4"
-back_time     = str(args[0])
-r0            = str(args[1])
-light_r_ratio = str(args[2])
-mass          = str(args[3])
-mass_ratio    = str(args[4])
+sim_time      = str(args[0])
+back_time     = str(args[1])
+r0            = str(args[2])
+light_r_ratio = str(args[3])
+mass          = str(args[4])
+mass_ratio    = str(args[5])
 
 #print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
 run_nbody = True
@@ -27,22 +27,6 @@ data2 = "Orphan_Data_September_2014.hist"
 data = "data.hist"
 blank = "none.hist"
 #######################################################################
-
-if(run_nbody == True):
-    os.chdir("../")
-    os.system("rm -r nbody_test")
-    os.system("mkdir nbody_test")
-    os.chdir("nbody_test")
-    os.system("cmake -DCMAKE_BUILD_TYPE=Release  -DNBODY_GL=ON -DBOINC_APPLICATION=OFF -DSEPARATION=OFF -DNBODY_OPENMP=ON    ~/Desktop/research/milkywayathome_client/")
-    os.system("make -j ")
-    os.chdir("../")
-    os.system("~/Desktop/research/nbody_test/bin/milkyway_nbody \
-        -f ~/Desktop/research/lua/EMD_20k_isotropic_1_54.lua \
-        -z ~/Desktop/research/data_testing/histograms/" + histogram + " \
-        -n 8 -x -e 27744245 -i "+ (sim_time) + " " + back_time + " " + r0 + " " + light_r_ratio + " " + mass + " " + mass_ratio )
-    os.chdir("data_testing")
-    
-
 
 if(make_data_hist == True):
     g = open("histograms/" + data, 'w')
