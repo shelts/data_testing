@@ -26,7 +26,7 @@ def __main__(args):
 
     print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
     
-    number_of_components = 2
+    number_of_components = 1
     parse = True
     #     CHOOSE YOUR TESTS     #
     output = True
@@ -50,9 +50,9 @@ def __main__(args):
         r_l = ( r0 )
         m_d = ( mass * (1.0 - mass_ratio) )
         m_l = ( mass * mass_ratio )
-        
-        masspl   = m_l / (0.5 * Nb);
-        masspd   = m_d / (0.5 * Nb);
+        print(m_d, m_l)
+        masspd  = (mass) / (Nb);
+        masspl  = (mass) / (Nb);
         
         
     #for one component

@@ -245,7 +245,7 @@ double potential_func( struct bodies * b, double * args, int N, double * cm)
         mass_dark = mass_d;
         pot += -mass * (mass_light/sqrt(sqr(r) + sqr(rscale_l)) +  mass_dark/sqrt(sqr(r) + sqr(rscale_d)) );
     }
-    return pot/2;
+    return pot / 2.0;
 }
 
 

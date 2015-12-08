@@ -236,3 +236,1586 @@ WARNING: Error during initialization
 "force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
 "force.gnuplot", line 12: No data in plot
 
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_0gy.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: No data in plot
+
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_0gy.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: No data in plot
+
+"vel_binned.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_0gy.dat"
+"vel_binned.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_vel.dat"
+"vel_binned.gnuplot", line 12: No data in plot
+
+"vel_vs_r.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/actual/light_matter_velocity_dist_0gy.dat"
+"vel_vs_r.gnuplot", line 12: No data in plot
+
+"vel_stability.gnuplot", line 13: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_0gy.dat"
+"vel_stability.gnuplot", line 13: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_theory_vel_bins.dat"
+"vel_stability.gnuplot", line 13: No data in plot
+
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_0gy.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: No data in plot
+
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_0gy.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"vel_vs_r.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 22: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 32: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 36: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 42: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 46: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 52: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 56: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 66: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+
+
+
+
+
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"stability_rad.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_0gy.dat"
+"stability_rad.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
+"stability_rad.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
+"stability_rad.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
+"stability_rad.gnuplot", line 12: No data in plot
+
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_0gy.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"stability_phi.gnuplot", line 12: No data in plot
+
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_0gy.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"stability_theta.gnuplot", line 12: No data in plot
+
+"vel_binned.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_0gy.dat"
+"vel_binned.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_vel.dat"
+"vel_binned.gnuplot", line 12: No data in plot
+
+"vel_vs_r.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/actual/light_matter_velocity_dist_0gy.dat"
+"vel_vs_r.gnuplot", line 12: No data in plot
+
+"vel_stability.gnuplot", line 13: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_0gy.dat"
+"vel_stability.gnuplot", line 13: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_theory_vel_bins.dat"
+"vel_stability.gnuplot", line 13: No data in plot
+
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_0gy.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+"vel_stability_phi.gnuplot", line 12: No data in plot
+
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_0gy.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+"vel_stability_theta.gnuplot", line 12: No data in plot
+
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+"stability_rad.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_rad.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 36: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 46: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 56: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 66: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+set set multiplot layout 4,4
+    ^
+"stability_rad.gnuplot", line 10: Unrecognized option.  See 'help set'.
+
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 36: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 46: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 56: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 66: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+set set multiplot layout 4,4
+    ^
+"stability_rad.gnuplot", line 12: Unrecognized option.  See 'help set'.
+
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 36: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 46: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 56: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 66: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+
+set set multiplot layout 4,4
+    ^
+"stability_rad.gnuplot", line 10: Unrecognized option.  See 'help set'.
+
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 36: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 46: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 56: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 66: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_vs_r.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_phi.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 12: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 16: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 20: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 26: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 30: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 34: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 40: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 44: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 48: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 54: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 58: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 62: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 68: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 72: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 76: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 82: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 86: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 90: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 96: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 100: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 104: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 110: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 114: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"vel_stability_theta.gnuplot", line 118: warning: Skipping data file with no valid points
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/pots.dat"
+"pots.gnuplot", line 11: No data in plot
+
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/den.dat"
+"den.gnuplot", line 12: No data in plot
+
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/rotation.dat"
+"rotation.gnuplot", line 12: No data in plot
+
+"force.gnuplot", line 12: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/theory/force.dat"
+"force.gnuplot", line 12: No data in plot
+
+  File "./stability_plots.py", line 49
+    if(plot_dark == True):
+    ^
+IndentationError: unexpected indent
+Cannot open load file 'stability_rad.gnuplot'
+"stability_rad.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_phi.gnuplot'
+"stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_theta.gnuplot'
+"stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_vs_r.gnuplot'
+"vel_vs_r.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability.gnuplot'
+"vel_stability.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_phi.gnuplot'
+"vel_stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_theta.gnuplot'
+"vel_stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘stability_rad.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_vs_r.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+  File "./stability_plots.py", line 61
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    ^
+IndentationError: unexpected indent
+Cannot open load file 'stability_rad.gnuplot'
+"stability_rad.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_phi.gnuplot'
+"stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_theta.gnuplot'
+"stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_vs_r.gnuplot'
+"vel_vs_r.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability.gnuplot'
+"vel_stability.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_phi.gnuplot'
+"vel_stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_theta.gnuplot'
+"vel_stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘stability_rad.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_vs_r.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+  File "./stability_plots.py", line 61
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    ^
+IndentationError: unexpected indent
+Cannot open load file 'stability_rad.gnuplot'
+"stability_rad.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_phi.gnuplot'
+"stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_theta.gnuplot'
+"stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_vs_r.gnuplot'
+"vel_vs_r.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability.gnuplot'
+"vel_stability.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_phi.gnuplot'
+"vel_stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_theta.gnuplot'
+"vel_stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘stability_rad.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_vs_r.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+  File "./stability_plots.py", line 61
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    ^
+IndentationError: unexpected indent
+Cannot open load file 'stability_rad.gnuplot'
+"stability_rad.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_phi.gnuplot'
+"stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_theta.gnuplot'
+"stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_vs_r.gnuplot'
+"vel_vs_r.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability.gnuplot'
+"vel_stability.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_phi.gnuplot'
+"vel_stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_theta.gnuplot'
+"vel_stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_vs_r.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+  File "./stability_plots.py", line 61
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    ^
+IndentationError: unexpected indent
+Cannot open load file 'stability_rad.gnuplot'
+"stability_rad.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_phi.gnuplot'
+"stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'stability_theta.gnuplot'
+"stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_vs_r.gnuplot'
+"vel_vs_r.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability.gnuplot'
+"vel_stability.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_phi.gnuplot'
+"vel_stability_phi.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'vel_stability_theta.gnuplot'
+"vel_stability_theta.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_vs_r.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_phi.gnuplot’: No such file or directory
+rm: cannot remove ‘vel_stability_theta.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory

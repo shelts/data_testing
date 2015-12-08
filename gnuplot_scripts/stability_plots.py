@@ -3,12 +3,12 @@ import os
 
 outputs = [ "0", "0p25", "0p50", "0p75", "1", "2", "3", "4"]
 sim_time = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
-titles   = [ "0", ".25" , ".5" , ".75" , "1", "2", "3", "4"]
+titles   = [ "0.0", "0.25" , "0.5" , "0.75" , "1.0", "2.0", "3.0", "4.0"]
 N        = 8
 M        = 0
-plot_dark = True
+plot_dark = False
 plot_light = True
-plot_both = True
+plot_both = False
 plot_theory = True
 if(plot_light == True):
     print("plotting light")
@@ -25,17 +25,36 @@ light      = "~/Desktop/research/data_testing/binned_data/light_matter_bins_"
 dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
 both       = "~/Desktop/research/data_testing/binned_data/both_matter_bins_"
 
+###
+f = open('stability_rad_multiplot.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg size 6000,2000\n")
+f.write("set key off\n")
+f.write("set ylabel 'counts'\n")
+f.write("set xlabel 'radius (kpc)'\n")
+f.write("set xrange[0:3]\n")
+f.write("set yrange[0:6500]\n\n\n")
 
-
+f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_multiplot.jpeg\" \n")
+f.write("set multiplot layout 2,4 rowsfirst\n")
+for i in range(M, N):
+    if(plot_light == True):
+        p = light + sim_time[i] + "gy.dat"
+        f.write("set title '" + titles[i] + "Gy \n")
+        f.write("plot '" + p + "' using 2:1  with boxes, '" + theory_den + "' using 1:3 with lines title 'light'\n\n") 
+        
+f.write("unset multiplot \n")
+f.close()
+###
 
 f = open('stability_rad.gnuplot', 'w')
 f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 f.write("set xrange[0:10]\n")
-f.write("set yrange[0:3000]\n\n\n")
+f.write("set yrange[0:6500]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -281,7 +300,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'vel (km/s)'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 f.write("set xrange[0:15]\n")
 f.write("set yrange[0:6]\n\n\n")
 
@@ -323,7 +342,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'vel (km/s)'\n")
+f.write("set xlabel 'velocity (km/s)'\n")
 f.write("set xrange[0:1]\n")
 #f.write("set yrange[0:5000]\n")
 f.write("set style fill transparent solid 0.2\n\n\n")
@@ -359,7 +378,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'pot'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 #f.write("set xrange[0:10]\n")
 f.write("set yrange[-50000:0]\n\n\n")
 
@@ -377,7 +396,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'den'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 f.write("set xrange[0:100]\n")
 f.write("set yrange[0:10]\n\n\n")
 if(plot_theory == True):
@@ -400,7 +419,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'vel'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 f.write("set xrange[0:500]\n")
 f.write("set yrange[0:400]\n\n\n")
 if(plot_theory == True):
@@ -424,7 +443,7 @@ f.write("reset\n")
 f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'force'\n")
-f.write("set xlabel 'radius (Kpc)'\n")
+f.write("set xlabel 'radius (kpc)'\n")
 f.write("set xrange[0:1000]\n")
 f.write("set yrange[-500:1]\n\n\n")
 if(plot_theory == True):

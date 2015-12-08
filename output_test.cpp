@@ -414,10 +414,11 @@ void single_density_theory(double bin_width, double * args)
     double masspl   = args[4]; 
     double masspd   = args[5];
     
+    
     double w = 0.0;
     double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
     double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
-    double pi= 4.0 * atan(1.0);
+    double pi = 4.0 * atan(1.0);
     
     double de, de2, de3;
     FILE * rho;
