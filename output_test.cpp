@@ -647,7 +647,7 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     
     s= string("actual/light_matter_density_"+extension+".dat");
     dens.open(s);
-    for(int i=0;i<Nl;i++)
+    for(int i = 0; i < Nl; i++)
     {
         r[i+Nd] = rl[i];
         dens<<rl[i]<<endl;

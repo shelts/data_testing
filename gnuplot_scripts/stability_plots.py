@@ -4,11 +4,11 @@ import os
 outputs = [ "0", "0p25", "0p50", "0p75", "1", "2", "3", "4"]
 sim_time = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 titles   = [ "0.0", "0.25" , "0.5" , "0.75" , "1.0", "2.0", "3.0", "4.0"]
-N        = 8
+N        = 1
 M        = 0
-plot_dark = False
+plot_dark = True
 plot_light = True
-plot_both = False
+plot_both = True
 plot_theory = True
 if(plot_light == True):
     print("plotting light")
@@ -32,7 +32,7 @@ f.write("set terminal jpeg size 6000,2000\n")
 f.write("set key off\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:3]\n")
+f.write("set xrange[0:0.05]\n")
 f.write("set yrange[0:6500]\n\n\n")
 
 f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_multiplot.jpeg\" \n")

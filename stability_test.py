@@ -8,23 +8,23 @@ args = sys.argv;
 #args = [1, 0.2, 0.2, 11, 0.2]
 def __main__(args):
     back_time     = float(args[1])
-    r0            = float(args[2])
-    light_r_ratio = float(args[3]) 
-    mass          = float(args[4])
+    r_l           = float(args[2])
+    rad_ratio     = float(args[3]) 
+    m_l           = float(args[4])
     mass_ratio    = float(args[5])
 
 
     sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
     #sim_time      = [ "0", "4"]
-    N             = 8
+    N             = 1
     M             = 0
     #back_time     = (args[0])
-    #r0            = (args[1])
-    #light_r_ratio = (args[2])
-    #mass          = (args[3])
+    #r_l            = (args[1])
+    #rad_ratio = (args[2])
+    #m_l          = (args[3])
     #mass_ratio    = (args[4])
 
-    print "parameters: ", back_time, r0, light_r_ratio, mass, mass_ratio
+    print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
     
     number_of_components = 1
     parse = True
@@ -46,22 +46,24 @@ def __main__(args):
     #for two component
     if(number_of_components == 2):    
         #Proper paramaters:
-        r_d = ( r0 / light_r_ratio )
-        r_l = ( r0 )
-        m_d = ( mass * (1.0 - mass_ratio) )
-        m_l = ( mass * mass_ratio )
+        dwarfMass = m_l / mass_ratio
+        rscale_t  = r_l / rad_ratio
+        
+        r_d = rscale_t  * (1.0 - rad_ratio)
+        m_d = dwarfMass * (1.0 - mass_ratio)
+        
         print(m_d, m_l)
-        masspd  = (mass) / (Nb);
-        masspl  = (mass) / (Nb);
+        masspd  = (m_d) / (0.5 * Nb);
+        masspl  = (m_l) / (0.5 * Nb);
         
         
     #for one component
     if(number_of_components == 1):
         #one component paramaters:
-        r_d = ( r0 / light_r_ratio )
-        r_l = 1.0
-        m_d = 0.0 #( mass * (1.0 - mass_ratio) )
-        m_l = 30.0
+        rscale_t  = r_l / rad_ratio
+        
+        r_d = rscale_t  * (1.0 - rad_ratio)
+        m_d = 0.0 
  
         masspd  = m_d / ( Nb);
         masspl  = m_l / ( Nb);
