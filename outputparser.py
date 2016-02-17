@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 
 args = sys.argv;
 
-
-
 try:
     PATH = args[1];
 except:

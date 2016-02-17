@@ -3,8 +3,11 @@ import os
 from subprocess import call
 import sys
 args = sys.argv;
-
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                #/# # # # # # # # # # # # # # \#
+                #          Control Panel       #
+                #\# # # # # # # # # # # # # # /#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #args = [1, 0.2, 0.2, 11, 0.2]
 back_time     = float(args[1])
 r_l           = float(args[2])
@@ -39,7 +42,7 @@ make_plots = True
 save_run = False
 folder_name = "orphan_parameters_2comp"
 cleanse = False #replace the directories
-#######################################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 Nb  = 20000
 
 #for two component
@@ -76,7 +79,11 @@ mass_d   = str( m_d )
 mass_per_particle_light = str( masspl )
 mass_per_particle_dark  = str( masspd )
 
-#######################################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                #/# # # # # # # # # # # # # # \#
+                #          Engine Room         #
+                #\# # # # # # # # # # # # # # /#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 
 if(parse == True):
