@@ -85,9 +85,9 @@ def __main__(arg):
     
     filename = args[2];
     
-    np.savetxt('./raw_data/light_matter_'+filename+'.dat', zip(light_x,light_y, light_z,light_vx, light_vy, light_vz), delimiter='\t')
+    np.savetxt('./raw_data/light_matter_'+ filename +'.dat', zip(light_x, light_y, light_z,light_vx, light_vy, light_vz), delimiter='\t')
     
-    np.savetxt('./raw_data/dark_matter_'+filename+'.dat', zip(dark_x,dark_y, dark_z,dark_vx, dark_vy, dark_vz), delimiter='\t')
+    np.savetxt('./raw_data/dark_matter_'+ filename +'.dat', zip(dark_x, dark_y, dark_z,dark_vx, dark_vy, dark_vz), delimiter='\t')
 
     
     
