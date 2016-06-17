@@ -16,8 +16,8 @@ m_l           = float(args[4])
 mass_ratio    = float(args[5])
 
 
-sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
-#sim_time      = [ "0", "4"]
+#sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
+sim_time      = [ "0", "2"]
 N             = 1
 M             = 0
 #back_time     = (args[0])
@@ -28,7 +28,7 @@ M             = 0
 
 print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
 
-number_of_components = 1
+number_of_components = 2
 parse = True
 #     CHOOSE YOUR TESTS     #
 output = True
@@ -54,7 +54,13 @@ if(number_of_components == 2):
     r_d = rscale_t  * (1.0 - rad_ratio)
     m_d = dwarfMass * (1.0 - mass_ratio)
     
+    r_l = 0.175
+    r_d = 0.175
+    m_l = 12
+    m_d = 1e-10
+    
     print(m_d, m_l)
+    print(r_d, r_l)
     masspd  = (m_d) / (0.5 * Nb);
     masspl  = (m_l) / (0.5 * Nb);
     

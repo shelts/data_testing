@@ -24,6 +24,7 @@ using namespace std;
     double x;
     double y;
     double z;
+    double l, b, r;
     double vx, vy, vz;
     double mass;
     int type;
@@ -42,7 +43,7 @@ int get_size(int type, string extension)
     /*getting the length of the data set*/
     ifstream length;
     length.open (s);
-    while(length>>datax>>datax>>datax>>datax>>datax>>datax)
+    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
     //       cout<<datax<<endl;
         N++;
@@ -57,19 +58,24 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
 {
   
     string s;
-    double datax,datay,dataz,datavx,datavy,datavz;
+    double datax,datay,dataz;
+    double datal, datab, datar;
+    double datavx,datavy,datavz;
     int i = 0;
     int N = Nd + Nl;
-    s = string("raw_data/dark_matter_"+extension+".dat");
+    s = string("raw_data/dark_matter_" + extension + ".dat");
     ifstream data;
     data.open (s);
     int type_dark = 1;
     int type_light = 0;
-    while(data>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
     {
         b[i].x    = datax;
         b[i].y    = datay;
         b[i].z    = dataz;
+        b[i].l    = datal;
+        b[i].b    = datab;
+        b[i].r    = datar;
         b[i].vx   = datavx;
         b[i].vy   = datavy;
         b[i].vz   = datavz;
@@ -79,14 +85,17 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
     }
     data.close();
 
-    s = string("raw_data/light_matter_"+extension+".dat");
+    s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data2;
     data2.open (s);
-    while(data2>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
+    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
     {
         b[i].x    = datax;
         b[i].y    = datay;
         b[i].z    = dataz;
+        b[i].l    = datal;
+        b[i].b    = datab;
+        b[i].r    = datar;
         b[i].vx   = datavx;
         b[i].vy   = datavy;
         b[i].vz   = datavz;

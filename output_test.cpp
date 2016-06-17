@@ -50,7 +50,7 @@ int get_size(int type, string extension)
  /*getting the length of the data set*/
    ifstream length;
    length.open (s);
-   while(length>>datax>>datax>>datax>>datax>>datax>>datax)
+   while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
 //       cout<<datax<<endl;
       N++;
@@ -66,13 +66,15 @@ void get_data(int N, double * x,double * y, double * z, double * vx,double * vy,
     string s;
     if(type == 0){s = string("raw_data/light_matter_"+extension+".dat");}
     else if(type == 1){s = string("raw_data/dark_matter_"+extension+".dat");}
-    double datax,datay,dataz,datavx,datavy,datavz;
+    double datax,datay,dataz;
+    double datal, datab, datar;
+    double datavx,datavy,datavz;
     int l = 0;
 
     ifstream data;
     data.open (s);
     /*reading in data*/
-    while(data>>datax>>datay>>dataz>>datavx>>datavy>>datavz)
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
     {
         x[l]  = datax;
         y[l]  = datay;
@@ -398,7 +400,7 @@ void get_radii(int N, double * x, double * y, double * z, double * r, double * c
     
     for(int i=0;i<N;i++)
     {
-        r[i]= sqrt( sqrdif(cm[0], x[i]) + sqrdif(cm[1], y[i]) + sqrdif(cm[2], z[i]) );
+        r[i] = sqrt( sqrdif(cm[0], x[i]) + sqrdif(cm[1], y[i]) + sqrdif(cm[2], z[i]) );
     }
     
 }
@@ -428,7 +430,7 @@ void single_density_theory(double bin_width, double * args)
         de2 = 4.0 * pi * w * w * density(w, light) * bin_width / masspl;
         de3 = 4.0 * pi * w * w * density(w, dark)  * bin_width / masspd;
         de = de2 + de3;
-        w += 0.01;
+        w += 0.001;
         fprintf(rho, "%f \t %f \t %f\t%f\n", w, de, de2, de3);
             
         if( w > 5 * (rscale_l + rscale_d)){break;}
@@ -479,8 +481,9 @@ void angle_theory( double bin_width, double * args)
     fclose(ph);
 }
 
-void vel_theory(double bin_width, double * args)
+void vel_theory(double bin_width, double * args, int Nd, int Nl)
 {
+    //this function is incorect
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
@@ -492,12 +495,12 @@ void vel_theory(double bin_width, double * args)
     double g;
     double pi = 4.0 * atan(1.0);
     double n;
-    
+    n = Nd + Nl;
     FILE * vel;
     vel= fopen("./theory/theory_vel.dat", "w");
     while(1)
     {
-        g = sqr(q) * seventhhalfs(1.0 - sqr(q)) * 20000.0 * 0.01 * 4.0 * pi;
+        g = sqr(q) * seventhhalfs(1.0 - sqr(q)) * n * bin_width * 4.0 * pi;
         q += 0.001;
         fprintf(vel, "%f \t %f\n", q, g);
             
@@ -508,6 +511,9 @@ void vel_theory(double bin_width, double * args)
 
 void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
 {
+    //This uses a single component potential. The theory line will not work if the input is a 
+    //two component dwarf with both components the same (simulating a single component)
+    //one component must be set to zero other.
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
@@ -515,8 +521,8 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     double masspl   = args[4]; 
     double masspd   = args[5];
     
-    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
-    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
+    double light[4] = {rscale_l, rscale_d, mass_l, mass_d};
+    double dark[4]  = {rscale_l, rscale_d, mass_l, mass_d};
     
     double v_l[Nl];
     double v_d[Nd];
@@ -912,7 +918,7 @@ int main (int argc, char * const argv[])
     
     printf(".");//theory -- vel curves
     
-    vel_theory(bin_width, args);
+    vel_theory(bin_width, args, Nd, Nl);
     
     printf(".");//theory -- from distribution func
     vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);

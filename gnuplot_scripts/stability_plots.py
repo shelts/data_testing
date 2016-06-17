@@ -4,6 +4,10 @@ import os
 outputs = [ "0", "0p25", "0p50", "0p75", "1", "2", "3", "4"]
 sim_time = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 titles   = [ "0.0", "0.25" , "0.5" , "0.75" , "1.0", "2.0", "3.0", "4.0"]
+
+outputs = [ "0", "2"]
+sim_time = [ "0", "2"]
+titles   = [ "0.0", "2"]
 N        = 1
 M        = 0
 plot_dark = True
@@ -32,7 +36,7 @@ f.write("set terminal jpeg size 6000,2000\n")
 f.write("set key off\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:0.05]\n")
+f.write("set xrange[0:0.1]\n")
 f.write("set yrange[0:6500]\n\n\n")
 
 f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_multiplot.jpeg\" \n")
@@ -53,8 +57,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:10]\n")
-f.write("set yrange[0:6500]\n\n\n")
+f.write("set xrange[0:1]\n")
+f.write("set yrange[0:2500]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -177,8 +181,8 @@ f.write("set terminal jpeg\n")
 f.write("set key off\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'vel (km/s)'\n")
-f.write("set xrange[0:10]\n")
-f.write("set yrange[0:1500]\n")
+f.write("set xrange[0:20]\n")
+f.write("set yrange[0:500]\n")
 f.write("set style fill transparent solid 0.2\n\n\n")
 
 
@@ -331,42 +335,42 @@ f.close()
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-##VELOCITY DISTRIBUTION
-##This is the one without theory
-theory   = "~/Desktop/research/data_testing/theory/theory_vel.dat"
-light = "~/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_"
-dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_norm_vel_bins_"
+###VELOCITY DISTRIBUTION
+###This is the one without theory
+#theory   = "~/Desktop/research/data_testing/theory/theory_vel.dat"
+#light = "~/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_"
+#dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_norm_vel_bins_"
 
-f = open('vel_binned.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'velocity (km/s)'\n")
-f.write("set xrange[0:1]\n")
-#f.write("set yrange[0:5000]\n")
-f.write("set style fill transparent solid 0.2\n\n\n")
+#f = open('vel_binned.gnuplot', 'w')
+#f.write("reset\n")
+#f.write("set terminal jpeg\n")
+#f.write("set key on\n")
+#f.write("set ylabel 'counts'\n")
+#f.write("set xlabel 'velocity (km/s)'\n")
+#f.write("set xrange[0:1]\n")
+#f.write("set yrange[0:400]\n")
+#f.write("set style fill transparent solid 0.2\n\n\n")
 
 
-for i in range(M, N):
-    if(plot_light == True):
-        p = light + sim_time[i] + "gy.dat"
-        f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_light_" + outputs[i] + "gy.jpeg\" \n")
-        f.write("set title 'Histogram of Light Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'light dist'  lw 2   \n\n", )
+#for i in range(M, N):
+    #if(plot_light == True):
+        #p = light + sim_time[i] + "gy.dat"
+        #f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_light_" + outputs[i] + "gy.jpeg\" \n")
+        #f.write("set title 'Histogram of Light Matter Velocity Distribution After " + titles[i] + "Gy' \n")
+        #f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'light dist'  lw 2   \n\n", )
 
-    if(plot_dark == True):
-        p = dark + sim_time[i] + "gy.dat"
-        f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_dark_" + outputs[i] + "gy.jpeg\" \n")
-        f.write("set title 'Histogram of Dark Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'dark dist'  lw 2   \n\n") 
+    #if(plot_dark == True):
+        #p = dark + sim_time[i] + "gy.dat"
+        #f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_dark_" + outputs[i] + "gy.jpeg\" \n")
+        #f.write("set title 'Histogram of Dark Matter Velocity Distribution After " + titles[i] + "Gy' \n")
+        #f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'dark dist'  lw 2   \n\n") 
         
 
 
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    #f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    #f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
 
-f.close()
+#f.close()
 
 
 
