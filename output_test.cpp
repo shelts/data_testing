@@ -140,11 +140,6 @@ double potential( double r, double * args)
     return (potential_result);
 }
 
-double test(double x, double * args, double * args2)
-{
- double func = exp(x) + sin(x) + x;
- return func;
-}
 
 double get_x()
 {
@@ -377,34 +372,6 @@ void angle_theory( double bin_width, double * args)
     }
     fclose(th);
     fclose(ph);
-}
-
-void vel_theory(double bin_width, double * args, int Nd, int Nl)
-{
-    //this function is incorect
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    double masspl   = args[4]; 
-    double masspd   = args[5];
-    
-    double q = 0.0;
-    double g;
-    double pi = 4.0 * atan(1.0);
-    double n;
-    n = Nd + Nl;
-    FILE * vel;
-    vel= fopen("./theory/theory_vel.dat", "w");
-    while(1)
-    {
-        g = sqr(q) * seventhhalfs(1.0 - sqr(q)) * n * bin_width * 4.0 * pi;
-        q += 0.001;
-        fprintf(vel, "%f \t %f\n", q, g);
-            
-        if( q > 1.0){break;}
-    }
-    fclose(vel);
 }
 
 void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
