@@ -160,12 +160,6 @@ double get_x()
     return x;
 }
 
-double nemo_vel(double r)
-{
-    double x = get_x();
-    double v = x * sqrt(2.0) * pow( (1.0 + sqr(r)) , -0.25);
-    return v;
-}
 
 double distribution(double mass, double r_scale, double v, double r, double * args)
 {
@@ -216,102 +210,6 @@ void com(double * cm, double * xd, double * yd, double * zd,  int Nd, double * x
     
 }
 
-void comv(double * cmv, double * vxd, double * vyd, double * vzd,  int Nd, double * vxl, double * vyl, double * vzl, int Nl, double masspd, double masspl, double mass)
-{
-    double cm_vx = 0.0;
-    double cm_vy = 0.0;
-    double cm_vz = 0.0;
-    
-    for(int i = 0; i < Nd; i++)
-    {
-        cm_vx += masspd * vxd[i];
-        cm_vy += masspd * vyd[i];
-        cm_vz += masspd * vzd[i];
-        
-    }
-    
-    for(int i = 0; i < Nl; i++)
-    {
-        cm_vx += masspl * vxl[i];
-        cm_vy += masspl * vyl[i];
-        cm_vz += masspl * vzl[i];
-    }
-    
-    cmv[0] = cm_vx * inv(mass);
-    cmv[1] = cm_vy * inv(mass);
-    cmv[2] = cm_vz * inv(mass);
-    
-}
-
-static double gauss_quad(double (*rootFunc)(double, double *, double *), double * comp_args, double * args, double lower, double upper )
-{
-    double Ng,hg,lowerg, upperg;
-    double intv;
-    double coef1,coef2;//parameters for gaussian quad
-    double c1, c2, c3;
-    double x1, x2, x3;
-    double x1n, x2n, x3n;
-    
-    //this should be from infinity. But the dis func should be negligble here.
-    double a = lower; 
-    double b = upper;
-
-    intv = 0;//initial value of integral
-    Ng = 1000.0;//integral resolution
-    hg = (b-a)/(Ng);
-
-    
-    lowerg = lower;
-    upperg = lowerg + hg; 
-
-    coef2 = (lowerg+upperg)/2.0;//initializes the first coeff to change the function limits
-    coef1 = (upperg-lowerg)/2.0;//initializes the second coeff to change the function limits
-    c1 = 5.0/9.0;
-    c2 = 8.0/9.0;
-    c3 = 5.0/9.0;
-    x1 = -sqrt(3.0/5.0);
-    x2 = 0.0;
-    x3 = sqrt(3.0/5.0);
-    x1n = (coef1 * x1 + coef2);
-    x2n = (coef1 * x2 + coef2);
-    x3n = (coef1 * x3 + coef2);
-    int counter=0;
-    while (1)
-    {
-                //gauss quad
-        intv = intv +  c1 * (*rootFunc)(x1n, comp_args, args) * coef1 +
-                       c2 * (*rootFunc)(x2n, comp_args, args) * coef1 + 
-                       c3 * (*rootFunc)(x3n, comp_args, args) * coef1;
-
-        lowerg = upperg;
-        upperg = upperg + hg;
-        coef2  = (lowerg + upperg)/2.0;//initializes the first coeff to change the function limits
-        coef1  = (upperg - lowerg)/2.0;
-
-        x1n = ((coef1) * x1 + coef2);
-        x2n = ((coef1) * x2 + coef2);
-        x3n = ((coef1) * x3 + coef2);
-
-        if(upper > lower)
-        {
-            if(lowerg >= upper)//loop termination clause
-            {
-                break;
-            }
-        }
-        else if(lower > upper)
-        {
-            if(lowerg <= upper)//loop termination clause
-            {
-                break;
-            }
-        }
-        
-        
-        counter++;
-    }
-    return intv;
-}
 
 /*this is a binning routine, makes a histogram*/
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
@@ -511,9 +409,7 @@ void vel_theory(double bin_width, double * args, int Nd, int Nl)
 
 void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
 {
-    //This uses a single component potential. The theory line will not work if the input is a 
-    //two component dwarf with both components the same (simulating a single component)
-    //one component must be set to zero other.
+    
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
@@ -583,49 +479,6 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     
 }
 
-void nemo_vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
-{
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    double masspl   = args[4]; 
-    double masspd   = args[5];
-    
-    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
-    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
-    
-    double v_l[Nl];
-    double v_d[Nd];
-    double v, u, f, r;
-    double v_esc, v_mx;
-    double fmax;
-    
-    for(int i = 0; i < Nl; i++)
-    {
-        r = r_l[i];
-        v_l[i] = nemo_vel(r);
-        v_l[i] *= 0.977813107;
-        
-    }
-    
-    for(int i = 0; i < Nd; i++)
-    {
-        r = r_d[i];
-        v_d[i] = nemo_vel(r);
-        v_d[i] *= 0.977813107;
-    }
-    
-    string s;
-    int type = 0;
-    s = string("binned_data/dark_matter_theory_nemo_vel_bins.dat");
-    binner(number_of_bins, bin_width, v_d, Nd, s, extension, type);
-    s = string("binned_data/light_matter_theory_nemo_vel_bins.dat");
-    binner(number_of_bins, bin_width, v_l, Nl, s, extension, type);
-    
-    
-}
-
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // actual data checking function
 
@@ -651,7 +504,7 @@ void radial_distribution(string extension, int Nd, int Nl, double * rd, double *
     }
     dens.close();
     
-    s= string("actual/light_matter_density_"+extension+".dat");
+    s = string("actual/light_matter_density_"+extension+".dat");
     dens.open(s);
     for(int i = 0; i < Nl; i++)
     {
@@ -872,9 +725,6 @@ int main (int argc, char * const argv[])
     double cmv[3] = {0.0, 0.0, 0.0};
     double mass;
     
-//     double tst1 = gauss_quad(test, args, args, 0.0, 5.0 );
-//     double tst2 = gauss_quad(test, args, args,  5.0, 0.0);
-//     printf("test = %f  %f\n", tst1, tst2);
     
     printf("running tests");
     /*getting the positional and velocity data*/
@@ -885,7 +735,7 @@ int main (int argc, char * const argv[])
     /*get center of mass*/
     mass = mass_l + mass_d;
     com(cm, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
-    comv(cmv, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
+    com(cmv, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
 
     /*getting the radii and vel vectors*/
     get_radii(Nd, dx, dy, dz, rd, cm);
