@@ -646,8 +646,6 @@ void vel_dis(string extension, double * args, int Nl, int Nd, double * vel_l, do
   
 }
 
-
-
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // main function calls
 int main (int argc, char * const argv[])

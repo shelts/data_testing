@@ -127,24 +127,6 @@ void com(struct bodies * b, int N, double * cm, double mass)
 }
   
   
-void comv(struct bodies* b, int N, double * cmv, double mass)
-{
-    double cm_vx = 0.0;
-    double cm_vy = 0.0;
-    double cm_vz = 0.0;
-    
-    for(int i = 0; i < N; i++)
-    {
-        cm_vx += b[i].mass * b[i].vx;
-        cm_vy += b[i].mass * b[i].vy;
-        cm_vz += b[i].mass * b[i].vz;
-    }
-    
-    cmv[0] = cm_vx * inv(mass);
-    cmv[1] = cm_vy * inv(mass);
-    cmv[2] = cm_vz * inv(mass);
-}
-  
 double mass_enc(double r, double rscale, double mass)
 {
     double rcube = r * r * r;
@@ -287,7 +269,7 @@ int main (int argc, char * const argv[])
 
     get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle);
     com(b, N, cm, mass);
-    comv(b, N, cmv, mass);
+    com(b, N, cmv, mass);
     
     printf("calculating virial ratio");
     /*calculates kinetic energy relative to centor of mass*/
