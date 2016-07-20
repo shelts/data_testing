@@ -83,9 +83,9 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     double datavx,datavy,datavz, datam;
     int i = 0;
     int N = Nd + Nl;
-    s = string("raw_data/dark_matter_" + extension + ".dat");
+    s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data;
-    data.open (s);
+    data.open(s);
     int type_dark = 1;
     int type_light = 0;
     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
@@ -104,10 +104,9 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     }
     data.close();
 
-    s = string("raw_data/light_matter_" + extension + ".dat");
-    ifstream data2;
-    data2.open (s);
-    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
+    s = string("raw_data/dark_matter_" + extension + ".dat");
+    data.open(s);
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
         b[i].x    = datax;
         b[i].y    = datay;
@@ -121,7 +120,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].type = type_light;
         i++;
     }
-    data2.close();
+    data.close();
   
 }
 
@@ -215,6 +214,7 @@ void com(double * cm, double * cmv, struct bodies * b,  int N, double mass)
     cmv[0] = cmv_x * inv(mass);
     cmv[1] = cmv_y * inv(mass);
     cmv[2] = cmv_z * inv(mass);
+//     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
 }
 
 void com_correction(double * cm, double * cmv, struct bodies * b, int N)
@@ -224,7 +224,7 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N)
     {
         r_corrected = sqrt( sqrdif(cm[0], b[i].x)  + sqrdif(cm[1], b[i].y)  + sqrdif(cm[2], b[i].z) );
         v_corrected = sqrt( sqrdif(cm[0], b[i].vx) + sqrdif(cm[1], b[i].vy) + sqrdif(cm[2], b[i].vz) );
-        
+//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
         b[i].x -= cm[0];
         b[i].y -= cm[1];
         b[i].z -= cm[2];
@@ -235,6 +235,7 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N)
         
         b[i].r = r_corrected;
         b[i].v = v_corrected;
+//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
     }
     
 }
@@ -680,7 +681,6 @@ int main (int argc, char * const argv[])
     double mass = mass_l + mass_d;
     com(cm, cmv, b, N, mass);
     com_correction(cm, cmv, b, N);
-
     
     printf(".");//actual 
     rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
