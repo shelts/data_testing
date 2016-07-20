@@ -29,6 +29,20 @@ using namespace std;
 #define minusthreehalves(x) (inv(threehalves(x)) )
 #define minushalf(x) ( inv(sqrt(x)) )
 #define minusquarter(x) (inv( sqrt(sqrt(x))) )
+#define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
+
+  struct bodies
+  {
+    double x;
+    double y;
+    double z;
+    double r;
+    double vx, vy, vz, v;
+    double mass;
+    int type;
+  };
+
+
 
 double randDouble(double low, double high)
 {
@@ -50,7 +64,7 @@ int get_size(int type, string extension)
  /*getting the length of the data set*/
    ifstream length;
    length.open (s);
-   while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
+   while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
 //       cout<<datax<<endl;
       N++;
@@ -60,33 +74,87 @@ int get_size(int type, string extension)
    return N;
 }
 
-/*this actually gets the data and stores it*/
-void get_data(int N, double * x,double * y, double * z, double * vx,double * vy, double * vz, int type, string extension)
+void get_data(int Nd, int Nl, struct bodies * b, string extension)
 {
+  
     string s;
-    if(type == 0){s = string("raw_data/light_matter_"+extension+".dat");}
-    else if(type == 1){s = string("raw_data/dark_matter_"+extension+".dat");}
     double datax,datay,dataz;
     double datal, datab, datar;
-    double datavx,datavy,datavz;
-    int l = 0;
-
+    double datavx,datavy,datavz, datam;
+    int i = 0;
+    int N = Nd + Nl;
+    s = string("raw_data/dark_matter_" + extension + ".dat");
     ifstream data;
     data.open (s);
-    /*reading in data*/
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
+    int type_dark = 1;
+    int type_light = 0;
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
-        x[l]  = datax;
-        y[l]  = datay;
-        z[l]  = dataz;
-        vx[l] = datavx;
-        vy[l] = datavy;
-        vz[l] = datavz;
-
-        l = l + 1;
+        b[i].x    = datax;
+        b[i].y    = datay;
+        b[i].z    = dataz;
+        b[i].r    = in_quad(datax, datay, datay);
+        b[i].vx   = datavx;
+        b[i].vy   = datavy;
+        b[i].vz   = datavz;
+        b[i].v    = in_quad(datavx, datavy, datavy);
+        b[i].mass = datam;
+        b[i].type = type_dark;
+        i++;
     }
     data.close();
+
+    s = string("raw_data/light_matter_" + extension + ".dat");
+    ifstream data2;
+    data2.open (s);
+    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
+    {
+        b[i].x    = datax;
+        b[i].y    = datay;
+        b[i].z    = dataz;
+        b[i].r    = in_quad(datax, datay, datay);
+        b[i].vx   = datavx;
+        b[i].vy   = datavy;
+        b[i].vz   = datavz;
+        b[i].v    = in_quad(datavx, datavy, datavy);
+        b[i].mass = datam;
+        b[i].type = type_light;
+        i++;
+    }
+    data2.close();
+  
 }
+
+
+/*this actually gets the data and stores it*/
+// void get_data(int N, double * x,double * y, double * z, double * vx,double * vy, double * vz, int type, string extension)
+// {
+//     string s;
+//     if(type == 0){s = string("raw_data/light_matter_"+extension+".dat");}
+//     else if(type == 1){s = string("raw_data/dark_matter_"+extension+".dat");}
+//     double datax,datay,dataz;
+//     double datal, datab, datar;
+//     double datavx,datavy,datavz;
+//     int l = 0;
+// 
+//     ifstream data;
+//     data.open (s);
+//     /*reading in data*/
+//     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
+//     {
+//         x[l]  = datax;
+//         y[l]  = datay;
+//         z[l]  = dataz;
+//         vx[l] = datavx;
+//         vy[l] = datavy;
+//         vz[l] = datavz;
+// 
+//         l = l + 1;
+//     }
+//     data.close();
+// }
+
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory functions
 
@@ -111,6 +179,8 @@ double density(double r, double * args)
     return density_result;
 }
 
+
+//this isn't used
 double mass_enc(double r, double * args)
 {
     double rscale_l = args[0];
@@ -141,19 +211,19 @@ double potential( double r, double * args)
 }
 
 
-double get_x()
-{
-    double x = 0.0;
-    double y = 0.1;
-    double u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
-    while(y > sqr(x) * pow( (1.0 - sqr(x)), 3.5) )
-    {
-        x = randDouble(0.0, 1.0);
-        y = randDouble(0.0, 0.1);
-    }
-    
-    return x;
-}
+// double get_x()
+// {
+//     double x = 0.0;
+//     double y = 0.1;
+//     double u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
+//     while(y > sqr(x) * pow( (1.0 - sqr(x)), 3.5) )
+//     {
+//         x = randDouble(0.0, 1.0);
+//         y = randDouble(0.0, 0.1);
+//     }
+//     
+//     return x;
+// }
 
 
 double distribution(double mass, double r_scale, double v, double r, double * args)
@@ -178,33 +248,57 @@ double esc_vel(double r, double * args)
 }
 
 
-void com(double * cm, double * xd, double * yd, double * zd,  int Nd, double * xl, double * yl, double * zl, int Nl, double masspd, double masspl, double mass)
+void com(double * cm, double * cmv, struct bodies * b,  int N, double mass)
 {
     double cm_x = 0.0;
     double cm_y = 0.0;
     double cm_z = 0.0;
-    
-    for(int i = 0; i < Nd; i++)
+    double cmv_x = 0.0;
+    double cmv_y = 0.0;
+    double cmv_z = 0.0;
+
+    for(int i = 0; i < N; i++)
     {
-        cm_x += masspd * xd[i];
-        cm_y += masspd * yd[i];
-        cm_z += masspd * zd[i];
+        cm_x += b[i].mass * b[i].x;
+        cm_y += b[i].mass * b[i].y;
+        cm_z += b[i].mass * b[i].z;
         
+        cmv_x += b[i].mass * b[i].vx;
+        cmv_y += b[i].mass * b[i].vy;
+        cmv_z += b[i].mass * b[i].vz;
     }
     
-    for(int i = 0; i < Nl; i++)
-    {
-        cm_x += masspl * xl[i];
-        cm_y += masspl * yl[i];
-        cm_z += masspl * zl[i];
-    }
     
     cm[0] = cm_x * inv(mass);
     cm[1] = cm_y * inv(mass);
     cm[2] = cm_z * inv(mass);
     
+    cmv[0] = cmv_x * inv(mass);
+    cmv[1] = cmv_y * inv(mass);
+    cmv[2] = cmv_z * inv(mass);
 }
 
+void com_correction(double * cm, double * cmv, struct bodies * b, int N)
+{
+    double r_corrected, v_corrected;
+    for(int i = 0; i < N; i++)
+    {
+        r_corrected = sqrt( sqrdif(cm[0], b[i].x)  + sqrdif(cm[1], b[i].y)  + sqrdif(cm[2], b[i].z) );
+        v_corrected = sqrt( sqrdif(cm[0], b[i].vx) + sqrdif(cm[1], b[i].vy) + sqrdif(cm[2], b[i].vz) );
+        
+        b[i].x -= cm[0];
+        b[i].y -= cm[1];
+        b[i].z -= cm[2];
+        
+        b[i].vx -= cmv[0];
+        b[i].vy -= cmv[1];
+        b[i].vz -= cmv[2];
+        
+        b[i].r = r_corrected;
+        b[i].v = v_corrected;
+    }
+    
+}
 
 /*this is a binning routine, makes a histogram*/
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
@@ -288,15 +382,7 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     bin.close();
 }
 
-void get_radii(int N, double * x, double * y, double * z, double * r, double * cm)
-{
-    
-    for(int i=0;i<N;i++)
-    {
-        r[i] = sqrt( sqrdif(cm[0], x[i]) + sqrdif(cm[1], y[i]) + sqrdif(cm[2], z[i]) );
-    }
-    
-}
+
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory checking functions
@@ -397,7 +483,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     {
         r = r_l[i];
         v_esc = sqrt( 2.0 * fabs( potential(r, light) ));
-        v_mx = (2.0/3.0) * sqrt( fabs( potential(r, light) ));
+        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, light) ));
         fmax = distribution(mass_l, rscale_l, v_mx, r, light);
         while(1)
         {
@@ -418,7 +504,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     {
         r = r_d[i];
         v_esc = sqrt( 2.0 * fabs( potential(r, dark) ));
-        v_mx = (2.0/3.0) * sqrt( fabs( potential(r, dark) ));
+        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, dark) ));
         fmax = distribution(mass_d, rscale_d, v_mx, r, dark);
         while(1)
         {
@@ -449,202 +535,168 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // actual data checking function
 
-void radial_distribution(string extension, int Nd, int Nl, double * rd, double * rl, int number_of_bins, double bin_width, double * args)
+void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, int number_of_bins, double bin_width)
 {
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    double masspl   = args[4]; 
-    double masspd   = args[5];
     int type = 0;
-    string s;
-    s= string("actual/dark_matter_density_"+extension+".dat");
-    ofstream dens;
-    dens.open(s);
-    double r[Nd + Nl];
-    
-    for(int i = 0; i < Nd; i++)
+    string s1, s2;
+    s1 = string("actual/light_matter_velocity_dist_" + extension + ".dat");
+    s2 = string("actual/dark_matter_velocity_dist_" + extension + ".dat");
+    ofstream vel_l, vel_d;
+    vel_l.open(s1);
+    vel_d.open(s2);
+    int light = 1;
+    int dark = 0;
+    double r[Nd + Nl], v[Nd + Nl];
+    double rd[Nd], rl[Nl];
+    double vd[Nd], vl[Nl];
+    int counterl = 0;
+    int counterd = 0;
+    for(int i = 0; i < N; i++)
     {
-        dens<<rd[i]<<endl;
-        r[i] = rd[i];
+        
     }
-    dens.close();
     
-    s = string("actual/light_matter_density_"+extension+".dat");
-    dens.open(s);
-    for(int i = 0; i < Nl; i++)
+    
+    for(int i = 0; i < N; i++)
     {
-        r[i+Nd] = rl[i];
-        dens<<rl[i]<<endl;
+        r[i] = b[i].r; 
+        v[i] = b[i].v;
+        if(b[i].type == light)
+        {
+            vel_l << b[i].r << "\t" << b[i].v << endl;
+            rl[countl] = b[i].r;
+            vl[countl] = b[i].v;
+            countl++;
+        }
+        else
+        {
+            vel_d << b[i].r << "\t" << b[i].v << endl;
+            rl[countd] = b[i].r;
+            vd[countd] = b[i].v;
+            countd++;
+        }
+        
     }
-    dens.close();
+    vel_l.close();
+    vel_d.close();
     
-    
-    s = string("binned_data/both_matter_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, r, Nd + Nl, s, extension, type);
-    
-    s = string("binned_data/dark_matter_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, rd, Nd, s, extension, type);
-    
-    s = string("binned_data/light_matter_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, rl, Nl, s, extension, type);
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //radial distribution                                                                  //
+    s = string("binned_data/both_matter_bins_" + extension + ".dat");                      //
+    binner(number_of_bins, bin_width, r, Nd + Nl, s, extension, type);                     //
+                                                                                           //
+    s = string("binned_data/dark_matter_bins_" + extension + ".dat");                      //
+    binner(number_of_bins, bin_width, rd, Nd, s, extension, type);                         //
+                                                                                           //
+    s = string("binned_data/light_matter_bins_" + extension + ".dat");                     //
+    binner(number_of_bins, bin_width, rl, Nl, s, extension, type);                         //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //velopcity distribution                                                               //
+    s = string("binned_data/dark_matter_vel_bins_" + extension + ".dat");                  //
+    binner(number_of_bins, bin_width, vel_d, Nd, s, extension, type);                      //
+                                                                                           //
+    s = string("binned_data/light_matter_vel_bins_" + extension + ".dat");                 //
+    binner(number_of_bins, bin_width, vel_l, Nl, s, extension, type);                      //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 }
 
-void angles(string extension, int Nl, int Nd, double * rl, double * rd, double * xl, double * yl, double * zl, double * xd, double * yd, double * zd, int number_of_bins, double bin_width, double * cm)
+void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_bins, double bin_width)
 {
     int N = Nl + Nd;
-    double r[N];
-    double theta_l[Nl];
-    double theta_d[Nd];
-    double theta[N];
-    double phi[N];
-    double phi_l[Nl];
-    double phi_d[Nd];
-    string s;
-    
-    int j = 0;
-    for(int i = 0; i < Nl; i++)
-    {
-        theta_l[i] = acos( (cm[2] - zl[i]) / rl[i] );
-        phi_l[i] = atan2( (cm[1] - yl[i]) , (cm[0] - xl[i]) );
-        
-        theta[j] = theta_l[i];
-        phi[j] = phi_l[i];
-        j++;
-    }
-    
-    for(int i = 0; i < Nd; i++)
-    {
-        theta_d[i] = acos( (cm[2] - zd[i]) / rd[i] );
-        phi_d[i] = atan2( (cm[1] - yd[i]) , (cm[0] - xd[i]) );
-        
-        theta[j] = theta_d[i];
-        phi[j] = phi_d[i];
-        j++;
-    }
-    
-    int type = 0;
-    s = string("binned_data/theta_light_" + extension + ".dat");
-    binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);
-    s = string("binned_data/theta_dark_" + extension + ".dat");
-    binner(number_of_bins, bin_width, theta_d, Nd, s, extension, type);
-    s = string("binned_data/theta_both_" + extension + ".dat");
-    binner(number_of_bins, bin_width, theta, N, s, extension, type);
-    
-    type = 1;
-    s = string("binned_data/phi_light_" + extension + ".dat");
-    binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);
-    s = string("binned_data/phi_dark_" + extension + ".dat");
-    binner(number_of_bins, bin_width, phi_d, Nd, s, extension, type);
-    s = string("binned_data/phi_both_" + extension + ".dat");
-    binner(number_of_bins, bin_width, phi, N, s, extension, type);
-    
-}
-
-void vel_angles(string extension, int Nl, int Nd, double * vl, double * vd, double * vxl, double * vyl, double * vzl, double * vxd, double * vyd, double * vzd, int number_of_bins, double bin_width, double * cmv )
-{
-    int N = Nl + Nd;
-    double v[N];
-    string s;
-    int type = 0;
-    double theta_l[Nl];
-    double theta_d[Nd];
-    double theta[N];
-    double phi[N];
-    double phi_l[Nl];
-    double phi_d[Nd];
-    
-    int j = 0;
-    for(int i = 0; i < Nl; i++)
-    {
-        theta_l[i] = acos( (cmv[2] - vzl[i]) / vl[i] );
-        phi_l[i] = atan2( (cmv[1] - vyl[i]) , (cmv[0] - vxl[i]) );
-        
-        theta[j] = theta_l[i];
-        phi[j] = phi_l[i];
-        j++;
-    }
-    
-    for(int i = 0; i < Nd; i++)
-    {
-        theta_d[i] = acos( (cmv[2] - vzd[i]) / vd[i] );
-        phi_d[i] = atan2( (cmv[1] - vyd[i]) , (cmv[0] - vxd[i]) );
-        
-        theta[j] = theta_d[i];
-        phi[j] = phi_d[i];
-        j++;
-    }
-    
-    s = string("binned_data/theta_vel_light_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);
-    s = string("binned_data/theta_vel_dark_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta_d, Nd, s, extension, type);
-    s = string("binned_data/theta_vel_both_"+extension+".dat");
-    binner(number_of_bins, bin_width, theta, N, s, extension, type);
-    
-    type = 1;
-    s = string("binned_data/phi_vel_light_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);
-    s = string("binned_data/phi_vel_dark_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi_d, Nd, s, extension, type);
-    s = string("binned_data/phi_vel_both_"+extension+".dat");
-    binner(number_of_bins, bin_width, phi, N, s, extension, type);
-    
-}
-
-
-void vel_dis(string extension, double * args, int Nl, int Nd, double * vel_l, double * vel_d, double * rl, double * rd, int number_of_bins, double bin_width)
-{
-
-    int type = 0;
-    string s;
-    double vsc;
-    s = string("actual/light_matter_velocity_dist_" + extension + ".dat");
-    ofstream vel;
-    vel.open(s);
-    for(int i = 0; i < Nl; i++)
-    {
-        vel<<rl[i]<<"\t"<<vel_l[i]<<endl;
-    }
-    vel.close();
-    
-    s = string("actual/dark_matter_velocity_dist_" + extension + ".dat");
-    ofstream vel2;
-    vel2.open(s);
-    for(int i = 0; i < Nd; i++)
-    {
-        vel2<<rd[i]<<"\t"<<vel_d[i]<<endl;
-    }
-    vel2.close();
-
-    double vd[Nd];
-    double vl[Nl];
-    
-    for(int i = 0; i < Nl; i++)
-    {
-        vsc = esc_vel(rl[i], args);
-        vl[i] = vel_l[i] / (vsc);
-    }
-    
-     for(int i = 0; i < Nd; i++)
-    {
-        vsc = esc_vel(rd[i], args);
-        vd[i] = vel_d[i] / (vsc);
-    }
-    
-    s = string("binned_data/dark_matter_vel_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, vel_d, Nd, s, extension, type);
-    s = string("binned_data/light_matter_vel_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, vel_l, Nl, s, extension, type);
-    
-    bin_width = 0.01;
-    s = string("binned_data/dark_matter_norm_vel_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, vd, Nd, s, extension, type);
-    s = string("binned_data/light_matter_norm_vel_bins_" + extension + ".dat");
-    binner(number_of_bins, bin_width, vl, Nl, s, extension, type);
+    double theta_l[Nl], thetav_l[Nl];
+    double theta_d[Nd], thetav_d[Nd];
+    double theta[N]   , thetav[N];
   
+    double phi[N]     , phiv[N];
+    double phi_l[Nl]  , phiv_l[Nl];
+    double phi_d[Nd]  , phiv_d[Nd];
+    string s;
+    
+    int counterl = 0;
+    int counterd = 0;
+
+    for(int i = 0; i < N; i++)
+    {
+        if(b[i].type == light)
+        {
+            theta_l[countl] = acos( b[i].z / b[i].r );
+            phi_l[countl] = atan2(  b[i].y , b[i].x );
+            
+            thetav_l[countl] = acos( b[i].vz / b[i].v );
+            phiv_l[countl] = atan2(  b[i].vy , b[i].vx );
+            
+            theta[i] = theta_l[countl];
+            phi[i] = phi_l[countl];
+            
+            thetav[i] = thetav_l[countl];
+            phiv[i] = phiv_l[countl];
+            countl++;
+        }
+        else
+        {
+            theta_d[countd] = acos( b[i].z / b[i].r );
+            phi_d[countd] = atan2(  b[i].y , b[i].x );
+            
+            thetav_d[countd] = acos( b[i].vz / b[i].v );
+            phiv_d[countd] = atan2(  b[i].vy , b[i].vx );
+            
+            theta[i] = theta_d[countd];
+            phi[i] = phi_d[countd];
+            
+            thetav[i] = thetav_d[countd];
+            phiv[i] = phiv_d[countd];
+            
+            countd++;
+        }
+        
+    }
+    
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //radial theta                                                                         //
+    int type = 0;                                                                          //
+    s = string("binned_data/theta_light_" + extension + ".dat");                           //
+    binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);                    //
+                                                                                           //
+    s = string("binned_data/theta_dark_" + extension + ".dat");                            //
+    binner(number_of_bins, bin_width, theta_d, Nd, s, extension, type);                    //
+                                                                                           //
+    s = string("binned_data/theta_both_" + extension + ".dat");                            //
+    binner(number_of_bins, bin_width, theta, N, s, extension, type);                       //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //velocity theta                                                                       //
+    s = string("binned_data/theta_vel_light_" + extension +".dat");                        //
+    binner(number_of_bins, bin_width, thetav_l, Nl, s, extension, type);                   //
+                                                                                           //
+    s = string("binned_data/theta_vel_dark_" + extension +".dat");                         //
+    binner(number_of_bins, bin_width, thetav_d, Nd, s, extension, type);                   //
+                                                                                           //
+    s = string("binned_data/theta_vel_both_" + extension + ".dat");                        //
+    binner(number_of_bins, bin_width, thetav, N, s, extension, type);                      //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //radia phi                                                                            //
+    type = 1;                                                                              //
+    s = string("binned_data/phi_light_" + extension + ".dat");                             //
+    binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);                      //
+                                                                                           //
+    s = string("binned_data/phi_dark_" + extension + ".dat");                              //
+    binner(number_of_bins, bin_width, phi_d, Nd, s, extension, type);                      //
+                                                                                           //
+    s = string("binned_data/phi_both_" + extension + ".dat");                              //
+    binner(number_of_bins, bin_width, phi, N, s, extension, type);                         //
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+    //velocity phi                                                                         //
+    s = string("binned_data/phi_vel_light_"+extension+".dat");                             //
+    binner(number_of_bins, bin_width, phiv_l, Nl, s, extension, type);                     //
+                                                                                           //
+    s = string("binned_data/phi_vel_dark_"+extension+".dat");                              //
+    binner(number_of_bins, bin_width, phiv_d, Nd, s, extension, type);                     //
+                                                                                           //
+    s = string("binned_data/phi_vel_both_"+extension+".dat");                              //
+    binner(number_of_bins, bin_width, phiv, N, s, extension, type);                        // 
+    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 }
+
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // main function calls
@@ -656,88 +708,72 @@ int main (int argc, char * const argv[])
     double rscale_d                = atof(argv[3]);
     double mass_l                  = atof(argv[4]);
     double mass_d                  = atof(argv[5]);
-    double mass_per_particle_light = atof(argv[6]); 
-    double mass_per_particle_dark  = atof(argv[7]); 
     string extension = simtime + "gy";
     
-//     printf("massl = %f  massd = %f rscale_l = %f rscale_d = %f\n", mass_l, mass_d, rscale_l, rscale_d);
-    double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, mass_per_particle_light, mass_per_particle_dark};
+    /*these are markers for the type of data being sent into functions*/
+    int d = 1;//dark matter     
+    int l = 0;//light matter
 
-    //    printf("rad_light= %f \t rad_dark=%f \n mass_light=%f \t mass_dark=%f\n", rscale_l, rscale_d, mass_l, mass_d);
 
     /*paramters for binning routine*/
     int number_of_bins = 1000;
     double bin_width = .10;
 
-    /*these are markers for the type of data being sent into functions*/
-    int d = 1;//dark matter     
-    int l = 0;//light matter
     
     int Nd = get_size(d, extension);//getting the size of the dark matter data
     int Nl = get_size(l, extension);//getting the size of the light matter data
     printf("light: %i dark: %i\n", Nl, Nd);
-    double rd[Nd], rl[Nl];//, r[Nd+Nl];  
-    double vel_d[Nd], vel_l[Nl];
 
-
-//     printf("Nl = %i  Nd = %i\n", Nl, Nd);
-    double dx[Nd], dy[Nd], dz[Nd], dvx[Nd], dvy[Nd], dvz[Nd];//vectors to store dark positions
-    double lx[Nl], ly[Nl], lz[Nl], lvx[Nl], lvy[Nl], lvz[Nl];//vectors to store light positions
-    double dv[Nd];//this is a vector to store the velocity distribution
-    double lv[Nl];//this is a vector to store the velocity distribution
+    int N = Nd + Nl;
+    bodies b[N];
     
-    double cm[3] = {0.0, 0.0, 0.0};
+    double cm[3]  = {0.0, 0.0, 0.0};
     double cmv[3] = {0.0, 0.0, 0.0};
-    double mass;
-    
     
     printf("running tests");
-    /*getting the positional and velocity data*/
-    get_data(Nd, dx, dy, dz, dvx, dvy, dvz, d, extension);  
-    get_data(Nl, lx, ly, lz, lvx, lvy, lvz, l, extension);
     
+    /*getting the positional and velocity data*/
+    get_data(Nd, Nl, b, extension);
     
     /*get center of mass*/
-    mass = mass_l + mass_d;
-    com(cm, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
-    com(cmv, dx, dy, dz, Nd, lx, ly, lz, Nl, mass_per_particle_dark, mass_per_particle_light, mass);
-
-    /*getting the radii and vel vectors*/
-    get_radii(Nd, dx, dy, dz, rd, cm);
-    get_radii(Nl, lx, ly, lz, rl, cm);
-    get_radii(Nd, dvx, dvy, dvz, vel_d, cmv);
-    get_radii(Nl, lvx, lvy, lvz, vel_l, cmv);
+    double mass = mass_l + mass_d;
+    com(cm, cmv, b, N, mass);
+    com_correction(cm, cmv, b, N);
 
     
-    /*radii*/
     printf(".");//actual 
-    radial_distribution(extension, Nd, Nl, rd, rl, number_of_bins, bin_width, args);
+    rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width, args);
+    
+    printf(".");//actual 
+    angles(extension, Nl, Nd, b, number_of_bins, bin_width, cm);
     
     printf(".");//theory
+    
+    double masspd;
+    double masspl;
+    for(i = 0, i < N; i++)
+    {
+        if(b[i] == l)
+        {
+            masspl = b[i].mass;
+        }
+        else
+        { 
+            masspd = b[i].mass;
+        }
+        
+        if(masspd != 0.0 && masspl != 0.0){break;}
+    }
+    double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, masspl, masspd};
     single_density_theory(bin_width, args);
-    
-    /*angles*/
-    printf(".");//actual for radii
-    angles(extension, Nl, Nd, rl, rd, lx, ly, lz, dx, dy, dz, number_of_bins, bin_width, cm);
-    
-    printf(".");//actual for vel
-    vel_angles(extension, Nl, Nd, vel_l, vel_d, lvx, lvy, lvz, dvx, dvy, dvz, number_of_bins, bin_width, cmv);
-    
+
+    printf(".");//theory -- from distribution func
+    vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
+
     printf(".");//theory
     angle_theory(bin_width, args);
     
     
-    /*velocity*/
-    printf(".");//actual
-    vel_dis(extension, args, Nl, Nd, vel_l, vel_d, rl, rd, number_of_bins, bin_width);
-    
-    printf(".");//theory -- vel curves
-    
-    vel_theory(bin_width, args, Nd, Nl);
-    
-    printf(".");//theory -- from distribution func
-    vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
-    nemo_vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
     
     
     printf("done.\n");

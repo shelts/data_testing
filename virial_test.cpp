@@ -43,7 +43,7 @@ int get_size(int type, string extension)
     /*getting the length of the data set*/
     ifstream length;
     length.open (s);
-    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
+    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
     //       cout<<datax<<endl;
         N++;
@@ -60,7 +60,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
     string s;
     double datax,datay,dataz;
     double datal, datab, datar;
-    double datavx,datavy,datavz;
+    double datavx,datavy,datavz, datam;
     int i = 0;
     int N = Nd + Nl;
     s = string("raw_data/dark_matter_" + extension + ".dat");
@@ -68,7 +68,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
     data.open (s);
     int type_dark = 1;
     int type_light = 0;
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
         b[i].x    = datax;
         b[i].y    = datay;
@@ -79,7 +79,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
         b[i].vx   = datavx;
         b[i].vy   = datavy;
         b[i].vz   = datavz;
-        b[i].mass = masspd;
+        b[i].mass = datam;
         b[i].type = type_dark;
         i++;
     }
@@ -88,7 +88,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
     s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data2;
     data2.open (s);
-    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
+    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
         b[i].x    = datax;
         b[i].y    = datay;
@@ -99,7 +99,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
         b[i].vx   = datavx;
         b[i].vy   = datavy;
         b[i].vz   = datavz;
-        b[i].mass = masspl;
+        b[i].mass = datam;
         b[i].type = type_light;
         i++;
     }

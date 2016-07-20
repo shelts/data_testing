@@ -8,7 +8,7 @@ args = sys.argv;
                 #          Control Panel       #
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#args = [1, 0.2, 0.2, 11, 0.2]
+#args = [1, 0.2, 0.2, 12, 0.2]
 back_time     = float(args[1])
 r_l           = float(args[2])
 rad_ratio     = float(args[3]) 
@@ -54,10 +54,6 @@ if(number_of_components == 2):
     r_d = rscale_t  * (1.0 - rad_ratio)
     m_d = dwarfMass * (1.0 - mass_ratio)
     
-    r_l = 0.175
-    r_d = 0.175
-    m_l = 12
-    m_d = 1e-10
     
     print(m_d, m_l)
     print(r_d, r_l)

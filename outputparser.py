@@ -32,33 +32,37 @@ def parse_data(file_name, ext):
         #print(len(tt))
         isDark = int(tt[0]);
         if(len(tt) == 8):
-            x = float(tt[1]);
-            y = float(tt[2]);
-            z = float(tt[3]);
-            vx = float(tt[4]);
-            vy = float(tt[5]);
-            vz = float(tt[6]);
+            ty = float(tt[0])
+            x  = float(tt[1])
+            y  = float(tt[2])
+            z  = float(tt[3])
+            vx = float(tt[4])
+            vy = float(tt[5])
+            vz = float(tt[6])
+            m  = float(tt[7])
         if(len(tt) == 11):
-            x = float(tt[1]);
-            y = float(tt[2]);
-            z = float(tt[3]);
-            l = float(tt[4]);
-            b = float(tt[5]);
-            r = float(tt[6]);
-            vx = float(tt[7]);
-            vy = float(tt[8]);
-            vz = float(tt[9]);
+            ty = float(tt[0])
+            x  = float(tt[1])
+            y  = float(tt[2])
+            z  = float(tt[3])
+            l  = float(tt[4])
+            b  = float(tt[5])
+            r  = float(tt[6])
+            vx = float(tt[7])
+            vy = float(tt[8])
+            vz = float(tt[9])
+            m  = float(tt[10])
 
         if(len(tt) == 8):
             if (isDark == 1):
-                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t\n" % (x, y, z, vx, vy, vz))
+                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
             else:
-                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t\n" % (x, y, z, vx, vy, vz))
+                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
         if(len(tt) == 11):
             if (isDark == 1):
-                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t\n" % (x, y, z, l, b, r, vx, vy, vz))
+                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m))
             else:
-                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t\n" % (x, y, z, l, b, r, vx, vy, vz))
+                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m))
 
 def main():
     args = sys.argv;
