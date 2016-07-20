@@ -126,35 +126,6 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
 }
 
 
-/*this actually gets the data and stores it*/
-// void get_data(int N, double * x,double * y, double * z, double * vx,double * vy, double * vz, int type, string extension)
-// {
-//     string s;
-//     if(type == 0){s = string("raw_data/light_matter_"+extension+".dat");}
-//     else if(type == 1){s = string("raw_data/dark_matter_"+extension+".dat");}
-//     double datax,datay,dataz;
-//     double datal, datab, datar;
-//     double datavx,datavy,datavz;
-//     int l = 0;
-// 
-//     ifstream data;
-//     data.open (s);
-//     /*reading in data*/
-//     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz)
-//     {
-//         x[l]  = datax;
-//         y[l]  = datay;
-//         z[l]  = dataz;
-//         vx[l] = datavx;
-//         vy[l] = datavy;
-//         vz[l] = datavz;
-// 
-//         l = l + 1;
-//     }
-//     data.close();
-// }
-
-
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory functions
 
@@ -180,23 +151,6 @@ double density(double r, double * args)
 }
 
 
-//this isn't used
-double mass_enc(double r, double * args)
-{
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-
-    double rcube = cube(r);
-    double mass_enclosed_l = mass_l * rcube * pow( (sqr(r) + sqr(rscale_l) ), -1.5);
-    double mass_enclosed_d = mass_d * rcube * pow( (sqr(r) + sqr(rscale_d) ), -1.5);
-    
-    double mass_enclosed = mass_enclosed_l + mass_enclosed_d;
-    return mass_enclosed;
-
-}
-
 double potential( double r, double * args)
 {
     double rscale_l = args[0];
@@ -209,21 +163,6 @@ double potential( double r, double * args)
 
     return (potential_result);
 }
-
-
-// double get_x()
-// {
-//     double x = 0.0;
-//     double y = 0.1;
-//     double u = sqr(x) * sqrt(seventh( (1.0 - sqr(x)) ));
-//     while(y > sqr(x) * pow( (1.0 - sqr(x)), 3.5) )
-//     {
-//         x = randDouble(0.0, 1.0);
-//         y = randDouble(0.0, 0.1);
-//     }
-//     
-//     return x;
-// }
 
 
 double distribution(double mass, double r_scale, double v, double r, double * args)
@@ -382,8 +321,6 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     bin.close();
 }
 
-
-
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory checking functions
 void single_density_theory(double bin_width, double * args)
@@ -440,7 +377,7 @@ void angle_theory( double bin_width, double * args)
         w += 0.01;
         fprintf(th, "%f \t %f \t %f\t%f\n", w, theta, theta_l, theta_d);
             
-        if(w>(5.0)){break;}
+        if(w > (5.0)){break;}
     }
     
     FILE * ph;
@@ -460,18 +397,18 @@ void angle_theory( double bin_width, double * args)
     fclose(ph);
 }
 
-void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, double * r_l, double * r_d, int Nl, int Nd)
+void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, struct bodies * b,  int Nl, int Nd)
 {
     
     double rscale_l = args[0];
     double rscale_d = args[1];
     double mass_l   = args[2];
     double mass_d   = args[3];
-    double masspl   = args[4]; 
-    double masspd   = args[5];
-    
-    double light[4] = {rscale_l, rscale_d, mass_l, mass_d};
-    double dark[4]  = {rscale_l, rscale_d, mass_l, mass_d};
+    int light = 0;
+    int N = Nl + Nd;
+    int countl = 0;
+    int countd = 0;
+//     double light[4] = {rscale_l, rscale_d, mass_l, mass_d};
     
     double v_l[Nl];
     double v_d[Nd];
@@ -479,46 +416,52 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     double v_esc, v_mx;
     double fmax;
     
-    for(int i = 0; i < Nl; i++)
+    for(int i = 0; i < N; i++)
     {
-        r = r_l[i];
-        v_esc = sqrt( 2.0 * fabs( potential(r, light) ));
-        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, light) ));
-        fmax = distribution(mass_l, rscale_l, v_mx, r, light);
+        r = b[i].r;
+        v_esc = sqrt( 2.0 * fabs( potential(r, args) ));
+        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, args) ));
+        if(b[i].type == light)
+        {
+            fmax = distribution(mass_l, rscale_l, v_mx, r, args);
+        }
+        else
+        {
+            fmax = distribution(mass_d, rscale_d, v_mx, r, args);
+        }
+        
         while(1)
         {
             v = randDouble(0.0, v_esc);
-            u = randDouble(0.0,1.0);
-            f = distribution(mass_l, rscale_l, v, r, light);
+            u = randDouble(0.0, 1.0);
+            if(b[i].type == light)
+            {
+                f = distribution(mass_l, rscale_l, v, r, args);
+            }
+            else
+            {
+                f = distribution(mass_d, rscale_d, v, r, args);
+            }
+            
 //             printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
-            if(fabs(f/fmax) > u)
+            if(fabs(f / fmax) > u)
             {
                 v *= 0.977813107;
-                v_l[i] = v;
+                if(b[i].type == light)
+                {
+                    v_l[countl] = v;
+                    countl++;
+                }
+                else
+                {
+                    v_d[countd] = v;
+                    countd++;
+                }
                 break;
             }
         }
     }
     
-    for(int i = 0; i < Nd; i++)
-    {
-        r = r_d[i];
-        v_esc = sqrt( 2.0 * fabs( potential(r, dark) ));
-        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, dark) ));
-        fmax = distribution(mass_d, rscale_d, v_mx, r, dark);
-        while(1)
-        {
-            v = randDouble(0.0, v_esc);
-            u = randDouble(0.0,1.0);
-            f = distribution(mass_d, rscale_d, v, r, dark);
-            if(fabs(f/fmax) > u)
-            {
-                v *= 0.977813107;
-                v_d[i] = v;
-                break;
-            }
-        }
-    }
     
     
     
@@ -538,24 +481,20 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
 void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, int number_of_bins, double bin_width)
 {
     int type = 0;
-    string s1, s2;
+    string s, s1, s2;
     s1 = string("actual/light_matter_velocity_dist_" + extension + ".dat");
     s2 = string("actual/dark_matter_velocity_dist_" + extension + ".dat");
     ofstream vel_l, vel_d;
     vel_l.open(s1);
     vel_d.open(s2);
-    int light = 1;
-    int dark = 0;
-    double r[Nd + Nl], v[Nd + Nl];
+    int light = 0;
+    int dark = 1;
+    int N = Nd + Nl;
+    double r[N], v[N];
     double rd[Nd], rl[Nl];
     double vd[Nd], vl[Nl];
-    int counterl = 0;
-    int counterd = 0;
-    for(int i = 0; i < N; i++)
-    {
-        
-    }
-    
+    int countl = 0;
+    int countd = 0;
     
     for(int i = 0; i < N; i++)
     {
@@ -571,7 +510,7 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
         else
         {
             vel_d << b[i].r << "\t" << b[i].v << endl;
-            rl[countd] = b[i].r;
+            rd[countd] = b[i].r;
             vd[countd] = b[i].v;
             countd++;
         }
@@ -593,10 +532,10 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     //velopcity distribution                                                               //
     s = string("binned_data/dark_matter_vel_bins_" + extension + ".dat");                  //
-    binner(number_of_bins, bin_width, vel_d, Nd, s, extension, type);                      //
+    binner(number_of_bins, bin_width, vd, Nd, s, extension, type);                         //
                                                                                            //
     s = string("binned_data/light_matter_vel_bins_" + extension + ".dat");                 //
-    binner(number_of_bins, bin_width, vel_l, Nl, s, extension, type);                      //
+    binner(number_of_bins, bin_width, vl, Nl, s, extension, type);                         //
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 }
 
@@ -612,8 +551,10 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
     double phi_d[Nd]  , phiv_d[Nd];
     string s;
     
-    int counterl = 0;
-    int counterd = 0;
+    int light = 1;
+    int dark = 0;
+    int countl = 0;
+    int countd = 0;
 
     for(int i = 0; i < N; i++)
     {
@@ -742,18 +683,18 @@ int main (int argc, char * const argv[])
 
     
     printf(".");//actual 
-    rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width, args);
+    rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
     
     printf(".");//actual 
-    angles(extension, Nl, Nd, b, number_of_bins, bin_width, cm);
+    angles(extension, Nl, Nd, b, number_of_bins, bin_width);
     
     printf(".");//theory
     
-    double masspd;
-    double masspl;
-    for(i = 0, i < N; i++)
+    double masspd = 0.0;
+    double masspl = 0.0;
+    for(int i = 0; i < N; i++)
     {
-        if(b[i] == l)
+        if(b[i].type == l)
         {
             masspl = b[i].mass;
         }
@@ -768,7 +709,7 @@ int main (int argc, char * const argv[])
     single_density_theory(bin_width, args);
 
     printf(".");//theory -- from distribution func
-    vel_distribution_theory(bin_width, number_of_bins, extension, args, rl, rd, Nl, Nd);
+    vel_distribution_theory(bin_width, number_of_bins, extension, args, b, Nl, Nd);
 
     printf(".");//theory
     angle_theory(bin_width, args);

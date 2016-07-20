@@ -54,7 +54,7 @@ int get_size(int type, string extension)
 }
 
 
-void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd, double masspl)
+void get_data(int Nd, int Nl, struct bodies * b, string extension)
 {
   
     string s;
@@ -108,22 +108,34 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension, double masspd
 }
   
   
-void com(struct bodies * b, int N, double * cm, double mass)
+void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
 {
     double cm_x = 0.0;
     double cm_y = 0.0;
     double cm_z = 0.0;
+    double cmv_x = 0.0;
+    double cmv_y = 0.0;
+    double cmv_z = 0.0;
     
     for(int i = 0; i < N; i++)
     {
         cm_x += b[i].mass * b[i].x;
         cm_y += b[i].mass * b[i].y;
         cm_z += b[i].mass * b[i].z;
+        
+        cmv_x += b[i].mass * b[i].vx;
+        cmv_y += b[i].mass * b[i].vy;
+        cmv_z += b[i].mass * b[i].vz;
     }
     
     cm[0] = cm_x * inv(mass);
     cm[1] = cm_y * inv(mass);
     cm[2] = cm_z * inv(mass);
+    
+    cmv[0] = cmv_x * inv(mass);
+    cmv[1] = cmv_y * inv(mass);
+    cmv[2] = cmv_z * inv(mass);
+//     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
 }
   
   
@@ -247,11 +259,10 @@ int main (int argc, char * const argv[])
     double rscale_d                = atof(argv[3]);
     double mass_l                  = atof(argv[4]);
     double mass_d                  = atof(argv[5]);
-    double mass_per_light_particle = atof(argv[6]); 
-    double mass_per_dark_particle  = atof(argv[7]); 
 
     string extension = simtime + "gy";
-    
+    int l = 0;
+    int d = 1;
     double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
     int Nl = get_size(0, extension);//getting the size of the dark matter data
     int Nd = get_size(1, extension);//getting the size of the light matter data
@@ -262,14 +273,13 @@ int main (int argc, char * const argv[])
     double cmv[3] = {0.0, 0.0, 0.0};
     
     double mass = mass_l + mass_d;
-    printf("masspl: %f \t masspd: %f\n", mass_per_light_particle, mass_per_dark_particle);
 
     double ke;
     double pot_func, pot_pp;
 
-    get_data(Nd, Nl, b, extension, mass_per_dark_particle, mass_per_light_particle);
-    com(b, N, cm, mass);
-    com(b, N, cmv, mass);
+    get_data(Nd, Nl, b, extension);
+    
+    com(b, N, cm, cmv, mass);
     
     printf("calculating virial ratio");
     /*calculates kinetic energy relative to centor of mass*/

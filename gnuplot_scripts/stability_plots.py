@@ -57,8 +57,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:1]\n")
-f.write("set yrange[0:2500]\n\n\n")
+f.write("set xrange[0:4]\n")
+f.write("set yrange[0:6500]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):

@@ -57,8 +57,6 @@ if(number_of_components == 2):
     
     print(m_d, m_l)
     print(r_d, r_l)
-    masspd  = (m_d) / (0.5 * Nb);
-    masspl  = (m_l) / (0.5 * Nb);
     
     
 #for one component
@@ -69,8 +67,6 @@ if(number_of_components == 1):
     r_d = rscale_t  * (1.0 - rad_ratio)
     m_d = 0.0 
 
-    masspd  = m_d / ( Nb);
-    masspl  = m_l / ( Nb);
 
 #we're all full of strings...
 nbody    = str( Nb )
@@ -78,8 +74,6 @@ rscale_l = str( r_l )
 rscale_d = str( r_d )
 mass_l   = str( m_l )
 mass_d   = str( m_d )
-mass_per_particle_light = str( masspl )
-mass_per_particle_dark  = str( masspd )
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
                 #/# # # # # # # # # # # # # # \#
@@ -97,12 +91,12 @@ if(output == True):
     print "performing tests"
     os.system("g++ -std=c++11 output_test.cpp -o output_test")
     for i in range(M, N):
-        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
     
 if(virial == True):
     os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
     for i in range(M, N):
-        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + mass_per_particle_light + " " + mass_per_particle_dark)
+        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d )
 
 if(tidal == True):
     os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
