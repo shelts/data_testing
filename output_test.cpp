@@ -56,22 +56,24 @@ double randDouble(double low, double high)
 /*This gets the number of positional data from the raw data files*/
 int get_size(int type, string extension)
 {
-  string s;
+    string s;
     if(type == 0){s = string("./raw_data/light_matter_"+extension+".dat");}
-  else {s = string("./raw_data/dark_matter_"+extension+".dat");}
-   int N = 0;
-  double datax;
- /*getting the length of the data set*/
-   ifstream length;
-   length.open (s);
-   while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
+    else {s = string("./raw_data/dark_matter_"+extension+".dat");}
+    
+    int N = 0;
+    double datax;
+    /*getting the length of the data set*/
+    ifstream length;
+    length.open (s);
+    
+    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
-//       cout<<datax<<endl;
-      N++;
+    //       cout<<datax<<endl;
+        N++;
     }
     length.close();
-   
-   return N;
+
+    return N;
 }
 
 void get_data(int Nd, int Nl, struct bodies * b, string extension)
@@ -88,6 +90,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     data.open(s);
     int type_dark = 1;
     int type_light = 0;
+    
     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
         b[i].x    = datax;
