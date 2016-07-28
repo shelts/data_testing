@@ -8,7 +8,7 @@
 #include <typeinfo>
 #include <vector>
 #include <string>
-
+#include "pots_dens.h"
 using namespace std;
 
 #define inv(x)  ((double) 1.0 / (x))
@@ -19,16 +19,16 @@ using namespace std;
  * This code calculates the viral ratio for the entire system as a whole
  */
 
-  struct bodies
-  {
-    double x;
-    double y;
-    double z;
-    double l, b, r;
-    double vx, vy, vz;
-    double mass;
-    int type;
-  };
+//   struct bodies
+//   {
+//     double x;
+//     double y;
+//     double z;
+//     double l, b, r;
+//     double vx, vy, vz;
+//     double mass;
+//     int type;
+//   };
 
 /*This gets the number of positional data from the raw data files*/
 int get_size(int type, string extension)
@@ -227,16 +227,14 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     return pot;
 }
 
-double potential_func( struct bodies * b, double * args, int N, double * cm)
+double potential_func( struct bodies * b, double * args, int N, double * cm, int comp1, int comp2)
 {
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    
     double pot = 0.0;
     double x, y, z, r, mass;
-    double mass_light, mass_dark;
+    double light_comp, dark_comp;
+    double pot2;
+    FILE * data;
+    data = fopen("v1.out", "a");
     for(int i = 0; i < N; i++)
     {
         x = b[i].x;
@@ -244,10 +242,16 @@ double potential_func( struct bodies * b, double * args, int N, double * cm)
         z = b[i].z;
         r = sqrt( sqrdel(cm[0], x) + sqrdel(cm[1], y) + sqrdel(cm[2], z));
         mass = b[i].mass;
-        mass_light = mass_l;
-        mass_dark = mass_d;
-        pot += -mass * (mass_light/sqrt(sqr(r) + sqr(rscale_l)) +  mass_dark/sqrt(sqr(r) + sqr(rscale_d)) );
+
+        light_comp = get_potential(r, args, comp1);
+        dark_comp  = get_potential(r, args, comp2);
+        
+        pot += -mass * (light_comp + dark_comp);
+        
+        pot2 = -mass * (mass_l/sqrt(sqr(r) + sqr(rscale_l)) +  mass_d/sqrt(sqr(r) + sqr(rscale_d)) );
+        fprintf(data, "%0.15f\t%0.15f\n", pot, pot2);
     }
+    fclose(data);
     return pot / 2.0;
 }
 
@@ -259,7 +263,9 @@ int main (int argc, char * const argv[])
     double rscale_d                = atof(argv[3]);
     double mass_l                  = atof(argv[4]);
     double mass_d                  = atof(argv[5]);
-
+    int model1                     = atof(argv[6]);
+    int model2                     = atof(argv[7]);
+    
     string extension = simtime + "gy";
     int l = 0;
     int d = 1;
@@ -286,7 +292,7 @@ int main (int argc, char * const argv[])
     ke = kinetic(N, b, cmv);
     printf("..");
     /*calculates potential energy relative to centor of mass*/
-    pot_func = potential_func(b, args, N, cm);
+    pot_func = potential_func(b, args, N, cm, comp1, comp2);
     printf("..");
     /*particle particle potential energy*/
     pot_pp = potential_energy(Nl, Nd, b, extension);
@@ -304,5 +310,5 @@ int main (int argc, char * const argv[])
 
 //     vel_dis(N, b, extension);
 
-  
+   
 }

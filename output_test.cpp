@@ -9,6 +9,8 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include "pots_dens.h"
+#include "structs.h"
 using namespace std;
 
 #define inv(x)  ((double) 1.0 / (x))
@@ -31,18 +33,24 @@ using namespace std;
 #define minusquarter(x) (inv( sqrt(sqrt(x))) )
 #define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
 
-  struct bodies
-  {
-    double x;
-    double y;
-    double z;
-    double r;
-    double vx, vy, vz, v;
-    double mass;
-    int type;
-  };
-
-
+//   struct bodies
+//   {
+//     double x;
+//     double y;
+//     double z;
+//     double r;
+//     double l, b, r;
+//     double vx, vy, vz, v;
+//     double mass;
+//     int type;
+//   };
+// 
+// struct dwarf_component
+// {
+//     int type;
+//     double mass;
+//     double rscale;
+// };
 
 double randDouble(double low, double high)
 {
@@ -131,48 +139,28 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory functions
 
-double density(double r, double * args)
+double density(double r, struct dwarf_component  light, struct dwarf_component  dark)
 {
-    
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    
-    double pi = 4.0 * atan(1.0);
-    double rscale_l_cube = cube(rscale_l); 
-    double rscale_d_cube = cube(rscale_d); 
-
-    //   double density_result= (3.0/(4.0*pi))*(mass/rscalecube *pow(1+ sqr/sqrrcube, -2.5));
-    double density_light_comp = (mass_l/rscale_l_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_l) ) );
-    double density_dark_comp  = (mass_d/rscale_d_cube) * minusfivehalves( (1.0 + sqr(r)/sqr(rscale_d) ) );
-    double coeff = 3.0 / (4.0 * pi);
-
-    double density_result = coeff * ( density_light_comp + density_dark_comp);
-    return density_result;
+    double light_comp = get_density(r, light);
+    double dark_comp  = get_density(r, dark);
+    return (light_comp + dark_comp);
 }
 
 
-double potential( double r, double * args)
+double potential(double r, struct dwarf_component  light, struct dwarf_component  dark)
 {
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    double pot_light_comp = mass_l/sqrt( sqr(r) + sqr(rscale_l) );
-    double pot_dark_comp  = mass_d/sqrt( sqr(r) + sqr(rscale_d) );
-    double potential_result = -1.0 * (pot_light_comp + pot_dark_comp);
-
-    return (potential_result);
+    double light_comp = get_potential(r, light);
+    double dark_comp  = get_potential(r, dark);
+    return (light_comp + dark_comp);
 }
 
 
-double distribution(double mass, double r_scale, double v, double r, double * args)
+double distribution(double mass, double r_scale, double v, double r, struct dwarf_component * light, struct dwarf_component * dark)
 {
     
     double pi  = 4.0 * atan(1.0);
     double coeff = 24.0 * sqrt(2.0) * inv( 7.0 * cube(pi) );
-    double energy = -potential(r, args) - 0.5 * sqr(v) ;
+    double energy = -potential(r, light, dark) - 0.5 * sqr(v) ;
     
     double f = v * v * coeff * inv( fourth(mass) ) * sqr(r_scale) * seventhhalfs(fabs(energy));
     
@@ -182,9 +170,9 @@ double distribution(double mass, double r_scale, double v, double r, double * ar
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // service functions
 
-double esc_vel(double r, double * args)
+double esc_vel(double r, struct dwarf_component * light, struct dwarf_component * dark)
 {
-    double escv = sqrt( fabs(2.0 * potential( r, args) ) );
+    double escv = sqrt( fabs(2.0 * potential( r, light, dark) ) );
     return escv;
 }
 
@@ -327,19 +315,9 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory checking functions
-void single_density_theory(double bin_width, double * args)
+void single_density_theory(double bin_width, struct dwarf_component * light, struct dwarf_component * dark, double masspl, double masspd)
 {
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    double masspl   = args[4]; 
-    double masspd   = args[5];
-    
-    
     double w = 0.0;
-    double light[4] = {rscale_l, rscale_d, mass_l, 0.0};
-    double dark[4]  = {rscale_l, rscale_d, 0.0, mass_d};
     double pi = 4.0 * atan(1.0);
     
     double de, de2, de3;
@@ -347,13 +325,13 @@ void single_density_theory(double bin_width, double * args)
     rho = fopen("./theory/theory_den.dat", "w");
     while(1)
     {
-        de2 = 4.0 * pi * w * w * density(w, light) * bin_width / masspl;
-        de3 = 4.0 * pi * w * w * density(w, dark)  * bin_width / masspd;
+        de2 = 4.0 * pi * w * w * get_density(w, light) * bin_width / masspl;
+        de3 = 4.0 * pi * w * w * get_density(w, dark)  * bin_width / masspd;
         de = de2 + de3;
         w += 0.001;
         fprintf(rho, "%f \t %f \t %f\t%f\n", w, de, de2, de3);
             
-        if( w > 5 * (rscale_l + rscale_d)){break;}
+        if( w > 5 * (light.rscale + dark.rscale)){break;}
     }
     fclose(rho);
 }
@@ -401,21 +379,23 @@ void angle_theory( double bin_width, double * args)
     fclose(ph);
 }
 
-void vel_distribution_theory(double bin_width, int number_of_bins, string extension, double * args, struct bodies * b,  int Nl, int Nd)
+void vel_distribution_theory(double bin_width, int number_of_bins, string extension, struct bodies * b,  int Nl, int Nd, struct dwarf_component * light, struct dwarf_component * dark)
 {
-    
-    double rscale_l = args[0];
-    double rscale_d = args[1];
-    double mass_l   = args[2];
-    double mass_d   = args[3];
-    int light = 0;
+    //this function only works if both components of the model are the same. 
+    //I.E. the two component model is essentially a one component model.
+    //this will return a vel distrib for a one comp model with the same mass and rscale
+    //I split the distrib in 2 so when we split up each component of the two comp model
+    //the counts match up when binned.
+    int light_particle = 0;
     int N = Nl + Nd;
     int countl = 0;
     int countd = 0;
-//     double light[4] = {rscale_l, rscale_d, mass_l, mass_d};
+    double mass = light.mass + dark.mass;
+    double rscale = light.rscale; //it doesn't matter which since they should be the  same
     
     double v_l[Nl];
     double v_d[Nd];
+    double v_t[N];
     double v, u, f, r;
     double v_esc, v_mx;
     double fmax;
@@ -423,35 +403,23 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     for(int i = 0; i < N; i++)
     {
         r = b[i].r;
-        v_esc = sqrt( 2.0 * fabs( potential(r, args) ));
-        v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, args) ));
-        if(b[i].type == light)
-        {
-            fmax = distribution(mass_l, rscale_l, v_mx, r, args);
-        }
-        else
-        {
-            fmax = distribution(mass_d, rscale_d, v_mx, r, args);
-        }
+        v_esc = esc_vel(r, light, dark);
+//         v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, args, comp1, comp2) ));
+        v_mx = (sqrt(2.0) / 3.0) * v_esc;
+        fmax = distribution(mass, rscale, v_mx, r, light, dark);
         
         while(1)
         {
             v = randDouble(0.0, v_esc);
             u = randDouble(0.0, 1.0);
-            if(b[i].type == light)
-            {
-                f = distribution(mass_l, rscale_l, v, r, args);
-            }
-            else
-            {
-                f = distribution(mass_d, rscale_d, v, r, args);
-            }
+            f = distribution(mass, rscale, v, r, light, dark);
             
 //             printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
             if(fabs(f / fmax) > u)
             {
+                //These are split in two so when we compare each component, the counts match up
                 v *= 0.977813107;
-                if(b[i].type == light)
+                if(b[i].type == light_particle)
                 {
                     v_l[countl] = v;
                     countl++;
@@ -461,6 +429,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
                     v_d[countd] = v;
                     countd++;
                 }
+                v_t[N] = v;
                 break;
             }
         }
@@ -475,7 +444,8 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     binner(number_of_bins, bin_width, v_d, Nd, s, extension, type);
     s = string("binned_data/light_matter_theory_vel_bins.dat");
     binner(number_of_bins, bin_width, v_l, Nl, s, extension, type);
-    
+    s = string("binned_data/both_matter_theory_vel_bins.dat");
+    binner(number_of_bins, bin_width, v_t, N, s, extension, type);
     
 }
 
@@ -649,10 +619,25 @@ int main (int argc, char * const argv[])
 {
     srand(time(NULL));
     string simtime                 = argv[1];
-    double rscale_l                = atof(argv[2]);
-    double rscale_d                = atof(argv[3]);
-    double mass_l                  = atof(argv[4]);
-    double mass_d                  = atof(argv[5]);
+    double rscale_l                    = atof(argv[2]);
+    double rscale_d                    = atof(argv[3]);
+    double mass_l                      = atof(argv[4]);
+    double mass_d                      = atof(argv[5]);
+    double model1                      = atof(argv[6]);
+    double model2                      = atof(argv[7]);
+    
+    
+    dwarf_component light;
+    dwarf_component dark;
+    
+    light.type = model1;
+    light.rscale = rscale_l;
+    light.mass = mass_l;
+    
+    dark.type = model2;
+    dark.rscale = rscale_d;
+    dark.mass = mass_d;
+    
     string extension = simtime + "gy";
     
     /*these are markers for the type of data being sent into functions*/
@@ -681,7 +666,7 @@ int main (int argc, char * const argv[])
     get_data(Nd, Nl, b, extension);
     
     /*get center of mass*/
-    double mass = mass_l + mass_d;
+    double mass = light.mass + dark.mass;
     com(cm, cmv, b, N, mass);
     com_correction(cm, cmv, b, N);
     
@@ -708,17 +693,36 @@ int main (int argc, char * const argv[])
         
         if(masspd != 0.0 && masspl != 0.0){break;}
     }
-    double args[6]  = {rscale_l, rscale_d, mass_l, mass_d, masspl, masspd};
-    single_density_theory(bin_width, args);
+    
+    
+    double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
+    single_density_theory(bin_width, light, dark, masspl, masspd);
 
     printf(".");//theory -- from distribution func
-    vel_distribution_theory(bin_width, number_of_bins, extension, args, b, Nl, Nd);
+    vel_distribution_theory(bin_width, number_of_bins, extension, b, Nl, Nd, light, dark);
 
     printf(".");//theory
     angle_theory(bin_width, args);
     
     
-    
-    
+//     double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
+    FILE * data;
+    data = fopen("2.out", "w");
+    double pot, den;
+    double v_mx1, v_mx2, v_esc;
+    double rtmp = 0.1;
+    while(1)
+    {
+        v_esc = esc_vel(rtmp, light, dark);
+        pot = density(rtmp, light, dark);
+        den = potential(rtmp, light, dark);
+        v_mx1 = (2.0 / 3.0) * sqrt( fabs( potential(rtmp, light, dark) ));
+        v_mx2 = (sqrt(2.0) / 3.0) * v_esc;
+        fprintf(data, "%0.15f\t%0.15f\t%0.15f\t%0.15f\t%0.15f\n", pot, den, rtmp, v_mx1, v_mx2);
+        rtmp += .1;
+        if(rtmp > 10){break;}
+        
+    }
+    fclose(data);
     printf("done.\n");
 }

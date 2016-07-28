@@ -3,48 +3,86 @@ import os
 from subprocess import call
 import sys
 args = sys.argv;
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                #/# # # # # # # # # # # # # # \#
+                #          CIRCUIT BOX         #
+                #\# # # # # # # # # # # # # # /#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # #
+#     LOGIC DIRECTORY           #
+# # # # # # # # # # # # # # # # #
+y = True                        #
+n = False                       #
+# # # # # # # # # # # # # # # # #
+
+# # # # # # # # # # # # # # # # #
+#     PARAMETER DIRECTORY       #
+# # # # # # # # # # # # # # # # #
+back_time     = float(args[1])  #
+r_l           = float(args[2])  #
+rad_ratio     = float(args[3])  #
+m_l           = float(args[4])  #
+mass_ratio    = float(args[5])  #
+# # # # # # # # # # # # # # # # #
+
+# # # # # # # # # # # # # # # # #
+#     MODEL DIRECTORY           #
+# # # # # # # # # # # # # # # # #
+plummer  = 1                    #
+NFW      = 2                    #
+gen_hern = 3                    #
+einasto  = 4                    #
+# # # # # # # # # # # # # # # # #
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
                 #/# # # # # # # # # # # # # # \#
                 #          Control Panel       #
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#args = [1, 0.2, 0.2, 12, 0.2]
-back_time     = float(args[1])
-r_l           = float(args[2])
-rad_ratio     = float(args[3]) 
-m_l           = float(args[4])
-mass_ratio    = float(args[5])
-
-
 #sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 sim_time      = [ "0", "2"]
 N             = 1
 M             = 0
-#back_time     = (args[0])
-#r_l            = (args[1])
-#rad_ratio = (args[2])
-#m_l          = (args[3])
-#mass_ratio    = (args[4])
 
 print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
 
 number_of_components = 2
 parse = True
+
+# # # # # # # # # # # # # # # # #
+#     CHOOSE YOUR MODELS        #
+# # # # # # # # # # # # # # # # #
+component1 = plummer
+component2 = plummer
+# # # # # # # # # # # # # # # # #
+
+
+
+# # # # # # # # # # # # # # # # #
 #     CHOOSE YOUR TESTS     #
-output = True
-tidal = False
-virial = True
+# # # # # # # # # # # # # # # # # 
+output         = y        #
+# # # # # # # # # # # # # # # # #
+tidal          = n        #
+# # # # # # # # # # # # # # # # #
+virial         = n        #
+# # # # # # # # # # # # # # # # #
+make_clean     = n        #
+# # # # # # # # # # # # # # # # #
+#         PLOTS?          #
+make_plots = False        #
+# # # # # # # # # # # # # # # # #
+#         SAVE?           #
+save_run = n              #
+# # # # # # # # # # # # # # # # #
+cleanse = False           #
+# # # # # # # # # # # # # # # # #
 
-#     PLOTS?    #
-make_plots = True
-
-#     SAVE?     #
-save_run = False
 folder_name = "orphan_parameters_2comp"
-cleanse = False #replace the directories
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 Nb  = 20000
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #for two component
 if(number_of_components == 2):    
     #Proper paramaters:
@@ -57,7 +95,7 @@ if(number_of_components == 2):
     
     print(m_d, m_l)
     print(r_d, r_l)
-    
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     
 #for one component
 if(number_of_components == 1):
@@ -89,14 +127,17 @@ if(parse == True):
 
 if(output == True):    
     print "performing tests"
-    os.system("g++ -std=c++11 output_test.cpp -o output_test")
+    #os.system("g++ -std=c++11 output_test.cpp -o output_test")
+    os.system("make all")
     for i in range(M, N):
-        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
+        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + component1 + " " + component2)
     
 if(virial == True):
-    os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
+    #os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
+    os.system("make all")
     for i in range(M, N):
-        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d )
+        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + component1 + " " + component2)
+    
 
 if(tidal == True):
     os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
@@ -110,3 +151,6 @@ if(save_run == True):
     os.system("./save_runs.py " + folder_name)
 if(cleanse == True):
     os.system("./cleanse.sh")
+
+if(make_clean == True):
+    os.system("make clean")
