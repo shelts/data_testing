@@ -18,7 +18,6 @@
 #define minusquarter(x) (inv( sqrt(sqrt(x))) )
 #define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
 
-#define sqrdel(x1, x2) sqr( (x1 - x2 ))
 
 struct bodies
 {

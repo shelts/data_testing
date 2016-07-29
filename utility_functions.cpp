@@ -90,9 +90,6 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
   
 }
 
-
-
-
 double randDouble(double low, double high)
 {
     double temp;
@@ -131,4 +128,41 @@ void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
     cmv[1] = cmv_y * inv(mass);
     cmv[2] = cmv_z * inv(mass);
 //     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
+}
+
+
+void com_correction(double * cm, double * cmv, struct bodies * b, int N)
+{
+    double r_corrected, v_corrected;
+    for(int i = 0; i < N; i++)
+    {
+        r_corrected = sqrt( sqrdif(cm[0], b[i].x)  + sqrdif(cm[1], b[i].y)  + sqrdif(cm[2], b[i].z) );
+        v_corrected = sqrt( sqrdif(cm[0], b[i].vx) + sqrdif(cm[1], b[i].vy) + sqrdif(cm[2], b[i].vz) );
+//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
+        b[i].x -= cm[0];
+        b[i].y -= cm[1];
+        b[i].z -= cm[2];
+        
+        b[i].vx -= cmv[0];
+        b[i].vy -= cmv[1];
+        b[i].vz -= cmv[2];
+        
+        b[i].r = r_corrected;
+        b[i].v = v_corrected;
+//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
+    }
+    
+}
+
+
+void init_comps(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2)
+{
+    light.type = model1;
+    light.rscale = rscale_l;
+    light.mass = mass_l;
+    
+    dark.type = model2;
+    dark.rscale = rscale_d;
+    dark.mass = mass_d;
+    
 }

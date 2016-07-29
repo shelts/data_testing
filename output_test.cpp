@@ -6,20 +6,6 @@ using namespace std;
 
 // theory functions
 
-
-void get(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2)
-{
-    light.type = model1;
-    light.rscale = rscale_l;
-    light.mass = mass_l;
-    
-    dark.type = model2;
-    dark.rscale = rscale_d;
-    dark.mass = mass_d;
-    
-}
-
-
 double density(double r, struct component & light, struct component & dark)
 {
     double light_comp = get_density(r, light);
@@ -57,29 +43,6 @@ double esc_vel(double r, struct component & light, struct component & dark)
     return escv;
 }
 
-
-void com_correction(double * cm, double * cmv, struct bodies * b, int N)
-{
-    double r_corrected, v_corrected;
-    for(int i = 0; i < N; i++)
-    {
-        r_corrected = sqrt( sqrdif(cm[0], b[i].x)  + sqrdif(cm[1], b[i].y)  + sqrdif(cm[2], b[i].z) );
-        v_corrected = sqrt( sqrdif(cm[0], b[i].vx) + sqrdif(cm[1], b[i].vy) + sqrdif(cm[2], b[i].vz) );
-//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
-        b[i].x -= cm[0];
-        b[i].y -= cm[1];
-        b[i].z -= cm[2];
-        
-        b[i].vx -= cmv[0];
-        b[i].vy -= cmv[1];
-        b[i].vz -= cmv[2];
-        
-        b[i].r = r_corrected;
-        b[i].v = v_corrected;
-//         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
-    }
-    
-}
 
 /*this is a binning routine, makes a histogram*/
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
@@ -479,7 +442,7 @@ int main (int argc, char * const argv[])
     
     component light;
     component dark;
-    get(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
+    init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
 
     
     string extension = simtime + "gy";

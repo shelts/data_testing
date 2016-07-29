@@ -8,45 +8,8 @@ using namespace std;
  * This code calculates the viral ratio for the entire system as a whole
  */
 
-double mass_enc(double r, double rscale, double mass)
+double kinetic(int N, struct bodies * b)
 {
-    double rcube = r * r * r;
-    double mass_enclosed= mass * rcube * pow( (r * r + rscale * rscale), -1.5);
-
-    return mass_enclosed;
-  
-}
-  
-void vel_dis(int N, struct bodies * b, string extension)
-{
-    double vx, vy, vz,v;
-    double x, y, z, r;
-    string s ="./test_output/vel_dis_" + extension + ".txt";
-
-    ofstream vels;
-    vels.open(s);
-    for(int i = 0; i < N; i++)
-    {
-        vx = b[i].vx;
-        vy = b[i].vy;
-        vz = b[i].vz;
-        v  = sqrt( sqr(vx) + sqr(vy) + sqr(vz) );
-        x  = b[i].x;
-        y  = b[i].y;
-        z  = b[i].z;
-        r  = sqrt( sqr(x) + sqr(y) + sqr(z));
-        vels<<v<<"\t"<<r<<endl;
-
-    }
-    vels.close();
-}
-  
-double kinetic(int N, struct bodies * b, double * cmv)
-{
-    string s;
-    //   if(type==1){s= string("energy/kinetic_e_light_"+extension+".dat");}
-    //   else {s= string("energy/kinetic_e_dark_"+extension+".dat");}
-
     double ke = 0.0;
     double vx, vy, vz;
     for(int i = 0; i < N; i++)
@@ -55,7 +18,7 @@ double kinetic(int N, struct bodies * b, double * cmv)
         vy = b[i].vy;
         vz = b[i].vz;
 
-        ke += 0.5 * b[i].mass * ( sqrdel(cmv[0], vx) + sqrdel(cmv[1], vy) + sqrdel(cmv[2], vz) );
+        ke += 0.5 * b[i].mass * in_quad(vx, vy, vz);
     }
     return ke;
 }
@@ -63,7 +26,6 @@ double kinetic(int N, struct bodies * b, double * cmv)
 
 double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
 {
-    string s;
     int  N = Nd + Nl;
     double pot = 0.0;
     double rad_diff = 0.0;
@@ -87,7 +49,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
             mass2 = b[j].mass;
             
             
-            rad_diff = sqrt( sqrdel(x1,x2) + sqrdel(y1, y2) + sqrdel(z1, z2) );
+            rad_diff = sqrt( sqrdif(x1, x2) + sqrdif(y1, y2) + sqrdif(z1, z2) );
             pot += -mass1 * mass2 / (rad_diff);
         
         }
@@ -96,7 +58,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     return pot;
 }
 
-double potential_func( struct bodies * b, int N, double * cm, struct component & light, struct component & dark)
+double potential_func( struct bodies * b, int N, struct component & light, struct component & dark)
 {
     double pot = 0.0;
     double x, y, z, r, mass;
@@ -107,7 +69,7 @@ double potential_func( struct bodies * b, int N, double * cm, struct component &
         x = b[i].x;
         y = b[i].y;
         z = b[i].z;
-        r = sqrt( sqrdel(cm[0], x) + sqrdel(cm[1], y) + sqrdel(cm[2], z));
+        r = in_quad(x, y, z);
         mass = b[i].mass;
 
         light_comp = get_potential(r, light);
@@ -134,13 +96,7 @@ int main (int argc, char * const argv[])
     component light;
     component dark;
     
-    light.type = model1;
-    light.rscale = rscale_l;
-    light.mass = mass_l;
-    
-    dark.type = model2;
-    dark.rscale = rscale_d;
-    dark.mass = mass_d;
+    init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
     
     int l = 0;
     int d = 1;
@@ -160,13 +116,15 @@ int main (int argc, char * const argv[])
     get_data(Nd, Nl, b, extension);
     
     com(b, N, cm, cmv, mass);
+    com_correction(cm, cmv, b, N);
+    
     
     printf("calculating virial ratio");
     /*calculates kinetic energy relative to centor of mass*/
-    ke = kinetic(N, b, cmv);
+    ke = kinetic(N, b);
     printf("..");
     /*calculates potential energy relative to centor of mass*/
-    pot_func = potential_func(b, N, cm, light, dark);
+    pot_func = potential_func(b, N, light, dark);
     printf("..");
     /*particle particle potential energy*/
     pot_pp = potential_energy(Nl, Nd, b, extension);
@@ -182,7 +140,6 @@ int main (int argc, char * const argv[])
     fprintf(file, "%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
     fclose(file);
 
-//     vel_dis(N, b, extension);
 
    
 }
