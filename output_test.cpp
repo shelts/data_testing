@@ -1,145 +1,26 @@
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <tgmath.h>
-#include <cstdlib>
-#include <stdio.h>
-#include <stdlib.h>
-#include <typeinfo>
-#include <vector>
-#include <string>
-#include <ctime>
 #include "pots_dens.h"
 #include "structs.h"
+#include "utility_functions.h"
 using namespace std;
 
-#define inv(x)  ((double) 1.0 / (x))
-#define seventh(x) ((x) * (x) * (x) * (x) * (x) * (x) * (x))
-#define sixth(x) ((x) * (x) * (x) * (x) * (x) * (x))
-#define fourth(x) ((x) * (x) * (x) * (x))
-#define fifth(x) ((x) * (x) * (x) * (x) * (x))
-#define cube(x) ((x) * (x) * (x))
-#define sqr(x)  ((x) * (x))
-#define sqrdif(x, y) (sqr( (x) - (y) ))
 
-#define seventhhalfs(x) ( sqrt(seventh(x) ) )
-#define fivehalves(x)   ( sqrt(fifth(x) ) )
-#define threehalves(x)  ( sqrt(cube(x)  ) )
-
-
-#define minusfivehalves(x) (inv(fivehalves(x)))
-#define minusthreehalves(x) (inv(threehalves(x)) )
-#define minushalf(x) ( inv(sqrt(x)) )
-#define minusquarter(x) (inv( sqrt(sqrt(x))) )
-#define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
-
-//   struct bodies
-//   {
-//     double x;
-//     double y;
-//     double z;
-//     double r;
-//     double l, b, r;
-//     double vx, vy, vz, v;
-//     double mass;
-//     int type;
-//   };
-// 
-// struct dwarf_component
-// {
-//     int type;
-//     double mass;
-//     double rscale;
-// };
-
-double randDouble(double low, double high)
-{
-    double temp;
-/* calculate the random number & return it */
-    temp = ((double) rand() / (static_cast<double>(RAND_MAX) + 1.0))* (high - low) + low;
-    return temp;
-}
-
-
-/*This gets the number of positional data from the raw data files*/
-int get_size(int type, string extension)
-{
-    string s;
-    if(type == 0){s = string("./raw_data/light_matter_"+extension+".dat");}
-    else {s = string("./raw_data/dark_matter_"+extension+".dat");}
-    
-    int N = 0;
-    double datax;
-    /*getting the length of the data set*/
-    ifstream length;
-    length.open (s);
-    
-    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
-    {
-    //       cout<<datax<<endl;
-        N++;
-    }
-    length.close();
-
-    return N;
-}
-
-void get_data(int Nd, int Nl, struct bodies * b, string extension)
-{
-  
-    string s;
-    double datax,datay,dataz;
-    double datal, datab, datar;
-    double datavx,datavy,datavz, datam;
-    int i = 0;
-    int N = Nd + Nl;
-    s = string("raw_data/light_matter_" + extension + ".dat");
-    ifstream data;
-    data.open(s);
-    int type_dark = 1;
-    int type_light = 0;
-    
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
-    {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].r    = in_quad(datax, datay, datay);
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].v    = in_quad(datavx, datavy, datavy);
-        b[i].mass = datam;
-        b[i].type = type_dark;
-        i++;
-    }
-    data.close();
-
-    s = string("raw_data/dark_matter_" + extension + ".dat");
-    data.open(s);
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
-    {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].r    = in_quad(datax, datay, datay);
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].v    = in_quad(datavx, datavy, datavy);
-        b[i].mass = datam;
-        b[i].type = type_light;
-        i++;
-    }
-    data.close();
-  
-}
-
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory functions
 
-double density(double r, struct dwarf_component  light, struct dwarf_component  dark)
+
+void get(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2)
+{
+    light.type = model1;
+    light.rscale = rscale_l;
+    light.mass = mass_l;
+    
+    dark.type = model2;
+    dark.rscale = rscale_d;
+    dark.mass = mass_d;
+    
+}
+
+
+double density(double r, struct component & light, struct component & dark)
 {
     double light_comp = get_density(r, light);
     double dark_comp  = get_density(r, dark);
@@ -147,7 +28,7 @@ double density(double r, struct dwarf_component  light, struct dwarf_component  
 }
 
 
-double potential(double r, struct dwarf_component  light, struct dwarf_component  dark)
+double potential(double r, struct component & light, struct component & dark)
 {
     double light_comp = get_potential(r, light);
     double dark_comp  = get_potential(r, dark);
@@ -155,7 +36,7 @@ double potential(double r, struct dwarf_component  light, struct dwarf_component
 }
 
 
-double distribution(double mass, double r_scale, double v, double r, struct dwarf_component * light, struct dwarf_component * dark)
+double distribution(double mass, double r_scale, double v, double r, struct component & light, struct component & dark)
 {
     
     double pi  = 4.0 * atan(1.0);
@@ -170,43 +51,12 @@ double distribution(double mass, double r_scale, double v, double r, struct dwar
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // service functions
 
-double esc_vel(double r, struct dwarf_component * light, struct dwarf_component * dark)
+double esc_vel(double r, struct component & light, struct component & dark)
 {
     double escv = sqrt( fabs(2.0 * potential( r, light, dark) ) );
     return escv;
 }
 
-
-void com(double * cm, double * cmv, struct bodies * b,  int N, double mass)
-{
-    double cm_x = 0.0;
-    double cm_y = 0.0;
-    double cm_z = 0.0;
-    double cmv_x = 0.0;
-    double cmv_y = 0.0;
-    double cmv_z = 0.0;
-
-    for(int i = 0; i < N; i++)
-    {
-        cm_x += b[i].mass * b[i].x;
-        cm_y += b[i].mass * b[i].y;
-        cm_z += b[i].mass * b[i].z;
-        
-        cmv_x += b[i].mass * b[i].vx;
-        cmv_y += b[i].mass * b[i].vy;
-        cmv_z += b[i].mass * b[i].vz;
-    }
-    
-    
-    cm[0] = cm_x * inv(mass);
-    cm[1] = cm_y * inv(mass);
-    cm[2] = cm_z * inv(mass);
-    
-    cmv[0] = cmv_x * inv(mass);
-    cmv[1] = cmv_y * inv(mass);
-    cmv[2] = cmv_z * inv(mass);
-//     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
-}
 
 void com_correction(double * cm, double * cmv, struct bodies * b, int N)
 {
@@ -315,7 +165,7 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory checking functions
-void single_density_theory(double bin_width, struct dwarf_component * light, struct dwarf_component * dark, double masspl, double masspd)
+void single_density_theory(double bin_width, struct component & light, struct component & dark, double masspl, double masspd)
 {
     double w = 0.0;
     double pi = 4.0 * atan(1.0);
@@ -379,7 +229,7 @@ void angle_theory( double bin_width, double * args)
     fclose(ph);
 }
 
-void vel_distribution_theory(double bin_width, int number_of_bins, string extension, struct bodies * b,  int Nl, int Nd, struct dwarf_component * light, struct dwarf_component * dark)
+void vel_distribution_theory(double bin_width, int number_of_bins, string extension, struct bodies * b,  int Nl, int Nd, struct component & light, struct component & dark)
 {
     //this function only works if both components of the model are the same. 
     //I.E. the two component model is essentially a one component model.
@@ -623,20 +473,14 @@ int main (int argc, char * const argv[])
     double rscale_d                    = atof(argv[3]);
     double mass_l                      = atof(argv[4]);
     double mass_d                      = atof(argv[5]);
-    double model1                      = atof(argv[6]);
-    double model2                      = atof(argv[7]);
+    int model1                         = atof(argv[6]);
+    int model2                         = atof(argv[7]);
     
     
-    dwarf_component light;
-    dwarf_component dark;
-    
-    light.type = model1;
-    light.rscale = rscale_l;
-    light.mass = mass_l;
-    
-    dark.type = model2;
-    dark.rscale = rscale_d;
-    dark.mass = mass_d;
+    component light;
+    component dark;
+    get(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
+
     
     string extension = simtime + "gy";
     
@@ -666,8 +510,8 @@ int main (int argc, char * const argv[])
     get_data(Nd, Nl, b, extension);
     
     /*get center of mass*/
-    double mass = light.mass + dark.mass;
-    com(cm, cmv, b, N, mass);
+    double mass = mass_l + mass_d;
+    com(b, N, cm, cmv, mass);
     com_correction(cm, cmv, b, N);
     
     printf(".");//actual 
@@ -706,23 +550,5 @@ int main (int argc, char * const argv[])
     
     
 //     double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
-    FILE * data;
-    data = fopen("2.out", "w");
-    double pot, den;
-    double v_mx1, v_mx2, v_esc;
-    double rtmp = 0.1;
-    while(1)
-    {
-        v_esc = esc_vel(rtmp, light, dark);
-        pot = density(rtmp, light, dark);
-        den = potential(rtmp, light, dark);
-        v_mx1 = (2.0 / 3.0) * sqrt( fabs( potential(rtmp, light, dark) ));
-        v_mx2 = (sqrt(2.0) / 3.0) * v_esc;
-        fprintf(data, "%0.15f\t%0.15f\t%0.15f\t%0.15f\t%0.15f\n", pot, den, rtmp, v_mx1, v_mx2);
-        rtmp += .1;
-        if(rtmp > 10){break;}
-        
-    }
-    fclose(data);
     printf("done.\n");
 }

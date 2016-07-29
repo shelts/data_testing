@@ -66,7 +66,7 @@ output         = y        #
 # # # # # # # # # # # # # # # # #
 tidal          = n        #
 # # # # # # # # # # # # # # # # #
-virial         = n        #
+virial         = y        #
 # # # # # # # # # # # # # # # # #
 make_clean     = n        #
 # # # # # # # # # # # # # # # # #
@@ -112,7 +112,8 @@ rscale_l = str( r_l )
 rscale_d = str( r_d )
 mass_l   = str( m_l )
 mass_d   = str( m_d )
-
+comp1    = str(component1)
+comp2    = str(component2)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
                 #/# # # # # # # # # # # # # # \#
                 #          Engine Room         #
@@ -130,13 +131,13 @@ if(output == True):
     #os.system("g++ -std=c++11 output_test.cpp -o output_test")
     os.system("make all")
     for i in range(M, N):
-        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + component1 + " " + component2)
+        os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
     
 if(virial == True):
     #os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
     os.system("make all")
     for i in range(M, N):
-        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + component1 + " " + component2)
+        os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
     
 
 if(tidal == True):

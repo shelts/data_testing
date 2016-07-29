@@ -1,4 +1,4 @@
+using namespace std;
+double get_potential(double r, struct component & model);
 
-double get_potential(double r, const struct dwarf_component model);
-
-double get_density(double r, const struct dwarf_component model);
+double get_density(double r, struct component & model);

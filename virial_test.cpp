@@ -1,144 +1,13 @@
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <tgmath.h>
-#include <cstdlib>
-#include <stdio.h>
-#include <stdlib.h>
-#include <typeinfo>
-#include <vector>
-#include <string>
 #include "pots_dens.h"
+#include "structs.h"
+#include "utility_functions.h"
 using namespace std;
 
-#define inv(x)  ((double) 1.0 / (x))
-#define sqr(x) ( x * x )
-#define sqrdel(x1, x2) sqr( (x1 - x2 ))
 
 /*
  * This code calculates the viral ratio for the entire system as a whole
  */
 
-//   struct bodies
-//   {
-//     double x;
-//     double y;
-//     double z;
-//     double l, b, r;
-//     double vx, vy, vz;
-//     double mass;
-//     int type;
-//   };
-
-/*This gets the number of positional data from the raw data files*/
-int get_size(int type, string extension)
-{
-    string s;
-    
-    if(type == 0){s = string("./raw_data/light_matter_"+extension+".dat");}
-    else {s = string("./raw_data/dark_matter_"+extension+".dat");}
-    
-    int N = 0;
-    double datax;
-    /*getting the length of the data set*/
-    ifstream length;
-    length.open (s);
-    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
-    {
-    //       cout<<datax<<endl;
-        N++;
-    }
-    length.close();
-
-    return N;
-}
-
-
-void get_data(int Nd, int Nl, struct bodies * b, string extension)
-{
-  
-    string s;
-    double datax,datay,dataz;
-    double datal, datab, datar;
-    double datavx,datavy,datavz, datam;
-    int i = 0;
-    int N = Nd + Nl;
-    s = string("raw_data/dark_matter_" + extension + ".dat");
-    ifstream data;
-    data.open (s);
-    int type_dark = 1;
-    int type_light = 0;
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
-    {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].l    = datal;
-        b[i].b    = datab;
-        b[i].r    = datar;
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].mass = datam;
-        b[i].type = type_dark;
-        i++;
-    }
-    data.close();
-
-    s = string("raw_data/light_matter_" + extension + ".dat");
-    ifstream data2;
-    data2.open (s);
-    while(data2>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
-    {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].l    = datal;
-        b[i].b    = datab;
-        b[i].r    = datar;
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].mass = datam;
-        b[i].type = type_light;
-        i++;
-    }
-    data2.close();
-  
-}
-  
-  
-void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
-{
-    double cm_x = 0.0;
-    double cm_y = 0.0;
-    double cm_z = 0.0;
-    double cmv_x = 0.0;
-    double cmv_y = 0.0;
-    double cmv_z = 0.0;
-    
-    for(int i = 0; i < N; i++)
-    {
-        cm_x += b[i].mass * b[i].x;
-        cm_y += b[i].mass * b[i].y;
-        cm_z += b[i].mass * b[i].z;
-        
-        cmv_x += b[i].mass * b[i].vx;
-        cmv_y += b[i].mass * b[i].vy;
-        cmv_z += b[i].mass * b[i].vz;
-    }
-    
-    cm[0] = cm_x * inv(mass);
-    cm[1] = cm_y * inv(mass);
-    cm[2] = cm_z * inv(mass);
-    
-    cmv[0] = cmv_x * inv(mass);
-    cmv[1] = cmv_y * inv(mass);
-    cmv[2] = cmv_z * inv(mass);
-//     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
-}
-  
-  
 double mass_enc(double r, double rscale, double mass)
 {
     double rcube = r * r * r;
@@ -152,7 +21,7 @@ void vel_dis(int N, struct bodies * b, string extension)
 {
     double vx, vy, vz,v;
     double x, y, z, r;
-    string s ="./test_output/vel_dis_"+extension+".txt";
+    string s ="./test_output/vel_dis_" + extension + ".txt";
 
     ofstream vels;
     vels.open(s);
@@ -227,14 +96,12 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     return pot;
 }
 
-double potential_func( struct bodies * b, double * args, int N, double * cm, int comp1, int comp2)
+double potential_func( struct bodies * b, int N, double * cm, struct component & light, struct component & dark)
 {
     double pot = 0.0;
     double x, y, z, r, mass;
     double light_comp, dark_comp;
-    double pot2;
-    FILE * data;
-    data = fopen("v1.out", "a");
+    
     for(int i = 0; i < N; i++)
     {
         x = b[i].x;
@@ -243,15 +110,12 @@ double potential_func( struct bodies * b, double * args, int N, double * cm, int
         r = sqrt( sqrdel(cm[0], x) + sqrdel(cm[1], y) + sqrdel(cm[2], z));
         mass = b[i].mass;
 
-        light_comp = get_potential(r, args, comp1);
-        dark_comp  = get_potential(r, args, comp2);
+        light_comp = get_potential(r, light);
+        dark_comp  = get_potential(r, dark);
         
-        pot += -mass * (light_comp + dark_comp);
+        pot += mass * (light_comp + dark_comp);
         
-        pot2 = -mass * (mass_l/sqrt(sqr(r) + sqr(rscale_l)) +  mass_d/sqrt(sqr(r) + sqr(rscale_d)) );
-        fprintf(data, "%0.15f\t%0.15f\n", pot, pot2);
     }
-    fclose(data);
     return pot / 2.0;
 }
 
@@ -267,9 +131,19 @@ int main (int argc, char * const argv[])
     int model2                     = atof(argv[7]);
     
     string extension = simtime + "gy";
+    component light;
+    component dark;
+    
+    light.type = model1;
+    light.rscale = rscale_l;
+    light.mass = mass_l;
+    
+    dark.type = model2;
+    dark.rscale = rscale_d;
+    dark.mass = mass_d;
+    
     int l = 0;
     int d = 1;
-    double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
     int Nl = get_size(0, extension);//getting the size of the dark matter data
     int Nd = get_size(1, extension);//getting the size of the light matter data
 
@@ -292,7 +166,7 @@ int main (int argc, char * const argv[])
     ke = kinetic(N, b, cmv);
     printf("..");
     /*calculates potential energy relative to centor of mass*/
-    pot_func = potential_func(b, args, N, cm, comp1, comp2);
+    pot_func = potential_func(b, N, cm, light, dark);
     printf("..");
     /*particle particle potential energy*/
     pot_pp = potential_energy(Nl, Nd, b, extension);
