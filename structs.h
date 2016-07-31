@@ -17,7 +17,7 @@
 #define minushalf(x) ( inv(sqrt(x)) )
 #define minusquarter(x) (inv( sqrt(sqrt(x))) )
 #define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
-
+#define pi ( 4.0 * atan(1.0) )
 
 struct bodies
 {

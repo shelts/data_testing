@@ -25,7 +25,7 @@ double potential(double r, struct component & light, struct component & dark)
 double distribution(double mass, double r_scale, double v, double r, struct component & light, struct component & dark)
 {
     
-    double pi  = 4.0 * atan(1.0);
+//     double pi  = 4.0 * atan(1.0);
     double coeff = 24.0 * sqrt(2.0) * inv( 7.0 * cube(pi) );
     double energy = -potential(r, light, dark) - 0.5 * sqr(v) ;
     
@@ -131,7 +131,7 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
 void single_density_theory(double bin_width, struct component & light, struct component & dark, double masspl, double masspd)
 {
     double w = 0.0;
-    double pi = 4.0 * atan(1.0);
+//     double pi = 4.0 * atan(1.0);
     
     double de, de2, de3;
     FILE * rho;
@@ -158,7 +158,7 @@ void angle_theory( double bin_width, double * args)
     double masspl   = args[4]; 
     double masspd   = args[5];
     
-    double pi = 4.0 * atan(1.0);
+//     double pi = 4.0 * atan(1.0);
     double theta_l, theta_d, theta;
     double phi_l, phi_d, phi;
     FILE * th;
