@@ -1,3 +1,4 @@
+/* Copyright (c) 2016 Siddhartha Shelton */
 
 void get_data(int Nd, int Nl, struct bodies * b, string extension);
 

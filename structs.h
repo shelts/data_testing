@@ -1,3 +1,4 @@
+/* Copyright (c) 2016 Siddhartha Shelton */
 #include <iostream>
 #include <fstream>
 #include <cmath>

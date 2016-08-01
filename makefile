@@ -1,3 +1,4 @@
+# /* Copyright (c) 2016 Siddhartha Shelton */
 CC = g++
 CFLAGS = -std=c++11
 all: output_test virial_test

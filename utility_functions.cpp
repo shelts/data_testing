@@ -1,3 +1,4 @@
+/* Copyright (c) 2016 Siddhartha Shelton */
 #include "structs.h"
 #include "utility_functions.h"
 #include "pots_dens.h"
