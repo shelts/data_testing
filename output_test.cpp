@@ -1,8 +1,7 @@
 #include "pots_dens.h"
 #include "structs.h"
 #include "utility_functions.h"
-using namespace std;
-
+#include "dist_funcs.h"
 
 // theory functions
 
@@ -21,110 +20,6 @@ double potential(double r, struct component & light, struct component & dark)
     return (light_comp + dark_comp);
 }
 
-
-double distribution(double mass, double r_scale, double v, double r, struct component & light, struct component & dark)
-{
-    
-//     double pi  = 4.0 * atan(1.0);
-    double coeff = 24.0 * sqrt(2.0) * inv( 7.0 * cube(pi) );
-    double energy = -potential(r, light, dark) - 0.5 * sqr(v) ;
-    
-    double f = v * v * coeff * inv( fourth(mass) ) * sqr(r_scale) * seventhhalfs(fabs(energy));
-    
-    return f;
-    
-}
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-// service functions
-
-double esc_vel(double r, struct component & light, struct component & dark)
-{
-    double escv = sqrt( fabs(2.0 * potential( r, light, dark) ) );
-    return escv;
-}
-
-
-/*this is a binning routine, makes a histogram*/
-void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
-{
-    // binN=number of bins
-    //binwidthsize of bins
-    double bins[binN];
-    double range = 0;
-    double upper = binN * binwidth;
-    
-    /*binning*/
-
-    /*initializing bins*/
-    for(int i = 0; i != binN; i++)
-    {bins[i] = 0;}
-    ofstream bin;
-    bin.open (s);
-    
-    for(int j = 0; j < N; j++)/*tests one of the numbers at a time*/
-    {
-        
-        range = 0;/*resets the range so that the bins can be tested again against the number*/
-        if(type == 1)
-        {
-            range = -4.0;
-            upper = 4.0;
-        }
-        if(type == 2 )
-        {
-            range = -15.0;
-            upper = 0.0;
-        }
-        
-        for(int i = 0; i < binN; i++)/*for each bin, the number is tested*/
-        {
-            if( ( range + binwidth ) < upper)
-            {
-                
-                /*this if statement tests to see if the random number is in that
-                bin range.*/
-                if ( x[j] >= range && x[j] < ( range + binwidth ) )
-                {
-                    bins[i] = bins[i] + 1;
-                    break;
-                }
-                range = range + binwidth;/*this statement changes the range of testing
-                so that a new new bin can be checked against the number*/
-            }
-            else if( (range + binwidth) == upper)/*includes the upper interval*/
-            {
-                if(x[j] >= range && x[j] <= (range + binwidth))
-                {
-                    bins[i] = bins[i] + 1;
-                    break;
-                }
-                range = range + binwidth;
-            }
-
-        }
-    }
-
-
-    double total = 0;
-    double binrange = 0;
-    
-    if(type == 1)
-    {
-        binrange = -4.0;
-    }
-    
-    if(type == 2 )
-    {
-        binrange = -15.0;
-    }
-    
-    for(int i = 0; i != binN; i++)
-    {
-        binrange = binrange + binwidth;
-        bin<<bins[i]<<"\t"<<binrange<<endl;
-    }
-    bin.close();
-}
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 // theory checking functions
@@ -203,8 +98,6 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     int N = Nl + Nd;
     int countl = 0;
     int countd = 0;
-    double mass = light.mass + dark.mass;
-    double rscale = light.rscale; //it doesn't matter which since they should be the  same
     
     double v_l[Nl];
     double v_d[Nd];
@@ -219,13 +112,13 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
         v_esc = esc_vel(r, light, dark);
 //         v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, args, comp1, comp2) ));
         v_mx = (sqrt(2.0) / 3.0) * v_esc;
-        fmax = distribution(mass, rscale, v_mx, r, light, dark);
+        fmax = dist_func(v_mx, r, light, dark);
         
         while(1)
         {
             v = randDouble(0.0, v_esc);
             u = randDouble(0.0, 1.0);
-            f = distribution(mass, rscale, v, r, light, dark);
+            f = dist_func(v, r, light, dark);
             
 //             printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
             if(fabs(f / fmax) > u)

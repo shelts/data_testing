@@ -1,17 +1,6 @@
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <tgmath.h>
-#include <cstdlib>
-#include <stdio.h>
-#include <stdlib.h>
-#include <typeinfo>
-#include <vector>
-#include <string>
-#include <ctime>
 #include "structs.h"
 #include "utility_functions.h"
-
+#include "pots_dens.h"
 
 /*This gets the number of positional data from the raw data files*/
 int get_size(int type, string extension)
@@ -36,7 +25,7 @@ int get_size(int type, string extension)
     return N;
 }
 
-
+/*this gets the actual data*/
 void get_data(int Nd, int Nl, struct bodies * b, string extension)
 {
   
@@ -90,6 +79,8 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
   
 }
 
+
+/*quick random number generator*/
 double randDouble(double low, double high)
 {
     double temp;
@@ -98,7 +89,7 @@ double randDouble(double low, double high)
     return temp;
 }
 
-
+/*calculates the center of mass and center of momentum and stores it into arrays*/
 void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
 {
     double cm_x = 0.0;
@@ -130,7 +121,7 @@ void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
 //     printf("%f\t%f\t%f\t%f\t%f\t%f\n", cm[0], cm[1], cm[2], cmv[0], cmv[1], cmv[2]);
 }
 
-
+/*used to correct for center of mass and momentum drift*/
 void com_correction(double * cm, double * cmv, struct bodies * b, int N)
 {
     double r_corrected, v_corrected;
@@ -154,7 +145,7 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N)
     
 }
 
-
+/*to initialize the structs for the two components*/
 void init_comps(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2)
 {
     light.type = model1;
@@ -165,4 +156,98 @@ void init_comps(struct component & light, struct component & dark, double rscale
     dark.rscale = rscale_d;
     dark.mass = mass_d;
     
+}
+
+/*escape velocity*/
+double esc_vel(double r, struct component & light, struct component & dark)
+{
+    double light_comp = get_potential(r, light);
+    double dark_comp  = get_potential(r, dark);
+    double potential =  (light_comp + dark_comp);
+    
+    double escv = sqrt( fabs(2.0 * potential ) );
+    return escv;
+}
+
+
+/*this is a binning routine, makes a histogram*/
+void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
+{
+    // binN=number of bins
+    //binwidthsize of bins
+    double bins[binN];
+    double range = 0;
+    double upper = binN * binwidth;
+    
+    /*binning*/
+
+    /*initializing bins*/
+    for(int i = 0; i != binN; i++)
+    {bins[i] = 0;}
+    ofstream bin;
+    bin.open (s);
+    
+    for(int j = 0; j < N; j++)/*tests one of the numbers at a time*/
+    {
+        
+        range = 0;/*resets the range so that the bins can be tested again against the number*/
+        if(type == 1)
+        {
+            range = -4.0;
+            upper = 4.0;
+        }
+        if(type == 2 )
+        {
+            range = -15.0;
+            upper = 0.0;
+        }
+        
+        for(int i = 0; i < binN; i++)/*for each bin, the number is tested*/
+        {
+            if( ( range + binwidth ) < upper)
+            {
+                
+                /*this if statement tests to see if the random number is in that
+                bin range.*/
+                if ( x[j] >= range && x[j] < ( range + binwidth ) )
+                {
+                    bins[i] = bins[i] + 1;
+                    break;
+                }
+                range = range + binwidth;/*this statement changes the range of testing
+                so that a new new bin can be checked against the number*/
+            }
+            else if( (range + binwidth) == upper)/*includes the upper interval*/
+            {
+                if(x[j] >= range && x[j] <= (range + binwidth))
+                {
+                    bins[i] = bins[i] + 1;
+                    break;
+                }
+                range = range + binwidth;
+            }
+
+        }
+    }
+
+
+    double total = 0;
+    double binrange = 0;
+    
+    if(type == 1)
+    {
+        binrange = -4.0;
+    }
+    
+    if(type == 2 )
+    {
+        binrange = -15.0;
+    }
+    
+    for(int i = 0; i != binN; i++)
+    {
+        binrange = binrange + binwidth;
+        bin<<bins[i]<<"\t"<<binrange<<endl;
+    }
+    bin.close();
 }

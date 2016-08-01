@@ -1,7 +1,6 @@
 #include "pots_dens.h"
 #include "structs.h"
 #include "utility_functions.h"
-using namespace std;
 
 
 /*

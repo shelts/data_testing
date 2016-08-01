@@ -1,3 +1,16 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <tgmath.h>
+#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
+#include <typeinfo>
+#include <vector>
+#include <string>
+#include <ctime>
+using namespace std;
+
 #define inv(x)  ((double) 1.0 / (x))
 #define seventh(x) ((x) * (x) * (x) * (x) * (x) * (x) * (x))
 #define sixth(x) ((x) * (x) * (x) * (x) * (x) * (x))
