@@ -2,18 +2,20 @@
 CC = g++
 CFLAGS = -std=c++11
 all: output_test virial_test
+INC_DIR = -I/headers/
+SRC_DIR = -I/src/
+HEADERS = pots_dens.h dist_funcs.h
+DEPS = structs.h  utility_functions.h $(HEADERS)
+SRC = utility_functions.cpp pots_dens.cpp dist_funcs.cpp 
 
-HEADERS = ./headers/pots_dens.h ./headers/dist_funcs.h
-DEPS = ./headers/structs.h  ./headers/utility_functions.h $(HEADERS)
-CPPS = utility_functions.cpp pots_dens.cpp dist_funcs.cpp 
 
 
-output_test: $(DEPS) output_test.cpp $(CPPS) 
-	$(CC)  $(CFLAGS) output_test.cpp $(CPPS) -o output_test
+output_test: $(DEPS) output_test.cpp $(SRC) 
+	$(CC)  $(CFLAGS) output_test.cpp $(SRC) -o output_test
 
-virial_test: $(DEPS) virial_test.cpp $(CPPS) 
-	$(CC) $(CFLAGS) virial_test.cpp $(CPPS) -o virial_test
+virial_test: $(DEPS) virial_test.cpp $(SRC) 
+	$(CC) $(CFLAGS) virial_test.cpp $(SRC) -o virial_test
 
 
 clean:
-	$(RM)  *.o *~ output_test virial_test
+	$(RM)  *.o *~ output_test virial_test 
