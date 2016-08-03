@@ -40,7 +40,7 @@ double nfw_distribution(double v, double r, struct component & light, struct com
 /*                             GENERAL HERNQUIST                                                                         */
 double gen_hern_distribution(double v, double r, struct component & light, struct component & dark)
 {
-    double rscale = light.rscale
+    double rscale = light.rscale;
     double mass = light.mass + dark.mass; 
     double light_comp = get_potential(r, light);
     double dark_comp  = get_potential(r, dark);
