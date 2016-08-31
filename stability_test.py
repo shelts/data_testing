@@ -31,7 +31,7 @@ mass_ratio    = float(args[5])  #
 #     MODEL DIRECTORY           #
 # # # # # # # # # # # # # # # # #
 plummer  = 1                    #
-NFW      = 2                    #
+nfw      = 2                    #
 gen_hern = 3                    #
 einasto  = 4                    #
 # # # # # # # # # # # # # # # # #
@@ -54,8 +54,26 @@ parse = True
 # # # # # # # # # # # # # # # # #
 #     CHOOSE YOUR MODELS        #
 # # # # # # # # # # # # # # # # #
-component1 = plummer
-component2 = plummer
+component1 = nfw
+component2 = nfw
+
+if(component1 == plummer):
+    name1 = "plummer"
+elif(component1 == nfw):
+    name1 = "nfw"
+elif(component1 == gen_hern):
+    name1 = "hern"
+elif(component1 == einasto):
+    name1 = "einasto"
+    
+if(component2 == plummer):
+    name2 = "plummer"
+elif(component2 == nfw):
+    name2 = "nfw"
+elif(component2 == gen_hern):
+    name2 = "hern"
+elif(component2 == einasto):
+    name2 = "einasto"
 # # # # # # # # # # # # # # # # #
 
 
@@ -72,17 +90,16 @@ virial         = y        #
 make_clean     = n        #
 # # # # # # # # # # # # # # # # #
 #         PLOTS?          #
-make_plots = False        #
+make_plots     = y        #
 # # # # # # # # # # # # # # # # #
 #         SAVE?           #
-save_run = n              #
+save_run       = n        #
 # # # # # # # # # # # # # # # # #
-cleanse = False           #
+cleanse        = False    #
 # # # # # # # # # # # # # # # # #
 
 folder_name = "orphan_parameters_2comp"
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-Nb  = 20000
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #for two component
 if(number_of_components == 2):    
@@ -92,7 +109,10 @@ if(number_of_components == 2):
     
     r_d = rscale_t  * (1.0 - rad_ratio)
     m_d = dwarfMass * (1.0 - mass_ratio)
-    
+    #r_d = 2
+    #r_l = r_d
+    #m_d = 10
+    #m_l = m_d
     
     print(m_d, m_l)
     print(r_d, r_l)
@@ -108,7 +128,6 @@ if(number_of_components == 1):
 
 
 #we're all full of strings...
-nbody    = str( Nb )
 rscale_l = str( r_l )
 rscale_d = str( r_d )
 mass_l   = str( m_l )
@@ -125,7 +144,7 @@ comp2    = str(component2)
 if(parse == True):
     print "parsing data"
     for i in range(M, N):
-        os.system("python outputparser.py ./sim_outputs/output_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
+        os.system("python outputparser.py ./sim_outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
 
 if(output == True):    
     print "performing tests"
@@ -136,7 +155,7 @@ if(output == True):
     
 if(virial == True):
     #os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
-    os.system("make all")
+    #os.system("make all")
     for i in range(M, N):
         os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
     

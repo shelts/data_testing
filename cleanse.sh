@@ -24,6 +24,7 @@ mkdir phi
 mkdir vel_theta
 mkdir vel_phi
 mkdir rad
+mkdir rad_profile
 mkdir pot
 
 mkdir vel_dist

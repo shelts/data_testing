@@ -32,6 +32,9 @@ using namespace std;
 #define minusquarter(x) (inv( sqrt(sqrt(x))) )
 #define in_quad(x,y,z) (sqrt( x * x + y * y + z * z))
 #define pi ( 4.0 * atan(1.0) )
+#define pi_4_3 (4.0 * pi / 3.0)
+#define hubble ((double) 73.8 / 1000.0) //km/s/kpc
+#define pcrit ((double) 3.0 * sqr(hubble) / (8.0 * pi) )
 
 struct bodies
 {

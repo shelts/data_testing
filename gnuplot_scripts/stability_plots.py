@@ -23,7 +23,7 @@ if(plot_both == True):
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-##RADIUS
+##RADIUS binned
 theory_den = "~/Desktop/research/data_testing/theory/theory_den.dat"
 light      = "~/Desktop/research/data_testing/binned_data/light_matter_bins_"
 dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
@@ -57,8 +57,8 @@ f.write("set terminal jpeg\n")
 f.write("set key on\n")
 f.write("set ylabel 'counts'\n")
 f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:4]\n")
-f.write("set yrange[0:6500]\n\n\n")
+f.write("set xrange[0:30]\n")
+f.write("set yrange[0:1000]\n\n\n")
 
 for i in range(M, N):
     if(plot_light == True):
@@ -84,6 +84,45 @@ for i in range(M, N):
 
 f.close()
 
+
+##RADIUS density profile
+theory_den = "~/Desktop/research/data_testing/theory/theory_den.dat"
+light      = "~/Desktop/research/data_testing/binned_data/light_matter_bins_"
+dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
+both       = "~/Desktop/research/data_testing/binned_data/both_matter_bins_"
+
+f = open('stability_rad_profile.gnuplot', 'w')
+f.write("reset\n")
+f.write("set terminal jpeg\n")
+f.write("set key on\n")
+f.write("set ylabel 'counts'\n")
+f.write("set xlabel 'radius (kpc)'\n")
+f.write("set xrange[0:30]\n")
+f.write("set yrange[0:1.8]\n\n\n")
+
+for i in range(M, N):
+    if(plot_light == True):
+        p = light + sim_time[i] + "gy.dat"
+        f.write("set output \"~/Desktop/research/data_testing/plots/rad_profile/radii_distribution_light_profile.jpeg\" \n")
+        f.write("set title 'Histogram of Light Matter Density Profile\n")
+        f.write("plot '" + theory_den + "' using 1:5 with lines title 'both', '" + theory_den + "' using 1:6 with lines title 'light', '" + theory_den + "' using 1:7 with lines title 'dark' \n\n") 
+
+    if(plot_dark == True):
+        p = dark + sim_time[i] + "gy.dat"
+        f.write("set output \"~/Desktop/research/data_testing/plots/rad_profile/radii_distribution_dark_profile.jpeg\" \n")
+        f.write("set title 'Histogram of Light Matter Density Profile\n")
+        f.write("plot '" + theory_den + "' using 1:5 with lines title 'both', '" + theory_den + "' using 1:6 with lines title 'light', '" + theory_den + "' using 1:7 with lines title 'dark' \n\n") 
+
+    if(plot_both == True):
+        p = both + sim_time[i] + "gy.dat"
+        f.write("set output \"~/Desktop/research/data_testing/plots/rad_profile/radii_distribution_both_profile.jpeg\" \n")
+        f.write("set title 'Histogram of Light Matter Density Profile\n")
+        f.write("plot '" + theory_den + "' using 1:5 with lines title 'both', '" + theory_den + "' using 1:6 with lines title 'light', '" + theory_den + "' using 1:7 with lines title 'dark' \n\n") 
+
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
+
+f.close()
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

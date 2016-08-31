@@ -8,6 +8,7 @@
     
 
     gnuplot stability_rad.gnuplot
+    gnuplot stability_rad_profile.gnuplot
     gnuplot stability_phi.gnuplot
     gnuplot stability_theta.gnuplot
     gnuplot vel_binned.gnuplot
@@ -21,6 +22,7 @@
     gnuplot force.gnuplot
     
     rm stability_rad.gnuplot
+    rm stability_rad_profile.gnuplot
     rm stability_phi.gnuplot
     rm stability_theta.gnuplot
     rm vel_binned.gnuplot

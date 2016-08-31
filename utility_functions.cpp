@@ -33,9 +33,8 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     string s;
     double datax,datay,dataz;
     double datal, datab, datar;
-    double datavx,datavy,datavz, datam;
+    double datavx, datavy, datavz, datam;
     int i = 0;
-    int N = Nd + Nl;
     s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data;
     data.open(s);
@@ -183,10 +182,13 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     /*binning*/
 
     /*initializing bins*/
-    for(int i = 0; i != binN; i++)
-    {bins[i] = 0;}
+    for(int i = 0; i != binN; i++){bins[i] = 0;}
     ofstream bin;
     bin.open (s);
+    
+    /* type 0 are the radii/vels and their theta angles. they would start at zero and go forward.
+     * type 1 is for phi, which starts at -pi and goes to pi
+     */
     
     for(int j = 0; j < N; j++)/*tests one of the numbers at a time*/
     {
@@ -196,11 +198,6 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
         {
             range = -4.0;
             upper = 4.0;
-        }
-        if(type == 2 )
-        {
-            range = -15.0;
-            upper = 0.0;
         }
         
         for(int i = 0; i < binN; i++)/*for each bin, the number is tested*/
@@ -212,20 +209,20 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
                 bin range.*/
                 if ( x[j] >= range && x[j] < ( range + binwidth ) )
                 {
-                    bins[i] = bins[i] + 1;
+                    bins[i] += 1;
                     break;
                 }
-                range = range + binwidth;/*this statement changes the range of testing
+                range += binwidth;/*this statement changes the range of testing
                 so that a new new bin can be checked against the number*/
             }
             else if( (range + binwidth) == upper)/*includes the upper interval*/
             {
                 if(x[j] >= range && x[j] <= (range + binwidth))
                 {
-                    bins[i] = bins[i] + 1;
+                    bins[i] += 1;
                     break;
                 }
-                range = range + binwidth;
+                range += binwidth;
             }
 
         }
@@ -238,11 +235,6 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     if(type == 1)
     {
         binrange = -4.0;
-    }
-    
-    if(type == 2 )
-    {
-        binrange = -15.0;
     }
     
     for(int i = 0; i != binN; i++)

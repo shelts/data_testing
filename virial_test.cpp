@@ -18,7 +18,7 @@ double kinetic(int N, struct bodies * b)
         vy = b[i].vy;
         vz = b[i].vz;
 
-        ke += 0.5 * b[i].mass * in_quad(vx, vy, vz);
+        ke += 0.5 * b[i].mass * (sqr(vx) + sqr(vy) + sqr(vz));
     }
     return ke;
 }
@@ -34,7 +34,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     double mass1, mass2;
     for(int i = 0; i < N; i++)
     {
-        for(int j = i+1; j < N; j++)
+        for(int j = i + 1; j < N; j++)
         { 
             x1 = b[i].x;
             x2 = b[j].x;
@@ -71,7 +71,7 @@ double potential_func( struct bodies * b, int N, struct component & light, struc
         z = b[i].z;
         r = in_quad(x, y, z);
         mass = b[i].mass;
-
+//         printf("%0.15f\n", mass);
         light_comp = get_potential(r, light);
         dark_comp  = get_potential(r, dark);
         
@@ -112,7 +112,7 @@ int main (int argc, char * const argv[])
 
     double ke;
     double pot_func, pot_pp;
-
+    double test = in_quad(3, 4, 5);
     get_data(Nd, Nl, b, extension);
     
     com(b, N, cm, cmv, mass);

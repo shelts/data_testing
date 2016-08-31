@@ -28,9 +28,9 @@ double potential(double r, struct component & light, struct component & dark)
 void single_density_theory(double bin_width, struct component & light, struct component & dark, double masspl, double masspd)
 {
     double w = 0.0;
-//     double pi = 4.0 * atan(1.0);
     
     double de, de2, de3;
+    double de_p, de2_p, de3_p;
     FILE * rho;
     rho = fopen("./theory/theory_den.dat", "w");
     while(1)
@@ -38,10 +38,15 @@ void single_density_theory(double bin_width, struct component & light, struct co
         de2 = 4.0 * pi * w * w * get_density(w, light) * bin_width / masspl;
         de3 = 4.0 * pi * w * w * get_density(w, dark)  * bin_width / masspd;
         de = de2 + de3;
+        
+        de2_p = de2 * masspl / (4.0 * pi * bin_width);
+        de3_p = de3 * masspd / (4.0 * pi * bin_width);
+        de_p = de2_p + de3_p;
+        
         w += 0.001;
-        fprintf(rho, "%f \t %f \t %f\t%f\n", w, de, de2, de3);
+        fprintf(rho, "%f \t %f \t %f\t%f\t %f \t %f\t%f\n", w, de, de2, de3, de_p, de2_p, de3_p);
             
-        if( w > 5 * (light.rscale + dark.rscale)){break;}
+        if( w > 100 * (light.rscale + dark.rscale)){break;}
     }
     fclose(rho);
 }
@@ -55,7 +60,6 @@ void angle_theory( double bin_width, double * args)
     double masspl   = args[4]; 
     double masspd   = args[5];
     
-//     double pi = 4.0 * atan(1.0);
     double theta_l, theta_d, theta;
     double phi_l, phi_d, phi;
     FILE * th;
@@ -63,8 +67,8 @@ void angle_theory( double bin_width, double * args)
     th= fopen("./theory/theory_theta.dat", "w");
     while(1)
     {
-        theta_l = 2.0 * pi * mass_l * sin(w) * bin_width / (masspl * 4 * pi);
-        theta_d = 2.0 * pi * mass_d * sin(w) * bin_width / (masspd * 4 * pi);
+        theta_l = 2.0 * pi * mass_l * sin(w) * bin_width / (masspl * 4.0 * pi);
+        theta_d = 2.0 * pi * mass_d * sin(w) * bin_width / (masspd * 4.0 * pi);
         theta = theta_l + theta_d;
         w += 0.01;
         fprintf(th, "%f \t %f \t %f\t%f\n", w, theta, theta_l, theta_d);
@@ -83,7 +87,7 @@ void angle_theory( double bin_width, double * args)
         w += 0.01;
         fprintf(ph, "%f \t %f \t %f\t%f\n", w, phi, phi_l, phi_d);
             
-        if(w>(5.0)){break;}
+        if(w > (5.0)){break;}
     }
     fclose(th);
     fclose(ph);
@@ -212,7 +216,7 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     s = string("binned_data/light_matter_bins_" + extension + ".dat");                     //
     binner(number_of_bins, bin_width, rl, Nl, s, extension, type);                         //
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-    //velopcity distribution                                                               //
+    //velocity distribution                                                               //
     s = string("binned_data/dark_matter_vel_bins_" + extension + ".dat");                  //
     binner(number_of_bins, bin_width, vd, Nd, s, extension, type);                         //
                                                                                            //
@@ -366,7 +370,6 @@ int main (int argc, char * const argv[])
     
     /*getting the positional and velocity data*/
     get_data(Nd, Nl, b, extension);
-    
     /*get center of mass*/
     double mass = mass_l + mass_d;
     com(b, N, cm, cmv, mass);
@@ -399,7 +402,6 @@ int main (int argc, char * const argv[])
     
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
     single_density_theory(bin_width, light, dark, masspl, masspd);
-
     printf(".");//theory -- from distribution func
     vel_distribution_theory(bin_width, number_of_bins, extension, b, Nl, Nd, light, dark);
 

@@ -30,33 +30,47 @@ double plummer_pot(double r, struct component & model)
 /*                            NFW                                                                                        */
  double  nfw_den(double r, struct component & model)                                                                     //
 {                                                                                                                        //
-    double rscale = model.rscale;
+    double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
-    return (1.0 / (4.0 * pi)) * (mass * rscale / r) * (1.0 / sqr(1.0 + r / rscale));                                     //
+    
+    double r200 = pow( mass / (200.0 * pcrit * pi_4_3) , 1.0 / 3.0);//as defined in Binney and Tremaine 2nd ed
+    double c = r200 / rscale;
+    double term = log(1.0 + c) - c / (1.0 + c);
+    double p0 = 200.0 * cube(c) * pcrit / (3.0 * term);
+    
+    double R = r / rscale;
+    return p0 * inv(R) * inv(sqr(1.0 + R));                                                                              //
 }                                                                                                                        //
                                                                                                                          //
  double nfw_pot(double r, struct component & model)                                                                      //
 {                                                                                                                        //
-    double rscale = model.rscale;
+    double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
-    return (mass / r) * log(1.0 + r / rscale);                                                                           //
+    
+    double r200 = pow( mass / (200.0 * pcrit * pi_4_3) , 1.0 / 3.0);//as defined in Binney and Tremaine 2nd ed
+    double c = r200 / rscale;
+    double term = log(1.0 + c) - c / (1.0 + c);
+    double p0 = 200.0 * cube(c) * pcrit / (3.0 * term);
+    
+    double R = r / rscale;
+    
+    return  - 4.0 * pi * sqr(rscale) * p0 * inv(R) * log(1.0 + R);                                                       //
 }                                                                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                             GENERAL HERNQUIST                                                                         */
 double gen_hern_den(double r, struct component & model)                                                                  //
 {                                                                                                                        //
-    double rscale = model.rscale;
+    double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     return inv(2.0 * pi) * mass * rscale / ( r * cube(r + rscale));                                                      //
 }                                                                                                                        //
                                                                                                                          //
 double gen_hern_pot(double r, struct component & model)                                                                  //
 {                                                                                                                        //
-    double rscale = model.rscale;
+    double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
-    return mass / (r + rscale);                                                                                          //
-}                                                  
-
+    return - mass / (r + rscale);                                                                                        //
+}                                                                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
