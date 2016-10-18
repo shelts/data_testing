@@ -33,6 +33,11 @@ void single_density_theory(double bin_width, struct component & light, struct co
     double de_p, de2_p, de3_p;
     FILE * rho;
     rho = fopen("./theory/theory_den.dat", "w");
+    /*
+     * this is the theoretical counts distribution. It is the differential mass enclosed function 
+     * divided by the mass per particle to give you counts. there is a 4pi from the angular integrals
+     * and the bin width is dr.
+     */
     while(1)
     {
         de2 = 4.0 * pi * w * w * get_density(w, light) * bin_width / masspl;

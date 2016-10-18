@@ -10,6 +10,7 @@
 
 double kinetic(int N, struct bodies * b)
 {
+    /* sums over the particles kinetic energy */
     double ke = 0.0;
     double vx, vy, vz;
     for(int i = 0; i < N; i++)
@@ -26,6 +27,10 @@ double kinetic(int N, struct bodies * b)
 
 double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
 {
+    /*
+     * this calculates the potential energy of the system using the particle
+     * particle sum of classical potential energy
+     */
     int  N = Nd + Nl;
     double pot = 0.0;
     double rad_diff = 0.0;
@@ -48,7 +53,7 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
             mass1 = b[i].mass;
             mass2 = b[j].mass;
             
-            
+            /* this sums over the particles, without particle self interaction */
             rad_diff = sqrt( sqrdif(x1, x2) + sqrdif(y1, y2) + sqrdif(z1, z2) );
             pot += -mass1 * mass2 / (rad_diff);
         
@@ -60,6 +65,9 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
 
 double potential_func( struct bodies * b, int N, struct component & light, struct component & dark)
 {
+    /*
+     * This calculates the potential energy using the theoretical potential function for that model
+     */
     double pot = 0.0;
     double x, y, z, r, mass;
     double light_comp, dark_comp;
