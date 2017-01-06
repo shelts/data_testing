@@ -146,6 +146,7 @@ int main (int argc, char * const argv[])
     //   printf("ke \t pot \t ratio \t time\n");
     //   fprintf(file, "%f \t %f \t %f \t %f \t%f\t %f \n", ke, pot,pot2, ratio,ratio2, atof(argv[1]));
     fprintf(file, "%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
+    printf("%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
     fclose(file);
 
 

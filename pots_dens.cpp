@@ -28,15 +28,24 @@ double plummer_pot(double r, struct component & model)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                            NFW                                                                                        */
- double  nfw_den(double r, struct component & model)                                                                     //
+ 
+double get_p0(double mass, double rscale)
+{
+
+    //as defined in Binney and Tremaine 2nd ed:
+    double r200 = cbrt( mass / (vol_pcrit));//vol_pcrit = 200.0 * pcrit * PI_4_3           //
+    double c = r200 / rscale; //halo concentration                                                                         //
+    double term = log(1.0 + c) - c / (1.0 + c);                                                                         //
+    double p0 = 200.0 * cube(c) * pcrit / (3.0 * term); //rho_0 as defined in Navarro et. al. 1997                         //
+    return p0;
+}
+
+double nfw_den(double r, struct component & model)                                                                     //
 {                                                                                                                        //
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     
-    double r200 = pow( mass / (200.0 * pcrit * pi_4_3) , 1.0 / 3.0);//as defined in Binney and Tremaine 2nd ed
-    double c = r200 / rscale;
-    double term = log(1.0 + c) - c / (1.0 + c);
-    double p0 = 200.0 * cube(c) * pcrit / (3.0 * term);
+    double p0 = get_p0(mass, rscale);
     
     double R = r / rscale;
     return p0 * inv(R) * inv(sqr(1.0 + R));                                                                              //
@@ -47,10 +56,7 @@ double plummer_pot(double r, struct component & model)
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     
-    double r200 = pow( mass / (200.0 * pcrit * pi_4_3) , 1.0 / 3.0);//as defined in Binney and Tremaine 2nd ed
-    double c = r200 / rscale;
-    double term = log(1.0 + c) - c / (1.0 + c);
-    double p0 = 200.0 * cube(c) * pcrit / (3.0 * term);
+    double p0 = get_p0(mass, rscale);    
     
     double R = r / rscale;
     

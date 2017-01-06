@@ -15,3 +15,5 @@ void init_comps(struct component & light, struct component & dark, double rscale
 double esc_vel(double r, struct component & light, struct component & dark);
 
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type);
+
+double max_finder(double (*profile)(double , double , struct component &, struct component &), double r, struct component & comp1, struct component & comp2, double a, double b, double c);

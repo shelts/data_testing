@@ -140,38 +140,38 @@ comp2    = str(component2)
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-
-if(parse == True):
+os.system("mv ../quick_plots/outputs/output_" + name1 + "_" + name2 + "_" + sim_time[0] + "gy.out ./sim_outputs")
+if(parse):
     print "parsing data"
     for i in range(M, N):
         os.system("python outputparser.py ./sim_outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
 
-if(output == True):    
+if(output):    
     print "performing tests"
     #os.system("g++ -std=c++11 output_test.cpp -o output_test")
     os.system("make all")
     for i in range(M, N):
         os.system("./output_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
     
-if(virial == True):
+if(virial):
     #os.system("g++ -std=c++11 virial_test.cpp -o virial_test")
     #os.system("make all")
     for i in range(M, N):
         os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
     
 
-if(tidal == True):
+if(tidal):
     os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
     os.system("./tidal_radius " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
 
-if(make_plots == True):
+if(make_plots):
     print "making plots"
     os.system("./make_plots.sh 2>>piped_output.txt ")
 
-if(save_run == True):
+if(save_run):
     os.system("./save_runs.py " + folder_name)
-if(cleanse == True):
+if(cleanse):
     os.system("./cleanse.sh")
 
-if(make_clean == True):
+if(make_clean):
     os.system("make clean")

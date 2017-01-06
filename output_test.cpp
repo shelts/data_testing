@@ -44,7 +44,7 @@ void single_density_theory(double bin_width, struct component & light, struct co
         de3 = 4.0 * pi * w * w * get_density(w, dark)  * bin_width / masspd;
         de = de2 + de3;
         
-        de2_p = de2 * masspl / (4.0 * pi * bin_width);
+        de2_p = de2 * masspl / (4.0 * pi * bin_width);//the density profile
         de3_p = de3 * masspd / (4.0 * pi * bin_width);
         de_p = de2_p + de3_p;
         
@@ -116,14 +116,15 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     double v, u, f, r;
     double v_esc, v_mx;
     double fmax;
+    double fmax2;
     
     for(int i = 0; i < N; i++)
     {
         r = b[i].r;
         v_esc = esc_vel(r, light, dark);
-//         v_mx = (2.0 / 3.0) * sqrt( fabs( potential(r, args, comp1, comp2) ));
         v_mx = (sqrt(2.0) / 3.0) * v_esc;
-        fmax = dist_func(v_mx, r, light, dark);
+        fmax2 = dist_func(v_mx, r, light, dark);
+        fmax = max_finder(dist_func, r, light, dark, 0.0, 0.5 * v_esc, v_esc);
         
         while(1)
         {
@@ -131,7 +132,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
             u = randDouble(0.0, 1.0);
             f = dist_func(v, r, light, dark);
             
-//             printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
+            //printf("f = %f fmax = %f  f/fmax = %f\n", f, fmax, f/fmax);
             if(fabs(f / fmax) > u)
             {
                 //These are split in two so when we compare each component, the counts match up

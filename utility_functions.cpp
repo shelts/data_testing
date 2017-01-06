@@ -244,3 +244,68 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     }
     bin.close();
 }
+
+
+double max_finder(double (*profile)(double , double , struct component &, struct component &), double r, struct component & comp1, struct component & comp2, double a, double b, double c)
+{
+    /*this is a maxfinding routine to find the maximum of the density.
+     * It uses Golden Section Search as outlined in Numerical Recipes 3rd edition
+     */
+    double RATIO = 0.61803399;
+    double RATIO_COMPLEMENT = 1.0 - RATIO;
+    int counter = 0;
+    double tolerance = 1e-4;
+    int limit = 50;
+    double profile_x1, profile_x2, x0, x1, x2, x3;
+    x0 = a;
+    x3 = c;
+    
+    if (fabs(b - c) > fabs(b - a))
+    {
+        x1 = b;
+        x2 = b + (RATIO_COMPLEMENT * (c - b)); 
+    }
+    else
+    {
+        x2 = b;
+        x1 = b - (RATIO_COMPLEMENT * (b - a));
+    }
+
+    profile_x1 = -(*profile)(x1, r, comp1, comp2);
+    profile_x2 = -(*profile)(x2, r, comp1, comp2);
+    
+    while (fabs(x3 - x0) > (tolerance * (fabs(x1) + fabs(x2)) ) )
+    {
+        counter++;
+        if (profile_x2 < profile_x1)
+        {
+            x0 = x1;
+            x1 = x2;
+            x2 = RATIO * x2 + RATIO_COMPLEMENT * x3;
+            profile_x1 = (double)profile_x2;
+            profile_x2 = -(*profile)(x2, r, comp1, comp2);
+        }
+        else
+        {
+            x3 = x2;
+            x2 = x1;
+            x1 = RATIO * x1 + RATIO_COMPLEMENT * x0;
+            profile_x2 = (double)profile_x1;
+            profile_x1 = -(*profile)(x1, r, comp1, comp2);
+        }
+        
+        if(counter > limit)
+        {
+            break;
+        }
+    }
+
+    if (profile_x1 < profile_x2)
+    {
+        return (-profile_x1);
+    }
+    else
+    {
+        return (-profile_x2);
+    }
+}
