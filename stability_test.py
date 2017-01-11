@@ -43,7 +43,7 @@ einasto  = 4                    #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "2"]
-N             = 1
+N             = 6
 M             = 0
 
 print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
@@ -54,7 +54,7 @@ parse = True
 # # # # # # # # # # # # # # # # #
 #     CHOOSE YOUR MODELS        #
 # # # # # # # # # # # # # # # # #
-component1 = plummer
+component1 = nfw
 component2 = nfw
 
 if(component1 == plummer):
