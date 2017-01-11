@@ -38,6 +38,7 @@ void single_density_theory(double bin_width, struct component & light, struct co
      * divided by the mass per particle to give you counts. there is a 4pi from the angular integrals
      * and the bin width is dr.
      */
+    printf("%0.15f\t%0.15f\n", masspl, masspd);
     while(1)
     {
         de2 = 4.0 * pi * w * w * get_density(w, light) * bin_width / masspl;
@@ -405,7 +406,7 @@ int main (int argc, char * const argv[])
         if(masspd != 0.0 && masspl != 0.0){break;}
     }
     
-    
+    printf("%0.15f\t%0.15f\n", masspl, masspd);
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
     single_density_theory(bin_width, light, dark, masspl, masspd);
     printf(".");//theory -- from distribution func

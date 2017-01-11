@@ -34,12 +34,12 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     double datax,datay,dataz;
     double datal, datab, datar;
     double datavx, datavy, datavz, datam;
+    int type_dark = 1;
+    int type_light = 0;
     int i = 0;
     s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data;
     data.open(s);
-    int type_dark = 1;
-    int type_light = 0;
     
     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
@@ -54,7 +54,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vz   = datavz;
         b[i].v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
-        b[i].type = type_dark;
+        b[i].type = type_light;
         i++;
     }
     data.close();
@@ -72,7 +72,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vz   = datavz;
         b[i].v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
-        b[i].type = type_light;
+        b[i].type = type_dark;
         i++;
     }
     data.close();

@@ -42,7 +42,7 @@ einasto  = 4                    #
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
-sim_time      = [ "0", "2"]
+#sim_time      = [ "0", "2"]
 N             = 1
 M             = 0
 
@@ -54,7 +54,7 @@ parse = True
 # # # # # # # # # # # # # # # # #
 #     CHOOSE YOUR MODELS        #
 # # # # # # # # # # # # # # # # #
-component1 = nfw
+component1 = plummer
 component2 = nfw
 
 if(component1 == plummer):
@@ -140,7 +140,9 @@ comp2    = str(component2)
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-os.system("mv ../quick_plots/outputs/output_" + name1 + "_" + name2 + "_" + sim_time[0] + "gy.out ./sim_outputs")
+for i in range(M,N):
+    os.system("mv ../quick_plots/outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out ./sim_outputs")
+    
 if(parse):
     print "parsing data"
     for i in range(M, N):
