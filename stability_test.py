@@ -43,7 +43,7 @@ einasto  = 4                    #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "2"]
-N             = 6
+N             = 1
 M             = 0
 
 print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
@@ -109,10 +109,6 @@ if(number_of_components == 2):
     
     r_d = rscale_t  * (1.0 - rad_ratio)
     m_d = dwarfMass * (1.0 - mass_ratio)
-    #r_d = 2
-    #r_l = r_d
-    #m_d = 10
-    #m_l = m_d
     
     print(m_d, m_l)
     print(r_d, r_l)
@@ -124,7 +120,7 @@ if(number_of_components == 1):
     rscale_t  = r_l / rad_ratio
     
     r_d = rscale_t  * (1.0 - rad_ratio)
-    m_d = 0.0 
+    m_d = 0.0
 
 
 #we're all full of strings...
