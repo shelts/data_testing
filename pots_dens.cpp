@@ -1,6 +1,7 @@
 /* Copyright (c) 2016 Siddhartha Shelton */
 #include "pots_dens.h"
 #include "structs.h"
+#include "utility_functions.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                             PLUMMER                                                                                   */
@@ -29,24 +30,27 @@ double plummer_pot(double r, struct component & model)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                            NFW                                                                                        */
  
-double get_p0(double mass, double rscale)
+double get_p0(struct component & model)
 {
+    double mass = model.mass; 
+    double rscale = model.rscale;
 
     //as defined in Binney and Tremaine 2nd ed:
-    double r200 = cbrt(0.5 *  mass / (vol_pcrit));//vol_pcrit = 200.0 * pcrit * PI_4_3           //
+    double r200 = cbrt(mass / (vol_pcrit));//vol_pcrit = 200.0 * pcrit * PI_4_3           //
     double c = r200 / rscale; //halo concentration                                                                       //
     double term = log(1.0 + c) - c / (1.0 + c);                                                                          //
     double p0 = 200.0 * cube(c) * pcrit / (3.0 * term); //rho_0 as defined in Navarro et. al. 1997                       //
+    model.r200 = r200;
+    model.p0 = p0;
 //     printf("%0.15f\n", p0);
-    return p0;
 }
 
 double nfw_den(double r, struct component & model)                                                                       //
 {                                                                                                                        //
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
-    
-    double p0 = get_p0(mass, rscale);
+    double p0     = model.p0;
+//     double p0 = get_p0(mass, rscale);
     
     double R = r / rscale;
     return p0 * inv(R) * inv(sqr(1.0 + R));                                                                              //
@@ -56,8 +60,8 @@ double nfw_den(double r, struct component & model)                              
 {                                                                                                                        //
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
-    
-    double p0 = get_p0(mass, rscale);    
+    double p0     = model.p0;
+//     double p0 = get_p0(mass, rscale);    
     
     double R = r / rscale;
     
@@ -83,10 +87,6 @@ double gen_hern_pot(double r, struct component & model)                         
 
 double get_density( double r, struct component & model)
 {
-    const int plummer = 1;
-    const int nfw = 2;
-    const int gen_hern = 3;
-    const int einasto = 4;
     double den_temp;
     
     switch(model.type)
@@ -109,10 +109,6 @@ double get_density( double r, struct component & model)
 
 double get_potential( double r, struct component & model)
 {
-    const int plummer = 1;
-    const int nfw = 2;
-    const int gen_hern = 3;
-    const int einasto = 4;
     double pot_temp;
     
     switch(model.type)

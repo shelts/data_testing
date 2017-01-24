@@ -38,7 +38,7 @@ void single_density_theory(double bin_width, struct component & light, struct co
      * divided by the mass per particle to give you counts. there is a 4pi from the angular integrals
      * and the bin width is dr.
      */
-    printf("%0.15f\t%0.15f\n", masspl, masspd);
+//     printf("%0.15f\t%0.15f\n", masspl, masspd);
     while(1)
     {
         de2 = 4.0 * pi * w * w * get_density(w, light) * bin_width / masspl;
@@ -180,8 +180,7 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     ofstream vel_l, vel_d;
     vel_l.open(s1);
     vel_d.open(s2);
-    int light = 0;
-    int dark = 1;
+    
     int N = Nd + Nl;
     double r[N], v[N];
     double rd[Nd], rl[Nl];
@@ -193,7 +192,7 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     {
         r[i] = b[i].r; 
         v[i] = b[i].v;
-        if(b[i].type == light)
+        if(b[i].type == lm)
         {
             vel_l << b[i].r << "\t" << b[i].v << endl;
             rl[countl] = b[i].r;
@@ -244,14 +243,12 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
     double phi_d[Nd]  , phiv_d[Nd];
     string s;
     
-    int light = 1;
-    int dark = 0;
     int countl = 0;
     int countd = 0;
 
     for(int i = 0; i < N; i++)
     {
-        if(b[i].type == light)
+        if(b[i].type == lm)
         {
             theta_l[countl] = acos( b[i].z / b[i].r );
             phi_l[countl] = atan2(  b[i].y , b[i].x );
@@ -349,22 +346,22 @@ int main (int argc, char * const argv[])
     component light;
     component dark;
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
-
+    printf("p0l: %0.15f\t p0d: %0.15f\n", light.p0, dark.p0);
+    
+    check_mass(light);
+    check_mass(dark);
     
     string extension = simtime + "gy";
     
     /*these are markers for the type of data being sent into functions*/
-    int d = 1;//dark matter     
-    int l = 0;//light matter
-
 
     /*paramters for binning routine*/
     int number_of_bins = 1000;
     double bin_width = .10;
 
     
-    int Nd = get_size(d, extension);//getting the size of the dark matter data
-    int Nl = get_size(l, extension);//getting the size of the light matter data
+    int Nd = get_size(dm, extension);//getting the size of the dark matter data
+    int Nl = get_size(lm, extension);//getting the size of the light matter data
     printf("light: %i dark: %i\n", Nl, Nd);
 
     int N = Nd + Nl;
@@ -377,45 +374,36 @@ int main (int argc, char * const argv[])
     
     /*getting the positional and velocity data*/
     get_data(Nd, Nl, b, extension);
+    
     /*get center of mass*/
     double mass = mass_l + mass_d;
     com(b, N, cm, cmv, mass);
     com_correction(cm, cmv, b, N);
     
-    printf(".");//actual 
-    rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
-    
-    printf(".");//actual 
-    angles(extension, Nl, Nd, b, number_of_bins, bin_width);
-    
-    printf(".");//theory
-    
     double masspd = 0.0;
     double masspl = 0.0;
-    for(int i = 0; i < N; i++)
-    {
-        if(b[i].type == l)
-        {
-            masspl = b[i].mass;
-        }
-        else
-        { 
-            masspd = b[i].mass;
-        }
-        
-        if(masspd != 0.0 && masspl != 0.0){break;}
-    }
-    
+    get_masspp(b, masspd, masspl);
     printf("%0.15f\t%0.15f\n", masspl, masspd);
+    
+    printf(".\n");//actual 
+    rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
+    
+    printf(".\n");//actual 
+    angles(extension, Nl, Nd, b, number_of_bins, bin_width);
+    
+    printf(".\n");//theory
+    
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
     single_density_theory(bin_width, light, dark, masspl, masspd);
-    printf(".");//theory -- from distribution func
+    
+    printf(".\n");//theory -- from distribution func
+    
     vel_distribution_theory(bin_width, number_of_bins, extension, b, Nl, Nd, light, dark);
 
-    printf(".");//theory
+    printf(".\n");//theory
+    
     angle_theory(bin_width, args);
     
     
-//     double args[4]  = {rscale_l, rscale_d, mass_l, mass_d};
     printf("done.\n");
 }

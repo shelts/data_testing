@@ -30,10 +30,10 @@ mass_ratio    = float(args[5])  #
 # # # # # # # # # # # # # # # # #
 #     MODEL DIRECTORY           #
 # # # # # # # # # # # # # # # # #
-plummer  = 1                    #
-nfw      = 2                    #
-gen_hern = 3                    #
-einasto  = 4                    #
+plummer  = 2                    #
+nfw      = 3                    #
+gen_hern = 4                    #
+einasto  = 5                    #
 # # # # # # # # # # # # # # # # #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

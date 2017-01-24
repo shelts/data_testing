@@ -77,10 +77,6 @@ double gen_hern_distribution(double v, double r, struct component & light, struc
 
 double dist_func(double v, double r, struct component & light, struct component & dark)
 {
-    const int plummer = 1;
-    const int nfw = 2;
-    const int gen_hern = 3;
-    const int einasto = 4;
     double dist_temp;
     /*in order for this to work it has to both be one type*/ 
     switch(light.type)

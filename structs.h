@@ -38,6 +38,13 @@ using namespace std;
 #define pcrit_exact ((double) 3.0 * sqr(hubble_gyr) / (8.0 * pi) )
 #define pcrit       0.000679087369829744220469326744094105320596648627735869652//precalculated version of pcrit
 #define vol_pcrit   0.568910904587397184785763397846734505212216314432372653620//vol_pcrit = 200.0 * pcrit * PI_4_3 
+
+#define lm       (int) 0
+#define dm       (int) 1
+#define plummer  (int) 2
+#define nfw      (int) 3
+#define gen_hern (int) 4
+#define einasto  (int) 5
 struct bodies
 {
     double x;
@@ -54,5 +61,7 @@ struct component
     double mass;
     double rscale;
     int type;
+    double p0;
+    double r200;
 };
 

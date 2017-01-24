@@ -34,8 +34,6 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     double datax,datay,dataz;
     double datal, datab, datar;
     double datavx, datavy, datavz, datam;
-    int type_dark = 1;
-    int type_light = 0;
     int i = 0;
     s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data;
@@ -54,7 +52,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vz   = datavz;
         b[i].v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
-        b[i].type = type_light;
+        b[i].type = lm;
         i++;
     }
     data.close();
@@ -72,7 +70,7 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vz   = datavz;
         b[i].v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
-        b[i].type = type_dark;
+        b[i].type = dm;
         i++;
     }
     data.close();
@@ -155,6 +153,34 @@ void init_comps(struct component & light, struct component & dark, double rscale
     dark.type = model2;
     dark.rscale = rscale_d;
     dark.mass = mass_d;
+    
+    
+    //init the p0 parameter at the start to avoid having to recalc it
+    switch(light.type)
+    {
+        case plummer:
+            break;
+        case nfw:
+            light.p0 = get_p0(light);
+            break;
+        case gen_hern:
+            break;
+        default:
+            printf("unknown model\n");
+    }
+    
+    switch(dark.type)
+    {
+        case plummer:
+            break;
+        case nfw:
+            dark.p0 = get_p0(dark);
+            break;
+        case gen_hern:
+            break;
+        default:
+            printf("unknown model\n");
+    }
     
 }
 
@@ -309,3 +335,30 @@ double max_finder(double (*profile)(double , double , struct component &, struct
         return (-profile_x2);
     }
 }
+
+void get_masspp(struct bodies * b, masspd, masspl)
+{
+    
+    for(int i = 0; i < N; i++)
+    {
+        if(b[i].type == lm)
+        {
+            masspl = b[i].mass;
+        }
+        else
+        { 
+            masspd = b[i].mass;
+        }
+        
+        if(masspd != 0.0 && masspl != 0.0){break;}
+    }  
+    
+}
+
+void check_mass(struct component & light)
+{
+    
+    
+}
+    
+    

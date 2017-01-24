@@ -10714,3 +10714,109 @@ rm: cannot remove ‘force.gnuplot’: No such file or directory
 "stability_vel_multiplot.gnuplot", line 22: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_4gy.dat"
 "multiplot_vel_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_4gy.dat"
 "multiplot_vel_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_4gy.dat"
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+"stability_rad_multiplot.gnuplot", line 20: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_4gy.dat"
+"multiplot_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_4gy.dat"
+"multiplot_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_4gy.dat"
+"stability_vel_multiplot.gnuplot", line 22: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_4gy.dat"
+"multiplot_vel_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_4gy.dat"
+"multiplot_vel_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_4gy.dat"
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+"stability_rad_multiplot.gnuplot", line 20: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_4gy.dat"
+"multiplot_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_4gy.dat"
+"multiplot_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_4gy.dat"
+"stability_vel_multiplot.gnuplot", line 22: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_4gy.dat"
+"multiplot_vel_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_4gy.dat"
+"multiplot_vel_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_4gy.dat"
+
+
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+"stability_rad_multiplot.gnuplot", line 20: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_4gy.dat"
+"multiplot_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_4gy.dat"
+"multiplot_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_4gy.dat"
+"stability_vel_multiplot.gnuplot", line 22: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_4gy.dat"
+"multiplot_vel_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_4gy.dat"
+"multiplot_vel_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_4gy.dat"
+Cannot open load file 'vel_binned.gnuplot'
+"vel_binned.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'pots.gnuplot'
+"pots.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'den.gnuplot'
+"den.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'rotation.gnuplot'
+"rotation.gnuplot", line 0: util.c: No such file or directory
+
+Cannot open load file 'force.gnuplot'
+"force.gnuplot", line 0: util.c: No such file or directory
+
+rm: cannot remove ‘vel_binned.gnuplot’: No such file or directory
+rm: cannot remove ‘pots.gnuplot’: No such file or directory
+rm: cannot remove ‘den.gnuplot’: No such file or directory
+rm: cannot remove ‘rotation.gnuplot’: No such file or directory
+rm: cannot remove ‘force.gnuplot’: No such file or directory
+"stability_rad_multiplot.gnuplot", line 20: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_4gy.dat"
+"multiplot_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_light_4gy.dat"
+"multiplot_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_light_4gy.dat"
+"stability_vel_multiplot.gnuplot", line 22: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_4gy.dat"
+"multiplot_vel_theta.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_light_4gy.dat"
+"multiplot_vel_phi.gnuplot", line 17: warning: Skipping unreadable file "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_light_4gy.dat"
