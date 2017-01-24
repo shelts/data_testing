@@ -105,6 +105,14 @@ int main (int argc, char * const argv[])
     component dark;
     
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
+    printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
+    printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
+    
+    check_mass(light);
+    check_mass(dark);
+    printf("ml,md :  (%0.15f , %0.15f)\n", light.mass, dark.mass);
+    mass_l = light.mass;
+    mass_d = dark.mass;
     
     int Nl = get_size(0, extension);//getting the size of the dark matter data
     int Nd = get_size(1, extension);//getting the size of the light matter data
@@ -125,17 +133,15 @@ int main (int argc, char * const argv[])
     com_correction(cm, cmv, b, N);
     
     
-    printf("calculating virial ratio");
+    printf("calculating virial ratio\n");
     
     /*calculates kinetic energy relative to centor of mass*/
     ke = kinetic(N, b);
     
-    printf(".\n");
     
     /*calculates potential energy relative to centor of mass*/
     pot_func = potential_func(b, N, light, dark);
     
-    printf(".\n");
     
     /*particle particle potential energy*/
     

@@ -346,10 +346,14 @@ int main (int argc, char * const argv[])
     component light;
     component dark;
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
-    printf("p0l: %0.15f\t p0d: %0.15f\n", light.p0, dark.p0);
+    printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
+    printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
     
     check_mass(light);
     check_mass(dark);
+    printf("ml,md :  (%0.15f , %0.15f)\n", light.mass, dark.mass);
+    mass_l = light.mass;
+    mass_d = dark.mass;
     
     string extension = simtime + "gy";
     
@@ -370,38 +374,29 @@ int main (int argc, char * const argv[])
     double cm[3]  = {0.0, 0.0, 0.0};
     double cmv[3] = {0.0, 0.0, 0.0};
     
-    printf("running tests");
+    printf("running tests\n");
     
     /*getting the positional and velocity data*/
     get_data(Nd, Nl, b, extension);
-    
+
     /*get center of mass*/
     double mass = mass_l + mass_d;
     com(b, N, cm, cmv, mass);
     com_correction(cm, cmv, b, N);
     
-    double masspd = 0.0;
-    double masspl = 0.0;
-    get_masspp(b, masspd, masspl);
-    printf("%0.15f\t%0.15f\n", masspl, masspd);
+    double masspl = get_masspp(b, N, lm);
+    double masspd = get_masspp(b, N, dm);
+    printf("masspl, masspd: (%0.15f , %0.15f)\n", masspl, masspd);
     
-    printf(".\n");//actual 
     rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
-    
-    printf(".\n");//actual 
+
     angles(extension, Nl, Nd, b, number_of_bins, bin_width);
-    
-    printf(".\n");//theory
-    
+
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
     single_density_theory(bin_width, light, dark, masspl, masspd);
     
-    printf(".\n");//theory -- from distribution func
-    
     vel_distribution_theory(bin_width, number_of_bins, extension, b, Nl, Nd, light, dark);
 
-    printf(".\n");//theory
-    
     angle_theory(bin_width, args);
     
     

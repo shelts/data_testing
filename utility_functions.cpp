@@ -336,28 +336,48 @@ double max_finder(double (*profile)(double , double , struct component &, struct
     }
 }
 
-void get_masspp(struct bodies * b, masspd, masspl)
+double get_masspp(struct bodies * b, int N, int type)
 {
+    double masspp;
     
     for(int i = 0; i < N; i++)
     {
-        if(b[i].type == lm)
+        if(b[i].type == type)
         {
-            masspl = b[i].mass;
-        }
-        else
-        { 
-            masspd = b[i].mass;
+            masspp = b[i].mass;
         }
         
-        if(masspd != 0.0 && masspl != 0.0){break;}
+        if(masspp != 0.0){break;}
     }  
-    
+//     printf("%0.15f\n", masspp);
+    return masspp;
 }
 
-void check_mass(struct component & light)
+
+double get_extra_nfw_mass(struct component & model)
+{
+    double r = 10 * model.r200;
+    double rs = model.rscale;
+    double m = 4.0 * pi * model.p0 * cube(rs) * (log( (rs + r) / rs) - r / (rs + r));
+    return m;
+}
+
+
+void check_mass(struct component & model)
 {
     
+    switch(model.type)
+    {
+        case plummer:
+            break;
+        case nfw:
+            model.mass = get_extra_nfw_mass(model);
+            break;
+        case gen_hern:
+            break;
+        default:
+            printf("unknown model\n");
+    }
     
 }
     

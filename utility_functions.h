@@ -18,6 +18,6 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
 
 double max_finder(double (*profile)(double , double , struct component &, struct component &), double r, struct component & comp1, struct component & comp2, double a, double b, double c);
 
-void get_masspp(struct bodies * b, masspd, masspl)
+double get_masspp(struct bodies * b, int N, int type);
 
-void check_mass(struct component & light)
+void check_mass(struct component & light);
