@@ -356,7 +356,7 @@ double get_masspp(struct bodies * b, int N, int type)
 
 double get_extra_nfw_mass(struct component & model)
 {
-    double r = 10 * model.r200;
+    double r = 50.0 * model.r200;
     double rs = model.rscale;
     double m = 4.0 * pi * model.p0 * cube(rs) * (log( (rs + r) / rs) - r / (rs + r));
     return m;

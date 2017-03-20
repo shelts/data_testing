@@ -32,3 +32,11 @@ mkdir ./vel_dist/binned_vs_tbins
 mkdir ./vel_dist/binned
 mkdir ./vel_dist/vel_vs_r
 
+mkdir multi
+mkdir multi/theta
+mkdir multi/phi
+mkdir multi/vel_theta
+mkdir multi/vel_phi
+mkdir multi/rad
+mkdir multi/vel_dist
+mkdir multi/vel_dist/vel_vs_r

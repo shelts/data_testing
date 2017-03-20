@@ -36,7 +36,7 @@ double get_p0(struct component & model)
     double rscale = model.rscale;
 
     //as defined in Binney and Tremaine 2nd ed:
-    double r200 = cbrt(mass / (vol_pcrit));//vol_pcrit = 200.0 * pcrit * PI_4_3           //
+    double r200 = cbrt(2.0 * mass / (vol_pcrit));//vol_pcrit = 200.0 * pcrit * PI_4_3           //
     double c = r200 / rscale; //halo concentration                                                                       //
     double term = log(1.0 + c) - c / (1.0 + c);                                                                          //
     double p0 = 200.0 * cube(c) * pcrit / (3.0 * term); //rho_0 as defined in Navarro et. al. 1997                       //
