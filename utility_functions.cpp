@@ -185,10 +185,10 @@ void init_comps(struct component & light, struct component & dark, double rscale
 }
 
 /*escape velocity*/
-double esc_vel(double r, struct component & light, struct component & dark)
+double esc_vel(struct position & pos, struct component & light, struct component & dark)
 {
-    double light_comp = get_potential(r, light);
-    double dark_comp  = get_potential(r, dark);
+    double light_comp = get_potential(pos, light);
+    double dark_comp  = get_potential(pos, dark);
     double potential =  (light_comp + dark_comp);
     
     double escv = sqrt( fabs(2.0 * potential ) );
@@ -272,7 +272,7 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
 }
 
 
-double max_finder(double (*profile)(double , double , struct component &, struct component &), double r, struct component & comp1, struct component & comp2, double a, double b, double c)
+double max_finder(double (*profile)(double , struct position & , struct component &, struct component &), struct position & pos, struct component & comp1, struct component & comp2, double a, double b, double c)
 {
     /*this is a maxfinding routine to find the maximum of the density.
      * It uses Golden Section Search as outlined in Numerical Recipes 3rd edition
@@ -297,8 +297,8 @@ double max_finder(double (*profile)(double , double , struct component &, struct
         x1 = b - (RATIO_COMPLEMENT * (b - a));
     }
 
-    profile_x1 = -(*profile)(x1, r, comp1, comp2);
-    profile_x2 = -(*profile)(x2, r, comp1, comp2);
+    profile_x1 = -(*profile)(x1, pos, comp1, comp2);
+    profile_x2 = -(*profile)(x2, pos, comp1, comp2);
     
     while (fabs(x3 - x0) > (tolerance * (fabs(x1) + fabs(x2)) ) )
     {
@@ -309,7 +309,7 @@ double max_finder(double (*profile)(double , double , struct component &, struct
             x1 = x2;
             x2 = RATIO * x2 + RATIO_COMPLEMENT * x3;
             profile_x1 = (double)profile_x2;
-            profile_x2 = -(*profile)(x2, r, comp1, comp2);
+            profile_x2 = -(*profile)(x2, pos, comp1, comp2);
         }
         else
         {
@@ -317,7 +317,7 @@ double max_finder(double (*profile)(double , double , struct component &, struct
             x2 = x1;
             x1 = RATIO * x1 + RATIO_COMPLEMENT * x0;
             profile_x2 = (double)profile_x1;
-            profile_x1 = -(*profile)(x1, r, comp1, comp2);
+            profile_x1 = -(*profile)(x1, pos, comp1, comp2);
         }
         
         if(counter > limit)

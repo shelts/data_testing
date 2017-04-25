@@ -50,6 +50,7 @@ struct position
     double x;
     double y;
     double z;
+    double r;
     double l; 
     double b;
 };
@@ -79,5 +80,6 @@ struct component
     double p0;
     double r200;
     double vhalo;
+    double b, c;
 };
 

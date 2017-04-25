@@ -54,8 +54,8 @@ parse = True
 # # # # # # # # # # # # # # # # #
 #     CHOOSE YOUR MODELS        #
 # # # # # # # # # # # # # # # # #
-component1 = nfw
-component2 = nfw
+component1 = plummer
+component2 = plummer
 
 if(component1 == plummer):
     name1 = "plummer"

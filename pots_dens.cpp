@@ -33,7 +33,6 @@ double plummer_pot(struct position & pos, struct component & model)
  
 double get_p0(struct component & model)
 {
-    double r = pos.r;
     double mass = model.mass; 
     double rscale = model.rscale;
 
@@ -115,7 +114,7 @@ double miyamoto_nagai_pot(struct position & pos, struct component & model)
     
     double thing = sqrt( sqr(z) + sqr(c) );
     double denom = sqR + sqr( b + thing );
-    double denom = sqrt(denom);
+    denom = sqrt(denom);
     
     return - mass / denom;
 }

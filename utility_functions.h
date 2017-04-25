@@ -12,11 +12,11 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N);
 
 void init_comps(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2);
 
-double esc_vel(double r, struct component & light, struct component & dark);
+double esc_vel(struct position & pos, struct component & light, struct component & dark);
 
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type);
 
-double max_finder(double (*profile)(double , double , struct component &, struct component &), double r, struct component & comp1, struct component & comp2, double a, double b, double c);
+double max_finder(double (*profile)(double , struct position & , struct component &, struct component &), struct position & pos, struct component & comp1, struct component & comp2, double a, double b, double c);
 
 double get_masspp(struct bodies * b, int N, int type);
 
