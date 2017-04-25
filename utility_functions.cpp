@@ -191,7 +191,7 @@ void init_galaxy_model(struct galaxy_model & mw)
     /* these are from MW@home */
     mw.bulge.type = gen_hern;
     mw.bulge.mass = 1.52954402e5;
-    mw.bulge.scale = 0.7;
+    mw.bulge.rscale = 0.7;
  
     mw.disk.type = miyamoto;
     mw.disk.mass = 4.45865888e5;

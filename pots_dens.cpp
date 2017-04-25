@@ -99,8 +99,6 @@ double log_pot(struct position & pos, struct component & model)
     
 }
 
-
-
 double miyamoto_nagai_pot(struct position & pos, struct component & model)
 {
     double mass = model.mass;

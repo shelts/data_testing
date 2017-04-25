@@ -86,7 +86,7 @@ double potential_func( struct bodies * b, int N, struct component & light, struc
 }
 
 
-double potential_func_with_galaxy( struct bodies * b, int N, struct component & light, struct component & dark)
+double potential_func_with_galaxy( struct bodies * b, int N, struct component & light, struct component & dark, struct galaxy_model & mw)
 {
     /*
      * This calculates the potential energy using the theoretical potential function for that model
@@ -102,8 +102,11 @@ double potential_func_with_galaxy( struct bodies * b, int N, struct component & 
         light_comp = get_potential(b[i].pos, light);
         dark_comp  = get_potential(b[i].pos, dark);
         
+        bulge = get_potential(b[i].pos, mw.bulge);
+        disk  = get_potential(b[i].pos, mw.disk);
+        halo  = get_potential(b[i].pos, mw.halo);
         
-        pot += mass * (light_comp + dark_comp);
+        pot += mass * (   (light_comp + dark_comp)  +  (bulge + disk + halo)   ) ;
         
     }
     return pot / 2.0;
@@ -150,7 +153,7 @@ int main (int argc, char * const argv[])
     double mass = mass_l + mass_d;
 
     double ke;
-    double pot_func, pot_pp;
+    double pot_func, pot_pp, pot_func_gly;
     double test = in_quad(3, 4, 5);
     get_data(Nd, Nl, b, extension);
     
@@ -169,19 +172,27 @@ int main (int argc, char * const argv[])
     
     
     /*particle particle potential energy*/
-    
     pot_pp = potential_energy(Nl, Nd, b, extension);
+    
+    /* calculates the potential energy of the dwarf and the galactic potential */
+    pot_func_gly = potential_func_with_galaxy(b, N, light, dark, mw);
+    
     
     printf("done.\n");
 
     double ratio_func = fabs( 2.0 * ke / pot_func);
     double ratio_pp = fabs( 2.0 * ke / pot_pp);
+    
     double rat = pot_pp / pot_func;
+    
+    double ratio_func_galaxy = fabs( 2.0 * ke / pot_func_gly);
+    
     FILE * file;
     file = fopen("./test_output/virial_output.txt", "a");
 
 
-    fprintf(file, "%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
-    printf("%f \t %f \t ratio: %f \t %s \n", ratio_func, ratio_pp, rat, (argv[1]));
+    fprintf(file, "%f \t %f \t ratio: %f \t %f \t %s \n", ratio_func, ratio_pp, rat, ratio_func_galaxy, (argv[1]));
+    
+    printf("%f \t %f \t ratio: %f \t %f \t %s \n", ratio_func, ratio_pp, rat, ratio_func_galaxy, (argv[1]));
     fclose(file);
 }

@@ -12,6 +12,8 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N);
 
 void init_comps(struct component & light, struct component & dark, double rscale_l, double rscale_d, double mass_l, double mass_d, int model1, int model2);
 
+void init_galaxy_model(struct galaxy_model & mw);
+
 double esc_vel(struct position & pos, struct component & light, struct component & dark);
 
 void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type);
