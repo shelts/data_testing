@@ -15,9 +15,9 @@ double kinetic(int N, struct bodies * b)
     double vx, vy, vz;
     for(int i = 0; i < N; i++)
     {
-        vx = b[i].vx;
-        vy = b[i].vy;
-        vz = b[i].vz;
+        vx = b[i].vel.vx;
+        vy = b[i].vel.vy;
+        vz = b[i].vel.vz;
 
         ke += 0.5 * b[i].mass * (sqr(vx) + sqr(vy) + sqr(vz));
     }
@@ -41,14 +41,14 @@ double potential_energy(int Nl, int Nd, struct bodies * b, string extension)
     {
         for(int j = i + 1; j < N; j++)
         { 
-            x1 = b[i].x;
-            x2 = b[j].x;
+            x1 = b[i].pos.x;
+            x2 = b[j].pos.x;
             
-            y1 = b[i].y;
-            y2 = b[j].y;
+            y1 = b[i].pos.y;
+            y2 = b[j].pos.y;
             
-            z1 = b[i].z;
-            z2 = b[j].z;
+            z1 = b[i].pos.z;
+            z2 = b[j].pos.z;
             
             mass1 = b[i].mass;
             mass2 = b[j].mass;
@@ -69,19 +69,15 @@ double potential_func( struct bodies * b, int N, struct component & light, struc
      * This calculates the potential energy using the theoretical potential function for that model
      */
     double pot = 0.0;
-    double x, y, z, r, mass;
+    double mass;
     double light_comp, dark_comp;
     
     for(int i = 0; i < N; i++)
     {
-        x = b[i].x;
-        y = b[i].y;
-        z = b[i].z;
-        r = in_quad(x, y, z);
         mass = b[i].mass;
-//         printf("%0.15f\n", mass);
-        light_comp = get_potential(r, light);
-        dark_comp  = get_potential(r, dark);
+
+        light_comp = get_potential(b[i].pos, light);
+        dark_comp  = get_potential(b[i].pos, dark);
         
         pot += mass * (light_comp + dark_comp);
         

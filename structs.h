@@ -45,16 +45,31 @@ using namespace std;
 #define nfw      (int) 3
 #define gen_hern (int) 4
 #define einasto  (int) 5
-struct bodies
+struct position
 {
     double x;
     double y;
     double z;
-    double l, b, r;
-    double vx, vy, vz, v;
+    double l; 
+    double b;
+};
+
+struct velocity
+{
+    double vx;
+    double vy;
+    double vz;
+    double v;
+};
+
+struct bodies
+{
+    position pos;
+    velocity vel;
     double mass;
     int type;
 };
+
 
 struct component
 {
@@ -63,5 +78,6 @@ struct component
     int type;
     double p0;
     double r200;
+    double vhalo;
 };
 

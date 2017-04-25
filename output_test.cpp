@@ -121,7 +121,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     
     for(int i = 0; i < N; i++)
     {
-        r = b[i].r;
+        r = b[i].pos.r;
         v_esc = esc_vel(r, light, dark);
         v_mx = (sqrt(2.0) / 3.0) * v_esc;
         fmax2 = dist_func(v_mx, r, light, dark);
@@ -190,20 +190,20 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     
     for(int i = 0; i < N; i++)
     {
-        r[i] = b[i].r; 
-        v[i] = b[i].v;
+        r[i] = b[i].pos.r; 
+        v[i] = b[i].vel.v;
         if(b[i].type == lm)
         {
-            vel_l << b[i].r << "\t" << b[i].v << endl;
-            rl[countl] = b[i].r;
-            vl[countl] = b[i].v;
+            vel_l << b[i].pos.r << "\t" << b[i].vel.v << endl;
+            rl[countl] = b[i].pos.r;
+            vl[countl] = b[i].vel.v;
             countl++;
         }
         else
         {
-            vel_d << b[i].r << "\t" << b[i].v << endl;
-            rd[countd] = b[i].r;
-            vd[countd] = b[i].v;
+            vel_d << b[i].pos.r << "\t" << b[i].vel.v << endl;
+            rd[countd] = b[i].pos.r;
+            vd[countd] = b[i].vel.v;
             countd++;
         }
         
@@ -250,11 +250,11 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
     {
         if(b[i].type == lm)
         {
-            theta_l[countl] = acos( b[i].z / b[i].r );
-            phi_l[countl] = atan2(  b[i].y , b[i].x );
+            theta_l[countl] = acos( b[i].pos.z / b[i].pos.r );
+            phi_l[countl] = atan2(  b[i].pos.y , b[i].pos.x );
             
-            thetav_l[countl] = acos( b[i].vz / b[i].v );
-            phiv_l[countl] = atan2(  b[i].vy , b[i].vx );
+            thetav_l[countl] = acos( b[i].vel.vz / b[i].vel.v );
+            phiv_l[countl] = atan2(  b[i].vel.vy , b[i].vel.vx );
             
             theta[i] = theta_l[countl];
             phi[i] = phi_l[countl];
@@ -265,11 +265,11 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
         }
         else
         {
-            theta_d[countd] = acos( b[i].z / b[i].r );
-            phi_d[countd] = atan2(  b[i].y , b[i].x );
+            theta_d[countd] = acos( b[i].pos.z / b[i].pos.r );
+            phi_d[countd] = atan2(  b[i].pos.y , b[i].pos.x );
             
-            thetav_d[countd] = acos( b[i].vz / b[i].v );
-            phiv_d[countd] = atan2(  b[i].vy , b[i].vx );
+            thetav_d[countd] = acos( b[i].vel.vz / b[i].vel.v );
+            phiv_d[countd] = atan2(  b[i].vel.vy , b[i].vel.vx );
             
             theta[i] = theta_d[countd];
             phi[i] = phi_d[countd];

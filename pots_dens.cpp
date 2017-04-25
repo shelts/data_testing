@@ -5,9 +5,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                             PLUMMER                                                                                   */
-double plummer_den(double r, struct component & model)
+double plummer_den(struct position & pos, struct component & model)
 {
-    
+    double r = pos.r;
     double rscale = model.rscale;
     double mass   = model.mass;
     
@@ -20,8 +20,9 @@ double plummer_den(double r, struct component & model)
     return density_result;
 }
 
-double plummer_pot(double r, struct component & model)
+double plummer_pot(struct position & pos, struct component & model)
 {
+    double r = pos.r;
     double rscale = model.rscale;
     double mass   = model.mass;
     double potential_result  = - mass / sqrt( sqr(r) + sqr(rscale) );
@@ -32,6 +33,7 @@ double plummer_pot(double r, struct component & model)
  
 double get_p0(struct component & model)
 {
+    double r = pos.r;
     double mass = model.mass; 
     double rscale = model.rscale;
 
@@ -45,8 +47,9 @@ double get_p0(struct component & model)
 //     printf("%0.15f\n", p0);
 }
 
-double nfw_den(double r, struct component & model)                                                                       //
+double nfw_den(struct position & pos, struct component & model)                                                                       //
 {                                                                                                                        //
+    double r = pos.r;
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     double p0     = model.p0;
@@ -56,8 +59,9 @@ double nfw_den(double r, struct component & model)                              
     return p0 * inv(R) * inv(sqr(1.0 + R));                                                                              //
 }                                                                                                                        //
                                                                                                                          //
- double nfw_pot(double r, struct component & model)                                                                      //
+ double nfw_pot(struct position & pos, struct component & model)                                                                      //
 {                                                                                                                        //
+    double r = pos.r;
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     double p0     = model.p0;
@@ -69,36 +73,80 @@ double nfw_den(double r, struct component & model)                              
 }                                                                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                             GENERAL HERNQUIST                                                                         */
-double gen_hern_den(double r, struct component & model)                                                                  //
+double gen_hern_den(struct position & pos, struct component & model)                                                                  //
 {                                                                                                                        //
+    double r = pos.r;
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     return inv(2.0 * pi) * mass * rscale / ( r * cube(r + rscale));                                                      //
 }                                                                                                                        //
                                                                                                                          //
-double gen_hern_pot(double r, struct component & model)                                                                  //
+double gen_hern_pot(struct position & pos, struct component & model)                                                                  //
 {                                                                                                                        //
+    double r = pos.r;
     double rscale = model.rscale;                                                                                        //
     double mass   = model.mass;                                                                                          //
     return - mass / (r + rscale);                                                                                        //
 }                                                                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*                             LOGRITHMIC                                                                                */
+
+double log_pot(struct position & pos, struct component & model)
+{
+    double r = pos.r;
+    double rscale = model.rscale;                                                                                        //
+    double vhalo   = model.vhalo;
+    return - sqr(vhalo) * log( 1.0 + sqr(r) / sqr(rscale) );
+    
+}
 
 
-double get_density( double r, struct component & model)
+
+double miyamoto_nagai_pot(struct position & pos, struct component & model)
+{
+    double mass = model.mass;
+    double b    = model.b;
+    double c    = model.c;
+    double x    = pos.x;
+    double y    = pos.y;
+    double z    = pos.z;
+    double sqR =  sqr(x) + sqr(y);
+    
+    
+    double thing = sqrt( sqr(z) + sqr(c) );
+    double denom = sqR + sqr( b + thing );
+    double denom = sqrt(denom);
+    
+    return - mass / denom;
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+double get_density( struct position & pos, struct component & model)
 {
     double den_temp;
     
     switch(model.type)
     {
         case plummer:
-            den_temp = plummer_den(r, model);
+            den_temp = plummer_den(pos, model);
             break;
         case nfw:
-            den_temp = nfw_den(r, model);
+            den_temp = nfw_den(pos, model);
             break;
         case gen_hern:
-            den_temp = gen_hern_den(r, model);
+            den_temp = gen_hern_den(pos, model);
             break;
         default:
             printf("unknown model\n");
@@ -107,20 +155,20 @@ double get_density( double r, struct component & model)
 }
 
 
-double get_potential( double r, struct component & model)
+double get_potential( struct position & pos, struct component & model)
 {
     double pot_temp;
     
     switch(model.type)
     {
         case plummer:
-            pot_temp = plummer_pot(r, model);
+            pot_temp = plummer_pot(pos, model);
             break;
         case nfw:
-            pot_temp = nfw_pot(r, model);
+            pot_temp = nfw_pot(pos, model);
             break;
         case gen_hern:
-            pot_temp = gen_hern_pot(r, model);
+            pot_temp = gen_hern_pot(pos, model);
             break;
         default:
             printf("unknown model\n");

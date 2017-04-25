@@ -41,16 +41,16 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     
     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].l    = datal;
-        b[i].b    = datab;
-        b[i].r    = in_quad(datax, datay, datay);
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].v    = in_quad(datavx, datavy, datavy);
+        b[i].pos.x    = datax;
+        b[i].pos.y    = datay;
+        b[i].pos.z    = dataz;
+        b[i].pos.l    = datal;
+        b[i].pos.b    = datab;
+        b[i].pos.r    = in_quad(datax, datay, datay);
+        b[i].vel.vx   = datavx;
+        b[i].vel.vy   = datavy;
+        b[i].vel.vz   = datavz;
+        b[i].vel.v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
         b[i].type = lm;
         i++;
@@ -61,14 +61,14 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     data.open(s);
     while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
     {
-        b[i].x    = datax;
-        b[i].y    = datay;
-        b[i].z    = dataz;
-        b[i].r    = in_quad(datax, datay, datay);
-        b[i].vx   = datavx;
-        b[i].vy   = datavy;
-        b[i].vz   = datavz;
-        b[i].v    = in_quad(datavx, datavy, datavy);
+        b[i].pos.x    = datax;
+        b[i].pos.y    = datay;
+        b[i].pos.z    = dataz;
+        b[i].pos.r    = in_quad(datax, datay, datay);
+        b[i].vel.vx   = datavx;
+        b[i].vel.vy   = datavy;
+        b[i].vel.vz   = datavz;
+        b[i].vel.v    = in_quad(datavx, datavy, datavy);
         b[i].mass = datam;
         b[i].type = dm;
         i++;
@@ -99,13 +99,13 @@ void com(struct bodies * b, int N, double * cm, double * cmv, double mass)
 
     for(int i = 0; i < N; i++)
     {
-        cm_x += b[i].mass * b[i].x;
-        cm_y += b[i].mass * b[i].y;
-        cm_z += b[i].mass * b[i].z;
+        cm_x += b[i].mass * b[i].pos.x;
+        cm_y += b[i].mass * b[i].pos.y;
+        cm_z += b[i].mass * b[i].pos.z;
         
-        cmv_x += b[i].mass * b[i].vx;
-        cmv_y += b[i].mass * b[i].vy;
-        cmv_z += b[i].mass * b[i].vz;
+        cmv_x += b[i].mass * b[i].vel.vx;
+        cmv_y += b[i].mass * b[i].vel.vy;
+        cmv_z += b[i].mass * b[i].vel.vz;
     }
     
     
@@ -125,19 +125,19 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N)
     double r_corrected, v_corrected;
     for(int i = 0; i < N; i++)
     {
-        r_corrected = sqrt( sqrdif(cm[0], b[i].x)  + sqrdif(cm[1], b[i].y)  + sqrdif(cm[2], b[i].z) );
-        v_corrected = sqrt( sqrdif(cm[0], b[i].vx) + sqrdif(cm[1], b[i].vy) + sqrdif(cm[2], b[i].vz) );
+        r_corrected = sqrt( sqrdif(cm[0], b[i].pos.x)  + sqrdif(cm[1], b[i].pos.y)  + sqrdif(cm[2], b[i].pos.z) );
+        v_corrected = sqrt( sqrdif(cm[0], b[i].vel.vx) + sqrdif(cm[1], b[i].vel.vy) + sqrdif(cm[2], b[i].vel.vz) );
 //         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
-        b[i].x -= cm[0];
-        b[i].y -= cm[1];
-        b[i].z -= cm[2];
+        b[i].pos.x -= cm[0];
+        b[i].pos.y -= cm[1];
+        b[i].pos.z -= cm[2];
         
-        b[i].vx -= cmv[0];
-        b[i].vy -= cmv[1];
-        b[i].vz -= cmv[2];
+        b[i].vel.vx -= cmv[0];
+        b[i].vel.vy -= cmv[1];
+        b[i].vel.vz -= cmv[2];
         
-        b[i].r = r_corrected;
-        b[i].v = v_corrected;
+        b[i].pos.r = r_corrected;
+        b[i].vel.v = v_corrected;
 //         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
     }
     
