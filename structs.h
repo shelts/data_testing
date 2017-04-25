@@ -45,6 +45,8 @@ using namespace std;
 #define nfw      (int) 3
 #define gen_hern (int) 4
 #define einasto  (int) 5
+#define miyamoto (int) 6
+#define log_halo (int) 7
 struct position
 {
     double x;
@@ -80,6 +82,12 @@ struct component
     double p0;
     double r200;
     double vhalo;
-    double b, c;
+    double scale_height;
 };
 
+struct galaxy_model
+{
+    component bulge;
+    component disk;
+    component halo;
+};

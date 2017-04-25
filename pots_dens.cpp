@@ -104,8 +104,8 @@ double log_pot(struct position & pos, struct component & model)
 double miyamoto_nagai_pot(struct position & pos, struct component & model)
 {
     double mass = model.mass;
-    double b    = model.b;
-    double c    = model.c;
+    double b    = model.rscale;
+    double c    = model.scale_height;
     double x    = pos.x;
     double y    = pos.y;
     double z    = pos.z;
@@ -168,6 +168,14 @@ double get_potential( struct position & pos, struct component & model)
             break;
         case gen_hern:
             pot_temp = gen_hern_pot(pos, model);
+            break;
+            
+        case miyamoto:
+            pot_temp = miyamoto_nagai_pot(pos, model);
+            break;    
+            
+        case log_halo:
+            pot_temp = log_pot(pos, model);
             break;
         default:
             printf("unknown model\n");

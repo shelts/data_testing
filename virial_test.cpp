@@ -86,6 +86,30 @@ double potential_func( struct bodies * b, int N, struct component & light, struc
 }
 
 
+double potential_func_with_galaxy( struct bodies * b, int N, struct component & light, struct component & dark)
+{
+    /*
+     * This calculates the potential energy using the theoretical potential function for that model
+     */
+    double pot = 0.0;
+    double mass;
+    double light_comp, dark_comp;
+    double bulge, disk, halo;
+    for(int i = 0; i < N; i++)
+    {
+        mass = b[i].mass;
+
+        light_comp = get_potential(b[i].pos, light);
+        dark_comp  = get_potential(b[i].pos, dark);
+        
+        
+        pot += mass * (light_comp + dark_comp);
+        
+    }
+    return pot / 2.0;
+}
+
+
 int main (int argc, char * const argv[])
 {
     string simtime                 = argv[1];
@@ -103,6 +127,11 @@ int main (int argc, char * const argv[])
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
     printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
     printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
+    
+    
+    galaxy_model mw;
+    init_galaxy_model(mw);
+    
     
     check_mass(light);
     check_mass(dark);

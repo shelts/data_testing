@@ -184,6 +184,26 @@ void init_comps(struct component & light, struct component & dark, double rscale
     
 }
 
+
+/*to initialize the struct for the galaxy model*/
+void init_galaxy_model(struct galaxy_model & mw)
+{
+    /* these are from MW@home */
+    mw.bulge.type = gen_hern;
+    mw.bulge.mass = 1.52954402e5;
+    mw.bulge.scale = 0.7;
+ 
+    mw.disk.type = miyamoto;
+    mw.disk.mass = 4.45865888e5;
+    mw.disk.rscale = 6.5;
+    mw.disk.scale_height = 0.26;
+    
+    mw.halo.type = log_halo;
+    mw.halo.vhalo = 73;
+    mw.halo.rscale = 12.0;
+}
+
+
 /*escape velocity*/
 double esc_vel(struct position & pos, struct component & light, struct component & dark)
 {
