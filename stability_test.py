@@ -41,7 +41,7 @@ einasto  = 5                    #
                 #          Control Panel       #
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
+sim_time      = [ "p1", "p25", "p50", "p75", "1", "2", "3", "4"]
 #sim_time      = [ "0", "2"]
 N             = 1
 M             = 0
@@ -136,8 +136,8 @@ comp2    = str(component2)
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-for i in range(M,N):
-    os.system("mv ../quick_plots/outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out ./sim_outputs")
+#for i in range(M,N):
+    #os.system("mv ../quick_plots/outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out ./sim_outputs")
     
 if(parse):
     print "parsing data"

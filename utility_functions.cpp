@@ -64,6 +64,8 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].pos.x    = datax;
         b[i].pos.y    = datay;
         b[i].pos.z    = dataz;
+        b[i].pos.l    = datal;
+        b[i].pos.b    = datab;
         b[i].pos.r    = in_quad(datax, datay, datay);
         b[i].vel.vx   = datavx;
         b[i].vel.vy   = datavy;
