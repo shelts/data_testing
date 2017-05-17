@@ -336,7 +336,7 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
 int main (int argc, char * const argv[])
 {
     srand(time(NULL));
-    string simtime                 = argv[1];
+    string simtime                     = argv[1];
     double rscale_l                    = atof(argv[2]);
     double rscale_d                    = atof(argv[3]);
     double mass_l                      = atof(argv[4]);
@@ -386,6 +386,7 @@ int main (int argc, char * const argv[])
     com(b, N, cm, cmv, mass);
     com_correction(cm, cmv, b, N);
     
+    printf("%i\t%i\n", lm, dm);
     double masspl = get_masspp(b, N, lm);
     double masspd = get_masspp(b, N, dm);
     printf("masspl, masspd: (%0.15f , %0.15f)\n", masspl, masspd);

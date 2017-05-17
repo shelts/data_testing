@@ -16,7 +16,7 @@ int get_size(int type, string extension)
     /*getting the length of the data set*/
     ifstream length;
     length.open (s);
-    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
+    while(length>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax>>datax)
     {
     //       cout<<datax<<endl;
         N++;
@@ -33,13 +33,13 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
     string s;
     double datax,datay,dataz;
     double datal, datab, datar;
-    double datavx, datavy, datavz, datam;
+    double datavx, datavy, datavz, datam, datavlos;
     int i = 0;
     s = string("raw_data/light_matter_" + extension + ".dat");
     ifstream data;
     data.open(s);
     
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam>>datavlos)
     {
         b[i].pos.x    = datax;
         b[i].pos.y    = datay;
@@ -51,15 +51,16 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vel.vy   = datavy;
         b[i].vel.vz   = datavz;
         b[i].vel.v    = in_quad(datavx, datavy, datavy);
-        b[i].mass = datam;
-        b[i].type = lm;
+        b[i].mass     = datam;
+        b[i].type     = lm;
+        b[i].vlos     = datavlos;
         i++;
     }
     data.close();
 
     s = string("raw_data/dark_matter_" + extension + ".dat");
     data.open(s);
-    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam)
+    while(data>>datax>>datay>>dataz>>datal>>datab>>datar>>datavx>>datavy>>datavz>>datam>>datavlos)
     {
         b[i].pos.x    = datax;
         b[i].pos.y    = datay;
@@ -71,8 +72,9 @@ void get_data(int Nd, int Nl, struct bodies * b, string extension)
         b[i].vel.vy   = datavy;
         b[i].vel.vz   = datavz;
         b[i].vel.v    = in_quad(datavx, datavy, datavy);
-        b[i].mass = datam;
-        b[i].type = dm;
+        b[i].mass     = datam;
+        b[i].type     = dm;
+        b[i].vlos     = datavlos;
         i++;
     }
     data.close();
@@ -361,7 +363,6 @@ double max_finder(double (*profile)(double , struct position & , struct componen
 double get_masspp(struct bodies * b, int N, int type)
 {
     double masspp;
-    
     for(int i = 0; i < N; i++)
     {
         if(b[i].type == type)
@@ -369,7 +370,7 @@ double get_masspp(struct bodies * b, int N, int type)
             masspp = b[i].mass;
         }
         
-        if(masspp != 0.0){break;}
+//         if(masspp != 0.0){break;}
     }  
 //     printf("%0.15f\n", masspp);
     return masspp;

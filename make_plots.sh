@@ -1,14 +1,14 @@
 #!/bin/bash      
 
-plot_stability=false
+plot_stability=true
 plot_multiplot_stability=false
-plot_multi_comp_stability=true
+plot_multi_comp_stability=false
 
     cd gnuplot_scripts/
     
 #     this is for the individual stability plots         #
 if [ "$plot_stability" = true ] ; then
-#     ./stability_plots.py
+    ./stability_plots.py
     echo 'plotting stability plots'
 fi
 

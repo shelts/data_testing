@@ -22,7 +22,7 @@ def get_start_number(file_name):
 
 def parse_data(file_name, ext):
     g = open('./raw_data/light_matter_'+ ext +'.dat', 'w')
-    f = open('./raw_data/dark_matter_'+ ext +'.dat', 'w')
+    f = open('./raw_data/dark_matter_' + ext +'.dat', 'w')
     lines = []
     lines = open(file_name).readlines() 
     start = get_start_number(file_name)
@@ -41,7 +41,7 @@ def parse_data(file_name, ext):
             vy = float(tt[5])
             vz = float(tt[6])
             m  = float(tt[7])
-        if(len(tt) == 11):
+        if(len(tt) == 12):
             ty = float(tt[0])
             x  = float(tt[1])
             y  = float(tt[2])
@@ -53,17 +53,18 @@ def parse_data(file_name, ext):
             vy = float(tt[8])
             vz = float(tt[9])
             m  = float(tt[10])
+            vlos = float(tt[11])
 
         if(len(tt) == 8):
             if (isDark == 1):
                 f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
             else:
                 g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
-        if(len(tt) == 11):
+        if(len(tt) == 12):
             if (isDark == 1):
-                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m))
+                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
             else:
-                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m))
+                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
 
 def main():
     args = sys.argv;

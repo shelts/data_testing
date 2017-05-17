@@ -71,6 +71,7 @@ struct bodies
     velocity vel;
     double mass;
     int type;
+    double vlos;
 };
 
 

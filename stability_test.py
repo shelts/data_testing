@@ -20,11 +20,10 @@ n = False                       #
 # # # # # # # # # # # # # # # # #
 #     PARAMETER DIRECTORY       #
 # # # # # # # # # # # # # # # # #
-back_time     = float(args[1])  #
-r_l           = float(args[2])  #
-rad_ratio     = float(args[3])  #
-m_l           = float(args[4])  #
-mass_ratio    = float(args[5])  #
+r_l           = float(args[1])  #
+rad_ratio     = float(args[2])  #
+m_l           = float(args[3])  #
+mass_ratio    = float(args[4])  #
 # # # # # # # # # # # # # # # # #
 
 # # # # # # # # # # # # # # # # #
@@ -46,7 +45,7 @@ sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
 N             = 1
 M             = 0
 
-print "parameters: ", back_time, r_l, rad_ratio, m_l, mass_ratio
+print "parameters: ", r_l, rad_ratio, m_l, mass_ratio
 
 number_of_components = 2
 parse = True
