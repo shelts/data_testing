@@ -4,7 +4,7 @@ import os
 outputs = [ "0", "2", "4"]
 sim_time = [ "0", "2", "4"]
 titles   = [ "0.0", "2.0", "4.0"]
-N        = 3
+N        = 1
 M        = 0
 plot_dark = False
 plot_light = True
