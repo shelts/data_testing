@@ -160,7 +160,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
     
     
     string s;
-    int type = 0;
+    string type = string("normal");
     s = string("binned_data/dark_matter_theory_vel_bins.dat");
     binner(number_of_bins, bin_width, v_d, Nd, s, extension, type);
     s = string("binned_data/light_matter_theory_vel_bins.dat");
@@ -175,7 +175,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
 
 void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, int number_of_bins, double bin_width)
 {
-    int type = 0;
+    string type = string("normal");
     string s, s1, s2;
     s1 = string("actual/light_matter_velocity_dist_" + extension + ".dat");
     s2 = string("actual/dark_matter_velocity_dist_" + extension + ".dat");
@@ -252,41 +252,41 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
     {
         if(b[i].type == lm)
         {
-            theta_l[countl] = acos( b[i].pos.z / b[i].pos.r );
-            phi_l[countl] = atan2(  b[i].pos.y , b[i].pos.x );
+            theta_l[countl] = acos(   b[i].pos.z / b[i].pos.r );
+            phi_l[countl]   = atan2(  b[i].pos.y , b[i].pos.x );
             
-            thetav_l[countl] = acos( b[i].vel.vz / b[i].vel.v );
-            phiv_l[countl] = atan2(  b[i].vel.vy , b[i].vel.vx );
+            thetav_l[countl] = acos(  b[i].vel.vz / b[i].vel.v );
+            phiv_l[countl]   = atan2( b[i].vel.vy , b[i].vel.vx );
             
             theta[i] = theta_l[countl];
-            phi[i] = phi_l[countl];
+            phi[i]   = phi_l[countl];
             
             thetav[i] = thetav_l[countl];
-            phiv[i] = phiv_l[countl];
+            phiv[i]   = phiv_l[countl];
             countl++;
         }
         else
         {
-            theta_d[countd] = acos( b[i].pos.z / b[i].pos.r );
-            phi_d[countd] = atan2(  b[i].pos.y , b[i].pos.x );
+            theta_d[countd] = acos(   b[i].pos.z / b[i].pos.r );
+            phi_d[countd]   = atan2(  b[i].pos.y , b[i].pos.x );
             
-            thetav_d[countd] = acos( b[i].vel.vz / b[i].vel.v );
-            phiv_d[countd] = atan2(  b[i].vel.vy , b[i].vel.vx );
+            thetav_d[countd] = acos(  b[i].vel.vz / b[i].vel.v );
+            phiv_d[countd]   = atan2( b[i].vel.vy , b[i].vel.vx );
             
             theta[i] = theta_d[countd];
-            phi[i] = phi_d[countd];
+            phi[i]   = phi_d[countd];
             
             thetav[i] = thetav_d[countd];
             phiv[i] = phiv_d[countd];
             
             countd++;
         }
-        
     }
+    
     
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     //radial theta                                                                         //
-    int type = 0;                                                                          //
+    string type = string("normal");                                                                //
     s = string("binned_data/theta_light_" + extension + ".dat");                           //
     binner(number_of_bins, bin_width, theta_l, Nl, s, extension, type);                    //
                                                                                            //
@@ -308,7 +308,7 @@ void angles(string extension, int Nl, int Nd, struct bodies * b, int number_of_b
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     //radia phi                                                                            //
-    type = 1;                                                                              //
+    type = string("phi");                                                                          //
     s = string("binned_data/phi_light_" + extension + ".dat");                             //
     binner(number_of_bins, bin_width, phi_l, Nl, s, extension, type);                      //
                                                                                            //
@@ -380,13 +380,11 @@ int main (int argc, char * const argv[])
     
     /*getting the positional and velocity data*/
     get_data(Nd, Nl, b, extension);
-
     /*get center of mass*/
     double mass = mass_l + mass_d;
     com(b, N, cm, cmv, mass);
     com_correction(cm, cmv, b, N);
     
-    printf("%i\t%i\n", lm, dm);
     double masspl = get_masspp(b, N, lm);
     double masspd = get_masspp(b, N, dm);
     printf("masspl, masspd: (%0.15f , %0.15f)\n", masspl, masspd);

@@ -2,7 +2,7 @@
 
 plot_stability=true
 plot_multiplot_stability=false
-plot_multi_comp_stability=false
+plot_multi_comp_stability=true
 
     cd gnuplot_scripts/
     

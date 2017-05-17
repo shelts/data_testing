@@ -221,7 +221,7 @@ double esc_vel(struct position & pos, struct component & light, struct component
 
 
 /*this is a binning routine, makes a histogram*/
-void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type)
+void binner(int binN, double binwidth, double * x, int N, string s, string extension, string type)
 {
     // binN=number of bins
     //binwidthsize of bins
@@ -236,15 +236,15 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     ofstream bin;
     bin.open (s);
     
-    /* type 0 are the radii/vels and their theta angles. they would start at zero and go forward.
-     * type 1 is for phi, which starts at -pi and goes to pi
+    /* type normal are the radii/vels and their theta angles. they would start at zero and go forward.
+     * type phi is for phi, which starts at -pi and goes to pi
      */
     
     for(int j = 0; j < N; j++)/*tests one of the numbers at a time*/
     {
         
         range = 0;/*resets the range so that the bins can be tested again against the number*/
-        if(type == 1)
+        if(type == string("phi"))
         {
             range = -4.0;
             upper = 4.0;
@@ -282,7 +282,7 @@ void binner(int binN, double binwidth, double * x, int N, string s, string exten
     double total = 0;
     double binrange = 0;
     
-    if(type == 1)
+    if(type == string("phi"))
     {
         binrange = -4.0;
     }

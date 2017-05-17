@@ -16,7 +16,7 @@ void init_galaxy_model(struct galaxy_model & mw);
 
 double esc_vel(struct position & pos, struct component & light, struct component & dark);
 
-void binner(int binN, double binwidth, double * x, int N, string s, string extension, int type);
+void binner(int binN, double binwidth, double * x, int N, string s, string extension, string type);
 
 double max_finder(double (*profile)(double , struct position & , struct component &, struct component &), struct position & pos, struct component & comp1, struct component & comp2, double a, double b, double c);
 
