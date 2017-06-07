@@ -391,6 +391,11 @@ int main (int argc, char * const argv[])
     
     rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
 
+    for( int i = 0; i < N; i++)
+    {
+//         printf("%f\n", b[i].vel.v);
+    }
+    
     angles(extension, Nl, Nd, b, number_of_bins, bin_width);
 
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};
