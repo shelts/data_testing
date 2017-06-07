@@ -7,7 +7,7 @@ titles   = [ "0.0", "0.25" , "0.5" , "0.75" , "1.0", "2.0", "3.0", "4.0"]
 
 #outputs = [ "0", "2"]
 #sim_time = [ "0", "2"]
-#titles   = [ "0.0", "2"]
+#titles   = [ "0.0", "2"]#aaff00
 N        = 1
 M        = 0
 plot_dark = True
@@ -21,6 +21,12 @@ if(plot_dark == True):
 if(plot_both == True):
     print("plotting both")
 
+
+gnu_common_header = ["reset",
+                     "set terminal png enhanced size 1300,700",
+                     "set key off",
+                     "set title font 'Times-Roman,20' ",
+                     "set ylabel 'Counts' "]
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 ##RADIUS binned
@@ -30,52 +36,36 @@ dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
 both       = "~/Desktop/research/data_testing/binned_data/both_matter_bins_"
 
 ###
-f = open('stability_rad_multiplot.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg size 6000,2000\n")
-f.write("set key off\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:0.1]\n")
-f.write("set yrange[0:6500]\n\n\n")
-
-f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_multiplot.jpeg\" \n")
-f.write("set multiplot layout 2,4 rowsfirst\n")
-for i in range(M, N):
-    if(plot_light == True):
-        p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + "Gy \n")
-        f.write("plot '" + p + "' using 2:1  with boxes, '" + theory_den + "' using 1:3 with lines title 'light'\n\n") 
-        
-f.write("unset multiplot \n")
-f.close()
-###
 
 f = open('stability_rad.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:10]\n")
-f.write("set yrange[0:2000]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'Radius (kpc)'",
+              "set xrange[0:10]",
+              "set yrange[0:2000]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
 
 for i in range(M, N):
     if(plot_light):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_light_" + outputs[i] + "gy.jpeg\" \n")
+        f.write("set output '~/Desktop/research/data_testing/plots/rad/radii_distribution_light_" + outputs[i] + "gy.jpeg' \n")
         f.write("set title 'Histogram of Light Matter Distribution After " + titles[i] + "Gy' \n")
         f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_den + "' using 1:2 with lines title 'both', '" + theory_den + "' using 1:3 with lines title 'light', '" + theory_den + "' using 1:4 with lines title 'dark' \n\n") 
 
     if(plot_dark):
         p = dark + sim_time[i] + "gy.dat"
-        f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_dark_" + outputs[i] + "gy.jpeg\" \n")
+        f.write("set output '~/Desktop/research/data_testing/plots/rad/radii_distribution_dark_" + outputs[i] + "gy.jpeg' \n")
         f.write("set title 'Histogram of Dark Matter Distribution After " + titles[i] + "Gy' \n")
         f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_den + "' using 1:2 with lines title 'both', '" + theory_den + "' using 1:3 with lines title 'light', '" + theory_den + "' using 1:4 with lines title 'dark' \n\n") 
 
     if(plot_both):
         p = both + sim_time[i] + "gy.dat"
-        f.write("set output \"~/Desktop/research/data_testing/plots/rad/radii_distribution_both_" + outputs[i] + "gy.jpeg\" \n")
+        f.write("set output '~/Desktop/research/data_testing/plots/rad/radii_distribution_both_" + outputs[i] + "gy.jpeg' \n")
         f.write("set title 'Histogram of Combined Matter Distribution After " + titles[i] + "Gy' \n")
         f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_den + "' using 1:2 with lines title 'both', '" + theory_den + "' using 1:3 with lines title 'light', '" + theory_den + "' using 1:4 with lines title 'dark' \n\n") 
 
@@ -92,13 +82,18 @@ dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
 both       = "~/Desktop/research/data_testing/binned_data/both_matter_bins_"
 
 f = open('stability_rad_profile.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:30]\n")
-f.write("set yrange[0:1.8]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'Radius (kpc)'",
+              "set xrange[0:30]",
+              "set yrange[0:1.8]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
 
 for i in range(M, N):
     if(plot_light == True):
@@ -133,13 +128,18 @@ dark  = "~/Desktop/research/data_testing/binned_data/phi_dark_"
 both  = "~/Desktop/research/data_testing/binned_data/phi_both_"
 
 f = open('stability_phi.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'phi (rad)'\n")
-f.write("set xrange[-5:5]\n")
-f.write("set yrange[0:1200]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'phi (rad)'",
+              "set xrange[-5:5]",
+              "set yrange[0:1200]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 
 for i in range(M, N):
     if(plot_light == True):
@@ -174,14 +174,19 @@ dark  = "~/Desktop/research/data_testing/binned_data/theta_dark_"
 both  = "~/Desktop/research/data_testing/binned_data/theta_both_"
 
 f = open('stability_theta.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'theta (rad)'\n")
-f.write("set xrange[0:4]\n")
-f.write("set yrange[0:1200]\n\n\n")
 
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'theta (rad)'",
+              "set xrange[0:4]",
+              "set yrange[0:1200]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
+        
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
@@ -215,14 +220,18 @@ light = "~/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
 dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
 
 f = open('vel_stability.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key off\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'vel (km/s)'\n")
-f.write("set xrange[0:20]\n")
-f.write("set yrange[0:500]\n")
-f.write("set style fill transparent solid 0.2\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'vel (km/s)'",
+              "set xrange[0:20]",
+              "set yrange[0:500]\n",
+              "set style fill transparent solid 0.2"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
 
 
 for i in range(M, N):
@@ -254,13 +263,18 @@ dark  = "~/Desktop/research/data_testing/binned_data/phi_vel_dark_"
 both  = "~/Desktop/research/data_testing/binned_data/phi_vel_both_"
 
 f = open('vel_stability_phi.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'phi (vel)'\n")
-f.write("set xrange[-5:5]\n")
-f.write("set yrange[0:1200]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'phi (vel)'",
+              "set xrange[-5:5]",
+              "set yrange[0:1200]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
 
 for i in range(M, N):
     if(plot_light == True):
@@ -297,13 +311,18 @@ dark  = "~/Desktop/research/data_testing/binned_data/theta_vel_dark_"
 both  = "~/Desktop/research/data_testing/binned_data/theta_vel_both_"
 
 f = open('vel_stability_theta.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'counts'\n")
-f.write("set xlabel 'theta (vel)'\n")
-f.write("set xrange[0:4]\n")
-f.write("set yrange[0:1200]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'theta (vel)'",
+              "set xrange[0:4]",
+              "set yrange[0:1200]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
 
 for i in range(M, N):
     if(plot_light == True):
@@ -339,13 +358,19 @@ light = "~/Desktop/research/data_testing/actual/light_matter_velocity_dist_"
 dark  = "~/Desktop/research/data_testing/actual/dark_matter_velocity_dist_"
 
 f = open('vel_vs_r.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal jpeg\n")
-f.write("set key on\n")
-f.write("set ylabel 'vel (km/s)'\n")
-f.write("set xlabel 'radius (kpc)'\n")
-f.write("set xrange[0:15]\n")
-f.write("set yrange[0:6]\n\n\n")
+
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set xlabel 'radius (kpc)'",
+              "set ylabel 'vel (km/s)'",
+              "set xrange[0:15]",
+              "set yrange[0:6]\n"
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 
 for i in range(M, N):
     if(plot_light == True):
@@ -367,136 +392,3 @@ for i in range(M, N):
     f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
 
 f.close()
-
-
-
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-###VELOCITY DISTRIBUTION
-###This is the one without theory
-#theory   = "~/Desktop/research/data_testing/theory/theory_vel.dat"
-#light = "~/Desktop/research/data_testing/binned_data/light_matter_norm_vel_bins_"
-#dark  = "~/Desktop/research/data_testing/binned_data/dark_matter_norm_vel_bins_"
-
-#f = open('vel_binned.gnuplot', 'w')
-#f.write("reset\n")
-#f.write("set terminal jpeg\n")
-#f.write("set key on\n")
-#f.write("set ylabel 'counts'\n")
-#f.write("set xlabel 'velocity (km/s)'\n")
-#f.write("set xrange[0:1]\n")
-#f.write("set yrange[0:400]\n")
-#f.write("set style fill transparent solid 0.2\n\n\n")
-
-
-#for i in range(M, N):
-    #if(plot_light == True):
-        #p = light + sim_time[i] + "gy.dat"
-        #f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_light_" + outputs[i] + "gy.jpeg\" \n")
-        #f.write("set title 'Histogram of Light Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        #f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'light dist'  lw 2   \n\n", )
-
-    #if(plot_dark == True):
-        #p = dark + sim_time[i] + "gy.dat"
-        #f.write("set output \"~/Desktop/research/data_testing/plots/vel_dist/binned/vel_distribution_dark_" + outputs[i] + "gy.jpeg\" \n")
-        #f.write("set title 'Histogram of Dark Matter Velocity Distribution After " + titles[i] + "Gy' \n")
-        #f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:2 with lines  title 'dark dist'  lw 2   \n\n") 
-        
-
-
-    #f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-    #f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-
-#f.close()
-
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#pot  = "~/Desktop/research/data_testing/theory/pots.dat"
-#f = open('pots.gnuplot', 'w')
-#f.write("reset\n")
-#f.write("set terminal jpeg\n")
-#f.write("set key on\n")
-#f.write("set ylabel 'pot'\n")
-#f.write("set xlabel 'radius (kpc)'\n")
-##f.write("set xrange[0:10]\n")
-#f.write("set yrange[-50000:0]\n\n\n")
-
-#if(plot_theory == True):
-    #f.write("set output \"~/Desktop/research/data_testing/plots/pots.jpeg\" \n")
-    #f.write("set title 'Pot vs r' \n")
-    #f.write("plot '" + pot + "' u 1:2  w l title 'plum', '' u 1:3 w l title 'mn', '' u 1:4 w l title 'sphere', '' u 1:5 w l title 'log' \n\n", )
-
-#f.close()
-
-#den  = "~/Desktop/research/data_testing/theory/den.dat"
-
-#f = open('den.gnuplot', 'w')
-#f.write("reset\n")
-#f.write("set terminal jpeg\n")
-#f.write("set key on\n")
-#f.write("set ylabel 'den'\n")
-#f.write("set xlabel 'radius (kpc)'\n")
-#f.write("set xrange[0:100]\n")
-#f.write("set yrange[0:10]\n\n\n")
-#if(plot_theory == True):
-    #f.write("set output \"~/Desktop/research/data_testing/plots/den.jpeg\" \n")
-    #f.write("set title 'den vs r' \n")
-    #f.write("plot '" + den + "' u 1:2  w l title 'plum', '' u 1:3 w l title 'mn', '' u 1:4 w l title 'sphere', '' u 1:5 w l title 'log' \n\n", )
-
-
-
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-
-#f.close()
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#rot  = "~/Desktop/research/data_testing/theory/rotation.dat"
-
-#f = open('rotation.gnuplot', 'w')
-#f.write("reset\n")
-#f.write("set terminal jpeg\n")
-#f.write("set key on\n")
-#f.write("set ylabel 'vel'\n")
-#f.write("set xlabel 'radius (kpc)'\n")
-#f.write("set xrange[0:500]\n")
-#f.write("set yrange[0:400]\n\n\n")
-#if(plot_theory == True):
-    #f.write("set output \"~/Desktop/research/data_testing/plots/rotation.jpeg\" \n")
-    #f.write("set title 'v vs r' \n")
-    #f.write("plot '" + rot + "' u 1:2  w l title 'mn', '' u 1:3 w l title 'sph', '' u 1:4 w l title 'log', '' u 1:5 w l title 'sum' \n\n", )
-
-
-
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-
-#f.close()
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#force  = "~/Desktop/research/data_testing/theory/force.dat"
-
-#f = open('force.gnuplot', 'w')
-#f.write("reset\n")
-#f.write("set terminal jpeg\n")
-#f.write("set key on\n")
-#f.write("set ylabel 'force'\n")
-#f.write("set xlabel 'radius (kpc)'\n")
-#f.write("set xrange[0:1000]\n")
-#f.write("set yrange[-500:1]\n\n\n")
-#if(plot_theory == True):
-    #f.write("set output \"~/Desktop/research/data_testing/plots/force.jpeg\" \n")
-    #f.write("set title 'force vs r' \n")
-    #f.write("plot '" + force + "' u 1:2  w l title 'force' \n\n", )
-
-
-
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-#f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-
-#f.close()

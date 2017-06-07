@@ -21,10 +21,12 @@ if(plot_both == True):
 
 
 gnu_common_header = ["reset",
-                     "set terminal png enhanced size 1300,700",
+                     "set terminal png enhanced",
                      "set key off",
                      "set title font 'Times-Roman,20' ",
-                     "set ylabel 'Counts' "]
+                     "set ylabel 'Counts' ",
+                     "set multiplot layout 1,3 rowsfirst"
+                     ]
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -39,11 +41,11 @@ f = open('multi_comp_stability_rad.gnuplot', 'w')
 for j in range(0, len(gnu_common_header)):
     f.writelines(gnu_common_header[j] + "\n")
 
-gnu_header = ["set xlabel 'Radius (kpc)'",
+gnu_header = ["set terminal png enhanced size 1300,700",
+              "set xlabel 'Radius (kpc)'",
               "set xrange[0:8]",
               "set yrange[0:1500]\n",
-              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_rad.png\" ",
-              "set multiplot layout 1,3 rowsfirst", 
+              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_rad.png\" "
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
@@ -83,8 +85,7 @@ for j in range(0, len(gnu_common_header)):
 gnu_header = ["set xlabel '{/Symbol f} (rad)'",
               "set xrange[-3.5:3.5]",
               "set yrange[0:800]\n",
-              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_phi.png\" ",
-              "set multiplot layout 1,3 rowsfirst", 
+              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_phi.png\" "
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
@@ -124,8 +125,7 @@ for j in range(0, len(gnu_common_header)):
 gnu_header = ["set xlabel '{/Symbol q} (rad)'",
               "set xrange[0:3.5]",
               "set yrange[0:1200]\n",
-              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_theta.png\" ",
-              "set multiplot layout 1,3 rowsfirst", 
+              "set output \"~/Desktop/research/data_testing/plots/multi_comp_stability_theta.png\" "
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
@@ -165,7 +165,8 @@ gnu_header = ["set xlabel 'Velocity (km/s)'",
               "set xrange[0:10]",
               "set yrange[0:1500]\n",
               "set output '~/Desktop/research/data_testing/plots/multi_comp_stability_vel.png' ",
-              "set multiplot layout 1,2 rowsfirst", 
+              "unset multiplot",
+              "set multiplot layout 1,2 rowsfirst"
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
@@ -205,8 +206,7 @@ for j in range(0, len(gnu_common_header)):
 gnu_header = ["set xlabel 'Velocity {/Symbol f} (rad)'",
               "set xrange[-3.5:3.5]",
               "set yrange[0:800]\n",
-              "set output '~/Desktop/research/data_testing/plots/multi_comp_stability_vel_phi.png' ",
-              "set multiplot layout 1,3 rowsfirst", 
+              "set output '~/Desktop/research/data_testing/plots/multi_comp_stability_vel_phi.png' "
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
@@ -247,8 +247,7 @@ for j in range(0, len(gnu_common_header)):
 gnu_header = ["set xlabel 'Velocity {/Symbol q} (rad)'",
               "set xrange[0:3.5]",
               "set yrange[0:1200]\n",
-              "set output '~/Desktop/research/data_testing/plots/multi_comp_stability_vel_theta.png' ",
-              "set multiplot layout 1,3 rowsfirst", 
+              "set output '~/Desktop/research/data_testing/plots/multi_comp_stability_vel_theta.png' "
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")
