@@ -17,6 +17,16 @@ if(plot_dark == True):
 if(plot_both == True):
     print("plotting both")
 
+
+gnu_common_header = ["reset",
+                     "set terminal png enhanced",
+                     "set key off",
+                     "set title font 'Times-Roman,20' ",
+                     "set ylabel 'Counts' ",
+                     "set multiplot layout 1,2 rowsfirst"
+                     ]
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 ##RADIUS
@@ -26,22 +36,28 @@ dark       = "~/Desktop/research/data_testing/binned_data/dark_matter_bins_"
 both       = "~/Desktop/research/data_testing/binned_data/both_matter_bins_"
 
 f = open('stability_rad_multiplot.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced size 1300,700\n")
-f.write("set key off\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel 'Radius (kpc)'\n")
-f.write("set xrange[0:8]\n")
-f.write("set yrange[0:1500]\n\n\n")
-f.write("set title font 'Times-Roman,20'\n")
 
-f.write("set output \"~/Desktop/research/data_testing/plots/radii_distribution_multiplot.png\" \n")
-f.write("set multiplot layout 1,3 rowsfirst\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
+
+gnu_header = ["set terminal png enhanced size 1300,700",
+              "set xlabel 'Radius (kpc)'",
+              "set xrange[0:8]",
+              "set yrange[0:1500]\n",
+              "set multiplot layout 1,3 rowsfirst\n",
+              "set output '~/Desktop/research/data_testing/plots/radii_distribution_multiplot.png' "
+              ]
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr'\n")
-        f.write("plot '" + p + "' using 2:1  with boxes, '" + theory_den + "' using 1:3 with lines title 'light'\n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes, '" + theory_den + "' using 1:3 with lines title 'light'\n"
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")    
         
 f.write("unset multiplot \n")
 f.close()
@@ -58,22 +74,27 @@ theory_phi   = "~/Desktop/research/data_testing/theory/theory_phi.dat"
 light = "~/Desktop/research/data_testing/binned_data/phi_light_"
 
 f = open('multiplot_phi.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced\n")
-f.write("set key off\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel '{/Symbol f} (rad)'\n")
-f.write("set xrange[-3.5:3.5]\n")
-f.write("set yrange[0:800]\n\n\n")
-f.write("set title font 'Times-Roman,20'\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
 
-f.write("set output \"~/Desktop/research/data_testing/plots/phi_distribution_multiplot.png\" \n")
-f.write("set multiplot layout 1,2 rowsfirst\n")
+gnu_header = ["set xlabel '{/Symbol f} (rad)'",
+              "set xrange[-3.5:3.5]",
+              "set yrange[0:800]\n",
+              "set output '~/Desktop/research/data_testing/plots/phi_distribution_multiplot.png' "
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr'\n")
-        f.write("plot '" + p + "' using 2:1  with boxes, '" + theory_phi + "' using 1:3 with lines title 'light' \n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes, '" + theory_phi + "' using 1:3 with lines title 'light' \n",
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")
+            
 f.write("unset multiplot \n")
 f.close()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -83,26 +104,30 @@ sim_time = [ "0","4"]
 titles   = [ "0.0", "4.0"]
 N        = 2
 M        = 0
-theory   = "~/Desktop/research/data_testing/theory/theory_theta.dat"
+theory_theta   = "~/Desktop/research/data_testing/theory/theory_theta.dat"
 light = "~/Desktop/research/data_testing/binned_data/theta_light_"
 
 f = open('multiplot_theta.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced\n")
-f.write("set key on\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel '{/Symbol q} (rad)'\n")
-f.write("set xrange[0:3.5]\n")
-f.write("set yrange[0:1200]\n\n\n")
-f.write("set title font 'Times-Roman,20'\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
 
-f.write("set output \"~/Desktop/research/data_testing/plots/theta_distribution_multiplot.png\" \n")
-f.write("set multiplot layout 1,2 rowsfirst\n")
+gnu_header = ["set xlabel '{/Symbol q} (rad)'",
+              "set xrange[0:3.5]",
+              "set yrange[0:1200]\n",
+              "set output '~/Desktop/research/data_testing/plots/theta_distribution_multiplot.png' "
+              ]
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:3 with lines title 'light'\n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_theta + "' using 1:3 with lines title 'light' \n",
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")
+        
 f.write("unset multiplot \n")
 f.close()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -118,25 +143,28 @@ theory_light   = "~/Desktop/research/data_testing/binned_data/light_matter_theor
 light = "~/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
 
 f = open('stability_vel_multiplot.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced size 1300,700\n")
-f.write("set key off\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel 'Velocity (km/s)'\n")
-f.write("set xrange[0:10]\n")
-f.write("set yrange[0:1500]\n")
-f.write("set title font 'Times-Roman,20'\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
 
-f.write("set output '~/Desktop/research/data_testing/plots/vel_distribution_multiplot.png' \n")
-f.write("set multiplot layout 1,3 rowsfirst\n")
+gnu_header = ["set terminal png enhanced size 1300,700",
+              "set xlabel 'Velocity (km/s)'",
+              "set xrange[0:10]",
+              "set yrange[0:1500]\n",
+              "set multiplot layout 1,3 rowsfirst\n",
+              "set output '~/Desktop/research/data_testing/plots/vel_distribution_multiplot.png' "
+              ]
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_light + "' using 2:1 with lines  title 'light theory'  lw 2   \n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory_light + "' using 2:1 with lines  title 'light theory'  lw 2   \n"
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")    
 
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
-    f.write("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # \n")
 f.write("unset multiplot \n")
 f.close()
 
@@ -153,22 +181,27 @@ theory_phi   = "~/Desktop/research/data_testing/theory/theory_phi.dat"
 light = "~/Desktop/research/data_testing/binned_data/phi_vel_light_"
 
 f = open('multiplot_vel_phi.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced\n")
-f.write("set key off\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel 'Velocity {/Symbol f} (rad)'\n")
-f.write("set xrange[-3.5:3.5]\n")
-f.write("set yrange[0:800]\n\n\n")
-f.write("set title font 'Times-Roman,20'\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
 
-f.write("set output \"~/Desktop/research/data_testing/plots/vel_phi_distribution_multiplot.png\" \n")
-f.write("set multiplot layout 1,2 rowsfirst\n")
+gnu_header = ["set xlabel 'Velocity {/Symbol f} (rad)'",
+              "set xrange[-3.5:3.5]",
+              "set yrange[0:800]\n",
+              "set output '~/Desktop/research/data_testing/plots/vel_phi_distribution_multiplot.png' "
+              ]
+
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes,'" + theory_phi + "' using 1:3 with lines title 'light'\n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes,'" + theory_phi + "' using 1:3 with lines title 'light' \n",
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")
+
 f.write("unset multiplot \n")
 f.close()
 
@@ -185,21 +218,26 @@ theory   = "~/Desktop/research/data_testing/theory/theory_theta.dat"
 light = "~/Desktop/research/data_testing/binned_data/theta_vel_light_"
 
 f = open('multiplot_vel_theta.gnuplot', 'w')
-f.write("reset\n")
-f.write("set terminal png enhanced\n")
-f.write("set key off\n")
-f.write("set ylabel 'Counts'\n")
-f.write("set xlabel 'Velocity {/Symbol q} (rad)'\n")
-f.write("set xrange[0:3.5]\n")
-f.write("set yrange[0:1200]\n\n\n")
-f.write("set title font 'Times-Roman,20'\n")
+for j in range(0, len(gnu_common_header)):
+    f.writelines(gnu_common_header[j] + "\n")
 
-f.write("set output \"~/Desktop/research/data_testing/plots/vel_theta_distribution_multiplot.png\" \n")
-f.write("set multiplot layout 1,2 rowsfirst\n")
+gnu_header = ["set xlabel 'Velocity {/Symbol q} (rad)'",
+              "set xrange[0:3.5]",
+              "set yrange[0:1200]\n",
+              "set output '~/Desktop/research/data_testing/plots/vel_theta_distribution_multiplot.png' "
+              ]
+for j in range(0, len(gnu_header)):
+        f.writelines(gnu_header[j] + "\n")
+        
 for i in range(M, N):
     if(plot_light == True):
         p = light + sim_time[i] + "gy.dat"
-        f.write("set title '" + titles[i] + " Gyr' \n")
-        f.write("plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:3 with lines title 'light' \n\n") 
+        gnu_args = ["set title '" + titles[i] + " Gyr'\n",
+                    "plot '" + p + "' using 2:1  with boxes title 'actual', '" + theory + "' using 1:3 with lines title 'light' \n",
+                    ]
+        for j in range(0, len(gnu_args)):
+            f.writelines(gnu_args[j] + "\n")
+
+
 f.write("unset multiplot \n")
 f.close()

@@ -62,8 +62,8 @@ for i in range(M, N):
                 "plot '" + p3 + "' using 2:1  with boxes, '" + theory_den + "' using 1:2 with lines title 'both'\n"
                 ]
     
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
         
 f.write("unset multiplot \n")
 f.close()
@@ -103,8 +103,8 @@ for i in range(M, N):
                 "plot '" + p3 + "' using 2:1  with boxes, '" + theory_phi + "' using 1:2 with lines title 'both'\n"
                 ]
     
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
         
 f.write("unset multiplot \n")
 f.close()
@@ -143,8 +143,8 @@ for i in range(M, N):
                 "plot '" + p3 + "' using 2:1  with boxes title 'actual', '" + theory_theta + "' using 1:2 with lines title 'both'\n"
                 ]
     
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
     
 f.write("unset multiplot \n")
 f.close()
@@ -182,8 +182,8 @@ for i in range(M, N):
                 "plot '" + p2 + "' using 2:1  with boxes title 'actual', '" + theory_dark + "' using 2:1 with lines  title 'dark theory'  lw 2\n",
                 ]
     
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
     
 f.write("unset multiplot \n")
 f.close()
@@ -223,8 +223,8 @@ for i in range(M, N):
                 "plot '" + p3 + "' using 2:1  with boxes,'" + theory_phi + "' using 1:2 with lines title 'both'\n"
                 ]
     
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
         
 f.write("unset multiplot \n")
 f.close()
@@ -263,8 +263,8 @@ for i in range(M, N):
                 "plot '" + p2 + "' using 2:1  with boxes title 'actual', '" + theory_theta + "' using 1:4 with lines title 'dark' \n",
                 "plot '" + p3 + "' using 2:1  with boxes title 'actual', '" + theory_theta + "' using 1:2 with lines title 'both' \n"
                 ]
-    for i in range(0, len(gnu_args)):
-        g.writelines(gnu_args[i] + "\n")
+    for j in range(0, len(gnu_args)):
+        f.writelines(gnu_args[j] + "\n")
         
 f.write("unset multiplot \n")
 f.close()
