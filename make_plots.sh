@@ -84,16 +84,16 @@ fi
 if [ "$plot_multi_comp_stability" = true ] ; then
 #     the plotting scripts for the multi comp for a given tim    #
     gnuplot multi_comp_stability_rad.gnuplot
-    gnuplot multi_comp_stability_pi.gnuplot
+    gnuplot multi_comp_stability_phi.gnuplot
     gnuplot multi_comp_stability_theta.gnuplot
     gnuplot multi_comp_stability_vel.gnuplot
     gnuplot multi_comp_stability_vel_phi.gnuplot
     gnuplot multi_comp_stability_vel_theta.gnuplot
     
-    rm multi_comp_stability_rad.gnuplot
-    rm multi_comp_stability_pi.gnuplot
-    rm multi_comp_stability_theta.gnuplot
-    rm multi_comp_stability_vel.gnuplot
-    rm multi_comp_stability_vel_phi.gnuplot
-    rm multi_comp_stability_vel_theta.gnuplot 
+#     rm multi_comp_stability_rad.gnuplot
+#     rm multi_comp_stability_pi.gnuplot
+# #     rm multi_comp_stability_theta.gnuplot
+#     rm multi_comp_stability_vel.gnuplot
+#     rm multi_comp_stability_vel_phi.gnuplot
+#     rm multi_comp_stability_vel_theta.gnuplot 
 fi

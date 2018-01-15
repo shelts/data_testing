@@ -53,7 +53,7 @@ void single_density_theory(double bin_width, struct component & light, struct co
         de_p = de2_p + de3_p;
         
         w += 0.001;
-        fprintf(rho, "%f \t %f \t %f\t%f\t %f \t %f\t%f\n", w, de, de2, de3, de_p, de2_p, de3_p);
+        fprintf(rho, "%f\t%f\t%f\t%f\t%f\t%f\t%f\n", w, de, de2, de3, de_p, de2_p, de3_p);
             
         if( w > 100 * (light.rscale + dark.rscale)){break;}
     }
@@ -80,7 +80,7 @@ void angle_theory( double bin_width, double * args)
         theta_d = 2.0 * pi * mass_d * sin(w) * bin_width / (masspd * 4.0 * pi);
         theta = theta_l + theta_d;
         w += 0.01;
-        fprintf(th, "%f \t %f \t %f\t%f\n", w, theta, theta_l, theta_d);
+        fprintf(th, "%f\t%f\t%f\t%f\n", w, theta, theta_l, theta_d);
             
         if(w > (5.0)){break;}
     }
@@ -94,7 +94,7 @@ void angle_theory( double bin_width, double * args)
         phi_d = 2 * mass_d * bin_width /  (masspd * 4 * pi);
         phi = phi_l + phi_d;
         w += 0.01;
-        fprintf(ph, "%f \t %f \t %f\t%f\n", w, phi, phi_l, phi_d);
+        fprintf(ph, "%f\t%f\t%f\t%f\n", w, phi, phi_l, phi_d);
             
         if(w > (5.0)){break;}
     }
@@ -194,11 +194,13 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
     {
         r[i] = b[i].pos.r; 
         v[i] = b[i].vel.v;
+        
         if(b[i].type == lm)
         {
             vel_l << b[i].pos.r << "\t" << b[i].vel.v << endl;
             rl[countl] = b[i].pos.r;
             vl[countl] = b[i].vel.v;
+//             printf("%1.5f\n", b[i].vel.v);
             countl++;
         }
         else
@@ -206,6 +208,7 @@ void rad_vel_distribution(string extension, int Nd, int Nl, struct bodies * b, i
             vel_d << b[i].pos.r << "\t" << b[i].vel.v << endl;
             rd[countd] = b[i].pos.r;
             vd[countd] = b[i].vel.v;
+//             printf("%1.5f\n", b[i].vel.v);
             countd++;
         }
         
@@ -363,7 +366,7 @@ int main (int argc, char * const argv[])
 
     /*paramters for binning routine*/
     int number_of_bins = 1000;
-    double bin_width = .10;
+    double bin_width = .05;
 
     
     int Nd = get_size(dm, extension);//getting the size of the dark matter data

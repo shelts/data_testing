@@ -19,11 +19,9 @@ if(plot_both == True):
 
 
 gnu_common_header = ["reset",
-                     "set terminal png enhanced",
                      "set key off",
                      "set title font 'Times-Roman,20' ",
                      "set ylabel 'Counts' ",
-                     "set multiplot layout 1,2 rowsfirst"
                      ]
 
 
@@ -44,8 +42,8 @@ gnu_header = ["set terminal png enhanced size 1300,700",
               "set xlabel 'Radius (kpc)'",
               "set xrange[0:8]",
               "set yrange[0:1500]\n",
-              "set multiplot layout 1,3 rowsfirst\n",
-              "set output '~/Desktop/research/data_testing/plots/radii_distribution_multiplot.png' "
+              "set output '~/Desktop/research/data_testing/plots/radii_distribution_multiplot.png' ",
+              "set multiplot layout 1,3 rowsfirst\n"
               ]
 for j in range(0, len(gnu_header)):
         f.writelines(gnu_header[j] + "\n")

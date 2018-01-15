@@ -84,12 +84,12 @@ output         = y        #
 # # # # # # # # # # # # # # # # #
 tidal          = n        #
 # # # # # # # # # # # # # # # # #
-virial         = n        #
+virial         = y        #
 # # # # # # # # # # # # # # # # #
 make_clean     = n        #
 # # # # # # # # # # # # # # # # #
 #         PLOTS?          #
-make_plots     = y        #
+make_plots     = n        #
 # # # # # # # # # # # # # # # # #
 #         SAVE?           #
 save_run       = n        #

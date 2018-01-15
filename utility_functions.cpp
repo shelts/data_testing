@@ -143,7 +143,7 @@ void com_correction(double * cm, double * cmv, struct bodies * b, int N)
         b[i].pos.r = r_corrected;
         b[i].vel.v = v_corrected;
 //         printf("%f\t%f\t%f\t%f\t%f\t%f\n", b[i].x, b[i].y, b[i].z, b[i].vx, b[i].vy, b[i].vz);
-        printf("%f\n", b[i].vel.v);
+//         printf("%f\n", b[i].vel.v);
     }
     
 }
