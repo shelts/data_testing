@@ -1,59 +1,50 @@
+#! /usr/bin/python
 #/* Copyright (c) 2016 Siddhartha Shelton */
+# A quick parsing script for nbody outputs #
 import sys
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-
-
-
-def get_start_number(file_name):
-    g = open(file_name, 'r')
-    num = 1
-    for line in g:
-        if (line.startswith("# ignore")):
-            break
-        else:
-            num += 1
-    g.close()
-    
-    return num
-
 
 def parse_data(file_name, ext):
     g = open('./raw_data/light_matter_'+ ext +'.dat', 'w')
     f = open('./raw_data/dark_matter_' + ext +'.dat', 'w')
-    lines = []
-    lines = open(file_name).readlines() 
-    start = get_start_number(file_name)
-    lines = lines[start:len(lines)];
+    data = open(file_name, 'r')
 
-    for line in lines:
-        tt = line.split(', ');
-        #print(len(tt))
-        isDark = int(tt[0]);
-        if(len(tt) == 9):
-            ty = float(tt[0])
-            x  = float(tt[1])
-            y  = float(tt[2])
-            z  = float(tt[3])
-            vx = float(tt[4])
-            vy = float(tt[5])
-            vz = float(tt[6])
-            m  = float(tt[7])
-        if(len(tt) == 13):
-            ty = float(tt[0])
-            x  = float(tt[2])
-            y  = float(tt[3])
-            z  = float(tt[4])
-            l  = float(tt[5])
-            b  = float(tt[6])
-            r  = float(tt[7])
-            vx = float(tt[8])
-            vy = float(tt[9])
-            vz = float(tt[10])
-            m  = float(tt[11])
-            vlos = float(tt[12])
+    read_data = False
+    for line in data:
+        if (line.startswith("# ignore")):
+            read_data = True
+            continue
+        if(line.startswith("</bodies>")):
+            break
+        if(read_data):
+            tt = line.split(', ');
+            isDark = int(tt[0]);
+            if(len(tt) == 9):
+                ty = float(tt[0])
+                x  = float(tt[1])
+                y  = float(tt[2])
+                z  = float(tt[3])
+                
+                vx = float(tt[4])
+                vy = float(tt[5])
+                vz = float(tt[6])
+                
+                m  = float(tt[7])
+            if(len(tt) == 13):
+                ty = float(tt[0])
+                x  = float(tt[2])
+                y  = float(tt[3])
+                z  = float(tt[4])
+                
+                l  = float(tt[5])
+                b  = float(tt[6])
+                r  = float(tt[7])
+                
+                vx = float(tt[8])
+                vy = float(tt[9])
+                vz = float(tt[10])
+                
+                m  = float(tt[11])
+                vlos = float(tt[12])
 
         if(len(tt) == 9):
             if (isDark == 1):

@@ -19,7 +19,7 @@ double potential(struct position & pos, struct component & light, struct compone
 {
     double light_comp = get_potential(pos, light);
     double dark_comp  = get_potential(pos, dark);
-    return (light_comp + dark_comp);
+    return (light_comp + dark_comp); 
 }
 
 
@@ -350,11 +350,12 @@ int main (int argc, char * const argv[])
     
     component light;
     component dark;
+    
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
     printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
     printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
     
-    check_mass(light);
+    check_mass(light); // the nfw model needs the mass augmented a bit
     check_mass(dark);
     printf("ml,md :  (%0.15f , %0.15f)\n", light.mass, dark.mass);
     mass_l = light.mass;
@@ -383,6 +384,7 @@ int main (int argc, char * const argv[])
     
     /*getting the positional and velocity data*/
     get_data(Nd, Nl, b, extension);
+    
     /*get center of mass*/
     double mass = mass_l + mass_d;
     com(b, N, cm, cmv, mass);
@@ -394,11 +396,6 @@ int main (int argc, char * const argv[])
     
     rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
 
-    for( int i = 0; i < N; i++)
-    {
-//         printf("%f\n", b[i].vel.v);
-    }
-    
     angles(extension, Nl, Nd, b, number_of_bins, bin_width);
 
     double args[6]  = {light.rscale, dark.rscale, light.mass, dark.mass, masspl, masspd};

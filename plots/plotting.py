@@ -1,78 +1,13 @@
 #! /usr/bin/python
 #/* Copyright (c) 2017 Siddhartha Shelton */
-import os
-import subprocess
-from subprocess import call
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.patches as mpatches
-import math as mt
-
-
-class bin_datas:
-    def __init__(self, file_name):
-        self.file_name = file_name
-        self.counts = []
-        self.bins = []
-        
-        self.get_data()
-        
-    def get_data(self):
-        f = open(self.file_name, 'r')
-        
-        for line in f:
-            line = line.split('\t')
-            ns = float(line[0])
-            bn = float(line[1])
-            self.counts.append(ns)
-            self.bins.append(bn)
-        f.close()
-        
-class theory_data:
-    def __init__(self, file_name, matter_type = None):
-        self.file_name = file_name
-        self.x_vals = []
-        self.combined = []
-        self.light = []
-        self.dark = []
-        self.matter_type = matter_type
-        self.get_data()
-        
-    def get_data(self):
-        f = open(self.file_name, 'r')
-        for line in f:
-            line = line.split('\t')
-            if(len(line) > 2):#for the radial density files
-                x = float(line[0])
-                c = float(line[1])
-                l = float(line[2])
-                d = float(line[3])
-                self.x_vals.append(x)
-                self.combined.append(c)
-                self.light.append(l)
-                self.dark.append(d)
-            elif(self.matter_type == 'light'):#for the vel files
-                x = float(line[1])
-                l = float(line[0])
-                self.x_vals.append(x)
-                self.light.append(l)
-            elif(self.matter_type == 'dark'):
-                x = float(line[1])
-                l = float(line[0])
-                self.x_vals.append(x)
-                self.dark.append(l)    
-                
-        f.close()
+from classes import *
 
 
 
-
-
-#plot each radial component over time. 
-#first row plots of each component initial
+#plot each radial component over time. first row plots of each component initial
 #second row same but after some time:
 def radial_components_over_time():
-    sim_time = ['0', '0']
+    sim_time = ['0', '4']
     
     theory_den = "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
     light      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
@@ -102,75 +37,81 @@ def radial_components_over_time():
     c2 = 'black'
     alp = 0.8
     lw = 3
+    
+    params = {'legend.fontsize': 18,
+          'legend.handlelength': 2}
+    plt.rcParams.update(params)
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    f.subplots_adjust(hspace=0)
+    f.subplots_adjust(wspace=0)
     plt.figure(figsize=(20, 10))
     plt.subplot(231)
-    plt.title('Baryonic Matter')
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.title('Baryonic Matter', fontsize=24)
+    #plt.xlabel('Radius (Kpc)')
+    plt.ylabel('N' , fontsize=18)
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Baryon Counts')
-    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Baryon Theory')
+    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Initial Distribution')
+    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(232)
-    plt.title('Dark Matter')
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.title('Dark Matter', fontsize=24)
+    #plt.xlabel('Radius (Kpc)')
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
+    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(233)
-    plt.title('Combined Matter')
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.title('Combined Matter',fontsize=24)
+    #plt.xlabel('Radius (Kpc)')
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, 2*y)
-    plt.bar(both_0gy.bins, both_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(both_0gy.bins, both_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
+    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(234)
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.xlabel('Radius (Kpc)', fontsize=18)
+    plt.ylabel('N', fontsize=18)
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp, label = 'Baryon Counts')
-    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Baryon Theory')
+    plt.bar(light_4gy.bins, light_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
+    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(235)
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.xlabel('Radius (Kpc)', fontsize=18)
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(dark_4gy.bins, dark_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
+    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(236)
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.xlabel('Radius (Kpc)', fontsize=18)
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, 2*y)
-    plt.bar(both_0gy.bins, both_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(both_4gy.bins, both_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
+    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     
     
-    plt.savefig("radial_components_over_time", format='png')
+    plt.savefig("radial_components_over_time.eps", format='eps')
     
 
 
-#plot each vel component over time. 
-#first row plots of each component initial
+#plot each vel component over time. first row plots of each component initial
 #second row same but after some time:
 def vel_components_over_time():
-    sim_time = ['0', '0']
+    sim_time = ['0', '4']
     
     theory_light   = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_theory_vel_bins.dat"
     theory_dark   = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_theory_vel_bins.dat"
@@ -200,49 +141,54 @@ def vel_components_over_time():
     alp = 0.8
     lw = 3
     sbpt = 221
-    
+    params = {'legend.fontsize': 20,
+          'legend.handlelength': 2}
+    plt.rcParams.update(params)
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    f.subplots_adjust(hspace=0)
+    f.subplots_adjust(wspace=0)
     plt.figure(figsize=(20, 10))
     plt.subplot(sbpt)
-    plt.title('Baryonic Matter')
-    plt.xlabel('Velocity (km/s)')
-    plt.ylabel('N')
+    plt.title('Baryonic Matter', fontsize=24)
+    #plt.xlabel('Velocity (km/s)')
+    plt.ylabel('N', fontsize=18)
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Baryon Counts')
-    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Baryon Theory')
+    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Initial Distribution')
+    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(sbpt + 1)
-    plt.title('Dark Matter')
-    plt.xlabel('Velocity (km/s)')
-    plt.ylabel('N')
+    plt.title('Dark Matter', fontsize=24)
+    #plt.xlabel('Velocity (km/s)')
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
+    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(sbpt + 2)
-    plt.xlabel('Velocity (km/s)')
-    plt.ylabel('N')
+    plt.xlabel('Velocity (km/s)', fontsize=18)
+    plt.ylabel('N', fontsize=18)
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp, label = 'Baryon Counts')
-    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Baryon Theory')
+    plt.bar(light_4gy.bins, light_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
+    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     plt.subplot(sbpt + 3)
-    plt.xlabel('Velocity (km/s)')
-    plt.ylabel('N')
+    plt.xlabel('Velocity (km/s)', fontsize=18)
+    #plt.ylabel('N')
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Dark Matter Counts')
-    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
+    plt.bar(dark_4gy.bins, dark_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
+    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
     plt.legend()
     
     
     
-    plt.savefig("vel_components_over_time", format='png')
+    plt.savefig("vel_components_over_time.eps", format='eps')
     
     
 #for creating a single plot with the two components having different distribution values
@@ -270,37 +216,39 @@ def mixed_radial_values():
     
     theory = theory_data(theory_den)
     
-    y = 3500
+    y = 2000
     x = 3
     w = .04
     c = 'red'
     c2 = 'black'
-    alp = 0.5
-    lw = 3
+    alp = 0.75
+    lw = 5
+    params = {'legend.fontsize': 24,
+          'legend.handlelength': 2}
+    plt.rcParams.update(params)
     plt.figure(figsize=(20, 10))
-    plt.title('Radial Distribution')
-    plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N')
+    plt.title('Radial Distribution', fontsize=28)
+    plt.xlabel('Radius (Kpc)', fontsize=20)
+    plt.ylabel('N', fontsize=20)
     plt.xlim(0, x)
     plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color='red', alpha = alp,  label = 'Baryon Counts')
-    plt.bar(light_0gy.bins, dark_0gy.counts,  width = w, color='blue', alpha = alp,  label = 'Dark Matter Counts')
-    plt.bar(light_0gy.bins, both_0gy.counts,  width = w, color='green', alpha = alp,  label = 'Combined Counts')
+    plt.bar(light_0gy.bins, both_0gy.counts,  width = w, color='green', alpha = alp,  label = 'Simulated Combined Distribution')
+    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color='red', alpha = alp,  label = 'Simulated Baryonic Distribution')
+    plt.bar(light_0gy.bins, dark_0gy.counts,  width = w, color='blue', alpha = alp,  label = 'Simulated Dark Matter Distribution')
     
-    plt.plot(theory.x_vals, theory.light,    color = 'red', linestyle = '-', linewidth = lw, label = 'Baryon Theory')
-    plt.plot(theory.x_vals, theory.dark,     color = 'blue', linestyle = '-', linewidth = lw, label = 'Dark Matter Theory')
-    plt.plot(theory.x_vals, theory.combined, color = 'green', linestyle = '-', linewidth = lw, label = 'Combined Theory')
+    plt.plot(theory.x_vals, theory.light,    color = 'red', linestyle = '-', linewidth = lw, label = 'Theoretical Baryon Distribution')
+    plt.plot(theory.x_vals, theory.dark,     color = 'blue', linestyle = '-', linewidth = lw, label = 'Theoretical Dark Matter Distribution')
+    plt.plot(theory.x_vals, theory.combined, color = 'green', linestyle = '-', linewidth = lw, label = 'Theoretical Combined Distribution')
     plt.legend()
 
-    plt.savefig("mixed_radial_values", format='png')   
+    plt.savefig("mixed_radial_values.png", format='png')   
     
     
 
 def main():
-    
     #radial_components_over_time()
-    #mixed_radial_values()
-    vel_components_over_time()
+    mixed_radial_values()
+    #vel_components_over_time()
     
 main()
 

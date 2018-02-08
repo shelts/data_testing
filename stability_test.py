@@ -40,11 +40,13 @@ einasto  = 5                    #
                 #          Control Panel       #
                 #\# # # # # # # # # # # # # # /#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
-#sim_time      = [ "0", "2"]
-N             = 1
+#sim_time      = [ "0", "p25", "p50", "p75", "1", "2", "3", "4"]
+sim_time      = [ "0", "2", "4"]
+N             = 3
 M             = 0
-
+ext = "gy.out"
+ext = "gy_same.out"#if you want to parse two different types of files. EX, initial plum with same and different parameters
+#ext = "gy_diff.out"
 print "parameters: ", r_l, rad_ratio, m_l, mass_ratio
 
 number_of_components = 2
@@ -141,7 +143,7 @@ comp2    = str(component2)
 if(parse):
     print "parsing data"
     for i in range(M, N):
-        os.system("python outputparser.py ./sim_outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + "gy.out  " + sim_time[i] +"gy")
+        os.system("./outputparser.py ./sim_outputs/output_" + name1 + "_" + name2 + "_" + sim_time[i] + ext + "  " + sim_time[i] +"gy")
 
 if(output):    
     print "performing tests"
@@ -155,18 +157,15 @@ if(virial):
     #os.system("make all")
     for i in range(M, N):
         os.system("./virial_test " + sim_time[i] + " " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d + " " + comp1 + " " + comp2)
-    
-
-if(tidal):
-    os.system("g++ -std=c++11 tidal_radius.cpp -o tidal_radius")
-    os.system("./tidal_radius " + rscale_l + " " + rscale_d + " " + mass_l + " " + mass_d)
 
 if(make_plots):
     print "making plots"
-    os.system("./make_plots.sh 2>>piped_output.txt ")
+    os.chdir("plots")
+    os.system("./plotting.py ")
+    os.system("./stability.py")
 
 if(save_run):
-    os.system("./save_runs.py " + folder_name)
+    os.system("./save_runs.py 'save' " + folder_name)
 if(cleanse):
     os.system("./cleanse.sh")
 
