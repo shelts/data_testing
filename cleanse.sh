@@ -1,42 +1,39 @@
 #!/bin/bash
 
-rm -r actual
-rm -r raw_data
-rm -r binned_data
-rm -r plots
-rm -r sim_outputs
-rm -r test_output
-rm -r theory
 
-mkdir actual
-mkdir binned_data
+clear_plots=true
+clear_data=false
+clear_sims=false
 
-mkdir raw_data
-mkdir sim_outputs
-mkdir test_output
-mkdir theory
 
-mkdir plots
-cd plots
-mkdir energy
-mkdir theta
-mkdir phi
-mkdir vel_theta
-mkdir vel_phi
-mkdir rad
-mkdir rad_profile
-mkdir pot
+if $clear_data
+then
+    rm actual/*
+  
+    rm  raw_data/*
+  
+    rm binned_data/*
+  
+    rm test_output/*
+  
+    rm theory/*
+fi
 
-mkdir vel_dist
-mkdir ./vel_dist/binned_vs_tbins
-mkdir ./vel_dist/binned
-mkdir ./vel_dist/vel_vs_r
 
-mkdir multi
-mkdir multi/theta
-mkdir multi/phi
-mkdir multi/vel_theta
-mkdir multi/vel_phi
-mkdir multi/rad
-mkdir multi/vel_dist
-mkdir multi/vel_dist/vel_vs_r
+# if $clear_sims
+# then
+#     # rm -r sim_outputs
+#     # mkdir sim_outputs
+# fi
+
+
+if $clear_plots
+then
+    rm plots/rad/*
+    rm plots/theta/*
+    rm plots/phi/*
+    rm plots/vel/*
+    rm plots/vel_theta/*
+    rm plots/vel_phi/*
+fi
+
