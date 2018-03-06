@@ -1,5 +1,5 @@
 #! /usr/bin/python
-#/* Copyright (c) 2017 Siddhartha Shelton */
+#/* Copyright (c) 2018 Siddhartha Shelton */
 from classes import *
 
 
@@ -246,9 +246,9 @@ def mixed_radial_values():
     
 
 def main():
-    #radial_components_over_time()
+    radial_components_over_time()
     mixed_radial_values()
-    #vel_components_over_time()
+    vel_components_over_time()
     
 main()
 

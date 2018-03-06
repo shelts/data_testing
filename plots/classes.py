@@ -1,5 +1,5 @@
 #! /usr/bin/python
-#/* Copyright (c) 2017 Siddhartha Shelton */
+#/* Copyright (c) 2018 Siddhartha Shelton */
 import os
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D

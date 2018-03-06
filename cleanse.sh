@@ -20,11 +20,11 @@ then
 fi
 
 
-# if $clear_sims
-# then
-#     # rm -r sim_outputs
-#     # mkdir sim_outputs
-# fi
+if $clear_sims
+then
+    rm -r sim_outputs
+    mkdir sim_outputs
+fi
 
 
 if $clear_plots

@@ -1,5 +1,5 @@
 #! /usr/bin/python
-#/* Copyright (c) 2017 Siddhartha Shelton */
+#/* Copyright (c) 2018 Siddhartha Shelton */
 from classes import *
 import time
 
@@ -457,28 +457,28 @@ def main():
     print 'run time: ', t1-t0
     
     t0 = time.time()
-    #radial_theta()
+    radial_theta()
     t1 = time.time()
     print 'run time: ', t1-t0
     
     t0 = time.time()
-    #radial_phi()
+    radial_phi()
     t1 = time.time()
     print 'run time: ', t1-t0
     
     t0 = time.time()
-    #vel()
+    vel()
     t1 = time.time()
     print 'run time: ', t1-t0
     
     t0 = time.time()
-    #vel_theta()
+    vel_theta()
     t1 = time.time()
     print 'run time: ', t1-t0
     
     t0 = time.time()
     vel_phi()
-    #t1 = time.time()
+    t1 = time.time()
     print 'run time: ', t1-t0
     
 main()
