@@ -26,7 +26,7 @@ double plummer_distribution(double v, struct position & pos, struct component & 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                             NFW                                                                                       */
-/* this is the distribution function for the plummer sphere. I had to put something because there is no analytic form    */ 
+/* WARNING: this is the distribution function for the plummer sphere. I had to put something because there is no analytic form    */ 
 /* for the nfw                                                                                                           */
 
 double nfw_distribution(double v, struct position & pos, struct component & light, struct component & dark)

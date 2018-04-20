@@ -118,16 +118,7 @@ double miyamoto_nagai_pot(struct position & pos, struct component & model)
 }
 
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 double get_density( struct position & pos, struct component & model)

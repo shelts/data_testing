@@ -243,12 +243,184 @@ def mixed_radial_values():
 
     plt.savefig("mixed_radial_values.png", format='png')   
     
+
+
+
+def radial_angulars_over_time():
+    sim_time = ['0', '4']
+    
+    theory_path_theta = "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+    both_path_theta   = "/home/sidd/Desktop/research/data_testing/binned_data/theta_both_"
+    
+    theta_0gy = bin_datas(both_path_theta + str(sim_time[0]) + "gy.dat")
+    theta_4gy = bin_datas(both_path_theta + str(sim_time[1]) + "gy.dat")
+    theory_theta  = theory_data(theory_path_theta)
+    
+    theory_path_phi = "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+    both_path_phi   = "/home/sidd/Desktop/research/data_testing/binned_data/phi_both_"
+    
+    phi_0gy = bin_datas(both_path_phi + str(sim_time[0]) + "gy.dat")
+    phi_4gy = bin_datas(both_path_phi + str(sim_time[1]) + "gy.dat")
+    theory_phi  = theory_data(theory_path_phi)
+    
+    y = 300
+    x = 4
+    w = .04
+    c = 'red'
+    c2 = 'black'
+    alp = 0.8
+    lw = 3
+    print 'plotting theta phi'
+    
+    params = {'legend.fontsize': 18,
+          'legend.handlelength': 2}
+    
+    plt.rcParams.update(params)
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    f.subplots_adjust(hspace=0)
+    f.subplots_adjust(wspace=0)
+    plt.figure(figsize=(20, 10))
+    
+    
+    plt.subplot(221)
+    plt.title(r'Combined Matter $\theta$ Distribution',fontsize=24)
+    #plt.xlabel(r'$\phi$' , fontsize=18)
+    plt.ylabel('N', fontsize=18)
+    plt.xlim(0, x)
+    plt.ylim(0, 2*y)
+    plt.bar(theta_0gy.bins, theta_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
+    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    
+    plt.subplot(222)
+    plt.title(r'Combined Matter $\phi$ Distribution',fontsize=24)
+    #plt.xlabel('Radius (Kpc)')
+    #plt.ylabel('N')
+    plt.xlim(-x, x)
+    plt.ylim(0, 2*y)
+    plt.bar(phi_0gy.bins, phi_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
+    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+   
+    
+    plt.subplot(223)
+    plt.xlabel(r'$\theta$', fontsize=18)
+    plt.ylabel('N', fontsize=18)
+    plt.xlim(0, x)
+    plt.ylim(0, 2*y)
+    plt.bar(theta_4gy.bins, theta_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
+    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    
+    plt.subplot(224)
+    #plt.title('Combined Matter',fontsize=24)
+    plt.xlabel(r'$\phi$', fontsize=18)
+    #plt.ylabel('N')
+    plt.xlim(-x, x)
+    plt.ylim(0, 2*y)
+    plt.bar(phi_4gy.bins, phi_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
+    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    plt.savefig("radial_theta_phi.eps", format='eps')   
+    plt.close()
+    return 0
     
 
-def main():
-    radial_components_over_time()
-    mixed_radial_values()
-    vel_components_over_time()
+
+
+def velocity_angulars_over_time():
+    sim_time = ['0', '4']
     
+    theory_path_theta = "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
+    both_path_theta   = "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_both_"
+    
+    theta_0gy = bin_datas(both_path_theta + str(sim_time[0]) + "gy.dat")
+    theta_4gy = bin_datas(both_path_theta + str(sim_time[1]) + "gy.dat")
+    theory_theta  = theory_data(theory_path_theta)
+    
+    theory_path_phi = "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
+    both_path_phi   = "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_both_"
+    
+    phi_0gy = bin_datas(both_path_phi + str(sim_time[0]) + "gy.dat")
+    phi_4gy = bin_datas(both_path_phi + str(sim_time[1]) + "gy.dat")
+    theory_phi  = theory_data(theory_path_phi)
+    
+    y = 300
+    x = 4
+    w = .04
+    c = 'red'
+    c2 = 'black'
+    alp = 0.8
+    lw = 3
+    print 'plotting theta phi'
+    
+    params = {'legend.fontsize': 18,
+          'legend.handlelength': 2}
+    
+    plt.rcParams.update(params)
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    f.subplots_adjust(hspace=0)
+    f.subplots_adjust(wspace=0)
+    plt.figure(figsize=(20, 10))
+    
+    
+    plt.subplot(221)
+    plt.title(r'Combined Matter $\theta$ Distribution',fontsize=24)
+    #plt.xlabel(r'$\phi$' , fontsize=18)
+    plt.ylabel('N', fontsize=18)
+    plt.xlim(0, x)
+    plt.ylim(0, 2*y)
+    plt.bar(theta_0gy.bins, theta_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
+    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    
+    plt.subplot(222)
+    plt.title(r'Combined Matter $\phi$ Distribution',fontsize=24)
+    #plt.xlabel('Radius (Kpc)')
+    #plt.ylabel('N')
+    plt.xlim(-x, x)
+    plt.ylim(0, 2*y)
+    plt.bar(phi_0gy.bins, phi_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
+    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+   
+    
+    plt.subplot(223)
+    plt.xlabel(r'$\theta$', fontsize=18)
+    plt.ylabel('N', fontsize=18)
+    plt.xlim(0, x)
+    plt.ylim(0, 2*y)
+    plt.bar(theta_4gy.bins, theta_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
+    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    
+    plt.subplot(224)
+    #plt.title('Combined Matter',fontsize=24)
+    plt.xlabel(r'$\phi$', fontsize=18)
+    #plt.ylabel('N')
+    plt.xlim(-x, x)
+    plt.ylim(0, 2*y)
+    plt.bar(phi_4gy.bins, phi_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
+    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+    plt.legend()
+    
+    plt.savefig("vel_theta_phi.eps", format='eps')   
+    plt.close()
+    return 0
+
+
+def main():
+    #radial_components_over_time()
+    #mixed_radial_values()
+    #vel_components_over_time()
+    #radial_angulars_over_time()
+    velocity_angulars_over_time()
 main()
 
