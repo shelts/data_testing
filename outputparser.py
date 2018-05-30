@@ -2,15 +2,17 @@
 #/* Copyright (c) 2016 Siddhartha Shelton */
 # A quick parsing script for nbody outputs #
 import sys
+import os
 
 def parse_data(file_name, ext):
+    #os.system("ls " + file_name)
     g = open('./raw_data/light_matter_'+ ext +'.dat', 'w')
     f = open('./raw_data/dark_matter_' + ext +'.dat', 'w')
     data = open(file_name, 'r')
 
     read_data = False
     for line in data:
-        if (line.startswith("# ignore")):
+        if(line.startswith("# ignore")):
             read_data = True
             continue
         if(line.startswith("</bodies>")):
@@ -46,17 +48,21 @@ def parse_data(file_name, ext):
                 m  = float(tt[11])
                 vlos = float(tt[12])
 
-        if(len(tt) == 9):
-            if (isDark == 1):
-                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
-            else:
-                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
-        if(len(tt) == 13):
-            if (isDark == 1):
-                f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
-            else:
-                g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
+            if(len(tt) == 9):
+                if (isDark == 1):
+                    f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
+                else:
+                    g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, vx, vy, vz, m))
+            if(len(tt) == 13):
+                if (isDark == 1):
+                    f.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
+                else:
+                    g.write("%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\n" % ( x, y, z, l, b, r, vx, vy, vz, m, vlos))
 
+
+    f.close()
+    g.close()
+    
 def main():
     args = sys.argv;
     file_name = args[1];

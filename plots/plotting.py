@@ -10,100 +10,85 @@ def radial_components_over_time():
     sim_time = ['0', '4']
     
     theory_den = "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
-    light      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
-    dark       = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_bins_"
-    both       = "/home/sidd/Desktop/research/data_testing/binned_data/both_matter_bins_"
+    light_path      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
+    dark_path       = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_bins_"
+    both_path       = "/home/sidd/Desktop/research/data_testing/binned_data/both_matter_bins_"
     
-    ev_0gy = sim_time[0] + "gy.dat"
-    #ev_2gy = sim_time[1] + "gy.dat"
-    ev_4gy = sim_time[1] + "gy.dat"
-    
-    light_0gy = bin_datas(light + ev_0gy)
-    #light_2gy = bin_datas(light + ev_2gy)
-    light_4gy = bin_datas(light + ev_4gy)
-    
-    dark_0gy = bin_datas(dark + ev_0gy)
-    #dark_2gy = bin_datas(dark + ev_2gy)
-    dark_4gy = bin_datas(dark + ev_4gy)
-    
-    both_0gy = bin_datas(both + ev_0gy) 
-    both_4gy = bin_datas(both + ev_4gy)
-    
-    theory = theory_data(theory_den)
-    y = 1500
-    x = 3
-    w = .04
-    c = 'red'
-    c2 = 'black'
-    alp = 0.8
-    lw = 3
-    
-    params = {'legend.fontsize': 18,
-          'legend.handlelength': 2}
-    plt.rcParams.update(params)
-    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    labels = ['Initial', '4 Gy']
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row', figsize=(20, 10))
     f.subplots_adjust(hspace=0)
-    f.subplots_adjust(wspace=0)
-    plt.figure(figsize=(20, 10))
-    plt.subplot(231)
-    plt.title('Baryonic Matter', fontsize=24)
-    #plt.xlabel('Radius (Kpc)')
-    plt.ylabel('N' , fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Initial Distribution')
-    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
+    f.subplots_adjust(wspace=0.25)
+    #plt.figure(figsize=(20, 10))
     
-    plt.subplot(232)
-    plt.title('Dark Matter', fontsize=24)
-    #plt.xlabel('Radius (Kpc)')
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
-    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(233)
-    plt.title('Combined Matter',fontsize=24)
-    #plt.xlabel('Radius (Kpc)')
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(both_0gy.bins, both_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
-    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(234)
-    plt.xlabel('Radius (Kpc)', fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(light_4gy.bins, light_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
-    plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(235)
-    plt.xlabel('Radius (Kpc)', fontsize=18)
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(dark_4gy.bins, dark_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
-    plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(236)
-    plt.xlabel('Radius (Kpc)', fontsize=18)
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(both_4gy.bins, both_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
-    plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    
-    
+    for i in range(len(sim_time)):
+        ev = sim_time[i] + "gy.dat"
+        light = bin_datas(light_path + ev)
+        dark = bin_datas(dark_path + ev)
+        both = bin_datas(both_path + ev) 
+        theory = theory_data(theory_den)
+        
+        
+        y = 1500
+        x = 3
+        w = .04
+        c = 'red'
+        c2 = 'black'
+        alp = 0.8
+        lw = 3
+        
+        params = {'legend.fontsize': 22,
+            'legend.handlelength': 1}
+        plt.rcParams.update(params)
+        sub_i = 231 + 3 * i
+        plt.subplot(sub_i)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+
+        if(i == 0):
+            plt.title('Baryonic Matter', fontsize=28)
+            plt.xticks([])
+        elif(i == len(sim_time) - 1):
+            plt.xlabel('Radius (kpc)', fontsize=24)
+            
+        plt.ylabel('N' , fontsize=24)
+        plt.xlim(0, x)
+        plt.ylim(0, y)
+        plt.bar(light.bins, light.counts, width = w, color=c, alpha = alp,  label = labels[i])
+        plt.plot(theory.x_vals, theory.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical ')
+        plt.legend()
+        
+        plt.subplot(sub_i + 1)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        if(i == 0):
+            plt.title('Dark Matter', fontsize=28)
+            plt.xticks([])
+        elif(i == len(sim_time) - 1):
+            plt.xlabel('Radius (kpc)', fontsize=24)
+
+        plt.xlim(0, x)
+        plt.ylim(0, y)
+        plt.bar(dark.bins, dark.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory.x_vals, theory.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical ')
+        plt.legend()
+        
+        plt.subplot(sub_i + 2)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        if(i == 0):
+            plt.title('Combined Matter',fontsize=28)
+            plt.xticks([])
+        elif(i == len(sim_time) - 1):
+            plt.xlabel('Radius (kpc)', fontsize=24)
+            
+        plt.xlim(0, x)
+        plt.ylim(0, 2*y)
+        plt.bar(both.bins, both.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical ')
+        plt.legend()
+        
     plt.savefig("radial_components_over_time.eps", format='eps')
     
 
@@ -113,224 +98,207 @@ def radial_components_over_time():
 def vel_components_over_time():
     sim_time = ['0', '4']
     
-    theory_light   = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_theory_vel_bins.dat"
-    theory_dark   = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_theory_vel_bins.dat"
-    light = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
-    dark  = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
+    theory_light_path   = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_theory_vel_bins.dat"
+    theory_dark_path   = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_theory_vel_bins.dat"
+    light_path = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_vel_bins_"
+    dark_path  = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_vel_bins_"
     
-    ev_0gy = sim_time[0] + "gy.dat"
-    #ev_2gy = sim_time[1] + "gy.dat"
-    ev_4gy = sim_time[1] + "gy.dat"
     
-    light_0gy = bin_datas(light + ev_0gy)
-    #light_2gy = bin_datas(light + ev_2gy)
-    light_4gy = bin_datas(light + ev_4gy)
-    
-    dark_0gy = bin_datas(dark + ev_0gy)
-    #dark_2gy = bin_datas(dark + ev_2gy)
-    dark_4gy = bin_datas(dark + ev_4gy)
-    
-    theory_light = theory_data(theory_light, 'light')
-    theory_dark  = theory_data(theory_dark, 'dark')
-    #print theory_light.light
-    y = 400
-    x = 10
-    w = .04
-    c = 'red'
-    c2 = 'black'
-    alp = 0.8
-    lw = 3
-    sbpt = 221
-    params = {'legend.fontsize': 20,
-          'legend.handlelength': 2}
-    plt.rcParams.update(params)
-    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    labels = ['Initial', '4 Gy']
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row', figsize=(20, 10))
     f.subplots_adjust(hspace=0)
-    f.subplots_adjust(wspace=0)
-    plt.figure(figsize=(20, 10))
-    plt.subplot(sbpt)
-    plt.title('Baryonic Matter', fontsize=24)
-    #plt.xlabel('Velocity (km/s)')
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color=c, alpha = alp,  label = 'Initial Distribution')
-    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
+    #f.subplots_adjust(wspace=0)
+    #plt.figure(figsize=(20, 10))
     
-    plt.subplot(sbpt + 1)
-    plt.title('Dark Matter', fontsize=24)
-    #plt.xlabel('Velocity (km/s)')
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(dark_0gy.bins, dark_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial Distribution')
-    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(sbpt + 2)
-    plt.xlabel('Velocity (km/s)', fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(light_4gy.bins, light_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
-    plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    plt.subplot(sbpt + 3)
-    plt.xlabel('Velocity (km/s)', fontsize=18)
-    #plt.ylabel('N')
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(dark_4gy.bins, dark_4gy.counts, width = w, color=c, alpha = alp, label = 'Distribution after 4 Gy')
-    plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical Distribution')
-    plt.legend()
-    
-    
-    
+    for i in range(len(sim_time)):
+        ev = sim_time[i] + "gy.dat"
+        
+        light = bin_datas(light_path + ev)
+        dark  = bin_datas(dark_path + ev)
+        theory_light = theory_data(theory_light_path, 'light')
+        theory_dark  = theory_data(theory_dark_path, 'dark')
+
+        #print theory_light.light
+        y = 400
+        x = 10
+        w = .04
+        c = 'red'
+        c2 = 'black'
+        alp = 0.8
+        lw = 3
+        sub_i = 221 + 2 * i
+        params = {'legend.fontsize': 22,
+            'legend.handlelength': 1}
+        
+        plt.rcParams.update(params)
+        
+        plt.subplot(sub_i)
+        if(i == 0):
+            plt.title('Baryonic Matter', fontsize=28)
+            plt.xticks([])
+        elif(i == len(sim_time) - 1):
+            plt.xlabel('Velocity (km/s)', fontsize=24)
+        
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        plt.ylabel('N', fontsize=24)
+        plt.xlim(0, x)
+        plt.ylim(0, y)
+        plt.bar(light.bins, light.counts, width = w, color=c, alpha = alp,  label = labels[i])
+        plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
+        
+        plt.subplot(sub_i + 1)
+        
+        if(i == 0):
+            plt.title('Dark Matter', fontsize=24)
+            plt.xticks([])
+        elif(i == len(sim_time) - 1):
+            plt.xlabel('Velocity (km/s)', fontsize=24)
+            
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        plt.xlim(0, x)
+        plt.ylim(0, y)
+        plt.bar(dark.bins, dark.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
+        
     plt.savefig("vel_components_over_time.eps", format='eps')
-    
     
 #for creating a single plot with the two components having different distribution values
 def mixed_radial_values():
-    sim_time = ['0', '0']
-    
+    sim_time = ['0', '4']
+    sim_time = ['0']
     theory_den = "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
-    light      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
-    dark       = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_bins_"
-    both       = "/home/sidd/Desktop/research/data_testing/binned_data/both_matter_bins_"
+    light_path      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
+    dark_path       = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_bins_"
+    both_path       = "/home/sidd/Desktop/research/data_testing/binned_data/both_matter_bins_"
     
-    ev_0gy = sim_time[0] + "gy.dat"
-    #ev_2gy = sim_time[1] + "gy.dat"
-    #ev_4gy = sim_time[1] + "gy.dat"
-    
-    light_0gy = bin_datas(light + ev_0gy)
-    #light_2gy = bin_datas(light + ev_2gy)
-    #light_4gy = bin_datas(light + ev_4gy)
-    
-    dark_0gy = bin_datas(dark + ev_0gy)
-    #dark_2gy = bin_datas(dark + ev_2gy)
-    #dark_4gy = bin_datas(dark + ev_4gy)
-    
-    both_0gy = bin_datas(both + ev_0gy) 
-    
-    theory = theory_data(theory_den)
-    
-    y = 2000
-    x = 3
-    w = .04
-    c = 'red'
-    c2 = 'black'
-    alp = 0.75
-    lw = 5
-    params = {'legend.fontsize': 24,
-          'legend.handlelength': 2}
-    plt.rcParams.update(params)
     plt.figure(figsize=(20, 10))
-    plt.title('Radial Distribution', fontsize=28)
-    plt.xlabel('Radius (Kpc)', fontsize=20)
-    plt.ylabel('N', fontsize=20)
-    plt.xlim(0, x)
-    plt.ylim(0, y)
-    plt.bar(light_0gy.bins, both_0gy.counts,  width = w, color='green', alpha = alp,  label = 'Simulated Combined Distribution')
-    plt.bar(light_0gy.bins, light_0gy.counts, width = w, color='red', alpha = alp,  label = 'Simulated Baryonic Distribution')
-    plt.bar(light_0gy.bins, dark_0gy.counts,  width = w, color='blue', alpha = alp,  label = 'Simulated Dark Matter Distribution')
+    for i in range(0, len(sim_time)):
+        ev = sim_time[i] + "gy.dat"
+        
+        light = bin_datas(light_path + ev)
+        dark  = bin_datas(dark_path + ev)
+        both  = bin_datas(both_path + ev) 
+        
+        theory = theory_data(theory_den)
+        
+        y = 2000
+        x = 3
+        w = .04
+        c = 'red'
+        c2 = 'black'
+        alp = 0.75
+        lw = 5
+        params = {'legend.fontsize': 24,
+            'legend.handlelength': 1}
+        #sub_i = 211 + i
+        #plt.subplot(sub_i)
+        plt.rcParams.update(params)
+        plt.tick_params(axis='y', which='major', labelsize=20)
+        plt.tick_params(axis='x', which='major', labelsize=20)
+        plt.title('Radial Distribution', fontsize=30)
+        plt.xlabel('Radius (Kpc)', fontsize=28)
+        plt.ylabel('N', fontsize=28)
+        plt.xlim(0, x)
+        plt.ylim(0, y)
+        plt.bar(both.bins, both.counts,  width = w, color='green', alpha = alp,  label = 'Simulated Combined Distribution')
+        plt.bar(light.bins, light.counts, width = w, color='red', alpha = alp,  label = 'Simulated Baryonic Distribution')
+        plt.bar(dark.bins, dark.counts,  width = w, color='blue', alpha = alp,  label = 'Simulated Dark Matter Distribution')
+        
+        plt.plot(theory.x_vals, theory.light,    color = 'red', linestyle = '-', linewidth = lw, label = 'Theoretical Baryon Distribution')
+        plt.plot(theory.x_vals, theory.dark,     color = 'blue', linestyle = '-', linewidth = lw, label = 'Theoretical Dark Matter Distribution')
+        plt.plot(theory.x_vals, theory.combined, color = 'green', linestyle = '-', linewidth = lw, label = 'Theoretical Combined Distribution')
+        plt.legend()
+
+    plt.savefig("mixed_radial_values.eps", format='eps')   
     
-    plt.plot(theory.x_vals, theory.light,    color = 'red', linestyle = '-', linewidth = lw, label = 'Theoretical Baryon Distribution')
-    plt.plot(theory.x_vals, theory.dark,     color = 'blue', linestyle = '-', linewidth = lw, label = 'Theoretical Dark Matter Distribution')
-    plt.plot(theory.x_vals, theory.combined, color = 'green', linestyle = '-', linewidth = lw, label = 'Theoretical Combined Distribution')
-    plt.legend()
-
-    plt.savefig("mixed_radial_values.png", format='png')   
-    
-
-
 
 def radial_angulars_over_time():
     sim_time = ['0', '4']
     
     theory_path_theta = "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
     both_path_theta   = "/home/sidd/Desktop/research/data_testing/binned_data/theta_both_"
-    
-    theta_0gy = bin_datas(both_path_theta + str(sim_time[0]) + "gy.dat")
-    theta_4gy = bin_datas(both_path_theta + str(sim_time[1]) + "gy.dat")
-    theory_theta  = theory_data(theory_path_theta)
-    
     theory_path_phi = "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
     both_path_phi   = "/home/sidd/Desktop/research/data_testing/binned_data/phi_both_"
     
-    phi_0gy = bin_datas(both_path_phi + str(sim_time[0]) + "gy.dat")
-    phi_4gy = bin_datas(both_path_phi + str(sim_time[1]) + "gy.dat")
-    theory_phi  = theory_data(theory_path_phi)
-    
-    y = 300
-    x = 4
-    w = .04
-    c = 'red'
-    c2 = 'black'
-    alp = 0.8
-    lw = 3
-    print 'plotting theta phi'
-    
-    params = {'legend.fontsize': 18,
-          'legend.handlelength': 2}
-    
-    plt.rcParams.update(params)
-    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+    labels = ['Initial', '4 gy']
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row', figsize=(20, 10))
     f.subplots_adjust(hspace=0)
-    f.subplots_adjust(wspace=0)
-    plt.figure(figsize=(20, 10))
-    
-    
-    plt.subplot(221)
-    plt.title(r'Combined Matter $\theta$ Distribution',fontsize=24)
-    #plt.xlabel(r'$\phi$' , fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(theta_0gy.bins, theta_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
-    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-    
-    plt.subplot(222)
-    plt.title(r'Combined Matter $\phi$ Distribution',fontsize=24)
-    #plt.xlabel('Radius (Kpc)')
-    #plt.ylabel('N')
-    plt.xlim(-x, x)
-    plt.ylim(0, 2*y)
-    plt.bar(phi_0gy.bins, phi_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
-    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-   
-    
-    plt.subplot(223)
-    plt.xlabel(r'$\theta$', fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(theta_4gy.bins, theta_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
-    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-    
-    plt.subplot(224)
-    #plt.title('Combined Matter',fontsize=24)
-    plt.xlabel(r'$\phi$', fontsize=18)
-    #plt.ylabel('N')
-    plt.xlim(-x, x)
-    plt.ylim(0, 2*y)
-    plt.bar(phi_4gy.bins, phi_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
-    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
+    #f.subplots_adjust(wspace=0)
+    #plt.figure(figsize=(20, 10))
+    for i in range(0,len(sim_time)):
+        
+        theta = bin_datas(both_path_theta + sim_time[i] + "gy.dat")
+        phi   = bin_datas(both_path_phi + sim_time[i] + "gy.dat")
+        
+        theory_theta  = theory_data(theory_path_theta)
+        theory_phi    = theory_data(theory_path_phi)
+        
+        
+        
+        y = 300
+        x = 4
+        w = .04
+        c = 'red'
+        c2 = 'black'
+        alp = 0.8
+        lw = 3
+        print 'plotting theta phi'
+        
+        params = {'legend.fontsize': 22,
+            'legend.handlelength': 1}
+        
+        plt.rcParams.update(params)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        sub_i = 221 + 2 * i 
+        #print sub_i
+        plt.subplot(sub_i)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        if(i == 0):
+            plt.title(r'Combined Matter $\theta$ Distribution',fontsize=28)
+            plt.xticks([])
+            
+        if(i == len(sim_time) - 1):
+            plt.xlabel(r'$\theta$', fontsize=24)
+            
+        plt.ylabel('N', fontsize=24)
+        plt.xlim(0, x)
+        plt.ylim(0, 2*y)
+        plt.bar(theta.bins, theta.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
+        
+        
+        plt.subplot(sub_i + 1)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        if(i == 0):
+            plt.title(r'Combined Matter $\phi$ Distribution',fontsize=28)
+            plt.xticks([])
+            
+        if(i == len(sim_time) - 1):
+            plt.xlabel(r'$\phi$', fontsize=24)
+            
+        plt.xlim(-x, x)
+        plt.ylim(0, 2*y)
+        plt.bar(phi.bins, phi.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
+        
     plt.savefig("radial_theta_phi.eps", format='eps')   
     plt.close()
     return 0
     
-
-
 
 def velocity_angulars_over_time():
     sim_time = ['0', '4']
@@ -338,78 +306,76 @@ def velocity_angulars_over_time():
     theory_path_theta = "/home/sidd/Desktop/research/data_testing/theory/theory_theta.dat"
     both_path_theta   = "/home/sidd/Desktop/research/data_testing/binned_data/theta_vel_both_"
     
-    theta_0gy = bin_datas(both_path_theta + str(sim_time[0]) + "gy.dat")
-    theta_4gy = bin_datas(both_path_theta + str(sim_time[1]) + "gy.dat")
-    theory_theta  = theory_data(theory_path_theta)
-    
     theory_path_phi = "/home/sidd/Desktop/research/data_testing/theory/theory_phi.dat"
     both_path_phi   = "/home/sidd/Desktop/research/data_testing/binned_data/phi_vel_both_"
-    
-    phi_0gy = bin_datas(both_path_phi + str(sim_time[0]) + "gy.dat")
-    phi_4gy = bin_datas(both_path_phi + str(sim_time[1]) + "gy.dat")
-    theory_phi  = theory_data(theory_path_phi)
-    
-    y = 300
-    x = 4
-    w = .04
-    c = 'red'
-    c2 = 'black'
-    alp = 0.8
-    lw = 3
-    print 'plotting theta phi'
-    
-    params = {'legend.fontsize': 18,
-          'legend.handlelength': 2}
-    
-    plt.rcParams.update(params)
-    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+
+    labels = ['Initial', '4 gy']
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row', figsize=(20, 10))
     f.subplots_adjust(hspace=0)
-    f.subplots_adjust(wspace=0)
-    plt.figure(figsize=(20, 10))
-    
-    
-    plt.subplot(221)
-    plt.title(r'Combined Matter $\theta$ Distribution',fontsize=24)
-    #plt.xlabel(r'$\phi$' , fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(theta_0gy.bins, theta_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
-    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-    
-    plt.subplot(222)
-    plt.title(r'Combined Matter $\phi$ Distribution',fontsize=24)
-    #plt.xlabel('Radius (Kpc)')
-    #plt.ylabel('N')
-    plt.xlim(-x, x)
-    plt.ylim(0, 2*y)
-    plt.bar(phi_0gy.bins, phi_0gy.counts, width = w, color=c, alpha = alp, label = 'Initial')
-    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-   
-    
-    plt.subplot(223)
-    plt.xlabel(r'$\theta$', fontsize=18)
-    plt.ylabel('N', fontsize=18)
-    plt.xlim(0, x)
-    plt.ylim(0, 2*y)
-    plt.bar(theta_4gy.bins, theta_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
-    plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
-    
-    
-    plt.subplot(224)
-    #plt.title('Combined Matter',fontsize=24)
-    plt.xlabel(r'$\phi$', fontsize=18)
-    #plt.ylabel('N')
-    plt.xlim(-x, x)
-    plt.ylim(0, 2*y)
-    plt.bar(phi_4gy.bins, phi_4gy.counts, width = w, color=c, alpha = alp, label = '4 Gy')
-    plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
-    plt.legend()
+    #f.subplots_adjust(wspace=0)
+    #plt.figure(figsize=(20, 10))
+
+    for i in range(0,len(sim_time)):
+        theta = bin_datas(both_path_theta + sim_time[i] + "gy.dat")
+        phi   = bin_datas(both_path_phi + sim_time[i] + "gy.dat")
+        
+        theory_theta  = theory_data(theory_path_theta)
+        theory_phi    = theory_data(theory_path_phi)
+        
+        
+        
+        y = 300
+        x = 4
+        w = .04
+        c = 'red'
+        c2 = 'black'
+        alp = 0.8
+        lw = 3
+        print 'plotting theta phi'
+        
+        params = {'legend.fontsize': 22,
+            'legend.handlelength': 1}
+        
+        plt.rcParams.update(params)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        sub_i = 221 + 2 * i 
+        #print sub_i
+        plt.subplot(sub_i)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        if(i == 0):
+            plt.title(r'Combined Matter $\theta$ Distribution',fontsize=28)
+            plt.xticks([])
+            
+        if(i == len(sim_time) - 1):
+            plt.xlabel(r'$\theta$', fontsize=24)
+            
+        plt.ylabel('N', fontsize=24)
+        plt.xlim(0, x)
+        plt.ylim(0, 2*y)
+        plt.bar(theta.bins, theta.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory_theta.x_vals, theory_theta.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
+        
+        
+        plt.subplot(sub_i + 1)
+        plt.tick_params(axis='y', which='major', labelsize=22)
+        plt.tick_params(axis='x', which='major', labelsize=22)
+        
+        if(i == 0):
+            plt.title(r'Combined Matter $\phi$ Distribution',fontsize=28)
+            plt.xticks([])
+
+        if(i == len(sim_time) - 1):
+            plt.xlabel(r'$\phi$', fontsize=24)
+            
+        plt.xlim(-x, x)
+        plt.ylim(0, 2*y)
+        plt.bar(phi.bins, phi.counts, width = w, color=c, alpha = alp, label = labels[i])
+        plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
+        plt.legend()
     
     plt.savefig("vel_theta_phi.eps", format='eps')   
     plt.close()
@@ -418,9 +384,9 @@ def velocity_angulars_over_time():
 
 def main():
     #radial_components_over_time()
-    #mixed_radial_values()
+    mixed_radial_values()
     #vel_components_over_time()
     #radial_angulars_over_time()
-    velocity_angulars_over_time()
+    #velocity_angulars_over_time()
 main()
 
