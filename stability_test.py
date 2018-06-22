@@ -46,7 +46,7 @@ N             = 3
 M             = 0
 ext = "gy.out"
 ext = "gy_same.out"#if you want to parse two different types of files. EX, initial plum with same and different parameters
-ext = "gy_diff.out"
+#ext = "gy_diff.out"
 print "parameters: ", r_l, rad_ratio, m_l, mass_ratio
 
 number_of_components = 2
@@ -86,12 +86,12 @@ output         = y        #
 # # # # # # # # # # # # # # # # #
 tidal          = n        #
 # # # # # # # # # # # # # # # # #
-virial         = y        #
+virial         = n        #
 # # # # # # # # # # # # # # # # #
 make_clean     = n        #
 # # # # # # # # # # # # # # # # #
 #         PLOTS?          #
-make_plots     = n        #
+make_plots     = y        #
 # # # # # # # # # # # # # # # # #
 #         SAVE?           #
 save_run       = n        #
@@ -162,7 +162,7 @@ if(make_plots):
     print "making plots"
     os.chdir("plots")
     os.system("./plotting.py ")
-    os.system("./stability.py")
+    #os.system("./stability.py")
 
 if(save_run):
     os.system("./save_runs.py 'save' " + folder_name)

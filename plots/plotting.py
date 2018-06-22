@@ -89,7 +89,8 @@ def radial_components_over_time():
         plt.plot(theory.x_vals, theory.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical ')
         plt.legend()
         
-    plt.savefig("radial_components_over_time.eps", format='eps')
+    plt.savefig("radial_components_over_time.png", format='png')
+    plt.savefig("radial_components_over_time.pdf", format='pdf')
     
 
 
@@ -121,7 +122,8 @@ def vel_components_over_time():
         #print theory_light.light
         y = 400
         x = 10
-        w = .04
+        #w = .04
+        w = .2
         c = 'red'
         c2 = 'black'
         alp = 0.8
@@ -144,7 +146,7 @@ def vel_components_over_time():
         
         plt.ylabel('N', fontsize=24)
         plt.xlim(0, x)
-        plt.ylim(0, y)
+        #plt.ylim(0, y)
         plt.bar(light.bins, light.counts, width = w, color=c, alpha = alp,  label = labels[i])
         plt.plot(theory_light.x_vals, theory_light.light, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
         plt.legend()
@@ -161,21 +163,22 @@ def vel_components_over_time():
         plt.tick_params(axis='x', which='major', labelsize=22)
         
         plt.xlim(0, x)
-        plt.ylim(0, y)
+        #plt.ylim(0, y)
         plt.bar(dark.bins, dark.counts, width = w, color=c, alpha = alp, label = labels[i])
         plt.plot(theory_dark.x_vals, theory_dark.dark, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
         plt.legend()
         
-    plt.savefig("vel_components_over_time.eps", format='eps')
+    plt.savefig("vel_components_over_time.png", format='png')
+    plt.savefig("vel_components_over_time.pdf", format='pdf')
     
 #for creating a single plot with the two components having different distribution values
 def mixed_radial_values():
     sim_time = ['0', '4']
     sim_time = ['0']
-    theory_den = "/home/sidd/Desktop/research/data_testing/theory/theory_den.dat"
-    light_path      = "/home/sidd/Desktop/research/data_testing/binned_data/light_matter_bins_"
-    dark_path       = "/home/sidd/Desktop/research/data_testing/binned_data/dark_matter_bins_"
-    both_path       = "/home/sidd/Desktop/research/data_testing/binned_data/both_matter_bins_"
+    theory_den = "/home/sidd/Desktop/research/data_testing/theory_mixed/theory_den.dat"
+    light_path      = "/home/sidd/Desktop/research/data_testing/binned_data_mixed/light_matter_bins_"
+    dark_path       = "/home/sidd/Desktop/research/data_testing/binned_data_mixed/dark_matter_bins_"
+    both_path       = "/home/sidd/Desktop/research/data_testing/binned_data_mixed/both_matter_bins_"
     
     plt.figure(figsize=(20, 10))
     for i in range(0, len(sim_time)):
@@ -206,16 +209,17 @@ def mixed_radial_values():
         plt.ylabel('N', fontsize=28)
         plt.xlim(0, x)
         plt.ylim(0, y)
-        plt.bar(both.bins, both.counts,  width = w, color='green', alpha = alp,  label = 'Simulated Combined Distribution')
-        plt.bar(light.bins, light.counts, width = w, color='red', alpha = alp,  label = 'Simulated Baryonic Distribution')
-        plt.bar(dark.bins, dark.counts,  width = w, color='blue', alpha = alp,  label = 'Simulated Dark Matter Distribution')
+        plt.bar(both.bins, both.counts,   width = w, color='w', alpha = 1, edgecolor = 'darkgreen', hatch="xxx",  linewidth = 2, label = 'Simulated Combined Distribution')
+        plt.bar(light.bins, light.counts, width = w, color='w', alpha = 1, edgecolor = 'red', hatch="//",     linewidth = 2,  label = 'Simulated Baryonic Distribution')
+        plt.bar(dark.bins, dark.counts,   width = w, color='w', alpha = 1, edgecolor = 'blue', hatch="\\\\",  linewidth = 2,  label = 'Simulated Dark Matter Distribution')
         
-        plt.plot(theory.x_vals, theory.light,    color = 'red', linestyle = '-', linewidth = lw, label = 'Theoretical Baryon Distribution')
-        plt.plot(theory.x_vals, theory.dark,     color = 'blue', linestyle = '-', linewidth = lw, label = 'Theoretical Dark Matter Distribution')
-        plt.plot(theory.x_vals, theory.combined, color = 'green', linestyle = '-', linewidth = lw, label = 'Theoretical Combined Distribution')
+        plt.plot(theory.x_vals, theory.light,    color = 'k', linestyle = 'dashed', linewidth = lw, label = 'Theoretical Baryon Distribution')
+        plt.plot(theory.x_vals, theory.dark,     color = 'k', linestyle = 'dotted', linewidth = lw, label = 'Theoretical Dark Matter Distribution')
+        plt.plot(theory.x_vals, theory.combined, color = 'k', linestyle = 'solid', linewidth = lw, label = 'Theoretical Combined Distribution')
         plt.legend()
 
-    plt.savefig("mixed_radial_values.eps", format='eps')   
+    plt.savefig("mixed_radial_values.pdf", format='pdf')   
+    plt.savefig("mixed_radial_values.png", format='png')   
     
 
 def radial_angulars_over_time():
@@ -240,10 +244,11 @@ def radial_angulars_over_time():
         theory_phi    = theory_data(theory_path_phi)
         
         
-        
         y = 300
+        #y = 3000
         x = 4
         w = .04
+        #w = .2
         c = 'red'
         c2 = 'black'
         alp = 0.8
@@ -295,7 +300,8 @@ def radial_angulars_over_time():
         plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
         plt.legend()
         
-    plt.savefig("radial_theta_phi.eps", format='eps')   
+    plt.savefig("radial_theta_phi.png", format='png')   
+    plt.savefig("radial_theta_phi.pdf", format='pdf') 
     plt.close()
     return 0
     
@@ -322,11 +328,11 @@ def velocity_angulars_over_time():
         theory_theta  = theory_data(theory_path_theta)
         theory_phi    = theory_data(theory_path_phi)
         
-        
-        
         y = 300
+        #y = 3000
         x = 4
         w = .04
+        #w = .2
         c = 'red'
         c2 = 'black'
         alp = 0.8
@@ -377,16 +383,17 @@ def velocity_angulars_over_time():
         plt.plot(theory_phi.x_vals, theory_phi.combined, color = c2, linestyle = '-', linewidth = lw, label = 'Theoretical')
         plt.legend()
     
-    plt.savefig("vel_theta_phi.eps", format='eps')   
+    plt.savefig("vel_theta_phi.png", format='png')   
+    plt.savefig("vel_theta_phi.pdf", format='pdf')  
     plt.close()
     return 0
 
 
 def main():
     #radial_components_over_time()
-    mixed_radial_values()
+    #mixed_radial_values()
     #vel_components_over_time()
-    #radial_angulars_over_time()
-    #velocity_angulars_over_time()
+    radial_angulars_over_time()
+    velocity_angulars_over_time()
 main()
 

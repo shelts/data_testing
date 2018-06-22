@@ -352,12 +352,12 @@ int main (int argc, char * const argv[])
     component dark;
     
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
-    printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
-    printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
+//     printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
+//     printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
     
     check_mass(light); // the nfw model needs the mass augmented a bit
     check_mass(dark);
-    printf("ml,md :  (%0.15f , %0.15f)\n", light.mass, dark.mass);
+//     printf("ml,md :  (%0.15f , %0.15f)\n", light.mass, dark.mass);
     mass_l = light.mass;
     mass_d = dark.mass;
     
@@ -368,6 +368,8 @@ int main (int argc, char * const argv[])
     /*paramters for binning routine*/
     int number_of_bins = 1000;
     double bin_width = .05;
+//     int number_of_bins = 500;
+//     double bin_width = .25;
 
     
     int Nd = get_size(dm, extension);//getting the size of the dark matter data
@@ -392,7 +394,7 @@ int main (int argc, char * const argv[])
     
     double masspl = get_masspp(b, N, lm);
     double masspd = get_masspp(b, N, dm);
-    printf("masspl, masspd: (%0.15f , %0.15f)\n", masspl, masspd);
+//     printf("masspl, masspd: (%0.15f , %0.15f)\n", masspl, masspd);
     
     rad_vel_distribution(extension, Nd, Nl, b, number_of_bins, bin_width);
 

@@ -128,8 +128,8 @@ int main (int argc, char * const argv[])
     component dark;
     
     init_comps(light, dark, rscale_l, rscale_d, mass_l, mass_d, model1, model2);
-    printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
-    printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
+//     printf("p0l,p0d :  (%0.15f , %0.15f)\n", light.p0, dark.p0);
+//     printf("r200l,r200d: (%0.15f\t  %0.15f)\n", light.r200, dark.r200);
     
     
     galaxy_model mw;
@@ -193,6 +193,7 @@ int main (int argc, char * const argv[])
 
     fprintf(file, "%f \t %f \t ratio: %f \t %f \t %s \n", ratio_func, ratio_pp, rat, ratio_func_galaxy, (argv[1]));
     
-    printf("ratio_func: %f \t pot_func: %f \t ratio_pp: %f \t pot_pp: %f \t ratio: %f \t ratio_func_gly: %f \t pot_func_gly: %f \t ke: %f \t %s \n", ratio_func, pot_func, ratio_pp, pot_pp, rat, ratio_func_galaxy, pot_func_gly, ke, (argv[1]));
+// //     printf("ratio_func: %f \t pot_func: %f \t ratio_pp: %f \t pot_pp: %f \t ratio: %f \t ratio_func_gly: %f \t pot_func_gly: %f \t ke: %f \t %s \n", ratio_func, pot_func, ratio_pp, pot_pp, rat, ratio_func_galaxy, pot_func_gly, ke, (argv[1]));
+    printf("ratio_func: %f \t ratio_pp: %f \t %s \n", ratio_func, ratio_pp, (argv[1]));
     fclose(file);
 }
