@@ -139,7 +139,7 @@ void vel_distribution_theory(double bin_width, int number_of_bins, string extens
             if(fabs(f / fmax) > u)
             {
                 //These are split in two so when we compare each component, the counts match up
-                v *= 0.977813107;
+//                 v *= 0.977813107;
                 if(b[i].type == light_particle)
                 {
                     v_l[countl] = v;

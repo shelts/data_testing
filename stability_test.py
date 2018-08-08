@@ -44,7 +44,7 @@ einasto  = 5                    #
 sim_time      = [ "0", "2", "4"]
 N             = 3
 M             = 0
-ext = "gy.out"
+#ext = "gy.out"
 ext = "gy_same.out"#if you want to parse two different types of files. EX, initial plum with same and different parameters
 #ext = "gy_diff.out"
 print "parameters: ", r_l, rad_ratio, m_l, mass_ratio
@@ -86,7 +86,7 @@ output         = y        #
 # # # # # # # # # # # # # # # # #
 tidal          = n        #
 # # # # # # # # # # # # # # # # #
-virial         = n        #
+virial         = y        #
 # # # # # # # # # # # # # # # # #
 make_clean     = n        #
 # # # # # # # # # # # # # # # # #
