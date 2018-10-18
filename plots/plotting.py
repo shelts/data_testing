@@ -209,7 +209,7 @@ def mixed_radial_values():
         plt.ylabel('N', fontsize=28)
         plt.xlim(0, x)
         plt.ylim(0, y)
-        plt.bar(both.bins, both.counts,   width = w, color='w', alpha = 1, edgecolor = 'darkgreen', hatch="xxx",  linewidth = 2, label = 'Simulated Combined Distribution')
+        plt.bar(both.bins, both.counts,   width = w, color='darkgreen', alpha = 1, edgecolor = 'darkgreen', hatch="",  linewidth = 2, label = 'Simulated Combined Distribution')
         plt.bar(light.bins, light.counts, width = w, color='w', alpha = 1, edgecolor = 'red', hatch="//",     linewidth = 2,  label = 'Simulated Baryonic Distribution')
         plt.bar(dark.bins, dark.counts,   width = w, color='w', alpha = 1, edgecolor = 'blue', hatch="\\\\",  linewidth = 2,  label = 'Simulated Dark Matter Distribution')
         
@@ -390,10 +390,10 @@ def velocity_angulars_over_time():
 
 
 def main():
-    radial_components_over_time()
-    #mixed_radial_values()
-    vel_components_over_time()
-    radial_angulars_over_time()
-    velocity_angulars_over_time()
+    #radial_components_over_time()
+    mixed_radial_values()
+    #vel_components_over_time()
+    #radial_angulars_over_time()
+    #velocity_angulars_over_time()
 main()
 

@@ -2,7 +2,7 @@
 
 
 clear_plots=true
-clear_data=false
+clear_data=true
 clear_sims=false
 
 
